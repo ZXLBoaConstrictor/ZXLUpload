@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <Photos/Photos.h>
+#import "ZXLVideoUtils.h"
 #import "ZXLFileUtils.h"
 #import "ZXLDocumentUtils.h"
 

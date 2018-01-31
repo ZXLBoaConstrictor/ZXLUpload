@@ -22,6 +22,8 @@
 		8285F6AE201C1AF400D0F682 /* ZXLUploadTaskCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8285F6AC201C1AF400D0F682 /* ZXLUploadTaskCenter.m */; };
 		8285F6B1201C1B2500D0F682 /* ZXLUploadFileCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8285F6AF201C1B2500D0F682 /* ZXLUploadFileCenter.h */; };
 		8285F6B2201C1B2500D0F682 /* ZXLUploadFileCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8285F6B0201C1B2500D0F682 /* ZXLUploadFileCenter.m */; };
+		828A67932021B58D0094CA92 /* ZXLVideoUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A67912021B58D0094CA92 /* ZXLVideoUtils.h */; };
+		828A67942021B58D0094CA92 /* ZXLVideoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67922021B58D0094CA92 /* ZXLVideoUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		8285F6AC201C1AF400D0F682 /* ZXLUploadTaskCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadTaskCenter.m; sourceTree = "<group>"; };
 		8285F6AF201C1B2500D0F682 /* ZXLUploadFileCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadFileCenter.h; sourceTree = "<group>"; };
 		8285F6B0201C1B2500D0F682 /* ZXLUploadFileCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadFileCenter.m; sourceTree = "<group>"; };
+		828A67912021B58D0094CA92 /* ZXLVideoUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLVideoUtils.h; sourceTree = "<group>"; };
+		828A67922021B58D0094CA92 /* ZXLVideoUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLVideoUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				8285F693201C196600D0F682 /* ZXLUpload.h */,
 				8269E8BE201F25C3002D540E /* ZXLFileUtils.h */,
 				8269E8BF201F25C3002D540E /* ZXLFileUtils.m */,
+				828A67912021B58D0094CA92 /* ZXLVideoUtils.h */,
+				828A67922021B58D0094CA92 /* ZXLVideoUtils.m */,
 				8269E8BA201F191C002D540E /* ZXLDocumentUtils.h */,
 				8269E8BB201F191C002D540E /* ZXLDocumentUtils.m */,
 				8285F69B201C1A0700D0F682 /* ZXLUploadFileResultCenter.h */,
@@ -107,6 +113,7 @@
 				8285F695201C196600D0F682 /* ZXLUpload.h in Headers */,
 				8285F6B1201C1B2500D0F682 /* ZXLUploadFileCenter.h in Headers */,
 				8285F6A9201C1A9D00D0F682 /* ZXLTaskInfoModel.h in Headers */,
+				828A67932021B58D0094CA92 /* ZXLVideoUtils.h in Headers */,
 				8269E8BC201F191C002D540E /* ZXLDocumentUtils.h in Headers */,
 				8285F6A1201C1A4A00D0F682 /* ZXLFileInfoModel.h in Headers */,
 			);
@@ -180,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				828A67942021B58D0094CA92 /* ZXLVideoUtils.m in Sources */,
 				8285F6B2201C1B2500D0F682 /* ZXLUploadFileCenter.m in Sources */,
 				8269E8C1201F25C3002D540E /* ZXLFileUtils.m in Sources */,
 				8269E8BD201F191C002D540E /* ZXLDocumentUtils.m in Sources */,
