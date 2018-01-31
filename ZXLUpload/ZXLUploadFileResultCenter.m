@@ -51,8 +51,7 @@
 @end
 
 @implementation ZXLUploadFileResultCenter
-+(ZXLUploadFileResultCenter*)shareUploadResultCenter
-{
++(ZXLUploadFileResultCenter*)shareUploadResultCenter{
     static dispatch_once_t pred = 0;
     __strong static ZXLUploadFileResultCenter * _sharedObject = nil;
     dispatch_once(&pred, ^{
@@ -61,8 +60,7 @@
     return _sharedObject;
 }
 
-- (instancetype)initLoadLocalUploadInfo
-{
+- (instancetype)initLoadLocalUploadInfo{
      if (self = [super init]) {
          
          _uploadResultInfo = [NSMutableDictionary dictionary];
@@ -103,8 +101,7 @@
     return self;
 }
 
--(void)clearAllUploadFileInfo
-{
+-(void)clearAllUploadFileInfo{
     [_uploadResultInfo removeAllObjects];
     [_comprssResultInfo removeAllObjects];
     [_uploadInfo removeAllObjects];
@@ -116,69 +113,66 @@
 }
 
 
--(void)saveComprssSuccess:(ZXLFileInfoModel *)fileInfo
-{
+-(void)saveComprssSuccess:(ZXLFileInfoModel *)fileInfo{
     if (!fileInfo || fileInfo.fileType != ZXLFileTypeVideo) return;
     
     NSString * videoName = [fileInfo uploadKey];
     NSString * comprssURL = FILE_Video_PATH(videoName);
-    if (![self checkComprssSuccessFileInfo:fileInfo.uuid] && //检查此文件是否保存过
+    if (![self checkComprssSuccessFileInfo:fileInfo.identifier] && //检查此文件是否保存过
         fileInfo.comprssSuccess &&  //检查压缩成功后的地址和压缩后的文件是否存在
         [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
         
         //压缩成功后把压缩过程存的文件信息删除
-        [self removeFileAVAssetExportSession:fileInfo.uuid];
+        [self removeFileAVAssetExportSession:fileInfo.identifier];
         
         NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-        [tempcomprssInfo setValue:[fileInfo keyValues] forKey:fileInfo.uuid];
+        [tempcomprssInfo setValue:[fileInfo keyValues] forKey:fileInfo.identifier];
         [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
         
-        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tempcomprssInfo valueForKey:fileInfo.uuid]];
+        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tempcomprssInfo valueForKey:fileInfo.identifier]];
         //存储成功记录
-        [_comprssResultInfo setValue:tempFileInfo forKey:fileInfo.uuid];
+        [_comprssResultInfo setValue:tempFileInfo forKey:fileInfo.identifier];
     }
 }
 
--(void)saveUploadSuccess:(ZXLFileInfoModel *)fileInfo
-{
+-(void)saveUploadSuccess:(ZXLFileInfoModel *)fileInfo{
     if (!fileInfo) return;
     
     //检查此文件是否保存过和文件是否上传成功
-    if (![self checkUploadSuccessFileInfo:fileInfo.uuid]&&
+    if (![self checkUploadSuccessFileInfo:fileInfo.identifier]&&
         fileInfo.progressType == ZXLFileUploadProgressUploadEnd &&
         fileInfo.uploadResult == ZXLFileUploadSuccess) {
         //文件开始压缩的时候先删除出错历史
-        [_uploadErrorInfo removeObjectForKey:fileInfo.uuid];
+        [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
         
         //上传成功后把上传过程存的文件信息删除
-        [_uploadInfo removeObjectForKey:fileInfo.uuid];
+        [_uploadInfo removeObjectForKey:fileInfo.identifier];
         
         //删除上传任务
-        [self removeUploadRequest:fileInfo.uuid];
+        [self removeUploadRequest:fileInfo.identifier];
         
         NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
-        [tmpUploadInfo setValue:[fileInfo keyValues] forKey:fileInfo.uuid];
+        [tmpUploadInfo setValue:[fileInfo keyValues] forKey:fileInfo.identifier];
         [ZXLDocumentUtils setDictionaryByListName:tmpUploadInfo fileName:ZXLDocumentUploadResultInfo];
         
-        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tmpUploadInfo valueForKey:fileInfo.uuid]];
+        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tmpUploadInfo valueForKey:fileInfo.identifier]];
         //存储成功记录
-        [_uploadResultInfo setValue:tempFileInfo forKey:fileInfo.uuid];
+        [_uploadResultInfo setValue:tempFileInfo forKey:fileInfo.identifier];
         
-        [[ZXLUploadTaskCenter shareUploadTask] changeFileUploadResult:fileInfo.uuid type:ZXLFileUploadSuccess];
+        [[ZXLUploadTaskCenter shareUploadTask] changeFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
     }
 }
 
--(void)saveUploadError:(ZXLFileInfoModel *)fileInfo
-{
+-(void)saveUploadError:(ZXLFileInfoModel *)fileInfo{
     if (!fileInfo) return;
     
-    ZXLFileInfoModel *tempFileInfo = [_uploadErrorInfo valueForKey:fileInfo.uuid];
+    ZXLFileInfoModel *tempFileInfo = [_uploadErrorInfo valueForKey:fileInfo.identifier];
     if (!tempFileInfo) {
         tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
-        [_uploadErrorInfo setValue:tempFileInfo forKey:tempFileInfo.uuid];
+        [_uploadErrorInfo setValue:tempFileInfo forKey:tempFileInfo.identifier];
         
         //删除上传任务
-        [self removeUploadRequest:fileInfo.uuid];
+        [self removeUploadRequest:fileInfo.identifier];
     }
 }
 
@@ -187,19 +181,18 @@
  
  @param fileInfo 文件信息
  */
--(void)saveComprssProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session
-{
+-(void)saveComprssProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session{
     if (!fileInfo || !session ||fileInfo.fileType != ZXLFileTypeVideo) return;
     
-    ZXLFileInfoModel *tempFileInfo = [_comprssInfo valueForKey:fileInfo.uuid];
+    ZXLFileInfoModel *tempFileInfo = [_comprssInfo valueForKey:fileInfo.identifier];
     if (!tempFileInfo) {
         tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
-        [_comprssInfo setValue:tempFileInfo forKey:tempFileInfo.uuid];
+        [_comprssInfo setValue:tempFileInfo forKey:tempFileInfo.identifier];
         
         //文件开始压缩的时候先删除出错历史
-        [_uploadErrorInfo removeObjectForKey:fileInfo.uuid];
+        [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
         //保存session
-        [self addFileAVAssetExportSession:session with:fileInfo.uuid];
+        [self addFileAVAssetExportSession:session with:fileInfo.identifier];
         
     }else
     {
@@ -214,14 +207,13 @@
  
  @param fileInfo 文件信息
  */
--(void)saveUploadProgress:(ZXLFileInfoModel *)fileInfo
-{
-    ZXLFileInfoModel *tempFileInfo = [_uploadInfo valueForKey:fileInfo.uuid];
+-(void)saveUploadProgress:(ZXLFileInfoModel *)fileInfo{
+    ZXLFileInfoModel *tempFileInfo = [_uploadInfo valueForKey:fileInfo.identifier];
     if (!tempFileInfo) {
         tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
-        [_uploadInfo setValue:tempFileInfo forKey:tempFileInfo.uuid];
+        [_uploadInfo setValue:tempFileInfo forKey:tempFileInfo.identifier];
         //文件开始上传的时候先删除出错历史
-        [_uploadErrorInfo removeObjectForKey:fileInfo.uuid];
+        [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
     }else
     {
         tempFileInfo.progress = fileInfo.progress;
@@ -229,11 +221,10 @@
     }
 }
 
--(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)uuidStr
-{
-    if (!ISNSStringValid(uuidStr))  return nil;
+-(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)identifier{
+    if (!ISNSStringValid(identifier))  return nil;
     
-    ZXLFileInfoModel *fileInfo = [_comprssResultInfo valueForKey:uuidStr];
+    ZXLFileInfoModel *fileInfo = [_comprssResultInfo valueForKey:identifier];
     if (fileInfo) {
         NSString * videoName = [fileInfo uploadKey];
         NSString * comprssURL = FILE_Video_PATH(videoName);
@@ -242,30 +233,29 @@
             return fileInfo;
         }else
         {
-            [_comprssResultInfo removeObjectForKey:uuidStr];
+            [_comprssResultInfo removeObjectForKey:identifier];
             //文件不存在删除保存过的文件信息
             NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-            [tempcomprssInfo removeObjectForKey:fileInfo.uuid];
+            [tempcomprssInfo removeObjectForKey:fileInfo.identifier];
             [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
         }
     }
     return nil;
 }
 
--(ZXLFileInfoModel *)checkUploadSuccessFileInfo:(NSString *)uuidStr
-{
-    if (!ISNSStringValid(uuidStr))  return nil;
+-(ZXLFileInfoModel *)checkUploadSuccessFileInfo:(NSString *)identifier{
+    if (!ISNSStringValid(identifier))  return nil;
     
-    ZXLFileInfoModel *fileInfo = [_uploadResultInfo valueForKey:uuidStr];
+    ZXLFileInfoModel *fileInfo = [_uploadResultInfo valueForKey:identifier];
     if (fileInfo) {
         if (fileInfo.progressType == ZXLFileUploadProgressUploadEnd && fileInfo.uploadResult == ZXLFileUploadSuccess) {
             return fileInfo;
         }else
         {
-            [_uploadResultInfo removeObjectForKey:uuidStr];
+            [_uploadResultInfo removeObjectForKey:identifier];
             //删除保存过但是错误的文件信息
             NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
-            [tmpUploadInfo removeObjectForKey:uuidStr];
+            [tmpUploadInfo removeObjectForKey:identifier];
             [ZXLDocumentUtils setDictionaryByListName:tmpUploadInfo fileName:ZXLDocumentUploadResultInfo];
         }
     }
@@ -275,53 +265,48 @@
 /**
  检查文件是否正在压缩
  
- @param uuidStr 文件uuid唯一值
+ @param identifier 文件identifier唯一值
  @return 压缩中的文件信息
  */
--(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)uuidStr
-{
-    if (!ISNSStringValid(uuidStr))  return nil;
+-(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)identifier{
+    if (!ISNSStringValid(identifier))  return nil;
     
-    return [_comprssInfo valueForKey:uuidStr];
+    return [_comprssInfo valueForKey:identifier];
 }
 
 /**
  检查文件是否正在上传
  
- @param uuidStr 文件uuid唯一值
+ @param identifier 文件identifier唯一值
  @return 上传中的文件信息
  */
--(ZXLFileInfoModel *)checkUploadProgressFileInfo:(NSString *)uuidStr
-{
-    if (!ISNSStringValid(uuidStr))  return nil;
+-(ZXLFileInfoModel *)checkUploadProgressFileInfo:(NSString *)identifier{
+    if (!ISNSStringValid(identifier))  return nil;
     
-    return [_uploadInfo valueForKey:uuidStr];
+    return [_uploadInfo valueForKey:identifier];
 }
 
 
--(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)uuidStr
-{
-    if (session && ISNSStringValid(uuidStr)) {
-        [_assetSessionDict setValue:session forKey:uuidStr];
+-(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)identifier{
+    if (session && ISNSStringValid(identifier)) {
+        [_assetSessionDict setValue:session forKey:identifier];
     }
 }
 
--(void)removeFileAVAssetExportSession:(NSString *)uuidStr
-{
-    if (ISNSStringValid(uuidStr)) {
-        AVAssetExportSession *session = [_assetSessionDict objectForKey:uuidStr];
+-(void)removeFileAVAssetExportSession:(NSString *)identifier{
+    if (ISNSStringValid(identifier)) {
+        AVAssetExportSession *session = [_assetSessionDict objectForKey:identifier];
         if (session) {
             [session cancelExport];
-            [_assetSessionDict removeObjectForKey:uuidStr];
-            [_comprssInfo removeObjectForKey:uuidStr];
+            [_assetSessionDict removeObjectForKey:identifier];
+            [_comprssInfo removeObjectForKey:identifier];
         }
     }
 }
 
--(AVAssetExportSession *)getAVAssetExportSession:(NSString *)uuidStr
-{
-    if (ISNSStringValid(uuidStr)) {
-        return [_assetSessionDict objectForKey:uuidStr];
+-(AVAssetExportSession *)getAVAssetExportSession:(NSString *)identifier{
+    if (ISNSStringValid(identifier)) {
+        return [_assetSessionDict objectForKey:identifier];
     }
     return nil;
 }
@@ -331,48 +316,45 @@
  
  @param request Request
  */
--(void)addUploadRequest:(id)request with:(NSString *)uuidStr
-{
-    if (request && ISNSStringValid(uuidStr)) {
-        [_sessionRequestDict setValue:request forKey:uuidStr];
+-(void)addUploadRequest:(id)request with:(NSString *)identifier{
+    if (request && ISNSStringValid(identifier)) {
+        [_sessionRequestDict setValue:request forKey:identifier];
     }
 }
 
 /**
  删除文件上传OSSRequest
  
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  */
--(void)removeUploadRequest:(NSString *)uuidStr
-{
-    if (ISNSStringValid(uuidStr)) {
-        id request = [_sessionRequestDict valueForKey:uuidStr];
+-(void)removeUploadRequest:(NSString *)identifier{
+    if (ISNSStringValid(identifier)) {
+        id request = [_sessionRequestDict valueForKey:identifier];
         if (request) {
             //注意:此处停止上传请求
 //          [request cancel];
             
-            [_sessionRequestDict removeObjectForKey:uuidStr];
+            [_sessionRequestDict removeObjectForKey:identifier];
         }
         //删除正在上传记录
-        [_uploadInfo removeObjectForKey:uuidStr];
+        [_uploadInfo removeObjectForKey:identifier];
     }
 }
 
 /**
  删除此文件在上传中留下的不成功的所有信息
  
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  */
--(void)removeFileInfoUpload:(NSString *)uuidStr
-{
+-(void)removeFileInfoUpload:(NSString *)identifier{
     //删除正在压缩记录
-    [self removeFileAVAssetExportSession:uuidStr];
+    [self removeFileAVAssetExportSession:identifier];
     
     //删除上传请求
-    [self removeUploadRequest:uuidStr];
+    [self removeUploadRequest:identifier];
     
     //删除出错历史
-    [_uploadErrorInfo removeObjectForKey:uuidStr];
+    [_uploadErrorInfo removeObjectForKey:identifier];
     
 }
 

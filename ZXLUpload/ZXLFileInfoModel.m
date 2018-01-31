@@ -17,15 +17,13 @@ typedef void (^completed)(BOOL bResult);
 
 @implementation ZXLFileInfoModel
 
-+(instancetype)dictionary:(NSDictionary *)dictionary
-{
++(instancetype)dictionary:(NSDictionary *)dictionary{
     return [[[self class] alloc] initWithDictionary:dictionary];
 }
 
--(instancetype)initWithDictionary:(NSDictionary *)dictionary
-{
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary{
     if (self = [super init]) {
-        self.uuid =                     [dictionary objectForKey:@"uuid"];
+        self.identifier =                     [dictionary objectForKey:@"identifier"];
         self.localURL =                 [dictionary objectForKey:@"localURL"];
         self.comprssSuccess =           [[dictionary objectForKey:@"comprssSuccess"] boolValue];
         self.uploadSize =               [[dictionary objectForKey:@"uploadSize"] integerValue];
@@ -39,8 +37,23 @@ typedef void (^completed)(BOOL bResult);
     return self;
 }
 
--(instancetype)initWithAsset:(PHAsset *)asset
-{
+
+-(NSMutableDictionary *)keyValues{
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    [dictionary setValue:_identifier forKey:@"identifier"];
+    [dictionary setValue:_localURL forKey:@"localURL"];
+    [dictionary setValue:_comprssSuccess?@"1":@"0" forKey:@"comprssSuccess"];
+    [dictionary setValue:@(_uploadSize).stringValue forKey:@"size"];
+    [dictionary setValue:@(_fileType).stringValue forKey:@"filetype"];
+    [dictionary setValue:[NSString stringWithFormat:@"%lf",_progress] forKey:@"progress"];
+    [dictionary setValue:@(_progressType).stringValue forKey:@"progressType"];
+    [dictionary setValue:@(_uploadResult).stringValue forKey:@"uploadResult"];
+    [dictionary setValue:@(_fileTime).stringValue forKey:@"fileTime"];
+    [dictionary setValue:_assetLocalIdentifier forKey:@"assetLocalIdentifier"];
+    return dictionary;
+}
+
+-(instancetype)initWithAsset:(PHAsset *)asset{
     if (self = [super init]) {
         
         if (asset.mediaType == PHAssetMediaTypeVideo) {
@@ -51,7 +64,7 @@ typedef void (^completed)(BOOL bResult);
             self.fileType =                 ZXLFileTypeImage;
         }
         self.localURL =                 @"";
-        self.uuid =                     asset.localIdentifier;
+        self.identifier =                     asset.localIdentifier;
         self.comprssSuccess =           NO;
         self.uploadSize =               0;
         self.progress =                 0;
@@ -63,11 +76,10 @@ typedef void (^completed)(BOOL bResult);
     return self;
 }
 
--(instancetype)initWithImage:(UIImage *)image
-{
+-(instancetype)initWithImage:(UIImage *)image{
     if (self = [super init]) {
         self.localURL =                 [ZXLDocumentUtils saveImageByName:image];
-        self.uuid =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
+        self.identifier =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
         self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
         self.fileType =                 ZXLFileTypeImage;
@@ -81,14 +93,12 @@ typedef void (^completed)(BOOL bResult);
     return self;
 }
 
--(instancetype)initWithFileURL:(NSString *)fileURL
-{
+-(instancetype)initWithFileURL:(NSString *)fileURL{
     if (self = [super init]) {
         
         ZXLFileFromType fileFrom = ZXLFileFromLoacl;
         NSRange tempRang = [fileURL rangeOfString:@"/tmp/"];
-        if (tempRang.location != NSNotFound)
-        {
+        if (tempRang.location != NSNotFound){
             fileFrom = ZXLFileFromTakePhoto;
         }
             
@@ -103,7 +113,7 @@ typedef void (^completed)(BOOL bResult);
             self.localURL = [ZXLDocumentUtils localFilePath:[fileURL lastPathComponent] fileType:self.fileType];
         }
         
-        self.uuid =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
+        self.identifier =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
         self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
         self.progress =                 0;
@@ -115,28 +125,24 @@ typedef void (^completed)(BOOL bResult);
     return self;
 }
 
-+(NSMutableArray<ZXLFileInfoModel *> *)initWithAssets:(NSMutableArray <PHAsset *> *)assets
-{
++(NSMutableArray<ZXLFileInfoModel *> *)initWithAssets:(NSMutableArray <PHAsset *> *)assets{
     return nil;
 }
 
-+(NSMutableArray<ZXLFileInfoModel *> *)initWithImages:(NSArray<UIImage *> *)ayImages
-{
++(NSMutableArray<ZXLFileInfoModel *> *)initWithImages:(NSArray<UIImage *> *)ayImages{
     return nil;
 }
 
--(void)dealloc
-{
+-(void)dealloc{
     if (_timer) {
         [_timer invalidate];
         _timer = nil;
     }
 }
 
--(void)waitcomprssResult
-{
+-(void)waitcomprssResult{
     //检测同一文件是否有压缩成功过
-    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.uuid];
+    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.identifier];
     if (successComprssFileInfo) {
         if (_timer) {
             [_timer invalidate];
@@ -149,15 +155,14 @@ typedef void (^completed)(BOOL bResult);
     }
 }
 
--(void)stopVideoCompress
-{
+-(void)stopVideoCompress{
     if (self.fileType == ZXLFileTypeVideo) {
         
         //停止并清空session
-        AVAssetExportSession *exportSession = [[ZXLUploadFileResultCenter shareUploadResultCenter] getAVAssetExportSession:self.uuid];
+        AVAssetExportSession *exportSession = [[ZXLUploadFileResultCenter shareUploadResultCenter] getAVAssetExportSession:self.identifier];
         if (exportSession) {
             [exportSession cancelExport];
-            [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileAVAssetExportSession:self.uuid];
+            [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileAVAssetExportSession:self.identifier];
             
             //删除压缩过没有压缩完的视频
             NSString * videoName = [self uploadKey];
@@ -172,8 +177,7 @@ typedef void (^completed)(BOOL bResult);
     }
 }
 
--(void)videoCompress:(void (^)(BOOL bResult ))completed
-{
+-(void)videoCompress:(void (^)(BOOL bResult ))completed{
     //非视频文件直接返回
     if (self.fileType != ZXLFileTypeVideo) {
         completed(NO);
@@ -181,7 +185,7 @@ typedef void (^completed)(BOOL bResult);
     }
     
     //检测同一文件是否有压缩成功过
-    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.uuid];
+    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.identifier];
     if (successComprssFileInfo) {
         self.comprssSuccess = YES;
         self.uploadSize = successComprssFileInfo.uploadSize;
@@ -190,7 +194,7 @@ typedef void (^completed)(BOOL bResult);
     }
     
     //有视频文件正在压缩还上传的地方等待视频压缩完成
-    ZXLFileInfoModel * progressComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssProgressFileInfo:self.uuid];
+    ZXLFileInfoModel * progressComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssProgressFileInfo:self.identifier];
     if (progressComprssFileInfo) {
         self.progressType = ZXLFileUploadProgressTranscoding;
         _comprssResult = completed;
@@ -363,14 +367,12 @@ typedef void (^completed)(BOOL bResult);
     }
 }
 
--(NSString *)localUploadURL
-{
+-(NSString *)localUploadURL{
     NSString *localUploadURL = self.localURL;
     
     ZXLFileFromType fileFrom = ZXLFileFromLoacl;
     NSRange tempRang = [self.localURL rangeOfString:@"/tmp/"];
-    if (tempRang.location != NSNotFound)
-    {
+    if (tempRang.location != NSNotFound){
         fileFrom = ZXLFileFromTakePhoto;
     }
     
@@ -384,13 +386,11 @@ typedef void (^completed)(BOOL bResult);
     return localUploadURL;
 }
 
--(NSString *)uploadKey
-{
-    return [ZXLFileUtils fileNameWithUUID:self.uuid fileType:self.fileType];
+-(NSString *)uploadKey{
+    return [ZXLFileUtils fileNameWithidentifier:self.identifier fileType:self.fileType];
 }
 
--(void)setUploadResultSuccess
-{
+-(void)setUploadResultSuccess{
     [self fileClear];
 
     self.uploadResult = ZXLFileUploadSuccess;
@@ -401,8 +401,7 @@ typedef void (^completed)(BOOL bResult);
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadSuccess:self];
 }
 
--(void)setUploadResultError:(ZXLFileUploadType)uploadType
-{
+-(void)setUploadResultError:(ZXLFileUploadType)uploadType{
     self.uploadResult = uploadType;
     //存储上传信息 上传失败
     self.progress = 1.0;
@@ -411,19 +410,17 @@ typedef void (^completed)(BOOL bResult);
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadError:self];
 }
 
--(void)resetFileInfo
-{
+-(void)resetFileInfo{
     [self stopVideoCompress];
     
     self.progress = 0;
     self.comprssSuccess = NO;
     self.progressType = ZXLFileUploadProgressStartUpload;
     self.uploadResult = ZXLFileUploadloading;
-    [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.uuid];
+    [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.identifier];
 }
 
--(void)fileClear
-{
+-(void)fileClear{
     NSString *localUploadURL  = [self localUploadURL];
     if (ISNSStringValid(localUploadURL) && [[NSFileManager defaultManager] fileExistsAtPath:localUploadURL]) {
         BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:localUploadURL error:nil];
@@ -431,22 +428,6 @@ typedef void (^completed)(BOOL bResult);
 //            NSLog(@"上传成功删除%@ --%@",uploadFileURL,self.filecomprssURL);
         }
     }
-}
-
--(NSMutableDictionary *)keyValues
-{
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    [dictionary setValue:_uuid forKey:@"uuid"];
-    [dictionary setValue:_localURL forKey:@"localURL"];
-    [dictionary setValue:_comprssSuccess?@"1":@"0" forKey:@"comprssSuccess"];
-    [dictionary setValue:@(_uploadSize).stringValue forKey:@"size"];
-    [dictionary setValue:@(_fileType).stringValue forKey:@"filetype"];
-    [dictionary setValue:[NSString stringWithFormat:@"%lf",_progress] forKey:@"progress"];
-    [dictionary setValue:@(_progressType).stringValue forKey:@"progressType"];
-    [dictionary setValue:@(_uploadResult).stringValue forKey:@"uploadResult"];
-    [dictionary setValue:@(_fileTime).stringValue forKey:@"fileTime"];
-    [dictionary setValue:_assetLocalIdentifier forKey:@"assetLocalIdentifier"];
-    return dictionary;
 }
 
 @end

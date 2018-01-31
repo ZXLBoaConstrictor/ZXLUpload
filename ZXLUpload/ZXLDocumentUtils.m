@@ -10,14 +10,12 @@
 
 
 @implementation ZXLDocumentUtils
-+(NSMutableDictionary *)dictionaryByListName:(NSString *)fileName
-{
++(NSMutableDictionary *)dictionaryByListName:(NSString *)fileName{
     if (!ISNSStringValid(fileName))
         return nil;
     NSMutableDictionary* dictconf = nil;
     NSString *filePath = [ZXLDocumentUtils pathDocumentByName:fileName create:YES];
-    if(filePath && [filePath length] > 0)
-    {
+    if(filePath && [filePath length] > 0){
         //读取存储文件到字典
         dictconf = [[NSMutableDictionary dictionary] initWithContentsOfFile:filePath];
         if(dictconf)
@@ -26,8 +24,7 @@
     return nil;
 }
 
-+(BOOL)setDictionaryByListName:(NSMutableDictionary *)dict fileName:(NSString *)fileName
-{
++(BOOL)setDictionaryByListName:(NSMutableDictionary *)dict fileName:(NSString *)fileName{
     if (!ISNSStringValid(fileName) || !ISDictionaryValid(dict))
         return NO;
     
@@ -38,19 +35,15 @@
     return ([dict writeToFile:filePath atomically:YES]);
 }
 
-+(NSString *)pathDocumentByName:(NSString *)fileName create:(BOOL)bCreate
-{
++(NSString *)pathDocumentByName:(NSString *)fileName create:(BOOL)bCreate{
     NSString *documentsDirectory = FILE_DIRECTORY;
-    if (!documentsDirectory)
-    {
+    if (!documentsDirectory){
         return nil;
     }
     
     NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
-    if(![[NSFileManager defaultManager]fileExistsAtPath:appFile])
-    {
-        if(bCreate)
-        {
+    if(![[NSFileManager defaultManager]fileExistsAtPath:appFile]){
+        if(bCreate){
             NSError* error = nil;
             [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
             [[NSFileManager defaultManager]createFileAtPath:appFile contents:nil attributes:nil];
@@ -61,25 +54,20 @@
     return appFile;
 }
 
-+ (NSString *)createFolder:(NSString *)path
-{
++ (NSString *)createFolder:(NSString *)path{
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
-    if(![fileManager fileExistsAtPath:path])
-    {
+    if(![fileManager fileExistsAtPath:path]){
         [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
-        if(!error)
-        {
+        if(!error){
             NSLog(@"%@",[error description]);
-            
         }
     }
     return path;
 }
 
-+ (NSString *)saveImageByName:(UIImage *)image
-{
-    NSString *fileName = [ZXLFileUtils fileNameWithUUID:[ZXLFileUtils imageMD5:image] fileType:ZXLFileTypeImage];
++ (NSString *)saveImageByName:(UIImage *)image{
+    NSString *fileName = [ZXLFileUtils fileNameWithidentifier:[ZXLFileUtils imageMD5:image] fileType:ZXLFileTypeImage];
     NSString *filePath = FILE_Image_PATH(fileName);
     BOOL bWrite = YES;
     if ([ZXLFileUtils fileSizeByPath:filePath] <= 0) {
@@ -89,8 +77,7 @@
     return bWrite?filePath:@"";
 }
 
-+ (NSString *)localFilePath:(NSString *)fileName fileType:(ZXLFileType)fileType
-{
++ (NSString *)localFilePath:(NSString *)fileName fileType:(ZXLFileType)fileType{
     NSString *filePath = @"";
     switch (fileType) {
         case ZXLFileTypeImage: filePath = FILE_Image_PATH(fileName); break;
@@ -101,8 +88,7 @@
     return filePath;
 }
 
-+(NSString *)takePhotoVideoURL:(NSString *)takePhotoVideoURL
-{
++(NSString *)takePhotoVideoURL:(NSString *)takePhotoVideoURL{
     NSString *strTemp = @"/tmp/";
     NSRange tempRang = [takePhotoVideoURL rangeOfString:strTemp];
     if (tempRang.location != NSNotFound) {

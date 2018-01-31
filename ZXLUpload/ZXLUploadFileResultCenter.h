@@ -57,78 +57,78 @@
 /**
  检查文件是否压缩成功过
  
- @param uuidStr 文件uuid唯一值
+ @param identifier 文件identifier唯一值
  @return 压缩过的文件信息
  */
--(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)uuidStr;
+-(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)identifier;
 
 /**
  检查文件是否上传成功过
  
- @param uuidStr 文件uuid唯一值
+ @param identifier 文件identifier唯一值
  @return 上传成功过的文件信息
  */
--(ZXLFileInfoModel *)checkUploadSuccessFileInfo:(NSString *)uuidStr;
+-(ZXLFileInfoModel *)checkUploadSuccessFileInfo:(NSString *)identifier;
 
 /**
  检查文件是否正在压缩
  
- @param uuidStr 文件uuid唯一值
+ @param identifier 文件identifier唯一值
  @return 压缩中的文件信息
  */
--(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)uuidStr;
+-(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)identifier;
 
 /**
  检查文件是否正在上传
  
- @param uuidStr 文件uuid唯一值
+ @param identifier 文件identifier唯一值
  @return 上传中的文件信息
  */
--(ZXLFileInfoModel *)checkUploadProgressFileInfo:(NSString *)uuidStr;
+-(ZXLFileInfoModel *)checkUploadProgressFileInfo:(NSString *)identifier;
 
 /**
  添加文件压缩进度session
  
  @param session AVAssetExportSession
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  */
--(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)uuidStr;
+-(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)identifier;
 
 
 /**
  删除文件压缩进度session
  
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  */
--(void)removeFileAVAssetExportSession:(NSString *)uuidStr;
+-(void)removeFileAVAssetExportSession:(NSString *)identifier;
 
 
 /**
  获取文件进度session
  
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  @return AVAssetExportSession
  */
--(AVAssetExportSession *)getAVAssetExportSession:(NSString *)uuidStr;
+-(AVAssetExportSession *)getAVAssetExportSession:(NSString *)identifier;
 
 /**
  添加文件上传Request
  
  @param request Request
  */
--(void)addUploadRequest:(id)request with:(NSString *)uuidStr;
+-(void)addUploadRequest:(id)request with:(NSString *)identifier;
 
 /**
  删除文件上传OSSRequest
  
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  */
--(void)removeUploadRequest:(NSString *)uuidStr;
+-(void)removeUploadRequest:(NSString *)identifier;
 
 /**
  删除此文件在上传中留下的不成功的所有信息
  
- @param uuidStr 文件uuid
+ @param identifier 文件identifier
  */
--(void)removeFileInfoUpload:(NSString *)uuidStr;
+-(void)removeFileInfoUpload:(NSString *)identifier;
 @end

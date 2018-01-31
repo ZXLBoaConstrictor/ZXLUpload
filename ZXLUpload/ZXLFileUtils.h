@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileType){
 
 +(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath;
 
-+(NSString *)fileNameWithUUID:(NSString *)uuid fileType:(ZXLFileType)fileType;
++(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType;
 /**
  图片MD5 值
 

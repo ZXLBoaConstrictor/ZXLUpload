@@ -12,5 +12,5 @@
 @interface ZXLUploadTaskCenter : NSObject
 +(instancetype)shareUploadTask;
 
--(void)changeFileUploadResult:(NSString *)uuid type:(ZXLFileUploadType)result;
+-(void)changeFileUploadResult:(NSString *)identifier type:(ZXLFileUploadType)result;
 @end

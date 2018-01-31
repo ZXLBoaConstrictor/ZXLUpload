@@ -12,8 +12,7 @@
 
 
 @implementation ZXLFileUtils
-+(NSString *)fileExtension:(ZXLFileType)fileType
-{
++(NSString *)fileExtension:(ZXLFileType)fileType{
     if (fileType == ZXLFileTypeImage) {
         return @"jpeg";
     }
@@ -29,8 +28,7 @@
     return @"";
 }
 
-+(ZXLFileType)fileTypeByURL:(NSString *)filePath
-{
++(ZXLFileType)fileTypeByURL:(NSString *)filePath{
     ZXLFileType fileType = ZXLFileTypeFile;
     if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeImage]]) {
         fileType = ZXLFileTypeImage;
@@ -47,19 +45,16 @@
     return fileType;
 }
 
-+(NSInteger)fileSizeByPath:(NSString *)localURL
-{
++(NSInteger)fileSizeByPath:(NSString *)localURL{
     NSInteger fileSize = 0;
     
     NSFileManager *fileManager = [NSFileManager defaultManager]; // default is not thread safe
     BOOL isDir = NO;
-    if ([fileManager fileExistsAtPath:localURL isDirectory:&isDir])
-    {
+    if ([fileManager fileExistsAtPath:localURL isDirectory:&isDir]){
         if (!isDir) {
             NSError *error = nil;
             NSDictionary *fileDict = [fileManager attributesOfItemAtPath:localURL error:&error];
-            if (!error && fileDict)
-            {
+            if (!error && fileDict){
                 fileSize = (NSInteger)[fileDict fileSize];
             }
         }
@@ -67,8 +62,7 @@
     return fileSize;
 }
 
-+(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath
-{
++(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath{
     if (!filePath || filePath.length < 1) return @"";
     
     return (__bridge_transfer NSString *)ZXLFileMD5HashCreateWithPath((__bridge CFStringRef)filePath, FileHashDefaultChunkSizeForReadingData);
@@ -135,8 +129,7 @@ done:
 }
 
 
-+(NSString *)imageMD5:(UIImage *)image
-{
++(NSString *)imageMD5:(UIImage *)image{
     NSData *imageData = UIImagePNGRepresentation(image);
     NSString * base64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
@@ -154,8 +147,7 @@ done:
              ] lowercaseString];
 }
 
-+(NSString *)fileNameWithUUID:(NSString *)uuid fileType:(ZXLFileType)fileType
-{
-    return [NSString stringWithFormat:@"%@%@.%@",ZXLFilePrefixion,uuid,[ZXLFileUtils fileExtension:fileType]];
++(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType{
+    return [NSString stringWithFormat:@"%@%@.%@",ZXLFilePrefixion,identifier,[ZXLFileUtils fileExtension:fileType]];
 }
 @end

@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
 
 @interface ZXLFileInfoModel : NSObject
 //文件信息
-@property (nonatomic,copy)NSString  *                      uuid;//唯一值
+@property (nonatomic,copy)NSString  *                      identifier;//唯一值
 
 /**
  文件本地路径(非绝对路径，注意IOS在App进程重启的时候路径都会变掉)
@@ -76,6 +76,13 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
 @property (nonatomic,assign)ZXLFileUploadType              uploadResult; //上传结果
 
 +(instancetype)dictionary:(NSDictionary *)dictionary;
+
+/**
+ 数据模型转字典
+ 
+ @return NSMutableDictionary
+ */
+-(NSMutableDictionary *)keyValues;
 
 /**
  构建函数
@@ -133,7 +140,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
 -(NSString *)localUploadURL;
 
 /**
- 文件上传名称 例子 ZXLFilePrefixion + uuid + fileExtension
+ 文件上传名称 例子 ZXLFilePrefixion + identifier + fileExtension
  
  @return 文件名称
  */
@@ -164,10 +171,5 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
  */
 -(void)fileClear;
 
-/**
- 数据模型转字典
- 
- @return NSMutableDictionary
- */
--(NSMutableDictionary *)keyValues;
+
 @end
