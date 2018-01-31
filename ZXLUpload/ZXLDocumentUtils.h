@@ -21,7 +21,7 @@
 
 #define ZXLDocumentUploadResultInfo @"ZXLDocumentUploadResultInfo"
 
-#define ZXLDocumentCompassInfo @"ZXLDocumentCompassInfo"
+#define ZXLDocumentComprssInfo @"ZXLDocumentComprssInfo"
 
 // 下载文件的总文件夹
 #define BASEDocument       @"ZXLDocumentFile"

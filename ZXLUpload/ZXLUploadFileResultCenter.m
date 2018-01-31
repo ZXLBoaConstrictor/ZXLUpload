@@ -20,7 +20,7 @@
 /**
  压缩文件信息 -- 保存本地
  */
-@property(nonatomic,strong)NSMutableDictionary * compassResultInfo;
+@property(nonatomic,strong)NSMutableDictionary * comprssResultInfo;
 
 
 /**
@@ -36,7 +36,7 @@
 /**
  压缩过程中的文件信息
  */
-@property(nonatomic,strong)NSMutableDictionary * compassInfo;
+@property(nonatomic,strong)NSMutableDictionary * comprssInfo;
 
 /**
  文件压缩session
@@ -67,9 +67,9 @@
          
          _uploadResultInfo = [NSMutableDictionary dictionary];
          _uploadErrorInfo = [NSMutableDictionary dictionary];
-         _compassResultInfo = [NSMutableDictionary dictionary];
+         _comprssResultInfo = [NSMutableDictionary dictionary];
          _uploadInfo = [NSMutableDictionary dictionary];
-         _compassInfo = [NSMutableDictionary dictionary];
+         _comprssInfo = [NSMutableDictionary dictionary];
          _assetSessionDict = [NSMutableDictionary dictionary];
          _sessionRequestDict = [NSMutableDictionary dictionary];
          
@@ -82,19 +82,19 @@
          }
          
          //读取压缩成功的文件信息 并检查压缩成功的文件是否还在本地
-         NSMutableDictionary *tempCompassInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentCompassInfo];
-         if (ISDictionaryValid(tempCompassInfo)) {
-             for (NSString * strKey in tempCompassInfo.allKeys) {
-                 NSDictionary * obj = [tempCompassInfo objectForKey:strKey];
+         NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
+         if (ISDictionaryValid(tempcomprssInfo)) {
+             for (NSString * strKey in tempcomprssInfo.allKeys) {
+                 NSDictionary * obj = [tempcomprssInfo objectForKey:strKey];
                  if (ISDictionaryValid(obj)) {
                      ZXLFileInfoModel *fileInfo =  [ZXLFileInfoModel dictionary:(NSDictionary *)obj];
                      NSString * videoName = [fileInfo uploadKey];
-                     NSString * compassURL = FILE_Video_PATH(videoName);
-                     if (fileInfo.compassSuccess && [[NSFileManager defaultManager] fileExistsAtPath:compassURL]) {
-                         [_compassResultInfo setValue:fileInfo forKey:strKey];
+                     NSString * comprssURL = FILE_Video_PATH(videoName);
+                     if (fileInfo.comprssSuccess && [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
+                         [_comprssResultInfo setValue:fileInfo forKey:strKey];
                      }else
                      {
-                         [tempCompassInfo removeObjectForKey:strKey];
+                         [tempcomprssInfo removeObjectForKey:strKey];
                      }
                  }
              }
@@ -106,36 +106,36 @@
 -(void)clearAllUploadFileInfo
 {
     [_uploadResultInfo removeAllObjects];
-    [_compassResultInfo removeAllObjects];
+    [_comprssResultInfo removeAllObjects];
     [_uploadInfo removeAllObjects];
-    [_compassInfo removeAllObjects];
+    [_comprssInfo removeAllObjects];
     [_assetSessionDict removeAllObjects];
     [_uploadErrorInfo removeAllObjects];
     [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadResultInfo];
-    [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentCompassInfo];
+    [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentComprssInfo];
 }
 
 
--(void)saveCompassSuccess:(ZXLFileInfoModel *)fileInfo
+-(void)saveComprssSuccess:(ZXLFileInfoModel *)fileInfo
 {
     if (!fileInfo || fileInfo.fileType != ZXLFileTypeVideo) return;
     
     NSString * videoName = [fileInfo uploadKey];
-    NSString * compassURL = FILE_Video_PATH(videoName);
-    if (![self checkCompassSuccessFileInfo:fileInfo.uuid] && //检查此文件是否保存过
-        fileInfo.compassSuccess &&  //检查压缩成功后的地址和压缩后的文件是否存在
-        [[NSFileManager defaultManager] fileExistsAtPath:compassURL]) {
+    NSString * comprssURL = FILE_Video_PATH(videoName);
+    if (![self checkComprssSuccessFileInfo:fileInfo.uuid] && //检查此文件是否保存过
+        fileInfo.comprssSuccess &&  //检查压缩成功后的地址和压缩后的文件是否存在
+        [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
         
         //压缩成功后把压缩过程存的文件信息删除
         [self removeFileAVAssetExportSession:fileInfo.uuid];
         
-        NSMutableDictionary *tempCompassInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentCompassInfo];
-        [tempCompassInfo setValue:[fileInfo keyValues] forKey:fileInfo.uuid];
-        [ZXLDocumentUtils setDictionaryByListName:tempCompassInfo fileName:ZXLDocumentCompassInfo];
+        NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
+        [tempcomprssInfo setValue:[fileInfo keyValues] forKey:fileInfo.uuid];
+        [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
         
-        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tempCompassInfo valueForKey:fileInfo.uuid]];
+        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tempcomprssInfo valueForKey:fileInfo.uuid]];
         //存储成功记录
-        [_compassResultInfo setValue:tempFileInfo forKey:fileInfo.uuid];
+        [_comprssResultInfo setValue:tempFileInfo forKey:fileInfo.uuid];
     }
 }
 
@@ -187,14 +187,14 @@
  
  @param fileInfo 文件信息
  */
--(void)saveCompassProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session
+-(void)saveComprssProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session
 {
     if (!fileInfo || !session ||fileInfo.fileType != ZXLFileTypeVideo) return;
     
-    ZXLFileInfoModel *tempFileInfo = [_compassInfo valueForKey:fileInfo.uuid];
+    ZXLFileInfoModel *tempFileInfo = [_comprssInfo valueForKey:fileInfo.uuid];
     if (!tempFileInfo) {
         tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
-        [_compassInfo setValue:tempFileInfo forKey:tempFileInfo.uuid];
+        [_comprssInfo setValue:tempFileInfo forKey:tempFileInfo.uuid];
         
         //文件开始压缩的时候先删除出错历史
         [_uploadErrorInfo removeObjectForKey:fileInfo.uuid];
@@ -229,24 +229,24 @@
     }
 }
 
--(ZXLFileInfoModel *)checkCompassSuccessFileInfo:(NSString *)uuidStr
+-(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)uuidStr
 {
     if (!ISNSStringValid(uuidStr))  return nil;
     
-    ZXLFileInfoModel *fileInfo = [_compassResultInfo valueForKey:uuidStr];
+    ZXLFileInfoModel *fileInfo = [_comprssResultInfo valueForKey:uuidStr];
     if (fileInfo) {
         NSString * videoName = [fileInfo uploadKey];
-        NSString * compassURL = FILE_Video_PATH(videoName);
+        NSString * comprssURL = FILE_Video_PATH(videoName);
         //文件存在返回结果
-        if (fileInfo.compassSuccess && [[NSFileManager defaultManager] fileExistsAtPath:compassURL]) {
+        if (fileInfo.comprssSuccess && [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
             return fileInfo;
         }else
         {
-            [_compassResultInfo removeObjectForKey:uuidStr];
+            [_comprssResultInfo removeObjectForKey:uuidStr];
             //文件不存在删除保存过的文件信息
-            NSMutableDictionary *tempCompassInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentCompassInfo];
-            [tempCompassInfo removeObjectForKey:fileInfo.uuid];
-            [ZXLDocumentUtils setDictionaryByListName:tempCompassInfo fileName:ZXLDocumentCompassInfo];
+            NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
+            [tempcomprssInfo removeObjectForKey:fileInfo.uuid];
+            [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
         }
     }
     return nil;
@@ -278,11 +278,11 @@
  @param uuidStr 文件uuid唯一值
  @return 压缩中的文件信息
  */
--(ZXLFileInfoModel *)checkCompassProgressFileInfo:(NSString *)uuidStr
+-(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)uuidStr
 {
     if (!ISNSStringValid(uuidStr))  return nil;
     
-    return [_compassInfo valueForKey:uuidStr];
+    return [_comprssInfo valueForKey:uuidStr];
 }
 
 /**
@@ -313,7 +313,7 @@
         if (session) {
             [session cancelExport];
             [_assetSessionDict removeObjectForKey:uuidStr];
-            [_compassInfo removeObjectForKey:uuidStr];
+            [_comprssInfo removeObjectForKey:uuidStr];
         }
     }
 }

@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
 
 
 //文件上传信息
-@property (nonatomic,assign)BOOL                           compassSuccess;//压缩成功（针对视频文件）
+@property (nonatomic,assign)BOOL                           comprssSuccess;//压缩成功（针对视频文件）
 @property (nonatomic,assign)float                          progress; //文件进度
 @property (nonatomic,assign)ZXLFileUploadProgressType      progressType; //文件上传状态
 @property (nonatomic,assign)ZXLFileUploadType              uploadResult; //上传结果

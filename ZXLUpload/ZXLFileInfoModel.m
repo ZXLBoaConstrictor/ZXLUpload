@@ -11,7 +11,7 @@
 typedef void (^completed)(BOOL bResult);
 
 @interface ZXLFileInfoModel()
-@property (nonatomic,copy)completed compassResult;
+@property (nonatomic,copy)completed comprssResult;
 @property (nonatomic,strong)NSTimer *timer;
 @end
 
@@ -27,7 +27,7 @@ typedef void (^completed)(BOOL bResult);
     if (self = [super init]) {
         self.uuid =                     [dictionary objectForKey:@"uuid"];
         self.localURL =                 [dictionary objectForKey:@"localURL"];
-        self.compassSuccess =           [[dictionary objectForKey:@"compassSuccess"] boolValue];
+        self.comprssSuccess =           [[dictionary objectForKey:@"comprssSuccess"] boolValue];
         self.uploadSize =               [[dictionary objectForKey:@"uploadSize"] integerValue];
         self.fileType =                 [[dictionary objectForKey:@"fileType"] integerValue];
         self.progress =                 [[dictionary objectForKey:@"progress"] floatValue];
@@ -52,7 +52,7 @@ typedef void (^completed)(BOOL bResult);
         }
         self.localURL =                 @"";
         self.uuid =                     asset.localIdentifier;
-        self.compassSuccess =           NO;
+        self.comprssSuccess =           NO;
         self.uploadSize =               0;
         self.progress =                 0;
         self.progressType =             ZXLFileUploadProgressStartUpload;
@@ -68,7 +68,7 @@ typedef void (^completed)(BOOL bResult);
     if (self = [super init]) {
         self.localURL =                 [ZXLDocumentUtils saveImageByName:image];
         self.uuid =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
-        self.compassSuccess =           NO;
+        self.comprssSuccess =           NO;
         self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
         self.fileType =                 ZXLFileTypeImage;
         self.progress =                 0;
@@ -104,7 +104,7 @@ typedef void (^completed)(BOOL bResult);
         }
         
         self.uuid =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
-        self.compassSuccess =           NO;
+        self.comprssSuccess =           NO;
         self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
         self.progress =                 0;
         self.progressType =             ZXLFileUploadProgressStartUpload;
@@ -133,19 +133,19 @@ typedef void (^completed)(BOOL bResult);
     }
 }
 
--(void)waitCompassResult
+-(void)waitcomprssResult
 {
     //检测同一文件是否有压缩成功过
-    ZXLFileInfoModel * successCompassFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkCompassSuccessFileInfo:self.uuid];
-    if (successCompassFileInfo) {
+    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.uuid];
+    if (successComprssFileInfo) {
         if (_timer) {
             [_timer invalidate];
             _timer = nil;
         }
         
-        self.compassSuccess = YES;
-        self.uploadSize = successCompassFileInfo.uploadSize;
-        _compassResult(YES);
+        self.comprssSuccess = YES;
+        self.uploadSize = successComprssFileInfo.uploadSize;
+        _comprssResult(YES);
     }
 }
 
@@ -165,7 +165,7 @@ typedef void (^completed)(BOOL bResult);
             if ([[NSFileManager defaultManager] fileExistsAtPath:strComprssUrl]) {
                 BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:strComprssUrl error:nil];
                 if (bRemove) {
-//                 NSLog(@"删除没有压缩完成的视频%@",strCompassUrl);
+//                 NSLog(@"删除没有压缩完成的视频%@",strcomprssURL);
                 }
             }
         }
@@ -181,24 +181,24 @@ typedef void (^completed)(BOOL bResult);
     }
     
     //检测同一文件是否有压缩成功过
-    ZXLFileInfoModel * successCompassFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkCompassSuccessFileInfo:self.uuid];
-    if (successCompassFileInfo) {
-        self.compassSuccess = YES;
-        self.uploadSize = successCompassFileInfo.uploadSize;
+    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.uuid];
+    if (successComprssFileInfo) {
+        self.comprssSuccess = YES;
+        self.uploadSize = successComprssFileInfo.uploadSize;
         completed(YES);
         return;
     }
     
     //有视频文件正在压缩还上传的地方等待视频压缩完成
-    ZXLFileInfoModel * progressCompassFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkCompassProgressFileInfo:self.uuid];
-    if (progressCompassFileInfo) {
+    ZXLFileInfoModel * progressComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssProgressFileInfo:self.uuid];
+    if (progressComprssFileInfo) {
         self.progressType = ZXLFileUploadProgressTranscoding;
-        _compassResult = completed;
+        _comprssResult = completed;
         if (_timer) {
             [_timer invalidate];
             _timer = nil;
         }
-        _timer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(waitCompassResult) userInfo:nil repeats:YES];
+        _timer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
         
         return;
     }
@@ -208,9 +208,9 @@ typedef void (^completed)(BOOL bResult);
         __block PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
         [self getVideoOutputPathWithAsset:asset completion:^(NSString *outputPath, NSString *error) {
             if (!ISNSStringValid(error) && ISNSStringValid(outputPath)) {
-                weakSelf.compassSuccess = YES;
+                weakSelf.comprssSuccess = YES;
                 weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
-                [[ZXLUploadFileResultCenter shareUploadResultCenter] saveCompassSuccess:weakSelf];
+                [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (completed) {
                         completed(YES);
@@ -235,9 +235,9 @@ typedef void (^completed)(BOOL bResult);
             AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:self.localURL]];
             [self startExportVideoWithVideoAsset:asset completion:^(NSString *outputPath, NSString *error) {
                 if (!ISNSStringValid(error) && ISNSStringValid(outputPath)) {
-                    weakSelf.compassSuccess = YES;
+                    weakSelf.comprssSuccess = YES;
                     weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
-                    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveCompassSuccess:weakSelf];
+                    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (completed) {
                             completed(YES);
@@ -359,7 +359,7 @@ typedef void (^completed)(BOOL bResult);
             });
         }];
         
-        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveCompassProgress:self ExportSession:session];
+        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssProgress:self ExportSession:session];
     }
 }
 
@@ -416,7 +416,7 @@ typedef void (^completed)(BOOL bResult);
     [self stopVideoCompress];
     
     self.progress = 0;
-    self.compassSuccess = NO;
+    self.comprssSuccess = NO;
     self.progressType = ZXLFileUploadProgressStartUpload;
     self.uploadResult = ZXLFileUploadloading;
     [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.uuid];
@@ -428,7 +428,7 @@ typedef void (^completed)(BOOL bResult);
     if (ISNSStringValid(localUploadURL) && [[NSFileManager defaultManager] fileExistsAtPath:localUploadURL]) {
         BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:localUploadURL error:nil];
         if (bRemove) {
-//            NSLog(@"上传成功删除%@ --%@",uploadFileURL,self.fileCompassUrl);
+//            NSLog(@"上传成功删除%@ --%@",uploadFileURL,self.filecomprssURL);
         }
     }
 }
@@ -438,7 +438,7 @@ typedef void (^completed)(BOOL bResult);
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [dictionary setValue:_uuid forKey:@"uuid"];
     [dictionary setValue:_localURL forKey:@"localURL"];
-    [dictionary setValue:_compassSuccess?@"1":@"0" forKey:@"compassSuccess"];
+    [dictionary setValue:_comprssSuccess?@"1":@"0" forKey:@"comprssSuccess"];
     [dictionary setValue:@(_uploadSize).stringValue forKey:@"size"];
     [dictionary setValue:@(_fileType).stringValue forKey:@"filetype"];
     [dictionary setValue:[NSString stringWithFormat:@"%lf",_progress] forKey:@"progress"];

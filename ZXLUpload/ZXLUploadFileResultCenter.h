@@ -22,7 +22,7 @@
  
  @param fileInfo 文件信息
  */
--(void)saveCompassSuccess:(ZXLFileInfoModel *)fileInfo;
+-(void)saveComprssSuccess:(ZXLFileInfoModel *)fileInfo;
 
 /**
  保存上传成功后的文件信息
@@ -44,7 +44,7 @@
  
  @param fileInfo 文件信息
  */
--(void)saveCompassProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session;
+-(void)saveComprssProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session;
 
 
 /**
@@ -60,7 +60,7 @@
  @param uuidStr 文件uuid唯一值
  @return 压缩过的文件信息
  */
--(ZXLFileInfoModel *)checkCompassSuccessFileInfo:(NSString *)uuidStr;
+-(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)uuidStr;
 
 /**
  检查文件是否上传成功过
@@ -76,7 +76,7 @@
  @param uuidStr 文件uuid唯一值
  @return 压缩中的文件信息
  */
--(ZXLFileInfoModel *)checkCompassProgressFileInfo:(NSString *)uuidStr;
+-(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)uuidStr;
 
 /**
  检查文件是否正在上传

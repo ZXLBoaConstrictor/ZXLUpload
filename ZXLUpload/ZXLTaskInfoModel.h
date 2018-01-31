@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class ZXLFileInfoModel;
+
 @interface ZXLTaskInfoModel : NSObject
+@property (nonatomic,copy)NSString *identifier;
+@property (nonatomic,strong)NSMutableArray<ZXLFileInfoModel *> *   ayFileInfo;     //文件上传任务数组
 
 @end
