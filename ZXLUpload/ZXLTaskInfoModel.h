@@ -9,8 +9,35 @@
 #import <Foundation/Foundation.h>
 #import "ZXLFileInfoModel.h"
 
+
+/**
+ 上传任务状态
+
+ - ZXLUploadTaskPrepareForUpload: 任务准备上传
+ - ZXLUploadTaskTranscoding: 上传任务中文件压缩中
+ - ZXLUploadTaskLoading: 文件上传中
+ - ZXLUploadTaskSuccess: 任务成功
+ - ZXLUploadTaskError: 任务失败
+ */
+typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
+    ZXLUploadTaskPrepareForUpload,
+    ZXLUploadTaskTranscoding,
+    ZXLUploadTaskLoading,
+    ZXLUploadTaskSuccess,
+    ZXLUploadTaskError
+};
+
 @interface ZXLTaskInfoModel : NSObject
-@property (nonatomic,copy)NSString *identifier; //任务标识符（确保标识符的唯一性）
+
+/**
+ 任务标识符（确保标识符的唯一性）
+ */
+@property (nonatomic,copy)NSString *identifier;
+
+/**
+ 重传标志（任务上传断网、进程重启等是否要重传--关系到是否保留任务数据）
+ */
+@property (nonatomic,assign)BOOL resetUpload;
 
 +(instancetype)dictionary:(NSDictionary *)dictionary;
 
@@ -42,7 +69,7 @@
  
  @return 上传任务状态
  */
--(ZXLFileUploadType)uploadTaskType;
+-(ZXLUploadTaskType)uploadTaskType;
 
 
 /**
@@ -90,6 +117,14 @@
  @param identifier 文件identifier 标识符
  */
 -(void)removeUploadFile:(NSString *)identifier;
+
+/**
+ 判断此上传任务中有没有该文件
+
+ @param identifier 文件唯一标识
+ @return 检测结果
+ */
+-(BOOL)checkFileInTask:(NSString *)identifier;
 
 /**
  清空上传任务进度

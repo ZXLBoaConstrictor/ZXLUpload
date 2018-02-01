@@ -18,7 +18,6 @@ typedef NS_ENUM(NSUInteger, ZXLFileFromType){
 
 /**
  文件上传结果
- 
  - ZXLFileUploadloading: 上传中
  - ZXLFileUploadSuccess: 上传成功
  - ZXLFileUploadFileError: 上传文件失败
@@ -70,8 +69,9 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
 
 
 //文件上传信息
+@property (nonatomic,copy)NSString  *                      superTaskIdentifier;//文件所在上传任务id标识（空则此次文件上传信息不在上传任务中）
 @property (nonatomic,assign)BOOL                           comprssSuccess;//压缩成功（针对视频文件）
-@property (nonatomic,assign)float                          progress; //文件进度
+@property (nonatomic,assign)float                          progress; //文件上传进度
 @property (nonatomic,assign)ZXLFileUploadProgressType      progressType; //文件上传状态
 @property (nonatomic,assign)ZXLFileUploadType              uploadResult; //上传结果
 
@@ -164,7 +164,6 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
  重置文件信息-（在上传失败的时候用）
  */
 -(void)resetFileInfo;
-
 
 /**
  清空缓存文件-（在上传成功用，清理缓存文件）

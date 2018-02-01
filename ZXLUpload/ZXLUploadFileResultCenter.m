@@ -299,6 +299,20 @@
         if (session) {
             [session cancelExport];
             [_assetSessionDict removeObjectForKey:identifier];
+        }
+        
+        ZXLFileInfoModel *fileInfo = [_comprssInfo valueForKey:identifier];
+        if (fileInfo) {
+            //删除压缩过没有压缩完的视频
+            NSString * videoName = [fileInfo uploadKey];
+            NSString *strComprssUrl = FILE_Video_PATH(videoName);
+            if ([[NSFileManager defaultManager] fileExistsAtPath:strComprssUrl]) {
+                BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:strComprssUrl error:nil];
+                if (bRemove) {
+//                 NSLog(@"删除没有压缩完成的视频%@",strComprssUrl);
+                }
+            }
+            
             [_comprssInfo removeObjectForKey:identifier];
         }
     }

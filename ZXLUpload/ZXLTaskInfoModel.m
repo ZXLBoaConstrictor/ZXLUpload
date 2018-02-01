@@ -7,11 +7,28 @@
 //
 
 #import "ZXLTaskInfoModel.h"
+#import "ZXLUploadFileResultCenter.h"
+
 @interface ZXLTaskInfoModel ()
-@property (nonatomic,strong)NSMutableArray<ZXLFileInfoModel *> * uploadFiles;     //文件上传任务数组
+
+/**
+ 文件上传任务数组
+ 外部不可调用 添加和删除的时候都要做任务状态判断，否则会影响上传任务结果
+ */
+@property (nonatomic,strong)NSMutableArray<ZXLFileInfoModel *> * uploadFiles;
+
+@property (nonatomic,assign)ZXLUploadTaskType taskUploadResult;
 @end
 
 @implementation ZXLTaskInfoModel
+
+#pragma 懒加载
+-(NSMutableArray<ZXLFileInfoModel *> * )uploadFiles{
+    if (!_uploadFiles) {
+        _uploadFiles = [NSMutableArray array];
+    }
+    return _uploadFiles;
+}
 
 +(instancetype)dictionary:(NSDictionary *)dictionary{
     return [[[self class] alloc] initWithDictionary:dictionary];
@@ -19,14 +36,21 @@
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary{
     if (self = [super init]) {
-        self.identifier     =  [dictionary objectForKey:@"identifier"];
-        NSArray *ayFiles    =  [dictionary objectForKey:@"uploadFiles"];
-        _uploadFiles = [NSMutableArray array];
+        self.taskUploadResult   =  ZXLUploadTaskPrepareForUpload;
+        self.identifier         =  [dictionary objectForKey:@"identifier"];
+        NSArray *ayFiles        =  [dictionary objectForKey:@"uploadFiles"];
         for (NSDictionary *fileDict in ayFiles) {
-            [_uploadFiles addObject:[ZXLFileInfoModel dictionary:fileDict]];
+            [self.uploadFiles addObject:[ZXLFileInfoModel dictionary:fileDict]];
         }
     }
     return self;
+}
+
+-(void)dealloc
+{
+    [self clearProgress];
+    [self.uploadFiles removeAllObjects];
+    self.uploadFiles = nil;
 }
 
 -(NSMutableDictionary *)keyValues{
@@ -34,7 +58,7 @@
     [dictionary setValue:_identifier forKey:@"identifier"];
     
     NSMutableArray * ayFileInfo = [NSMutableArray array];
-    for (ZXLFileInfoModel *fileInfo in _uploadFiles) {
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
         [ayFileInfo addObject:[fileInfo keyValues]];
     }
     [dictionary setValue:ayFileInfo forKey:@"uploadFiles"];
@@ -42,45 +66,192 @@
 }
 
 -(float)uploadProgress{
-    return 0;
+    float fProgress = 0;
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+        ZXLFileInfoModel * tempFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier];
+        if (tempFileInfo) {
+            fProgress += tempFileInfo.progress;
+        }else{
+            fProgress += fileInfo.progress;
+        }
+    }
+    return fProgress;
 }
 
 -(float)compressProgress{
-    return 0;
-}
-
--(ZXLFileUploadType)uploadTaskType{
-    return 0;
+    float fProgress = 0;
+    NSInteger fCompressFileCount = 0;
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+        if (fileInfo.fileType == ZXLFileTypeVideo) {
+            fCompressFileCount ++;
+            AVAssetExportSession *Session = [[ZXLUploadFileResultCenter shareUploadResultCenter] getAVAssetExportSession:fileInfo.identifier];
+            if (Session) {
+                fProgress += Session.progress;
+            }else{
+                fProgress += 1.0;
+            }
+        }
+    }
+    return fProgress/fCompressFileCount;
 }
 
 -(long long)uploadFileSize{
-  return 0;
+    long long fileSize = 0;
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+        fileSize += fileInfo.uploadSize;
+    }
+    return fileSize;
 }
+
+
+-(ZXLUploadTaskType)uploadTaskType{
+    
+    //任务上传完成的结果直接返回
+    if (self.taskUploadResult == ZXLUploadTaskSuccess || self.taskUploadResult == ZXLUploadTaskError)
+        return self.taskUploadResult;
+    
+    if (self.uploadFiles.count == 0)
+        return ZXLUploadTaskPrepareForUpload;
+    
+    BOOL bError = NO;
+    BOOL bCompress = NO;
+    BOOL bPrepareForUpload = YES;
+    NSInteger nSuccessFileCount = 0;
+    
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+        switch (fileInfo.progressType) {
+            case ZXLFileUploadProgressTranscoding:{
+                bCompress = YES;
+            }
+                break;
+            case ZXLFileUploadProgressUploadEnd:{
+                if (fileInfo.uploadResult == ZXLFileUploadError || fileInfo.uploadResult == ZXLFileUploadFileError) {
+                    bError = YES;
+                }else{
+                    nSuccessFileCount ++;
+                }
+            }
+                break;
+            default:
+                
+                break;
+        }
+        
+        if (fileInfo.progressType != ZXLFileUploadProgressStartUpload) {
+            bPrepareForUpload = NO;
+        }
+    }
+    
+    if (nSuccessFileCount == self.uploadFiles.count) self.taskUploadResult = ZXLUploadTaskSuccess;
+    
+    if (bError) self.taskUploadResult = ZXLUploadTaskError;
+    
+    if (bPrepareForUpload) self.taskUploadResult = ZXLUploadTaskPrepareForUpload;
+        
+    if (bCompress) self.taskUploadResult = ZXLUploadTaskTranscoding;
+    
+    return self.taskUploadResult;
+}
+
 
 
 -(void)addFileInfo:(ZXLFileInfoModel *)fileInfo{
+    if (!fileInfo) return;
     
+    //添加上传文件时 确保文件在准备上传状态 -- 失败状态要继续添加上传文件清空上传状态，然后再添加文件
+    if (self.taskUploadResult == ZXLUploadTaskError)
+        [self clearProgress];
+    
+    if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
+        return;
+
+    fileInfo.superTaskIdentifier = self.identifier;
+    [self.uploadFiles addObject:fileInfo];
 }
 
-
 -(void)addFileInfos:(NSMutableArray<ZXLFileInfoModel *> *)ayFileInfo{
+    if (!ayFileInfo) return;
     
+    if (self.taskUploadResult == ZXLUploadTaskError)
+        [self clearProgress];
+    
+    if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
+        return;
+    
+    for (ZXLFileInfoModel * fileInfo in ayFileInfo) {
+        [self addFileInfo:fileInfo];
+    }
 }
 
 -(void)insertObjectFirst:(ZXLFileInfoModel *)fileInfo{
+    if (!fileInfo) return;
     
+    if (self.taskUploadResult == ZXLUploadTaskError)
+        [self clearProgress];
+    
+    if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
+        return;
+    
+    fileInfo.superTaskIdentifier = self.identifier;
+    if (self.uploadFiles.count > 0) {
+        [self.uploadFiles insertObject:fileInfo atIndex:0];
+    }else{
+        [self.uploadFiles addObject:fileInfo];
+    }
 }
 
 -(void)insertObjectsFirst:(NSMutableArray <ZXLFileInfoModel *> *)ayFileInfo{
+    if (!ayFileInfo) return;
     
+    if (self.taskUploadResult == ZXLUploadTaskError)
+        [self clearProgress];
+    
+    if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
+        return;
+    
+    if (self.uploadFiles.count > 0) {
+        NSMutableArray<ZXLFileInfoModel *> * arrayTemp = [NSMutableArray arrayWithArray:self.uploadFiles];
+        [self.uploadFiles removeAllObjects];
+        [self.uploadFiles addObjectsFromArray:ayFileInfo];
+        [self.uploadFiles addObjectsFromArray:arrayTemp];
+    }else{
+        [self.uploadFiles addObjectsFromArray:ayFileInfo];
+    }
 }
 
 -(void)removeUploadFile:(NSString *)identifier{
+    if (!ISNSStringValid(identifier)) return;
     
+    //只有在上传失败或者是准备上传的情况下才能删除文件信息
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskPrepareForUpload)
+    {
+        for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+            if ([fileInfo.identifier isEqualToString:identifier]) {
+                [self.uploadFiles removeObject:fileInfo];
+                break;
+            }
+        }
+    }
+}
+
+-(BOOL)checkFileInTask:(NSString *)identifier{
+    if (!ISNSStringValid(identifier)) return NO;
+    
+    BOOL bExistence = NO;
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+        if ([fileInfo.identifier isEqualToString:identifier]) {
+            bExistence = YES;
+            break;
+        }
+    }
+    return bExistence;
 }
 
 -(void)clearProgress{
-    
+    self.taskUploadResult = ZXLUploadTaskPrepareForUpload;
+    for (ZXLFileInfoModel *fileInfo in self.uploadFiles) {
+        [fileInfo resetFileInfo];
+    }
 }
 
 @end

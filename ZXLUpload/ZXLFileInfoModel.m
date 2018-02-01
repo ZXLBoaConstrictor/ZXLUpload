@@ -8,6 +8,8 @@
 
 #import "ZXLFileInfoModel.h"
 #import "ZXLUploadFileResultCenter.h"
+#import "ZXLUploadTaskCenter.h"
+
 typedef void (^completed)(BOOL bResult);
 
 @interface ZXLFileInfoModel()
@@ -152,28 +154,6 @@ typedef void (^completed)(BOOL bResult);
         self.comprssSuccess = YES;
         self.uploadSize = successComprssFileInfo.uploadSize;
         _comprssResult(YES);
-    }
-}
-
--(void)stopVideoCompress{
-    if (self.fileType == ZXLFileTypeVideo) {
-        
-        //停止并清空session
-        AVAssetExportSession *exportSession = [[ZXLUploadFileResultCenter shareUploadResultCenter] getAVAssetExportSession:self.identifier];
-        if (exportSession) {
-            [exportSession cancelExport];
-            [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileAVAssetExportSession:self.identifier];
-            
-            //删除压缩过没有压缩完的视频
-            NSString * videoName = [self uploadKey];
-            NSString *strComprssUrl = FILE_Video_PATH(videoName);
-            if ([[NSFileManager defaultManager] fileExistsAtPath:strComprssUrl]) {
-                BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:strComprssUrl error:nil];
-                if (bRemove) {
-//                 NSLog(@"删除没有压缩完成的视频%@",strcomprssURL);
-                }
-            }
-        }
     }
 }
 
@@ -410,14 +390,16 @@ typedef void (^completed)(BOOL bResult);
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadError:self];
 }
 
+
 -(void)resetFileInfo{
-    [self stopVideoCompress];
-    
     self.progress = 0;
     self.comprssSuccess = NO;
     self.progressType = ZXLFileUploadProgressStartUpload;
     self.uploadResult = ZXLFileUploadloading;
-    [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.identifier];
+    
+    if ([[ZXLUploadTaskCenter shareUploadTask] checkRemoveFile:self.superTaskIdentifier file:self.identifier]) {
+        [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.identifier];
+    }
 }
 
 -(void)fileClear{
