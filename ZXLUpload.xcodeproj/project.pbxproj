@@ -46,6 +46,7 @@
 		828A6799202458990094CA92 /* ZXLUploadTaskManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadTaskManager.m; sourceTree = "<group>"; };
 		828A679C2024595F0094CA92 /* ZXLUploadFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadFileManager.h; sourceTree = "<group>"; };
 		828A679D2024595F0094CA92 /* ZXLUploadFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadFileManager.m; sourceTree = "<group>"; };
+		828A67A02024764D0094CA92 /* ZXLUploadDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				8285F693201C196600D0F682 /* ZXLUpload.h */,
+				828A67A02024764D0094CA92 /* ZXLUploadDefine.h */,
 				8269E8BE201F25C3002D540E /* ZXLFileUtils.h */,
 				8269E8BF201F25C3002D540E /* ZXLFileUtils.m */,
 				828A67912021B58D0094CA92 /* ZXLVideoUtils.h */,

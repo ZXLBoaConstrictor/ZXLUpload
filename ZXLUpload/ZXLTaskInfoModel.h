@@ -7,25 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZXLFileInfoModel.h"
+#import "ZXLUploadDefine.h"
 
-
-/**
- 上传任务状态
-
- - ZXLUploadTaskPrepareForUpload: 任务准备上传
- - ZXLUploadTaskTranscoding: 上传任务中文件压缩中
- - ZXLUploadTaskLoading: 文件上传中
- - ZXLUploadTaskSuccess: 任务成功
- - ZXLUploadTaskError: 任务失败
- */
-typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
-    ZXLUploadTaskPrepareForUpload,
-    ZXLUploadTaskTranscoding,
-    ZXLUploadTaskLoading,
-    ZXLUploadTaskSuccess,
-    ZXLUploadTaskError
-};
+@class ZXLFileInfoModel;
 
 @interface ZXLTaskInfoModel : NSObject
 

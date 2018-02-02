@@ -7,6 +7,7 @@
 //
 
 #import "ZXLUploadFileResultCenter.h"
+#import "ZXLDocumentUtils.h"
 #import "ZXLFileInfoModel.h"
 #import "ZXLUploadTaskManager.h"
 

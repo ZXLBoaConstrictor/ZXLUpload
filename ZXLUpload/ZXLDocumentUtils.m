@@ -7,7 +7,7 @@
 //
 
 #import "ZXLDocumentUtils.h"
-
+#import "ZXLFileUtils.h"
 
 @implementation ZXLDocumentUtils
 +(NSMutableDictionary *)dictionaryByListName:(NSString *)fileName{

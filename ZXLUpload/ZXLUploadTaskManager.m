@@ -7,14 +7,24 @@
 //
 
 #import "ZXLUploadTaskManager.h"
+#import "ZXLTaskInfoModel.h"
+#import "ZXLDocumentUtils.h"
 
 @interface ZXLUploadTaskManager ()
+@property (nonatomic,strong)NSMapTable * uploadTaskDelegates;
 @property (nonatomic,strong)NSMutableDictionary * uploadTasks;
 @end
 
 @implementation ZXLUploadTaskManager
 
 #pragma 懒加载
+-(NSMapTable * )uploadTaskDelegates{
+    if (!_uploadTaskDelegates) {
+        _uploadTaskDelegates = [NSMapTable weakToWeakObjectsMapTable];
+    }
+    return _uploadTaskDelegates;
+}
+
 -(NSMutableDictionary * )uploadTasks{
     if (!_uploadTasks) {
         _uploadTasks = [NSMutableDictionary dictionary];
@@ -48,14 +58,126 @@
     }
 }
 
+- (void)addUploadTaskEndResponeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate forIdentifier:(NSString *)identifier
+{
+    if (!delegate || !ISNSStringValid(identifier))return;
+    
+    if (![self.uploadTaskDelegates objectForKey:identifier]) {
+        [self.uploadTaskDelegates setObject:delegate forKey:identifier];
+    }
+}
+
+- (void)removeTaskForIdentifier:(NSString *)identifier
+{
+    if (!ISNSStringValid(identifier)) return;
+    
+    if ([self.uploadTaskDelegates objectForKey:identifier]) {
+        [self.uploadTaskDelegates removeObjectForKey:identifier];
+    }
+    
+    ZXLTaskInfoModel * taskInfo = [self.uploadTasks valueForKey:identifier];
+    if (taskInfo) {
+        [taskInfo removeAllUploadFiles];
+        [self.uploadTasks removeObjectForKey:identifier];
+    }
+}
+
++ (void)addUploadFile:(ZXLFileInfoModel *)fileInfo forIdentifier:(NSString *)identifier
+{
+    if (!fileInfo || !ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo addUploadFile:fileInfo];
+    }
+}
+
++ (void)addUploadFiles:(NSMutableArray<ZXLFileInfoModel *> *)fileInfos forIdentifier:(NSString *)identifier
+{
+    if (!fileInfos || fileInfos.count == 0 || !ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo addUploadFiles:fileInfos];
+    }
+}
+
++ (void)insertUploadFile:(ZXLFileInfoModel *)fileInfo atIndex:(NSUInteger)index forIdentifier:(NSString *)identifier
+{
+    if (!fileInfo || !ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo insertUploadFile:fileInfo atIndex:index];
+    }
+}
+
++ (void)insertUploadFilesFirst:(NSMutableArray <ZXLFileInfoModel *> *)fileInfos forIdentifier:(NSString *)identifier
+{
+    if (!fileInfos || fileInfos.count == 0 || !ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo insertUploadFilesFirst:fileInfos];
+    }
+}
+
++ (void)replaceUploadFileAtIndex:(NSUInteger)index withUploadFile:(ZXLFileInfoModel *)fileInfo forIdentifier:(NSString *)identifier
+{
+    if (!fileInfo || !ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo replaceUploadFileAtIndex:index withUploadFile:fileInfo];
+    }
+}
+
++ (void)removeUploadFile:(NSString *)fileIdentifier forIdentifier:(NSString *)identifier
+{
+    if (!ISNSStringValid(fileIdentifier) || !ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo removeUploadFile:fileIdentifier];
+    }
+}
+
++ (void)removeAllUploadFilesForIdentifier:(NSString *)identifier
+{
+    if (!ISNSStringValid(identifier)) return;
+    
+    ZXLTaskInfoModel * taskInfo = [[ZXLUploadTaskManager manager] uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo removeAllUploadFiles];
+    }
+}
+
 -(ZXLTaskInfoModel *)uploadTaskInfoForIdentifier:(NSString *)identifier{
     if (!ISNSStringValid(identifier)) return nil;
     
     return [self.uploadTasks valueForKey:identifier];
 }
 
+-(ZXLTaskInfoModel *)uploadTaskInfoForIdentifier:(NSString *)identifier create:(BOOL)bCreate{
+    if (!ISNSStringValid(identifier)) return nil;
+    
+    if (bCreate) {
+        ZXLTaskInfoModel *taskInfo = NewObject(ZXLTaskInfoModel);
+        taskInfo.identifier = identifier;
+        [self.uploadTasks setValue:taskInfo forKey:identifier];
+    }
+    
+    return [self.uploadTasks valueForKey:identifier];
+}
 
-
+-(void)addUploadTaskInfo:(ZXLTaskInfoModel *)taskInfo
+{
+    if (!taskInfo || !ISNSStringValid(taskInfo.identifier)) return;
+    
+    if (![self uploadTaskInfoForIdentifier:taskInfo.identifier]) {
+        [self.uploadTasks setValue:taskInfo forKey:taskInfo.identifier];
+    }
+}
 
 -(void)changeFileUploadResult:(NSString *)fileIdentifier type:(ZXLFileUploadType)result{
     

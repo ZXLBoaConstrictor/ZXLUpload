@@ -16,4 +16,6 @@ FOUNDATION_EXPORT const unsigned char ZXLUploadVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ZXLUpload/PublicHeader.h>
 
-
+#import "ZXLVideoUtils.h"
+#import "ZXLFileUtils.h"
+#import "ZXLDocumentUtils.h"

@@ -7,44 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZXLVideoUtils.h"
-#import "ZXLFileUtils.h"
-#import "ZXLDocumentUtils.h"
-
-typedef NS_ENUM(NSUInteger, ZXLFileFromType){
-    ZXLFileFromTakePhoto,//拍摄（目前拍摄的支持视频格式）
-    ZXLFileFromLoacl//本地
-} ;
-
-/**
- 文件上传结果
- - ZXLFileUploadloading: 上传中
- - ZXLFileUploadSuccess: 上传成功
- - ZXLFileUploadFileError: 上传文件失败
- - ZXLFileUploadError: 上传失败
- */
-typedef NS_ENUM(NSUInteger, ZXLFileUploadType){
-    ZXLFileUploadloading,
-    ZXLFileUploadSuccess,
-    ZXLFileUploadFileError,
-    ZXLFileUploadError
-};
-
-
-/**
- 文件上传过程状态
- 
- - ZXLFileUploadProgressStartUpload: 准备开始上传
- - ZXLFileUploadProgressTranscoding: 压缩中
- - ZXLFileUploadProgressUpload: 上传中
- - ZXLFileUploadProgressUploadEnd: 上传结束
- */
-typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType){
-    ZXLFileUploadProgressStartUpload,
-    ZXLFileUploadProgressTranscoding,
-    ZXLFileUploadProgressUpload,
-    ZXLFileUploadProgressUploadEnd
-};
+#import <Photos/Photos.h>
+#import "ZXLUploadDefine.h"
 
 @interface ZXLFileInfoModel : NSObject
 //文件信息

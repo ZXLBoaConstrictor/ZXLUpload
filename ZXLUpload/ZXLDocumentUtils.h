@@ -8,16 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ZXLFileUtils.h"
-//NEW 对象
-#define NewObject(x) [[x alloc]init];
-
-#define iOS9Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.0f)
-
-//字符串空判断
-#define ISNSStringValid(x) (x != NULL && [x length] > 0)
- //字典空判断
-#define ISDictionaryValid(x) (x != NULL && [x count] > 0)
+#import "ZXLUploadDefine.h"
 
 #define ZXLDocumentUploadTaskInfo @"ZXLDocumentUploadTaskInfo"
 

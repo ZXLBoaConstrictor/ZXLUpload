@@ -116,8 +116,8 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
         snprintf(hash + (2 * i), 3, "%02x", (int)(digest[i]));
     }
     result = CFStringCreateWithCString(kCFAllocatorDefault,(const char *)hash,kCFStringEncodingUTF8);
-    
-done:
+
+    done:
     if (readStream) {
         CFReadStreamClose(readStream);
         CFRelease(readStream);

@@ -7,6 +7,11 @@
 //
 
 #import "ZXLFileInfoModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ZXLVideoUtils.h"
+#import "ZXLFileUtils.h"
+#import "ZXLDocumentUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadTaskManager.h"
 
@@ -81,7 +86,7 @@ typedef void (^completed)(BOOL bResult);
 -(instancetype)initWithImage:(UIImage *)image{
     if (self = [super init]) {
         self.localURL =                 [ZXLDocumentUtils saveImageByName:image];
-        self.identifier =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
+        self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
         self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
         self.fileType =                 ZXLFileTypeImage;

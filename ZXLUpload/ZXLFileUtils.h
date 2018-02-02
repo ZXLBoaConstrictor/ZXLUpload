@@ -8,23 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-//文件前缀
-#define ZXLFilePrefixion @"jlboss"
-
-/**
- 文件类型（目前先支持 图片和视频）
- - ZXLFileTypeFile: 文件
- - ZXLFileTypeImage: 图片
- - ZXLFileTypeVideo: 视频
- - ZXLFileTypeVoice: 语音
- */
-typedef NS_ENUM(NSUInteger, ZXLFileType){
-    ZXLFileTypeFile,
-    ZXLFileTypeImage,
-    ZXLFileTypeVideo,
-    ZXLFileTypeVoice
-} ;
+#import "ZXLUploadDefine.h"
 
 @interface ZXLFileUtils : NSObject
 

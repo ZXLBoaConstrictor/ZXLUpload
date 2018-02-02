@@ -7,6 +7,8 @@
 //
 
 #import "ZXLTaskInfoModel.h"
+
+#import "ZXLFileInfoModel.h"
 #import "ZXLUploadFileResultCenter.h"
 
 @interface ZXLTaskInfoModel ()
@@ -254,6 +256,7 @@
     //只有在上传失败或者是准备上传的情况下才能删除文件信息
     if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskPrepareForUpload)
     {
+        [self clearProgress];
         [self.uploadFiles removeAllObjects];
     }
 }

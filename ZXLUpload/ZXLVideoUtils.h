@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <Photos/Photos.h>
 
 @interface ZXLVideoUtils : NSObject
 
