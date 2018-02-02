@@ -39,14 +39,14 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
  */
 @property (nonatomic,assign)BOOL resetUpload;
 
-+(instancetype)dictionary:(NSDictionary *)dictionary;
++ (instancetype)dictionary:(NSDictionary *)dictionary;
 
 /**
  数据模型转字典
  
  @return NSMutableDictionary
  */
--(NSMutableDictionary *)keyValues;
+- (NSMutableDictionary *)keyValues;
 
 
 /**
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
  
  @return 进度
  */
--(float)uploadProgress;
+- (float)uploadProgress;
 
 
 /**
@@ -62,14 +62,14 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
  
  @return 进度
  */
--(float)compressProgress;
+- (float)compressProgress;
 
 /**
  当前上传任务状态
  
  @return 上传任务状态
  */
--(ZXLUploadTaskType)uploadTaskType;
+- (ZXLUploadTaskType)uploadTaskType;
 
 
 /**
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
  
  @return 文件总大小
  */
--(long long)uploadFileSize;
+- (long long)uploadFileSize;
 
 
 /**
@@ -85,38 +85,19 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
  
  @param fileInfo 文件信息
  */
--(void)addFileInfo:(ZXLFileInfoModel *)fileInfo;
+- (void)addUploadFile:(ZXLFileInfoModel *)fileInfo;
 
+- (void)addUploadFiles:(NSMutableArray<ZXLFileInfoModel *> *)fileInfos;
 
-/**
- 添加上传任务中的一组文件信息
- 
- @param ayFileInfo 文件信息数组
- */
--(void)addFileInfos:(NSMutableArray<ZXLFileInfoModel *> *)ayFileInfo;
+- (void)insertUploadFile:(ZXLFileInfoModel *)fileInfo atIndex:(NSUInteger)index;
 
-/**
- 添加上传任务中的文件信息在第一位置
- 
- @param fileInfo 文件信息
- */
--(void)insertObjectFirst:(ZXLFileInfoModel *)fileInfo;
+- (void)insertUploadFilesFirst:(NSMutableArray <ZXLFileInfoModel *> *)fileInfos;
 
+- (void)replaceUploadFileAtIndex:(NSUInteger)index withUploadFile:(ZXLFileInfoModel *)fileInfo;
 
-/**
- 添加上传任务中的一组文件信息在第一位置
- 
- @param ayFileInfo 文件信息
- */
--(void)insertObjectsFirst:(NSMutableArray <ZXLFileInfoModel *> *)ayFileInfo;
+- (void)removeUploadFile:(NSString *)identifier;
 
-
-/**
- 删除上传文件
-
- @param identifier 文件identifier 标识符
- */
--(void)removeUploadFile:(NSString *)identifier;
+- (void)removeAllUploadFiles;
 
 /**
  判断此上传任务中有没有该文件
@@ -124,11 +105,11 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
  @param identifier 文件唯一标识
  @return 检测结果
  */
--(BOOL)checkFileInTask:(NSString *)identifier;
+- (BOOL)checkFileInTask:(NSString *)identifier;
 
 /**
  清空上传任务进度
  */
--(void)clearProgress;
+- (void)clearProgress;
 
 @end

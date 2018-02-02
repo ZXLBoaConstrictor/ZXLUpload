@@ -8,7 +8,7 @@
 
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLFileInfoModel.h"
-#import "ZXLUploadTaskCenter.h"
+#import "ZXLUploadTaskManager.h"
 
 @interface ZXLUploadFileResultCenter()
 
@@ -159,7 +159,7 @@
         //存储成功记录
         [_uploadResultInfo setValue:tempFileInfo forKey:fileInfo.identifier];
         
-        [[ZXLUploadTaskCenter shareUploadTask] changeFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
+        [[ZXLUploadTaskManager manager] changeFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
     }
 }
 

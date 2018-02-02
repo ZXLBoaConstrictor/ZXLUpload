@@ -8,7 +8,7 @@
 
 #import "ZXLFileInfoModel.h"
 #import "ZXLUploadFileResultCenter.h"
-#import "ZXLUploadTaskCenter.h"
+#import "ZXLUploadTaskManager.h"
 
 typedef void (^completed)(BOOL bResult);
 
@@ -397,7 +397,7 @@ typedef void (^completed)(BOOL bResult);
     self.progressType = ZXLFileUploadProgressStartUpload;
     self.uploadResult = ZXLFileUploadloading;
     
-    if ([[ZXLUploadTaskCenter shareUploadTask] checkRemoveFile:self.superTaskIdentifier file:self.identifier]) {
+    if ([[ZXLUploadTaskManager manager] checkRemoveFile:self.superTaskIdentifier file:self.identifier]) {
         [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.identifier];
     }
 }

@@ -19,6 +19,8 @@
  //字典空判断
 #define ISDictionaryValid(x) (x != NULL && [x count] > 0)
 
+#define ZXLDocumentUploadTaskInfo @"ZXLDocumentUploadTaskInfo"
+
 #define ZXLDocumentUploadResultInfo @"ZXLDocumentUploadResultInfo"
 
 #define ZXLDocumentComprssInfo @"ZXLDocumentComprssInfo"
