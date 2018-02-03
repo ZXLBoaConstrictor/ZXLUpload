@@ -62,6 +62,11 @@
     return fileSize;
 }
 
++(NSString *)serverAddressFileURL:(NSString *)fileKey
+{
+    return [NSString stringWithFormat:@"%@/%@",ZXLFileServerAddress,fileKey];
+}
+
 +(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath{
     if (!filePath || filePath.length < 1) return @"";
     

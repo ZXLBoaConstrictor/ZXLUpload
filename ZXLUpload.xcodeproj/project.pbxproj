@@ -24,6 +24,10 @@
 		828A679B202458990094CA92 /* ZXLUploadTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A6799202458990094CA92 /* ZXLUploadTaskManager.m */; };
 		828A679E2024595F0094CA92 /* ZXLUploadFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A679C2024595F0094CA92 /* ZXLUploadFileManager.h */; };
 		828A679F2024595F0094CA92 /* ZXLUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A679D2024595F0094CA92 /* ZXLUploadFileManager.m */; };
+		828A67A32025B68D0094CA92 /* ZXLNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */; };
+		828A67A42025B68D0094CA92 /* ZXLNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */; };
+		828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A67A52025BB210094CA92 /* ZXLNetworkManager.h */; };
+		828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67A62025BB210094CA92 /* ZXLNetworkManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,10 @@
 		828A679C2024595F0094CA92 /* ZXLUploadFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadFileManager.h; sourceTree = "<group>"; };
 		828A679D2024595F0094CA92 /* ZXLUploadFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadFileManager.m; sourceTree = "<group>"; };
 		828A67A02024764D0094CA92 /* ZXLUploadDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadDefine.h; sourceTree = "<group>"; };
+		828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		828A67A52025BB210094CA92 /* ZXLNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLNetworkManager.h; sourceTree = "<group>"; };
+		828A67A62025BB210094CA92 /* ZXLNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLNetworkManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,10 @@
 				828A6799202458990094CA92 /* ZXLUploadTaskManager.m */,
 				828A679C2024595F0094CA92 /* ZXLUploadFileManager.h */,
 				828A679D2024595F0094CA92 /* ZXLUploadFileManager.m */,
+				828A67A52025BB210094CA92 /* ZXLNetworkManager.h */,
+				828A67A62025BB210094CA92 /* ZXLNetworkManager.m */,
+				828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */,
+				828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */,
 				8285F694201C196600D0F682 /* Info.plist */,
 			);
 			path = ZXLUpload;
@@ -109,6 +121,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */,
 				8269E8C0201F25C3002D540E /* ZXLFileUtils.h in Headers */,
 				8285F69D201C1A0700D0F682 /* ZXLUploadFileResultCenter.h in Headers */,
 				828A679A202458990094CA92 /* ZXLUploadTaskManager.h in Headers */,
@@ -118,6 +131,7 @@
 				828A67932021B58D0094CA92 /* ZXLVideoUtils.h in Headers */,
 				8269E8BC201F191C002D540E /* ZXLDocumentUtils.h in Headers */,
 				8285F6A1201C1A4A00D0F682 /* ZXLFileInfoModel.h in Headers */,
+				828A67A32025B68D0094CA92 /* ZXLNetworkReachabilityManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,11 +206,13 @@
 				828A67942021B58D0094CA92 /* ZXLVideoUtils.m in Sources */,
 				828A679B202458990094CA92 /* ZXLUploadTaskManager.m in Sources */,
 				8269E8C1201F25C3002D540E /* ZXLFileUtils.m in Sources */,
+				828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */,
 				8269E8BD201F191C002D540E /* ZXLDocumentUtils.m in Sources */,
 				8285F6A2201C1A4A00D0F682 /* ZXLFileInfoModel.m in Sources */,
 				8285F69E201C1A0700D0F682 /* ZXLUploadFileResultCenter.m in Sources */,
 				8285F6AA201C1A9D00D0F682 /* ZXLTaskInfoModel.m in Sources */,
 				828A679F2024595F0094CA92 /* ZXLUploadFileManager.m in Sources */,
+				828A67A42025B68D0094CA92 /* ZXLNetworkReachabilityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

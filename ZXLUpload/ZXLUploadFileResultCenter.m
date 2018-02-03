@@ -160,7 +160,7 @@
         //存储成功记录
         [_uploadResultInfo setValue:tempFileInfo forKey:fileInfo.identifier];
         
-        [[ZXLUploadTaskManager manager] changeFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
+        [[ZXLUploadTaskManager manager] setFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
     }
 }
 
@@ -338,7 +338,7 @@
 }
 
 /**
- 删除文件上传OSSRequest
+ 删除文件上传Request
  
  @param identifier 文件identifier
  */

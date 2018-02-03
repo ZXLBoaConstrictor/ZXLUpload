@@ -9,15 +9,17 @@
 //文件前缀
 #define ZXLFilePrefixion @"jlboss"
 
-//NEW 对象
-#define NewObject(x) [[x alloc]init];
+//服务器域名
+#define ZXLFileServerAddress @""
 
-#define iOS9Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.0f)
+//NEW 对象
+#define NewObject(object) [[object alloc]init];
 
 //字符串空判断
-#define ISNSStringValid(x) (x != NULL && [x length] > 0)
+#define ISNSStringValid(string) (string != NULL && [string length] > 0)
+
 //字典空判断
-#define ISDictionaryValid(x) (x != NULL && [x count] > 0)
+#define ISDictionaryValid(dictionary) (dictionary != NULL && [dictionary count] > 0)
 
 /**
  文件类型（目前先支持 图片和视频）

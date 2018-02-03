@@ -1,6 +1,7 @@
 //
 //  ZXLTaskInfoModel.h
 //  ZXLUpload
+//  文件上传中的文件操作比较敏感，限制于上传状态，所以所有操作内部消化不允许外部操作
 //
 //  Created by 张小龙 on 2018/1/27.
 //  Copyright © 2018年 张小龙. All rights reserved.
@@ -32,9 +33,20 @@
  */
 - (NSMutableDictionary *)keyValues;
 
+/**
+ 任务开启上传
+ */
+- (void)startUpload;
 
 /**
- 当前任务进度
+ 上传和压缩总进度
+
+ @return 总上传进度
+ */
+- (float)uploadAndcompressProgress;
+
+/**
+ 当前任务上传进度 -- 不包含压缩进度
  
  @return 进度
  */
@@ -90,6 +102,16 @@
  @return 检测结果
  */
 - (BOOL)checkFileInTask:(NSString *)identifier;
+
+
+/**
+ 设置任务中所有此文件上传结果
+
+ @param fileIdentifier 文件唯一标识
+ @param result 上传结果
+ */
+- (void)setFileUploadResult:(NSString *)fileIdentifier type:(ZXLFileUploadType)result;
+
 
 /**
  清空上传任务进度

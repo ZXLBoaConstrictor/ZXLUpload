@@ -7,7 +7,32 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZXLUploadDefine.h"
+
+@class ZXLFileInfoModel;
 
 @interface ZXLUploadFileManager : NSObject
++ (instancetype)manager;
 
+/**
+ 上传任务专用上传 （检测过文件压缩、文件上传）
+
+ @param fileInfo 文件信息
+ @param progress 上传进度
+ @param result 上传结果
+ */
+- (void)taskUploadFile:(ZXLFileInfoModel *)fileInfo
+             progress:(void (^)(float percent))progress
+               result:(void (^)(ZXLFileUploadType nResult,NSString *resultURL))result;
+
+/**
+ 单个文件上传 （本来此处考虑，同文件多个地方上传情况，先不考虑。场景：上传任务中有文件正在上传，单个文件又上传）
+
+ @param fileInfo 文件信息
+ @param progress 上传进度
+ @param result 上传结果
+ */
+- (void)uploadFile:(ZXLFileInfoModel *)fileInfo
+          progress:(void (^)(float percent))progress
+            result:(void (^)(ZXLFileUploadType nResult,NSString *resultURL))result;
 @end

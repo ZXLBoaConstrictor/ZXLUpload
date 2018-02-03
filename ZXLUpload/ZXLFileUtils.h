@@ -27,6 +27,9 @@
 +(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath;
 
 +(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType;
+
++(NSString *)serverAddressFileURL:(NSString *)fileKey;
+
 /**
  图片MD5 值
 
