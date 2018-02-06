@@ -10,6 +10,7 @@
 #import "ZXLFileUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLFileInfoModel.h"
+#import "ZXLNetworkManager.h"
 
 @implementation ZXLUploadFileManager
 
@@ -18,8 +19,16 @@
     __strong static ZXLUploadFileManager * _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[ZXLUploadFileManager alloc] init];
+        
     });
     return _sharedObject;
+}
+
+- (instancetype)init{
+    if (self = [super init]) {
+
+    }
+    return self;
 }
 
 -(void)taskUploadFile:(ZXLFileInfoModel *)fileInfo
@@ -27,6 +36,11 @@
                result:(void (^)(ZXLFileUploadType nResult,NSString *resultURL))result
 {
     fileInfo.progressType = ZXLFileUploadProgressUpload;
+    
+    
+//    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
+    
+    
     //上传后的文件key (即文件名称)
 //    NSString * uploadKey = [fileInfo uploadKey];
     //文件在本地地址

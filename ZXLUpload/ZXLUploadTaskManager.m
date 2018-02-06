@@ -9,6 +9,7 @@
 #import "ZXLUploadTaskManager.h"
 #import "ZXLTaskInfoModel.h"
 #import "ZXLDocumentUtils.h"
+#import "ZXLNetworkManager.h"
 
 @interface ZXLUploadTaskManager ()
 @property (nonatomic,strong)NSMapTable * uploadTaskDelegates;
@@ -21,7 +22,7 @@
 #pragma 懒加载
 -(NSMapTable * )uploadTaskDelegates{
     if (!_uploadTaskDelegates) {
-        _uploadTaskDelegates = [NSMapTable weakToWeakObjectsMapTable];
+        _uploadTaskDelegates = [NSMapTable weakToStrongObjectsMapTable];
     }
     return _uploadTaskDelegates;
 }
@@ -45,8 +46,27 @@
 - (instancetype)init{
     if (self = [super init]) {
         [self localTaskInfo];
+        [ZXLNetworkManager manager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshNetWorkStatus) name:ZXLNetworkReachabilityNotification object:nil];
     }
     return self;
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)refreshNetWorkStatus
+{
+    if ([ZXLNetworkManager manager].networkStatusChange) {
+        //无网变有网络
+        if ([ZXLNetworkManager manager].networkstatus > ZXLNetworkReachabilityStatusNotReachable) {
+            
+        }else//有网络变无网络
+        {
+            
+        }
+    }
 }
 
 -(void)localTaskInfo{

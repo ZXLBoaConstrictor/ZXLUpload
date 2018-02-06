@@ -7,8 +7,7 @@
 //
 
 #import "ZXLNetworkManager.h"
-#import "ZXLNetworkReachabilityManager.h"
-
+#import "ZXLUploadDefine.h"
 @implementation ZXLNetworkManager
 +(instancetype)manager{
     static dispatch_once_t pred = 0;
@@ -24,19 +23,16 @@
         
         ZXLNetworkReachabilityManager *mangerNet = [ZXLNetworkReachabilityManager sharedManager];
         [mangerNet startMonitoring];
-        
         [mangerNet setReachabilityStatusChangeBlock:^(ZXLNetworkReachabilityStatus status) {
             
-            
-//            BOOL bNetworkStatusChange = YES;
-//            if ((system_networkstatus > ZXLNetworkReachabilityStatusNotReachable && status > ZXLNetworkReachabilityStatusNotReachable)||
-//                (system_networkstatus <= ZXLNetworkReachabilityStatusNotReachable && status <= ZXLNetworkReachabilityStatusNotReachable)) {
-//                bNetworkStatusChange = NO;
-//            }
-//
-//            system_networkstatus = status;
-            
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"JLBNetWorkStatusChange" object:bNetworkStatusChange?@"1":@"0"];
+            BOOL bNetworkStatusChange = YES;
+            if ((self.networkstatus > ZXLNetworkReachabilityStatusNotReachable && status > ZXLNetworkReachabilityStatusNotReachable)||
+                (self.networkstatus <= ZXLNetworkReachabilityStatusNotReachable && status <= ZXLNetworkReachabilityStatusNotReachable)) {
+                bNetworkStatusChange = NO;
+            }
+            self.networkStatusChange = bNetworkStatusChange;
+            self.networkstatus = status;
+            [[NSNotificationCenter defaultCenter] postNotificationName:ZXLNetworkReachabilityNotification object:self.networkStatusChange?@"1":@"0"];
         
         }];
     }

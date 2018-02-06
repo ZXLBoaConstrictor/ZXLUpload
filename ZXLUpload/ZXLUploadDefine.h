@@ -21,6 +21,9 @@
 //字典空判断
 #define ISDictionaryValid(dictionary) (dictionary != NULL && [dictionary count] > 0)
 
+//网络变化通知
+#define ZXLNetworkReachabilityNotification @"ZXLNetworkReachabilityNotification"
+
 /**
  文件类型（目前先支持 图片和视频）
  - ZXLFileTypeFile: 文件
