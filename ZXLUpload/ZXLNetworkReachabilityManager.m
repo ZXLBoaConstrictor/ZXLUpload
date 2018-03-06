@@ -16,7 +16,7 @@ NSString * const ZXLNetworkingReachabilityNotificationStatusItem = @"ZXLNetworki
 
 typedef void (^ZXLNetworkReachabilityStatusBlock)(ZXLNetworkReachabilityStatus status);
 
-NSString * AFStringFromNetworkReachabilityStatus(ZXLNetworkReachabilityStatus status) {
+NSString * ZXLStringFromNetworkReachabilityStatus(ZXLNetworkReachabilityStatus status) {
     switch (status) {
         case ZXLNetworkReachabilityStatusNotReachable:
             return NSLocalizedStringFromTable(@"Not Reachable", @"AFNetworking", nil);
@@ -223,7 +223,7 @@ static void ZXLNetworkReachabilityReleaseCallback(const void *info) {
 #pragma mark -
 
 - (NSString *)localizedNetworkReachabilityStatusString {
-    return AFStringFromNetworkReachabilityStatus(self.networkReachabilityStatus);
+    return ZXLStringFromNetworkReachabilityStatus(self.networkReachabilityStatus);
 }
 
 #pragma mark -

@@ -14,7 +14,7 @@
 
 @protocol ZXLUploadTaskResponeseDelegate
 @optional
-
+-(void)uploadTaskResponese:(ZXLTaskInfoModel *)taskInfo;
 @end
 
 
@@ -30,7 +30,7 @@
 - (void)addUploadTaskEndResponeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate forIdentifier:(NSString *)identifier;
 
 /**
- 删除上传任务
+ 删除上传任务(建议在上传任务执行完并且拿到执行结果后删除上传任务)
 
  @param identifier 任务唯一值
  */
@@ -86,10 +86,13 @@
 
 - (void)replaceUploadFileAtIndex:(NSUInteger)index withUploadFile:(ZXLFileInfoModel *)fileInfo forIdentifier:(NSString *)identifier;
 
+- (void)removeUploadFileAtIndex:(NSUInteger)index forIdentifier:(NSString *)identifier;
+
 - (void)removeUploadFile:(NSString *)fileIdentifier forIdentifier:(NSString *)identifier;
 
 - (void)removeAllUploadFilesForIdentifier:(NSString *)identifier;
 
 
+-(void)testReUpload;
 
 @end

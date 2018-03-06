@@ -7,13 +7,16 @@
 //
 
 #import "ZXLUploadTaskManager.h"
+#import "ZXLTimer.h"
 #import "ZXLTaskInfoModel.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLNetworkManager.h"
 
 @interface ZXLUploadTaskManager ()
-@property (nonatomic,strong)NSMapTable * uploadTaskDelegates;
-@property (nonatomic,strong)NSMutableDictionary * uploadTasks;
+@property (nonatomic,strong)NSMapTable * uploadTaskDelegates;//需要当前界面返回上传结果的代理
+@property (nonatomic,strong)NSMutableArray * responeseTags; //标记上传结果做过代理应答（应答过不再应答）
+@property (nonatomic,strong)NSMutableArray * localTags; //标记启动过开始的上传任务
+@property (nonatomic,strong)NSMutableDictionary * uploadTasks;//所有上传任务
 @property (nonatomic,strong)NSTimer * timer;
 @end
 
@@ -22,7 +25,8 @@
 #pragma 懒加载
 -(NSMapTable * )uploadTaskDelegates{
     if (!_uploadTaskDelegates) {
-        _uploadTaskDelegates = [NSMapTable weakToStrongObjectsMapTable];
+        _uploadTaskDelegates = [NSMapTable mapTableWithKeyOptions:NSMapTableCopyIn
+                                                     valueOptions:NSMapTableWeakMemory];
     }
     return _uploadTaskDelegates;
 }
@@ -32,6 +36,20 @@
         _uploadTasks = [NSMutableDictionary dictionary];
     }
     return _uploadTasks;
+}
+
+-(NSMutableArray * )localTags{
+    if (!_localTags) {
+        _localTags = [NSMutableArray array];
+    }
+    return _localTags;
+}
+
+-(NSMutableArray * )responeseTags{
+    if (!_responeseTags) {
+        _responeseTags = [NSMutableArray array];
+    }
+    return _responeseTags;
 }
 
 +(instancetype)manager{
@@ -51,8 +69,7 @@
     }
     return self;
 }
--(void)dealloc
-{
+-(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -76,6 +93,10 @@
         for (NSString *dictKey in [tmpUploadTaskInfo allKeys]) {
             [self.uploadTasks setValue:[ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo valueForKey:dictKey]] forKey:dictKey];
         }
+        
+        [self.localTags addObjectsFromArray:[tmpUploadTaskInfo allKeys]];
+    }else{
+        [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadTaskInfo];
     }
 }
 
@@ -92,6 +113,18 @@
     
     if ([self.uploadTaskDelegates objectForKey:identifier]) {
         [self.uploadTaskDelegates removeObjectForKey:identifier];
+    }
+    
+    if ([self.responeseTags indexOfObject:identifier] != NSNotFound) {
+        [self.responeseTags removeObject:identifier];
+    }
+    
+    if ([self.localTags indexOfObject:identifier] != NSNotFound) {
+        [self.localTags removeObject:identifier];
+        
+        NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
+        [tmpUploadTaskInfo removeObjectForKey:identifier];
+        [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
     }
     
     ZXLTaskInfoModel * taskInfo = [self.uploadTasks valueForKey:identifier];
@@ -146,6 +179,14 @@
     }
 }
 
+- (void)removeUploadFileAtIndex:(NSUInteger)index forIdentifier:(NSString *)identifier{
+    if (!ISNSStringValid(identifier)) return;
+    ZXLTaskInfoModel * taskInfo = [self uploadTaskInfoForIdentifier:identifier create:YES];
+    if (taskInfo) {
+        [taskInfo removeUploadFileAtIndex:index];
+    }
+}
+
 - (void)removeUploadFile:(NSString *)fileIdentifier forIdentifier:(NSString *)identifier{
     if (!ISNSStringValid(fileIdentifier) || !ISNSStringValid(identifier)) return;
     
@@ -155,8 +196,7 @@
     }
 }
 
-- (void)removeAllUploadFilesForIdentifier:(NSString *)identifier
-{
+- (void)removeAllUploadFilesForIdentifier:(NSString *)identifier{
     if (!ISNSStringValid(identifier)) return;
     
     ZXLTaskInfoModel * taskInfo = [self uploadTaskInfoForIdentifier:identifier create:YES];
@@ -174,7 +214,8 @@
 -(ZXLTaskInfoModel *)uploadTaskInfoForIdentifier:(NSString *)identifier create:(BOOL)bCreate{
     if (!ISNSStringValid(identifier)) return nil;
     
-    if (bCreate) {
+    ZXLTaskInfoModel *tempTaskInfo = [self.uploadTasks valueForKey:identifier];
+    if (!tempTaskInfo && bCreate) {
         ZXLTaskInfoModel *taskInfo = NewObject(ZXLTaskInfoModel);
         taskInfo.identifier = identifier;
         [self.uploadTasks setValue:taskInfo forKey:identifier];
@@ -224,7 +265,45 @@
     if (taskInfo) {
         taskInfo.resetUpload = bResetUpload;
         [taskInfo startUpload];
+        [self.responeseTags removeObject:taskInfo.identifier];
+        
+        if ([self.localTags indexOfObject:identifier] != NSNotFound) {
+            [self.localTags addObject:identifier];
+            
+            NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
+            [tmpUploadTaskInfo setValue:[taskInfo keyValues] forKey:identifier];
+            [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
+        }
+        
+    }
+    
+    if (self.uploadTasks.count == 1) {
+        if (_timer) {
+            [_timer invalidate];
+            _timer = nil;
+        }
+        
+        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(taskUploadProgress) userInfo:nil repeats:YES];
+        [_timer fire];
     }
 }
 
+-(void)taskUploadProgress{
+    for (ZXLTaskInfoModel *taskInfo in [self.uploadTasks allValues]) {
+        ZXLUploadTaskType uploadTaskType = [taskInfo uploadTaskType];
+        if ([self.responeseTags indexOfObject:taskInfo.identifier] == NSNotFound && (uploadTaskType == ZXLUploadTaskSuccess || uploadTaskType == ZXLUploadTaskError)) {
+            id  delegate  = [self.uploadTaskDelegates objectForKey:taskInfo.identifier];
+            if (delegate && [delegate respondsToSelector:@selector(uploadTaskResponese:)]) {
+                [delegate uploadTaskResponese:taskInfo];
+                [self.responeseTags addObject:taskInfo.identifier];
+            }
+        }
+    }
+}
+
+-(void)testReUpload{
+    for (ZXLTaskInfoModel *taskInfo in [self.uploadTasks allValues]){
+        [self startUploadForIdentifier:taskInfo.identifier resetUpload:YES];
+    }
+}
 @end

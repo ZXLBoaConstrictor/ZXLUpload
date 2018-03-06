@@ -130,9 +130,10 @@
 -(void)resetFileInfo;
 
 /**
- 清空缓存文件-（在上传成功用，清理缓存文件）
- */
--(void)fileClear;
+ 获取文件缩略图
 
+ @param completed 返回缩略图
+ */
+-(void)getThumbnail:(void (^)(UIImage * image))completed;
 
 @end

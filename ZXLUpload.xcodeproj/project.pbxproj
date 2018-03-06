@@ -28,6 +28,9 @@
 		828A67A42025B68D0094CA92 /* ZXLNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */; };
 		828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A67A52025BB210094CA92 /* ZXLNetworkManager.h */; };
 		828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67A62025BB210094CA92 /* ZXLNetworkManager.m */; };
+		829961C5204E913B0040FF16 /* ZXLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 829961C3204E913B0040FF16 /* ZXLTimer.h */; };
+		829961C6204E913B0040FF16 /* ZXLTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 829961C4204E913B0040FF16 /* ZXLTimer.m */; };
+		829961C9204E95DE0040FF16 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829961C8204E95DE0040FF16 /* Photos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		828A67A52025BB210094CA92 /* ZXLNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLNetworkManager.h; sourceTree = "<group>"; };
 		828A67A62025BB210094CA92 /* ZXLNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLNetworkManager.m; sourceTree = "<group>"; };
+		829961C3204E913B0040FF16 /* ZXLTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLTimer.h; sourceTree = "<group>"; };
+		829961C4204E913B0040FF16 /* ZXLTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLTimer.m; sourceTree = "<group>"; };
+		829961C8204E95DE0040FF16 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				829961C9204E95DE0040FF16 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +80,7 @@
 			children = (
 				8285F692201C196600D0F682 /* ZXLUpload */,
 				8285F691201C196600D0F682 /* Products */,
+				829961C7204E95DE0040FF16 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,9 +117,19 @@
 				828A67A62025BB210094CA92 /* ZXLNetworkManager.m */,
 				828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */,
 				828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */,
+				829961C3204E913B0040FF16 /* ZXLTimer.h */,
+				829961C4204E913B0040FF16 /* ZXLTimer.m */,
 				8285F694201C196600D0F682 /* Info.plist */,
 			);
 			path = ZXLUpload;
+			sourceTree = "<group>";
+		};
+		829961C7204E95DE0040FF16 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				829961C8204E95DE0040FF16 /* Photos.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +150,7 @@
 				8269E8BC201F191C002D540E /* ZXLDocumentUtils.h in Headers */,
 				8285F6A1201C1A4A00D0F682 /* ZXLFileInfoModel.h in Headers */,
 				828A67A32025B68D0094CA92 /* ZXLNetworkReachabilityManager.h in Headers */,
+				829961C5204E913B0040FF16 /* ZXLTimer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +224,7 @@
 			files = (
 				828A67942021B58D0094CA92 /* ZXLVideoUtils.m in Sources */,
 				828A679B202458990094CA92 /* ZXLUploadTaskManager.m in Sources */,
+				829961C6204E913B0040FF16 /* ZXLTimer.m in Sources */,
 				8269E8C1201F25C3002D540E /* ZXLFileUtils.m in Sources */,
 				828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */,
 				8269E8BD201F191C002D540E /* ZXLDocumentUtils.m in Sources */,

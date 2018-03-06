@@ -8,6 +8,7 @@
 
 #import "ZXLFileUtils.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import <AVFoundation/AVFoundation.h>
 #define FileHashDefaultChunkSizeForReadingData 1024*8
 
 
@@ -34,12 +35,12 @@
         fileType = ZXLFileTypeImage;
     }
     
-    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeImage]]) {
-        fileType = ZXLFileTypeImage;
+    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]]) {
+        fileType = ZXLFileTypeVideo;
     }
     
-    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeImage]]) {
-        fileType = ZXLFileTypeImage;
+    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeVoice]]) {
+        fileType = ZXLFileTypeVoice;
     }
     
     return fileType;
@@ -154,5 +155,39 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
 
 +(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType{
     return [NSString stringWithFormat:@"%@%@.%@",ZXLFilePrefixion,identifier,[ZXLFileUtils fileExtension:fileType]];
+}
+
++(UIImage *)localVideoThumbnail:(NSString *)path{
+    
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:path] options:nil];
+    
+    AVAssetImageGenerator *gen = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
+    gen.appliesPreferredTrackTransform = YES;
+    
+    NSError *error = nil;
+    CMTime actualTime;
+    
+    CGImageRef image = [gen copyCGImageAtTime:CMTimeMakeWithSeconds(1.0, 600) actualTime:&actualTime error:&error];
+    
+    UIImage *thumb = [UIImage imageWithCGImage:image];
+    
+    CGImageRelease(image);
+    
+//    if (!thumb) {
+//        thumb = nil;
+//    }
+//
+    return thumb;
+}
+
++(NSString *)base64EncodedString:(NSString *)string{
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+   return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
++(NSInteger)fileCMTime:(NSString *)path{
+    AVURLAsset *avUrl = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
+    CMTime time = [avUrl duration];
+    return ceil(time.value/time.timescale);
 }
 @end

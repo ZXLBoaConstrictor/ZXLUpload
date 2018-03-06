@@ -29,7 +29,6 @@
 +(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType;
 
 +(NSString *)serverAddressFileURL:(NSString *)fileKey;
-
 /**
  图片MD5 值
 
@@ -37,4 +36,16 @@
  @return MD5值
  */
 +(NSString *)imageMD5:(UIImage *)image;
+
++(UIImage *)localVideoThumbnail:(NSString *)path;
+
++(NSString *)base64EncodedString:(NSString *)string;
+
+/**
+ 音频文件和视频文件的时长
+
+ @param path 文件地址
+ @return 时长
+ */
++(NSInteger)fileCMTime:(NSString *)path;
 @end

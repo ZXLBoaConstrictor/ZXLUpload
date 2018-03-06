@@ -10,12 +10,12 @@
 #define ZXLFilePrefixion @"jlboss"
 
 //服务器域名
-#define ZXLFileServerAddress @""
+#define ZXLFileServerAddress @"https://images2.bestjlb.com/"
 
-//NEW 对象
+////NEW 对象
 #define NewObject(object) [[object alloc]init];
-
-//字符串空判断
+//
+////字符串空判断
 #define ISNSStringValid(string) (string != NULL && [string length] > 0)
 
 //字典空判断

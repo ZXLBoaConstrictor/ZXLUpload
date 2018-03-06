@@ -78,6 +78,10 @@
              [tmpUploadInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                  [_uploadResultInfo setValue:[ZXLFileInfoModel dictionary:(NSDictionary *)obj] forKey:key];
              }];
+         }else{
+             if (!tmpUploadInfo) {
+                [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadResultInfo];
+             }
          }
          
          //读取压缩成功的文件信息 并检查压缩成功的文件是否还在本地
@@ -96,6 +100,10 @@
                          [tempcomprssInfo removeObjectForKey:strKey];
                      }
                  }
+             }
+         }else{
+             if (!tempcomprssInfo) {
+                 [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentComprssInfo];
              }
          }
      }
@@ -123,9 +131,6 @@
         fileInfo.comprssSuccess &&  //检查压缩成功后的地址和压缩后的文件是否存在
         [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
         
-        //压缩成功后把压缩过程存的文件信息删除
-        [self removeFileAVAssetExportSession:fileInfo.identifier];
-        
         NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
         [tempcomprssInfo setValue:[fileInfo keyValues] forKey:fileInfo.identifier];
         [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
@@ -133,6 +138,9 @@
         ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tempcomprssInfo valueForKey:fileInfo.identifier]];
         //存储成功记录
         [_comprssResultInfo setValue:tempFileInfo forKey:fileInfo.identifier];
+        
+        //压缩成功后把压缩过程存的文件信息删除
+        [self removeFileAVAssetExportSession:fileInfo.identifier];
     }
 }
 
@@ -143,23 +151,37 @@
     if (![self checkUploadSuccessFileInfo:fileInfo.identifier]&&
         fileInfo.progressType == ZXLFileUploadProgressUploadEnd &&
         fileInfo.uploadResult == ZXLFileUploadSuccess) {
-        //文件开始压缩的时候先删除出错历史
+        //删除压缩成功信息
+        if (fileInfo.fileType == ZXLFileTypeVideo) {
+            //压缩成功信息删除--内存
+           [_comprssResultInfo removeObjectForKey:fileInfo.identifier];
+            //压缩成功信息删除--本地
+            NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
+            [tempcomprssInfo removeObjectForKey:fileInfo.identifier];
+            [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
+        }
+        //删除本地缓存的文件(注图片不做文件删除)
+        if (fileInfo.fileType != ZXLFileTypeImage) {
+            NSString *filePath = [fileInfo localUploadURL];
+            if (ISNSStringValid(filePath) && [[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+                if (bRemove) {
+                    
+                }
+            }
+        }
+        //删除出错历史
         [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
-        
-        //上传成功后把上传过程存的文件信息删除
-        [_uploadInfo removeObjectForKey:fileInfo.identifier];
-        
-        //删除上传任务
+        //删除上传信息
         [self removeUploadRequest:fileInfo.identifier];
-        
+        //存储成功记录--本地
         NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
         [tmpUploadInfo setValue:[fileInfo keyValues] forKey:fileInfo.identifier];
         [ZXLDocumentUtils setDictionaryByListName:tmpUploadInfo fileName:ZXLDocumentUploadResultInfo];
-        
+        //存储成功记录--内存
         ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tmpUploadInfo valueForKey:fileInfo.identifier]];
-        //存储成功记录
         [_uploadResultInfo setValue:tempFileInfo forKey:fileInfo.identifier];
-        
+        //设置所有任务上传的同文件都成功
         [[ZXLUploadTaskManager manager] setFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
     }
 }
@@ -215,8 +237,7 @@
         [_uploadInfo setValue:tempFileInfo forKey:tempFileInfo.identifier];
         //文件开始上传的时候先删除出错历史
         [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
-    }else
-    {
+    }else{
         tempFileInfo.progress = fileInfo.progress;
         tempFileInfo.progressType = ZXLFileUploadProgressUpload;
     }
@@ -304,13 +325,15 @@
         
         ZXLFileInfoModel *fileInfo = [_comprssInfo valueForKey:identifier];
         if (fileInfo) {
-            //删除压缩过没有压缩完的视频
-            NSString * videoName = [fileInfo uploadKey];
-            NSString *strComprssUrl = FILE_Video_PATH(videoName);
-            if ([[NSFileManager defaultManager] fileExistsAtPath:strComprssUrl]) {
-                BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:strComprssUrl error:nil];
-                if (bRemove) {
-//                 NSLog(@"删除没有压缩完成的视频%@",strComprssUrl);
+            //删除压缩过没有压缩完的视频,且没有成功记录的视频
+            if (![_comprssResultInfo objectForKey:identifier]) {
+                NSString * videoName = [fileInfo uploadKey];
+                NSString *strComprssUrl = FILE_Video_PATH(videoName);
+                if ([[NSFileManager defaultManager] fileExistsAtPath:strComprssUrl]) {
+                    BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:strComprssUrl error:nil];
+                    if (bRemove) {
+                        //                 NSLog(@"删除没有压缩完成的视频%@",strComprssUrl);
+                    }
                 }
             }
             

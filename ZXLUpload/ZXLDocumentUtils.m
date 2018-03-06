@@ -25,7 +25,7 @@
 }
 
 +(BOOL)setDictionaryByListName:(NSMutableDictionary *)dict fileName:(NSString *)fileName{
-    if (!ISNSStringValid(fileName) || !ISDictionaryValid(dict))
+    if (!ISNSStringValid(fileName) || !dict)
         return NO;
     
     NSString *filePath = [ZXLDocumentUtils pathDocumentByName:fileName create:YES];

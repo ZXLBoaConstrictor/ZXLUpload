@@ -14,6 +14,7 @@
 #import "ZXLDocumentUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadTaskManager.h"
+#import "ZXLTimer.h"
 
 typedef void (^completed)(BOOL bResult);
 
@@ -50,8 +51,8 @@ typedef void (^completed)(BOOL bResult);
     [dictionary setValue:_identifier forKey:@"identifier"];
     [dictionary setValue:_localURL forKey:@"localURL"];
     [dictionary setValue:_comprssSuccess?@"1":@"0" forKey:@"comprssSuccess"];
-    [dictionary setValue:@(_uploadSize).stringValue forKey:@"size"];
-    [dictionary setValue:@(_fileType).stringValue forKey:@"filetype"];
+    [dictionary setValue:@(_uploadSize).stringValue forKey:@"uploadSize"];
+    [dictionary setValue:@(_fileType).stringValue forKey:@"fileType"];
     [dictionary setValue:[NSString stringWithFormat:@"%lf",_progress] forKey:@"progress"];
     [dictionary setValue:@(_progressType).stringValue forKey:@"progressType"];
     [dictionary setValue:@(_uploadResult).stringValue forKey:@"uploadResult"];
@@ -70,8 +71,9 @@ typedef void (^completed)(BOOL bResult);
         if (asset.mediaType == PHAssetMediaTypeImage) {
             self.fileType =                 ZXLFileTypeImage;
         }
+        
         self.localURL =                 @"";
-        self.identifier =                     asset.localIdentifier;
+        self.identifier =               [ZXLFileUtils base64EncodedString:asset.localIdentifier];
         self.comprssSuccess =           NO;
         self.uploadSize =               0;
         self.progress =                 0;
@@ -111,16 +113,16 @@ typedef void (^completed)(BOOL bResult);
             
         if (fileFrom == ZXLFileFromTakePhoto) {
             //目前拍摄的支持视频 -- 图片采用存储 initWithImage 格式
-            self.localURL = [ZXLDocumentUtils takePhotoVideoURL:fileURL];
-            self.fileType =                 ZXLFileTypeVideo;
+            self.localURL =             [ZXLDocumentUtils takePhotoVideoURL:fileURL];
+            self.fileType =             ZXLFileTypeVideo;
         }else
         {
-            self.fileType =                 [ZXLFileUtils fileTypeByURL:fileURL];
+            self.fileType =             [ZXLFileUtils fileTypeByURL:fileURL];
             //路径筛查检测
-            self.localURL = [ZXLDocumentUtils localFilePath:[fileURL lastPathComponent] fileType:self.fileType];
+            self.localURL =             [ZXLDocumentUtils localFilePath:[fileURL lastPathComponent] fileType:self.fileType];
         }
         
-        self.identifier =                     [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
+        self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
         self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
         self.progress =                 0;
@@ -128,16 +130,28 @@ typedef void (^completed)(BOOL bResult);
         self.uploadResult =             ZXLFileUploadloading;
         self.fileTime =                 0;
         self.assetLocalIdentifier =     @"";
+        
+        if (self.fileType == ZXLFileTypeVideo || self.fileType == ZXLFileTypeVoice) {
+            self.fileTime =                 [ZXLFileUtils fileCMTime:fileURL];
+        }
     }
     return self;
 }
 
 +(NSMutableArray<ZXLFileInfoModel *> *)initWithAssets:(NSMutableArray <PHAsset *> *)assets{
-    return nil;
+    NSMutableArray<ZXLFileInfoModel *> * models = [NSMutableArray array];
+    for (PHAsset *asset in assets) {
+        [models addObject:[[ZXLFileInfoModel alloc] initWithAsset:asset]];
+    }
+    return models;
 }
 
 +(NSMutableArray<ZXLFileInfoModel *> *)initWithImages:(NSArray<UIImage *> *)ayImages{
-    return nil;
+    NSMutableArray<ZXLFileInfoModel *> * models = [NSMutableArray array];
+    for (UIImage *image in ayImages) {
+        [models addObject:[[ZXLFileInfoModel alloc] initWithImage:image]];
+    }
+    return models;
 }
 
 -(void)dealloc{
@@ -187,7 +201,7 @@ typedef void (^completed)(BOOL bResult);
             [_timer invalidate];
             _timer = nil;
         }
-        _timer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
+        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
         
         return;
     }
@@ -354,20 +368,12 @@ typedef void (^completed)(BOOL bResult);
 
 -(NSString *)localUploadURL{
     NSString *localUploadURL = self.localURL;
-    
-    ZXLFileFromType fileFrom = ZXLFileFromLoacl;
-    NSRange tempRang = [self.localURL rangeOfString:@"/tmp/"];
-    if (tempRang.location != NSNotFound){
-        fileFrom = ZXLFileFromTakePhoto;
-    }
-    
-    if (fileFrom == ZXLFileFromTakePhoto) {
-        localUploadURL = [ZXLDocumentUtils takePhotoVideoURL:self.localURL];
-    }else
-    {
+    if (self.fileType == ZXLFileTypeVideo) {
+        NSString * videoName = [self uploadKey];
+        localUploadURL = FILE_Video_PATH(videoName);
+    }else{
         localUploadURL = [ZXLDocumentUtils localFilePath:[self.localURL lastPathComponent] fileType:self.fileType];
     }
-    
     return localUploadURL;
 }
 
@@ -376,8 +382,6 @@ typedef void (^completed)(BOOL bResult);
 }
 
 -(void)setUploadResultSuccess{
-    [self fileClear];
-
     self.uploadResult = ZXLFileUploadSuccess;
     //存储上传信息 上传成功
     self.progress = 1.0;
@@ -407,13 +411,40 @@ typedef void (^completed)(BOOL bResult);
     }
 }
 
--(void)fileClear{
-    NSString *localUploadURL  = [self localUploadURL];
-    if (ISNSStringValid(localUploadURL) && [[NSFileManager defaultManager] fileExistsAtPath:localUploadURL]) {
-        BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:localUploadURL error:nil];
-        if (bRemove) {
-//            NSLog(@"上传成功删除%@ --%@",uploadFileURL,self.filecomprssURL);
+-(void)getThumbnail:(void (^)(UIImage * image))completed{
+    
+    if (self.fileType == ZXLFileTypeImage) {
+         completed([UIImage imageWithContentsOfFile:[self localUploadURL]]);
+    }
+    
+    if (self.fileType == ZXLFileTypeVideo) {
+        if (ISNSStringValid(self.assetLocalIdentifier)) {//相册数据
+            PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
+            [ZXLVideoUtils getPhotoWithAsset:asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+                if (completed) {
+                    completed(photo);
+                }
+            } progressHandler:nil networkAccessAllowed:YES];
+        }else{
+            
+            ZXLFileFromType fileFrom = ZXLFileFromLoacl;
+            NSRange tempRang = [self.localURL rangeOfString:@"/tmp/"];
+            if (tempRang.location != NSNotFound){
+                fileFrom = ZXLFileFromTakePhoto;
+            }
+            NSString * localURL = @"";
+            if (fileFrom == ZXLFileFromTakePhoto) {//拍照视频
+                localURL = [ZXLDocumentUtils takePhotoVideoURL:self.localURL];
+            }else{//本地视频
+                localURL = [ZXLDocumentUtils localFilePath:[self.localURL lastPathComponent] fileType:self.fileType];
+            }
+            
+            completed([ZXLFileUtils localVideoThumbnail:localURL]);
         }
+    }
+    
+    if (self.fileType == ZXLFileTypeVoice) {
+//        completed([UIImage baseImageNamed:@"JLBHomeWorkVoice.png"]);
     }
 }
 

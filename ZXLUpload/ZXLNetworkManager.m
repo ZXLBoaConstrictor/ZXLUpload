@@ -33,7 +33,6 @@
             self.networkStatusChange = bNetworkStatusChange;
             self.networkstatus = status;
             [[NSNotificationCenter defaultCenter] postNotificationName:ZXLNetworkReachabilityNotification object:self.networkStatusChange?@"1":@"0"];
-        
         }];
     }
     return self;

@@ -39,6 +39,13 @@
 - (void)startUpload;
 
 /**
+ 上传文件数量
+
+ @return 文件数量
+ */
+- (NSInteger)uploadFilesCount;
+
+/**
  上传和压缩总进度
 
  @return 总上传进度
@@ -93,7 +100,14 @@
 
 - (void)removeUploadFile:(NSString *)identifier;
 
+- (void)removeUploadFileAtIndex:(NSUInteger)index;
+
 - (void)removeAllUploadFiles;
+
+- (ZXLFileInfoModel *)uploadFileAtIndex:(NSInteger)index;
+
+- (ZXLFileInfoModel *)uploadFileForIdentifier:(NSString *)identifier;
+
 
 /**
  判断此上传任务中有没有该文件

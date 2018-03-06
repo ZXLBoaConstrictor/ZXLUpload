@@ -183,7 +183,7 @@ FOUNDATION_EXPORT NSString * const ZXLNetworkingReachabilityNotificationStatusIt
 /**
  Returns a localized string representation of an `ZXLNetworkReachabilityStatus` value.
  */
-FOUNDATION_EXPORT NSString * AFStringFromNetworkReachabilityStatus(ZXLNetworkReachabilityStatus status);
+FOUNDATION_EXPORT NSString * ZXLStringFromNetworkReachabilityStatus(ZXLNetworkReachabilityStatus status);
 
 NS_ASSUME_NONNULL_END
 #endif
