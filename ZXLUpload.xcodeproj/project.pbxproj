@@ -45,7 +45,6 @@
 		82C8DFFB207DE627006AF4DC /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */; };
 		82C8DFFD207DEC43006AF4DC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */; };
 		82C8DFFF207DEC4B006AF4DC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */; };
-		82C8E001207DEC55006AF4DC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8E000207DEC55006AF4DC /* libresolv.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,7 +88,6 @@
 		82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunOSSiOS.framework; path = ZXLUpload/AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		82C8E000207DEC55006AF4DC /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82C8E001207DEC55006AF4DC /* libresolv.tbd in Frameworks */,
 				82C8DFFF207DEC4B006AF4DC /* SystemConfiguration.framework in Frameworks */,
 				82C8DFFD207DEC43006AF4DC /* CoreTelephony.framework in Frameworks */,
 				82C8DFFB207DE627006AF4DC /* AliyunOSSiOS.framework in Frameworks */,
@@ -170,7 +167,6 @@
 		829961C7204E95DE0040FF16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				82C8E000207DEC55006AF4DC /* libresolv.tbd */,
 				82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */,
 				82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */,
 				82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */,
@@ -417,6 +413,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3EZVVYFZCE;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -430,6 +427,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jlb.tool.ZXLUpload;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -443,6 +443,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3EZVVYFZCE;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -456,6 +457,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jlb.tool.ZXLUpload;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
