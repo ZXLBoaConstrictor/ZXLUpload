@@ -13,10 +13,10 @@
 #define ZXLFileServerAddress @"https://images2.bestjlb.com/"
 
 ////NEW 对象
-#define NewObject(object) [[object alloc]init];
+//#define NewObject(object) [[object alloc]init];
 //
 ////字符串空判断
-#define ISNSStringValid(string) (string != NULL && [string length] > 0)
+//#define ISNSStringValid(string) (string != NULL && [string length] > 0)
 
 //字典空判断
 #define ISDictionaryValid(dictionary) (dictionary != NULL && [dictionary count] > 0)
@@ -28,14 +28,14 @@
  文件类型（目前先支持 图片和视频）
  - ZXLFileTypeFile: 文件
  - ZXLFileTypeImage: 图片
- - ZXLFileTypeVideo: 视频
  - ZXLFileTypeVoice: 语音
+ - ZXLFileTypeVideo: 视频
  */
 typedef NS_ENUM(NSUInteger, ZXLFileType){
     ZXLFileTypeFile,
     ZXLFileTypeImage,
+    ZXLFileTypeVoice,
     ZXLFileTypeVideo,
-    ZXLFileTypeVoice
 } ;
 
 typedef NS_ENUM(NSUInteger, ZXLFileFromType){
@@ -88,4 +88,18 @@ typedef NS_ENUM(NSUInteger, ZXLUploadTaskType){
     ZXLUploadTaskLoading,
     ZXLUploadTaskSuccess,
     ZXLUploadTaskError
+};
+
+
+/**
+ 上传任务重传类型
+
+ - ZXLRestUploadTaskNone: 不重传
+ - ZXLRestUploadTaskNetwork: 断网重传
+ - ZXLRestUploadTaskProcess: 杀进程也保留(App 重新打开的时候可以再调用函数控制重传)
+ */
+typedef NS_OPTIONS(NSInteger, ZXLRestUploadTaskType) {
+    ZXLRestUploadTaskNone                    = 0,
+    ZXLRestUploadTaskNetwork                 = 1<<0,
+    ZXLRestUploadTaskProcess                 = 1<<1,
 };

@@ -136,4 +136,8 @@
  */
 -(void)getThumbnail:(void (^)(UIImage * image))completed;
 
+/**
+ 上传任务遇到网络错误的时候
+ */
+- (void)networkError;
 @end

@@ -11,9 +11,39 @@
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLFileInfoModel.h"
 #import "ZXLNetworkManager.h"
-//#import "baseAliOSSManage.h"
+#import "baseAliOSSManage.h"
+#import "ZXLSyncMutableDictionary.h"
+#import "ZXLSyncMapTable.h"
+
+@interface ZXLUploadFileManager ()
+@property (nonatomic,strong)ZXLSyncMapTable * uploadFileResponseBlocks;
+@property (nonatomic,strong)ZXLSyncMapTable * uploadFileProgressBlocks;
+@property (nonatomic,strong)ZXLSyncMutableDictionary * waitResultFiles;
+@property (nonatomic,strong)NSTimer * timer;//定时检查上传结果返回处理
+@end
 
 @implementation ZXLUploadFileManager
+#pragma 懒加载
+-(ZXLSyncMapTable * )uploadFileResponseBlocks{
+    if (!_uploadFileResponseBlocks) {
+        _uploadFileResponseBlocks = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableCopyIn];
+    }
+    return _uploadFileResponseBlocks;
+}
+
+-(ZXLSyncMapTable * )uploadFileProgressBlocks{
+    if (!_uploadFileProgressBlocks) {
+        _uploadFileProgressBlocks = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableCopyIn];
+    }
+    return _uploadFileProgressBlocks;
+}
+
+-(ZXLSyncMutableDictionary *)waitResultFiles{
+    if (!_waitResultFiles) {
+        _waitResultFiles = [[ZXLSyncMutableDictionary alloc] init];
+    }
+    return _waitResultFiles;
+}
 
 +(instancetype)manager{
     static dispatch_once_t pred = 0;
@@ -25,17 +55,35 @@
     return _sharedObject;
 }
 
-- (instancetype)init{
-    if (self = [super init]) {
-
+- (void)taskUploadFile:(ZXLFileInfoModel *)fileInfo
+              progress:(ZXLUploadFileProgressCallback)progress
+              complete:(ZXLUploadFileResponseCallback)complete{
+    
+    //当有上传成功过的信息，不再继续进行压缩上传
+    if ([[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier]) {
+        [fileInfo setUploadResultSuccess];
+        if (progress) {
+            progress(1.0);
+        }
+        if (complete) {
+            complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+        }
+        return;
     }
-    return self;
-}
-
--(void)taskUploadFile:(ZXLFileInfoModel *)fileInfo
-             progress:(void (^)(float percent))progress
-               result:(void (^)(ZXLFileUploadType nResult,NSString *resultURL))result
-{
+    
+    //当有相同文件正在上传的时候等待上传结果
+    if ([[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier]) {
+        [self.uploadFileProgressBlocks setObject:progress forKey:fileInfo.identifier];
+        [self.uploadFileResponseBlocks setObject:complete forKey:fileInfo.identifier];
+        [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
+        
+        if ( !_timer) {
+            _timer = [baseNSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) userInfo:nil repeats:YES];
+            [_timer fire];
+        }
+        return;
+    }
+    
     fileInfo.progressType = ZXLFileUploadProgressUpload;
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
     
@@ -43,49 +91,60 @@
     NSString * uploadKey = [fileInfo uploadKey];
     //文件在本地地址
     NSString *localUploadURL = [fileInfo localUploadURL];
-    
-//    //文件上传实现
-//    OSSRequest *request = [[baseAliOSSManage shareOssManage] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
-//        if (percent < 1) {
-//            fileInfo.progress = percent;
-//            [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
-//        }
-//    } result:^(OSSTask *task) {
-//        
-//        OSSInitMultipartUploadResult * uploadResult = task.result;
-//        if (task && uploadResult && uploadResult.httpResponseCode == 200) {
-//            //上传结束 成功
-//            [fileInfo setUploadResultSuccess];
-//            progress(1.0);
-//            result(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:uploadKey]);
-//        }else
-//        {
-//            //上传结束 失败
-//            [fileInfo setUploadResultError:ZXLFileUploadError];
-//            progress(1.0);
-//            result(ZXLFileUploadError,@"");
-//        }
-//    }];
-//    
-//    if (request) {
-//        [[ZXLUploadFileResultCenter shareUploadResultCenter] addUploadRequest:request with:fileInfo.identifier];
-//    }
-
+    //文件上传实现
+    OSSRequest *request = [[baseAliOSSManage shareOssManage] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
+        if (percent < 1) {
+            if (progress) {
+                progress(percent);
+            }
+            fileInfo.progress = percent;
+            [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
+        }
+    } result:^(OSSTask *task) {
+        OSSInitMultipartUploadResult * uploadResult = task.result;
+        if (task && uploadResult && uploadResult.httpResponseCode == 200) {
+            //上传结束 成功
+            [fileInfo setUploadResultSuccess];
+            if (progress) {
+                progress(1.0);
+            }
+            if (complete) {
+                complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:uploadKey]);
+            }
+            
+        }else{
+            //上传结束 失败
+            [fileInfo setUploadResultError:ZXLFileUploadError];
+            if (progress) {
+                progress(1.0);
+            }
+            if (complete) {
+                complete(ZXLFileUploadError,@"");
+            }
+        }
+    }];
+    if (request) {
+        [[ZXLUploadFileResultCenter shareUploadResultCenter] addUploadRequest:request with:fileInfo.identifier];
+    }
 }
 
 - (void)uploadFile:(ZXLFileInfoModel *)fileInfo
-          progress:(void (^)(float percent))progress
-            result:(void (^)(ZXLFileUploadType nResult,NSString *resultURL))result
-{
-        //当有上传成功过的信息，不再继续进行压缩上传
-    ZXLFileInfoModel * successFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier];
-    if (successFileInfo) {
+          progress:(ZXLUploadFileProgressCallback)progress
+          complete:(ZXLUploadFileResponseCallback)complete{
+    //当有上传成功过的信息，不再继续进行压缩上传
+    if ([[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier]) {
         [fileInfo setUploadResultSuccess];
-        progress(1.0);
-        result(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+        
+        [self.uploadFileProgressBlocks objectForKey:fileInfo.identifier];
+        if (progress) {
+            progress(1.0);
+        }
+        if (complete) {
+            complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+        }
         return;
     }
-
+    
     __block BOOL compressError = NO;
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
@@ -95,11 +154,9 @@
                 if (!bResult) {
                    compressError = YES;
                 }
-                
                 dispatch_group_leave(group);
             }];
-        }else
-        {
+        }else{
             dispatch_group_leave(group);
         }
     });
@@ -107,14 +164,61 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (compressError) {//文件压缩失败
             [fileInfo setUploadResultError:ZXLFileUploadError];
-            progress(1.0);
-            result(ZXLFileUploadError,@"");
-        }else
-        {
-           [self taskUploadFile:fileInfo progress:progress result:result];
+            if (progress) {
+                progress(1.0);
+            }
+            if (complete) {
+                complete(ZXLFileUploadError,@"");
+            }
+        }else{
+           [self taskUploadFile:fileInfo progress:progress complete:complete];
         }
     });
-    
 }
 
+-(void)fileUploadProgress{
+    NSMutableArray * ayFileKeys = [NSMutableArray arrayWithArray:[self.waitResultFiles allKeys]];
+    for (NSString *identifier in ayFileKeys) {
+        ZXLFileInfoModel * fileInfo = [self.waitResultFiles objectForKey:identifier];
+        if (fileInfo) {
+            //获得相同文件上传成功信息
+            ZXLFileInfoModel * resultFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier];
+            if (!resultFileInfo) {
+                //获得相同文件上传失败信息
+                resultFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadErrorFileInfo:fileInfo.identifier];
+            }
+            if (!resultFileInfo) {
+                //获得相同文件正在上传信息
+                resultFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier];
+            }
+            
+            if (resultFileInfo) {
+                //文件上传进度
+                ZXLUploadFileProgressCallback progressCallback = [self.uploadFileProgressBlocks objectForKey:fileInfo.identifier];
+                if (progressCallback) {
+                    progressCallback(resultFileInfo.progress);
+                }
+                
+                //文件上传结果
+                ZXLUploadFileResponseCallback responseCallback = [self.uploadFileResponseBlocks objectForKey:fileInfo.identifier];
+                if (resultFileInfo.uploadResult == ZXLFileUploadSuccess) {
+                    [fileInfo setUploadResultSuccess];
+                    if (responseCallback) {
+                        responseCallback(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+                        [self.uploadFileResponseBlocks removeObjectForKey:fileInfo.identifier];
+                        [self.uploadFileProgressBlocks removeObjectForKey:fileInfo.identifier];
+                        [self.waitResultFiles removeObjectForKey:fileInfo.identifier];
+                    }
+                }else if (resultFileInfo.uploadResult == ZXLFileUploadError || resultFileInfo.uploadResult == ZXLFileUploadFileError){
+                    if (responseCallback) {
+                        responseCallback(ZXLFileUploadError,@"");
+                        [self.uploadFileResponseBlocks removeObjectForKey:fileInfo.identifier];
+                        [self.uploadFileProgressBlocks removeObjectForKey:fileInfo.identifier];
+                        [self.waitResultFiles removeObjectForKey:fileInfo.identifier];
+                    }
+                }
+            }
+        }
+    }
+}
 @end

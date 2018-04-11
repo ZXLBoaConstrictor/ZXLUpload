@@ -7,49 +7,42 @@
 //
 
 #import "ZXLUploadTaskManager.h"
-#import "ZXLTimer.h"
+#import "ZXLSyncMutableDictionary.h"
+#import "ZXLSyncMapTable.h"
 #import "ZXLTaskInfoModel.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLNetworkManager.h"
+#import "ZXLUploadUnifiedResponese.h"
 
 @interface ZXLUploadTaskManager ()
-@property (nonatomic,strong)NSMapTable * uploadTaskDelegates;//需要当前界面返回上传结果的代理
-@property (nonatomic,strong)NSMutableArray * responeseTags; //标记上传结果做过代理应答（应答过不再应答）
-@property (nonatomic,strong)NSMutableArray * localTags; //标记启动过开始的上传任务
-@property (nonatomic,strong)NSMutableDictionary * uploadTasks;//所有上传任务
-@property (nonatomic,strong)NSTimer * timer;
+@property (nonatomic,strong)ZXLSyncMapTable * uploadTaskDelegates;//需要当前界面返回上传结果的代理
+@property (nonatomic,strong)ZXLSyncMapTable * uploadTaskBlocks;//需要当前界面返回上传结果的block
+@property (nonatomic,strong)ZXLSyncMutableDictionary * uploadTasks;//所有上传任务
+@property (nonatomic,strong)NSTimer * timer;//定时检查上传结果返回处理
 @end
 
 @implementation ZXLUploadTaskManager
 
 #pragma 懒加载
--(NSMapTable * )uploadTaskDelegates{
+-(ZXLSyncMapTable * )uploadTaskDelegates{
     if (!_uploadTaskDelegates) {
-        _uploadTaskDelegates = [NSMapTable mapTableWithKeyOptions:NSMapTableCopyIn
-                                                     valueOptions:NSMapTableWeakMemory];
+        _uploadTaskDelegates = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableWeakMemory];
     }
     return _uploadTaskDelegates;
 }
 
--(NSMutableDictionary * )uploadTasks{
+-(ZXLSyncMapTable * )uploadTaskBlocks{
+    if (!_uploadTaskBlocks) {
+        _uploadTaskBlocks = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableCopyIn];
+    }
+    return _uploadTaskBlocks;
+}
+
+-(ZXLSyncMutableDictionary * )uploadTasks{
     if (!_uploadTasks) {
-        _uploadTasks = [NSMutableDictionary dictionary];
+        _uploadTasks = [[ZXLSyncMutableDictionary alloc] init];
     }
     return _uploadTasks;
-}
-
--(NSMutableArray * )localTags{
-    if (!_localTags) {
-        _localTags = [NSMutableArray array];
-    }
-    return _localTags;
-}
-
--(NSMutableArray * )responeseTags{
-    if (!_responeseTags) {
-        _responeseTags = [NSMutableArray array];
-    }
-    return _responeseTags;
 }
 
 +(instancetype)manager{
@@ -73,15 +66,56 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)refreshNetWorkStatus
-{
+-(BOOL)clearUploadTask{
+    BOOL bHaveUpload = [self haveUploadTaskLoading];
+    
+    if (bHaveUpload) return NO;
+
+    [self.uploadTasks removeAllObjects];
+    [self.uploadTaskDelegates removeAllObjects];
+    [self.uploadTaskBlocks removeAllObjects];
+    
+    [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadTaskInfo];
+    return YES;
+}
+
+-(BOOL)haveUploadTaskLoading{
+     BOOL bHaveUpload = NO;
+    for (NSString *identifier in [self.uploadTasks allKeys]) {
+        ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+        if (taskInfo) {
+            ZXLUploadTaskType taskUploadResult = [taskInfo uploadTaskType];
+            if (taskUploadResult == ZXLUploadTaskTranscoding
+                || taskUploadResult == ZXLUploadTaskLoading
+                || taskUploadResult == ZXLUploadTaskSuccess) {
+                bHaveUpload = YES;
+                break;
+            }
+        }
+    }
+    return bHaveUpload;
+}
+
+-(void)refreshNetWorkStatus{
     if ([ZXLNetworkManager manager].networkStatusChange) {
         //无网变有网络
         if ([ZXLNetworkManager manager].networkstatus > ZXLNetworkReachabilityStatusNotReachable) {
-            
-        }else//有网络变无网络
-        {
-            
+            for (NSString *identifier in [self.uploadTasks allKeys]) {
+                ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+                if (taskInfo && (taskInfo.resetUploadType&ZXLRestUploadTaskNetwork)) {
+                    ZXLUploadTaskType taskUploadResult = [taskInfo uploadTaskType];
+                    if (taskUploadResult == ZXLUploadTaskError) {
+                        [self startUploadWithUnifiedResponeseForIdentifier:taskInfo.identifier];
+                    }
+                }
+            }
+        }else{//有网络变无网络
+            for (NSString *identifier in [self.uploadTasks allKeys]) {
+                ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+                if (taskInfo) {
+                    [taskInfo networkError];
+                }
+            }
         }
     }
 }
@@ -91,23 +125,40 @@
     NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
     if (ISDictionaryValid(tmpUploadTaskInfo)) {
         for (NSString *dictKey in [tmpUploadTaskInfo allKeys]) {
-            [self.uploadTasks setValue:[ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo valueForKey:dictKey]] forKey:dictKey];
+            ZXLTaskInfoModel * taskInfo =  [ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo valueForKey:dictKey]];
+            [self.uploadTasks setObject:taskInfo forKey:dictKey];
         }
-        
-        [self.localTags addObjectsFromArray:[tmpUploadTaskInfo allKeys]];
     }else{
         [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadTaskInfo];
     }
 }
 
-- (void)addUploadTaskEndResponeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate forIdentifier:(NSString *)identifier{
-    if (!delegate || !ISNSStringValid(identifier))return;
-    
-    if (![self.uploadTaskDelegates objectForKey:identifier]) {
-        [self.uploadTaskDelegates setObject:delegate forKey:identifier];
+-(void)restUploadTaskReStartProcess{
+    for (NSString *identifier in [self.uploadTasks allKeys]) {
+        ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+        if (taskInfo && (taskInfo.resetUploadType&ZXLRestUploadTaskProcess)) {
+            [self startUploadWithUnifiedResponeseForIdentifier:taskInfo.identifier];
+        }
     }
 }
 
+/**
+ 添加上传任务结果回调
+ 
+ @param delegate 代理
+ @param identifier 任务唯一值
+ */
+- (void)addUploadTaskEndResponeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate forIdentifier:(NSString *)identifier{
+    if (!delegate || !ISNSStringValid(identifier))return;
+    
+    [self.uploadTaskDelegates setObject:delegate forKey:identifier];
+}
+
+/**
+ 删除上传任务(建议在界面释放函数中释放identifier)
+ 
+ @param identifier 任务唯一值
+ */
 - (void)removeTaskForIdentifier:(NSString *)identifier{
     if (!ISNSStringValid(identifier)) return;
     
@@ -115,22 +166,15 @@
         [self.uploadTaskDelegates removeObjectForKey:identifier];
     }
     
-    if ([self.responeseTags indexOfObject:identifier] != NSNotFound) {
-        [self.responeseTags removeObject:identifier];
-    }
-    
-    if ([self.localTags indexOfObject:identifier] != NSNotFound) {
-        [self.localTags removeObject:identifier];
-        
-        NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-        [tmpUploadTaskInfo removeObjectForKey:identifier];
-        [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
-    }
-    
-    ZXLTaskInfoModel * taskInfo = [self.uploadTasks valueForKey:identifier];
+    ZXLTaskInfoModel * taskInfo = [self.uploadTasks objectForKey:identifier];
     if (taskInfo) {
         [taskInfo removeAllUploadFiles];
         [self.uploadTasks removeObjectForKey:identifier];
+        if (taskInfo.storageLocal) {
+            NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
+            [tmpUploadTaskInfo removeObjectForKey:identifier];
+            [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
+        }
     }
 }
 
@@ -208,46 +252,50 @@
 -(ZXLTaskInfoModel *)uploadTaskInfoForIdentifier:(NSString *)identifier{
     if (!ISNSStringValid(identifier)) return nil;
     
-    return [self.uploadTasks valueForKey:identifier];
+    return [self.uploadTasks objectForKey:identifier];
 }
 
 -(ZXLTaskInfoModel *)uploadTaskInfoForIdentifier:(NSString *)identifier create:(BOOL)bCreate{
     if (!ISNSStringValid(identifier)) return nil;
     
-    ZXLTaskInfoModel *tempTaskInfo = [self.uploadTasks valueForKey:identifier];
+    ZXLTaskInfoModel *tempTaskInfo = [self.uploadTasks objectForKey:identifier];
     if (!tempTaskInfo && bCreate) {
         ZXLTaskInfoModel *taskInfo = NewObject(ZXLTaskInfoModel);
         taskInfo.identifier = identifier;
-        [self.uploadTasks setValue:taskInfo forKey:identifier];
+        [self.uploadTasks setObject:taskInfo forKey:identifier];
     }
     
-    return [self.uploadTasks valueForKey:identifier];
+    return [self.uploadTasks objectForKey:identifier];
 }
 
 -(void)addUploadTaskInfo:(ZXLTaskInfoModel *)taskInfo{
     if (!taskInfo || !ISNSStringValid(taskInfo.identifier)) return;
     
     if (![self uploadTaskInfoForIdentifier:taskInfo.identifier]) {
-        [self.uploadTasks setValue:taskInfo forKey:taskInfo.identifier];
+        [self.uploadTasks setObject:taskInfo forKey:taskInfo.identifier];
     }
 }
 
 - (void)setFileUploadResult:(NSString *)fileIdentifier type:(ZXLFileUploadType)result{
-    if (!ISNSStringValid(fileIdentifier) || self.uploadTasks.count == 0) return;
+    if (!ISNSStringValid(fileIdentifier) || [self.uploadTasks count] == 0) return;
 
-    for (ZXLTaskInfoModel *taskInfo in [self.uploadTasks allValues]) {
-        [taskInfo setFileUploadResult:fileIdentifier type:result];
+    for (NSString *identifier in [self.uploadTasks allKeys]) {
+        ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+        if (taskInfo) {
+            [taskInfo setFileUploadResult:fileIdentifier type:result];
+        }
     }
 }
 
 -(BOOL)checkRemoveFile:(NSString *)taskIdentifier file:(NSString *)fileIdentifier{
     if (!ISNSStringValid(taskIdentifier) || !ISNSStringValid(fileIdentifier)) return NO;
     
-    if (self.uploadTasks.count == 0) return YES;
+    if ([self.uploadTasks count] == 0) return YES;
     
     BOOL bExistence = NO;
-    for (ZXLTaskInfoModel *taskInfo in [self.uploadTasks allValues]) {
-        if (![taskIdentifier isEqualToString:taskInfo.identifier]) {
+    for (NSString *identifier in [self.uploadTasks allKeys]) {
+        ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+        if (taskInfo && ![taskIdentifier isEqualToString:taskInfo.identifier]) {
             ZXLUploadTaskType taskUploadResult = [taskInfo uploadTaskType];
             if ((taskUploadResult == ZXLUploadTaskTranscoding || taskUploadResult == ZXLUploadTaskLoading) && [taskInfo checkFileInTask:fileIdentifier]) {
                 bExistence = YES;
@@ -258,52 +306,87 @@
     return !bExistence;
 }
 
-- (void)startUploadForIdentifier:(NSString *)identifier resetUpload:(BOOL)bResetUpload{
+- (void)startUploadWithUnifiedResponeseForIdentifier:(NSString *)identifier{
+    [self startUploadWithUnifiedResponeseForIdentifier:identifier resetUpload:ZXLRestUploadTaskNetwork|ZXLRestUploadTaskProcess];
+}
+
+- (void)startUploadWithUnifiedResponeseForIdentifier:(NSString *)identifier resetUpload:(ZXLRestUploadTaskType)resetUploadType{
+    [self startUploadForIdentifier:identifier responeseDelegate:[ZXLUploadUnifiedResponese manager] resetUpload:resetUploadType complete:nil];
+}
+
+- (void)startUploadForIdentifier:(NSString *)identifier{
+    [self startUploadForIdentifier:identifier responeseDelegate:nil resetUpload:ZXLRestUploadTaskNone complete:nil];
+}
+
+- (void)startUploadForIdentifier:(NSString *)identifier complete:(void (^)(ZXLTaskInfoModel *taskInfo))complete{
+    [self startUploadForIdentifier:identifier responeseDelegate:nil resetUpload:ZXLRestUploadTaskNone complete:complete];
+}
+
+- (void)startUploadForIdentifier:(NSString *)identifier
+               responeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate
+                     resetUpload:(ZXLRestUploadTaskType)resetUploadType
+                        complete:(ZXLUploadTaskResponseCallback)complete{
+    
     if (!ISNSStringValid(identifier)) return;
     
-    ZXLTaskInfoModel * taskInfo = [self.uploadTasks valueForKey:identifier];
+    ZXLTaskInfoModel * taskInfo = [self.uploadTasks objectForKey:identifier];
     if (taskInfo) {
-        taskInfo.resetUpload = bResetUpload;
-        [taskInfo startUpload];
-        [self.responeseTags removeObject:taskInfo.identifier];
-        
-        if ([self.localTags indexOfObject:identifier] != NSNotFound) {
-            [self.localTags addObject:identifier];
+        taskInfo.resetUploadType = resetUploadType;
+        taskInfo.completeResponese = NO;
+        //返回block存储（返回处理方式允许一种方式返回）
+        if (complete) {
+            [self.uploadTaskBlocks setObject:complete forKey:identifier];
             
-            NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-            [tmpUploadTaskInfo setValue:[taskInfo keyValues] forKey:identifier];
-            [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
+            if ([self.uploadTaskDelegates objectForKey:identifier]) {
+                [self.uploadTaskDelegates removeObjectForKey:identifier];
+            }
+        }
+        //返回delegate存储（返回处理方式允许一种方式返回）
+        if (delegate) {
+            [self addUploadTaskEndResponeseDelegate:delegate forIdentifier:identifier];
+            
+            if ([self.uploadTaskBlocks objectForKey:identifier]) {
+                [self.uploadTaskBlocks removeObjectForKey:identifier];
+            }
+            
+            if (delegate == [ZXLUploadUnifiedResponese manager]) {
+                taskInfo.unifiedResponese = YES;
+            }
         }
         
+        //任务中所有文件开始上传
+        [taskInfo startUpload];
     }
     
-    if (self.uploadTasks.count == 1) {
-        if (_timer) {
-            [_timer invalidate];
-            _timer = nil;
-        }
-        
-        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(taskUploadProgress) userInfo:nil repeats:YES];
+    if ( !_timer) {
+        _timer = [baseNSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(taskUploadProgress) userInfo:nil repeats:YES];
         [_timer fire];
     }
 }
 
 -(void)taskUploadProgress{
-    for (ZXLTaskInfoModel *taskInfo in [self.uploadTasks allValues]) {
-        ZXLUploadTaskType uploadTaskType = [taskInfo uploadTaskType];
-        if ([self.responeseTags indexOfObject:taskInfo.identifier] == NSNotFound && (uploadTaskType == ZXLUploadTaskSuccess || uploadTaskType == ZXLUploadTaskError)) {
-            id  delegate  = [self.uploadTaskDelegates objectForKey:taskInfo.identifier];
-            if (delegate && [delegate respondsToSelector:@selector(uploadTaskResponese:)]) {
-                [delegate uploadTaskResponese:taskInfo];
-                [self.responeseTags addObject:taskInfo.identifier];
+    for (NSString *identifier in [self.uploadTasks allKeys]) {
+        ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+        if (taskInfo) {
+            ZXLUploadTaskType uploadTaskType = [taskInfo uploadTaskType];
+            if (!taskInfo.completeResponese && (uploadTaskType == ZXLUploadTaskSuccess || uploadTaskType == ZXLUploadTaskError)) {
+                id  delegate  = [self.uploadTaskDelegates objectForKey:taskInfo.identifier];
+                if (delegate && [delegate respondsToSelector:@selector(uploadTaskResponese:)]) {
+                    taskInfo.completeResponese = YES;
+                    [delegate uploadTaskResponese:taskInfo];
+                }else{
+                    ZXLUploadTaskResponseCallback  complete  = [self.uploadTaskBlocks objectForKey:taskInfo.identifier];
+                    if (complete) {
+                        taskInfo.completeResponese = YES;
+                        complete(taskInfo);
+                        
+                        [self.uploadTaskBlocks removeObjectForKey:taskInfo.identifier];
+                        
+                        [self removeTaskForIdentifier:taskInfo.identifier];
+                    }
+                }
             }
         }
-    }
-}
-
--(void)testReUpload{
-    for (ZXLTaskInfoModel *taskInfo in [self.uploadTasks allValues]){
-        [self startUploadForIdentifier:taskInfo.identifier resetUpload:YES];
     }
 }
 @end

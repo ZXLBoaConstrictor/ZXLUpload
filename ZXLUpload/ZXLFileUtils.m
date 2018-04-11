@@ -8,7 +8,6 @@
 
 #import "ZXLFileUtils.h"
 #import <CommonCrypto/CommonCrypto.h>
-#import <AVFoundation/AVFoundation.h>
 #define FileHashDefaultChunkSizeForReadingData 1024*8
 
 
@@ -18,7 +17,7 @@
         return @"jpeg";
     }
     
-    if (fileType == ZXLFileTypeImage) {
+    if (fileType == ZXLFileTypeVideo) {
         return @"mp4";
     }
     
@@ -173,10 +172,10 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
     
     CGImageRelease(image);
     
-//    if (!thumb) {
-//        thumb = nil;
-//    }
-//
+    if (!thumb) {
+        thumb = [UIImage baseImageNamed:@"JLBImageDefault.png"];
+    }
+    
     return thumb;
 }
 

@@ -12,10 +12,11 @@
 
 @interface ZXLUploadFileResultCenter : NSObject
 +(ZXLUploadFileResultCenter*)shareUploadResultCenter;
+
 /**
- 清空保存的所有的文件信息
+ 清空保存的所有的文件信息（有上传任务的时候清除操作会失败）
  */
--(void)clearAllUploadFileInfo;
+-(BOOL)clearAllUploadFileInfo;
 
 /**
  保存压缩成功的文件信息-目前只支持视频
@@ -85,6 +86,15 @@
  @return 上传中的文件信息
  */
 -(ZXLFileInfoModel *)checkUploadProgressFileInfo:(NSString *)identifier;
+
+
+/**
+ 检查文件是否上传失败过
+ 
+ @param identifier 文件identifier唯一值
+ @return 上传失败过的文件信息
+ */
+-(ZXLFileInfoModel *)checkUploadErrorFileInfo:(NSString *)identifier;
 
 /**
  添加文件压缩进度session

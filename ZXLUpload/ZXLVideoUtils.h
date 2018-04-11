@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <Photos/Photos.h>
+
 @interface ZXLVideoUtils : NSObject
 
 // 获取优化后的视频转向信息

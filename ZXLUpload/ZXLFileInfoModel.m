@@ -14,12 +14,11 @@
 #import "ZXLDocumentUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadTaskManager.h"
-#import "ZXLTimer.h"
 
-typedef void (^completed)(BOOL bResult);
+typedef void (^ZXLFileComprssCallback)(BOOL bResult);
 
 @interface ZXLFileInfoModel()
-@property (nonatomic,copy)completed comprssResult;
+@property (nonatomic,copy)ZXLFileComprssCallback comprssCallback;
 @property (nonatomic,strong)NSTimer *timer;
 @end
 
@@ -172,14 +171,16 @@ typedef void (^completed)(BOOL bResult);
         
         self.comprssSuccess = YES;
         self.uploadSize = successComprssFileInfo.uploadSize;
-        _comprssResult(YES);
+        self.comprssCallback(YES);
     }
 }
 
 -(void)videoCompress:(void (^)(BOOL bResult ))completed{
     //非视频文件直接返回
     if (self.fileType != ZXLFileTypeVideo) {
-        completed(NO);
+        if (completed) {
+            completed(NO);
+        }
         return;
     }
     
@@ -188,7 +189,9 @@ typedef void (^completed)(BOOL bResult);
     if (successComprssFileInfo) {
         self.comprssSuccess = YES;
         self.uploadSize = successComprssFileInfo.uploadSize;
-        completed(YES);
+        if (completed) {
+           completed(YES);
+        }
         return;
     }
     
@@ -196,13 +199,12 @@ typedef void (^completed)(BOOL bResult);
     ZXLFileInfoModel * progressComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssProgressFileInfo:self.identifier];
     if (progressComprssFileInfo) {
         self.progressType = ZXLFileUploadProgressTranscoding;
-        _comprssResult = completed;
+        self.comprssCallback = completed;
         if (_timer) {
             [_timer invalidate];
             _timer = nil;
         }
-        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
-        
+        _timer = [baseNSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
         return;
     }
     
@@ -214,20 +216,15 @@ typedef void (^completed)(BOOL bResult);
                 weakSelf.comprssSuccess = YES;
                 weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
                 [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (completed) {
-                        completed(YES);
-                    }
-                });
-            }else
-            {
+                if (completed) {
+                    completed(YES);
+                }
+            }else{
                 //文件信息错误
                 [weakSelf setUploadResultError:ZXLFileUploadFileError];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (completed) {
-                        completed(NO);
-                    }
-                });
+                if (completed) {
+                    completed(NO);
+                }
             }
         }];
         
@@ -241,29 +238,22 @@ typedef void (^completed)(BOOL bResult);
                     weakSelf.comprssSuccess = YES;
                     weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
                     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (completed) {
-                            completed(YES);
-                        }
-                    });
-                }else
-                {
+                    if (completed) {
+                        completed(YES);
+                    }
+                }else{
                     [weakSelf setUploadResultError:ZXLFileUploadFileError];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (completed) {
-                            completed(NO);
-                        }
-                    });
+                    if (completed) {
+                        completed(NO);
+                    }
                 }
             }];
         }else
         {
             [weakSelf setUploadResultError:ZXLFileUploadFileError];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completed) {
-                    completed(NO);
-                }
-            });
+            if (completed) {
+                completed(NO);
+            }
         }
     }
 }
@@ -354,8 +344,7 @@ typedef void (^completed)(BOOL bResult);
                 if (completion) {
                     if (ISNSStringValid(errorStr)) {
                         completion(@"",errorStr);
-                    }else
-                    {
+                    }else{
                         completion(resultPath,@"");
                     }
                 }
@@ -414,7 +403,9 @@ typedef void (^completed)(BOOL bResult);
 -(void)getThumbnail:(void (^)(UIImage * image))completed{
     
     if (self.fileType == ZXLFileTypeImage) {
-         completed([UIImage imageWithContentsOfFile:[self localUploadURL]]);
+        if (completed) {
+            completed([UIImage imageWithContentsOfFile:[self localUploadURL]]);
+        }
     }
     
     if (self.fileType == ZXLFileTypeVideo) {
@@ -439,13 +430,23 @@ typedef void (^completed)(BOOL bResult);
                 localURL = [ZXLDocumentUtils localFilePath:[self.localURL lastPathComponent] fileType:self.fileType];
             }
             
-            completed([ZXLFileUtils localVideoThumbnail:localURL]);
+            if (completed) {
+                completed([ZXLFileUtils localVideoThumbnail:localURL]);
+            }
         }
     }
     
     if (self.fileType == ZXLFileTypeVoice) {
-//        completed([UIImage baseImageNamed:@"JLBHomeWorkVoice.png"]);
+        if (completed) {
+           completed([UIImage baseImageNamed:@"JLBHomeWorkVoice.png"]);
+        }
     }
 }
 
+- (void)networkError{
+    if (self.uploadResult == ZXLFileUploadloading && ![[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:self.identifier]) {
+        [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.identifier];
+        [self setUploadResultError:ZXLFileUploadError];
+    }
+}
 @end

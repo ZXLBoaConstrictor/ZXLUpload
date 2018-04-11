@@ -8,18 +8,31 @@
 
 #import <Foundation/Foundation.h>
 #import "ZXLUploadDefine.h"
+#import "ZXLTaskInfoModel.h"
 
 @class ZXLFileInfoModel;
-@class ZXLTaskInfoModel;
-
-@protocol ZXLUploadTaskResponeseDelegate
-@optional
--(void)uploadTaskResponese:(ZXLTaskInfoModel *)taskInfo;
-@end
-
 
 @interface ZXLUploadTaskManager : NSObject
 + (instancetype)manager;
+
+/**
+ 清除所有上传任务,同时也清除本地缓存数据
+ （注：如果有任务正在上传则清除失败）
+ */
+-(BOOL)clearUploadTask;
+
+/**
+ 是否有上传任务正在上传
+
+ @return 查询结果
+ */
+-(BOOL)haveUploadTaskLoading;
+
+/**
+ app 重启后重新开始上传存储的本地任务
+ (注：此函数重传 ZXLRestUploadTaskProcess 标志的 ZXLTaskInfoModel)
+ */
+-(void)restUploadTaskReStartProcess;
 
 /**
  添加上传任务结果回调
@@ -30,19 +43,39 @@
 - (void)addUploadTaskEndResponeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate forIdentifier:(NSString *)identifier;
 
 /**
- 删除上传任务(建议在上传任务执行完并且拿到执行结果后删除上传任务)
+ 删除上传任务(建议在界面释放函数中释放identifier)
 
  @param identifier 任务唯一值
  */
 - (void)removeTaskForIdentifier:(NSString *)identifier;
 
-/**
- 某个任务启动上传 -- 并标明此任务断网需要不需要重传
 
+- (void)startUploadWithUnifiedResponeseForIdentifier:(NSString *)identifier;
+/**
+ 任务启动上传
+(注：此函数上传用于统一处理返回，用此函数必须扩展使用ZXLUploadUnifiedResponese 并实现 ZXLUploadTaskResponeseDelegate)
  @param identifier 任务唯一值
- @param bResetUpload 断网重传标识
+ @param resetUploadType 重传类型
  */
-- (void)startUploadForIdentifier:(NSString *)identifier resetUpload:(BOOL)bResetUpload;
+- (void)startUploadWithUnifiedResponeseForIdentifier:(NSString *)identifier resetUpload:(ZXLRestUploadTaskType)resetUploadType;
+
+/**
+ 任务启动上传
+ （注: 此函数上传返回结果为block形式,返回结果如果添加了delegate，则返回结果任然会以block形式返回,
+    断网、杀进程不会重传）
+ @param identifier 任务唯一值
+ @param complete 上传结果
+ */
+- (void)startUploadForIdentifier:(NSString *)identifier complete:(ZXLUploadTaskResponseCallback)complete;
+
+
+/**
+ 任务启动上传
+ （注: 此函数上传返回结果为deelegate代理形式,所以要先添加delegate（addUploadTaskEndResponeseDelegate），所以identifier不使用时记得释放（removeTaskForIdentifier）。
+ 断网、杀进程不会重传）
+ @param identifier 任务唯一值
+ */
+- (void)startUploadForIdentifier:(NSString *)identifier;
 
 /**
  获取任务信息
@@ -91,8 +124,5 @@
 - (void)removeUploadFile:(NSString *)fileIdentifier forIdentifier:(NSString *)identifier;
 
 - (void)removeAllUploadFilesForIdentifier:(NSString *)identifier;
-
-
--(void)testReUpload;
 
 @end

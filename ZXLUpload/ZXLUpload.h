@@ -23,3 +23,4 @@ FOUNDATION_EXPORT const unsigned char ZXLUploadVersionString[];
 #import "ZXLTaskInfoModel.h"
 #import "ZXLUploadTaskManager.h"
 #import "ZXLUploadFileManager.h"
+#import "ZXLUploadFileResultCenter.h"

@@ -7,7 +7,7 @@
 //
 
 #import "ZXLVideoUtils.h"
-#import <AssetsLibrary/AssetsLibrary.h>
+
 @implementation ZXLVideoUtils
 
 /// 获取视频角度

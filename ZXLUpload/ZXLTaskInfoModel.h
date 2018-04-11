@@ -11,6 +11,24 @@
 #import "ZXLUploadDefine.h"
 
 @class ZXLFileInfoModel;
+@class ZXLTaskInfoModel;
+
+
+/**
+ 文件上传任务结果block回调
+
+ @param taskInfo 上传结果文件信息
+ */
+typedef void (^ZXLUploadTaskResponseCallback)(ZXLTaskInfoModel *taskInfo);
+
+
+/**
+ 文件上传结果delegate回调
+ */
+@protocol ZXLUploadTaskResponeseDelegate
+-(void)uploadTaskResponese:(ZXLTaskInfoModel *)taskInfo;
+@end
+
 
 @interface ZXLTaskInfoModel : NSObject
 
@@ -22,7 +40,24 @@
 /**
  重传标志（任务上传断网、进程重启等是否要重传--关系到是否保留任务数据）
  */
-@property (nonatomic,assign)BOOL resetUpload;
+@property (nonatomic,assign)ZXLRestUploadTaskType resetUploadType;
+
+/**
+ 此上传任务是否是统一应答处理
+ */
+@property (nonatomic,assign)BOOL unifiedResponese;
+/**
+ 标记上传任务是否做过应答返回
+ */
+@property (nonatomic,assign)BOOL completeResponese;
+
+/**
+ 标记上传是否存储本地（只有 resetUpload 为YES 的才需要保存本地）
+ */
+@property (nonatomic,assign)BOOL storageLocal;
+
+
+
 
 + (instancetype)dictionary:(NSDictionary *)dictionary;
 
@@ -126,10 +161,15 @@
  */
 - (void)setFileUploadResult:(NSString *)fileIdentifier type:(ZXLFileUploadType)result;
 
-
 /**
  清空上传任务进度
  */
 - (void)clearProgress;
+
+
+/**
+ 上传任务遇到网络错误的时候
+ */
+- (void)networkError;
 
 @end
