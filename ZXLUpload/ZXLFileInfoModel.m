@@ -9,11 +9,14 @@
 #import "ZXLFileInfoModel.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "ZXLUploadDefine.h"
 #import "ZXLVideoUtils.h"
 #import "ZXLFileUtils.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadTaskManager.h"
+#import "ZXLTimer.h"
+
 
 typedef void (^ZXLFileComprssCallback)(BOOL bResult);
 
@@ -204,15 +207,15 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
             [_timer invalidate];
             _timer = nil;
         }
-        _timer = [baseNSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
+        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
         return;
     }
     
     typeof(self) __weak weakSelf = self;
-    if (ISNSStringValid(self.assetLocalIdentifier)) {//相册
+    if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册
         __block PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
         [self getVideoOutputPathWithAsset:asset completion:^(NSString *outputPath, NSString *error) {
-            if (!ISNSStringValid(error) && ISNSStringValid(outputPath)) {
+            if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
                 weakSelf.comprssSuccess = YES;
                 weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
                 [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
@@ -234,7 +237,7 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
         if ([[NSFileManager defaultManager] fileExistsAtPath:self.localURL]) {
             AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:self.localURL]];
             [self startExportVideoWithVideoAsset:asset completion:^(NSString *outputPath, NSString *error) {
-                if (!ISNSStringValid(error) && ISNSStringValid(outputPath)) {
+                if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
                     weakSelf.comprssSuccess = YES;
                     weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
                     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
@@ -342,7 +345,7 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion) {
-                    if (ISNSStringValid(errorStr)) {
+                    if (ZXLISNSStringValid(errorStr)) {
                         completion(@"",errorStr);
                     }else{
                         completion(resultPath,@"");
@@ -409,7 +412,7 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
     }
     
     if (self.fileType == ZXLFileTypeVideo) {
-        if (ISNSStringValid(self.assetLocalIdentifier)) {//相册数据
+        if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册数据
             PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
             [ZXLVideoUtils getPhotoWithAsset:asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
                 if (completed) {
@@ -438,7 +441,7 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
     
     if (self.fileType == ZXLFileTypeVoice) {
         if (completed) {
-           completed([UIImage baseImageNamed:@"JLBHomeWorkVoice.png"]);
+//           completed([UIImage baseImageNamed:@"JLBHomeWorkVoice.png"]);
         }
     }
 }

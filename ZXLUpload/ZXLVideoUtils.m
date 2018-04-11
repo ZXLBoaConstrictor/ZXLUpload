@@ -7,6 +7,7 @@
 //
 
 #import "ZXLVideoUtils.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @implementation ZXLVideoUtils
 

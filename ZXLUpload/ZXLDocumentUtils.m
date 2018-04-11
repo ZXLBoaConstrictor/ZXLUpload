@@ -7,11 +7,12 @@
 //
 
 #import "ZXLDocumentUtils.h"
+#import "ZXLUploadDefine.h"
 #import "ZXLFileUtils.h"
 
 @implementation ZXLDocumentUtils
 +(NSMutableDictionary *)dictionaryByListName:(NSString *)fileName{
-    if (!ISNSStringValid(fileName))
+    if (!ZXLISNSStringValid(fileName))
         return nil;
     NSMutableDictionary* dictconf = nil;
     NSString *filePath = [ZXLDocumentUtils pathDocumentByName:fileName create:YES];
@@ -25,11 +26,11 @@
 }
 
 +(BOOL)setDictionaryByListName:(NSMutableDictionary *)dict fileName:(NSString *)fileName{
-    if (!ISNSStringValid(fileName) || !dict)
+    if (!ZXLISNSStringValid(fileName) || !dict)
         return NO;
     
     NSString *filePath = [ZXLDocumentUtils pathDocumentByName:fileName create:YES];
-    if (!ISNSStringValid(filePath))
+    if (!ZXLISNSStringValid(filePath))
         return NO;
     
     return ([dict writeToFile:filePath atomically:YES]);

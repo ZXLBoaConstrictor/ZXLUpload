@@ -7,13 +7,17 @@
 //
 
 #import "ZXLUploadFileManager.h"
+#import "ZXLUploadDefine.h"
 #import "ZXLFileUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLFileInfoModel.h"
 #import "ZXLNetworkManager.h"
-#import "baseAliOSSManage.h"
+#import "ZXLAliOSSManager.h"
 #import "ZXLSyncMutableDictionary.h"
 #import "ZXLSyncMapTable.h"
+#import "ZXLTimer.h"
+#import <AliyunOSSiOS/AliyunOSSiOS.h>
+
 
 @interface ZXLUploadFileManager ()
 @property (nonatomic,strong)ZXLSyncMapTable * uploadFileResponseBlocks;
@@ -78,7 +82,7 @@
         [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
         
         if ( !_timer) {
-            _timer = [baseNSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) userInfo:nil repeats:YES];
+            _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) userInfo:nil repeats:YES];
             [_timer fire];
         }
         return;
@@ -92,7 +96,7 @@
     //文件在本地地址
     NSString *localUploadURL = [fileInfo localUploadURL];
     //文件上传实现
-    OSSRequest *request = [[baseAliOSSManage shareOssManage] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
+    OSSRequest *request = [[ZXLAliOSSManager manager] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
         if (percent < 1) {
             if (progress) {
                 progress(percent);

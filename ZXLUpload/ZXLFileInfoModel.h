@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
-#import "ZXLUploadDefine.h"
+typedef NS_ENUM(NSUInteger, ZXLFileUploadProgressType);
+typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
+typedef NS_ENUM(NSUInteger, ZXLFileType);
 
 @interface ZXLFileInfoModel : NSObject
 //文件信息

@@ -8,6 +8,7 @@
 
 #import "ZXLTaskInfoModel.h"
 
+#import "ZXLUploadDefine.h"
 #import "ZXLFileInfoModel.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadFileManager.h"
@@ -366,7 +367,7 @@
 }
 
 -(void)removeUploadFile:(NSString *)identifier{
-    if (!ISNSStringValid(identifier)) return;
+    if (!ZXLISNSStringValid(identifier)) return;
     
     //只有在上传失败或者是准备上传的情况下才能删除文件信息
     if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskPrepareForUpload){
@@ -400,7 +401,7 @@
 }
 
 - (ZXLFileInfoModel *)uploadFileForIdentifier:(NSString *)identifier{
-    if (!ISNSStringValid(identifier)) return nil;
+    if (!ZXLISNSStringValid(identifier)) return nil;
     
     ZXLFileInfoModel *tempFileInfo = nil;
     for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
@@ -414,7 +415,7 @@
 }
 
 - (void)setFileUploadResult:(NSString *)fileIdentifier type:(ZXLFileUploadType)result{
-    if (!ISNSStringValid(fileIdentifier)) return;
+    if (!ZXLISNSStringValid(fileIdentifier)) return;
     
     for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
         ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
@@ -433,7 +434,7 @@
 }
 
 -(BOOL)checkFileInTask:(NSString *)identifier{
-    if (!ISNSStringValid(identifier)) return NO;
+    if (!ZXLISNSStringValid(identifier)) return NO;
     
     BOOL bExistence = NO;
     for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
@@ -453,7 +454,7 @@
     if ((self.resetUploadType&ZXLRestUploadTaskProcess)) {
         if (self.storageLocal) {
             NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-            ZXLTaskInfoModel * tasInfo = [ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo dictionaryValueForKey:self.identifier]];
+            ZXLTaskInfoModel * tasInfo = [ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo objectForKey:self.identifier]];
             BOOL bCompare = YES;
             if ([tasInfo uploadFilesCount] != self.uploadFiles.count) {
                 bCompare = NO;

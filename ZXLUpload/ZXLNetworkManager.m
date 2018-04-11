@@ -7,6 +7,7 @@
 //
 
 #import "ZXLNetworkManager.h"
+#import "ZXLNetworkReachabilityManager.h"
 #import "ZXLUploadDefine.h"
 @implementation ZXLNetworkManager
 +(instancetype)manager{

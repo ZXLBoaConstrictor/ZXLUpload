@@ -7,6 +7,7 @@
 //
 
 #import "ZXLUploadFileResultCenter.h"
+#import "ZXLUploadDefine.h"
 #import "ZXLSyncMutableDictionary.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLFileInfoModel.h"
@@ -76,7 +77,7 @@
          
          //读取本地上传结果文件信息
          NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
-         if (ISDictionaryValid(tmpUploadInfo)) {
+         if (ZXLISDictionaryValid(tmpUploadInfo)) {
              [tmpUploadInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                  [self.uploadResultInfo setObject:[ZXLFileInfoModel dictionary:(NSDictionary *)obj] forKey:key];
              }];
@@ -88,11 +89,11 @@
          
          //读取压缩成功的文件信息 并检查压缩成功的文件是否还在本地
          NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-         if (ISDictionaryValid(tempcomprssInfo)) {
+         if (ZXLISDictionaryValid(tempcomprssInfo)) {
              NSArray * arrayKeys = [NSArray arrayWithArray:tempcomprssInfo.allKeys];
              for (NSString * strKey in arrayKeys) {
                  NSDictionary * obj = [tempcomprssInfo objectForKey:strKey];
-                 if (ISDictionaryValid(obj)) {
+                 if (ZXLISDictionaryValid(obj)) {
                      ZXLFileInfoModel *fileInfo =  [ZXLFileInfoModel dictionary:(NSDictionary *)obj];
                      NSString * videoName = [fileInfo uploadKey];
                      NSString * comprssURL = FILE_Video_PATH(videoName);
@@ -171,7 +172,7 @@
         //删除本地缓存的文件(注图片不做文件删除)
         if (fileInfo.fileType != ZXLFileTypeImage) {
             NSString *filePath = [fileInfo localUploadURL];
-            if (ISNSStringValid(filePath) && [[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            if (ZXLISNSStringValid(filePath) && [[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
                 if (bRemove) {
                     
@@ -250,7 +251,7 @@
 }
 
 -(ZXLFileInfoModel *)checkComprssSuccessFileInfo:(NSString *)identifier{
-    if (!ISNSStringValid(identifier))  return nil;
+    if (!ZXLISNSStringValid(identifier))  return nil;
     
     ZXLFileInfoModel *fileInfo = [_comprssResultInfo objectForKey:identifier];
     if (fileInfo) {
@@ -271,7 +272,7 @@
 }
 
 -(ZXLFileInfoModel *)checkUploadSuccessFileInfo:(NSString *)identifier{
-    if (!ISNSStringValid(identifier))  return nil;
+    if (!ZXLISNSStringValid(identifier))  return nil;
     
     ZXLFileInfoModel *fileInfo = [_uploadResultInfo objectForKey:identifier];
     if (fileInfo) {
@@ -295,7 +296,7 @@
  @return 压缩中的文件信息
  */
 -(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)identifier{
-    if (!ISNSStringValid(identifier))  return nil;
+    if (!ZXLISNSStringValid(identifier))  return nil;
     
     return [_comprssInfo objectForKey:identifier];
 }
@@ -307,7 +308,7 @@
  @return 上传中的文件信息
  */
 -(ZXLFileInfoModel *)checkUploadProgressFileInfo:(NSString *)identifier{
-    if (!ISNSStringValid(identifier))  return nil;
+    if (!ZXLISNSStringValid(identifier))  return nil;
     
     return [_uploadInfo objectForKey:identifier];
 }
@@ -319,20 +320,20 @@
  @return 上传失败过的文件信息
  */
 -(ZXLFileInfoModel *)checkUploadErrorFileInfo:(NSString *)identifier{
-    if (!ISNSStringValid(identifier))  return nil;
+    if (!ZXLISNSStringValid(identifier))  return nil;
     
     return [_uploadErrorInfo objectForKey:identifier];
 }
 
 
 -(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)identifier{
-    if (session && ISNSStringValid(identifier)) {
+    if (session && ZXLISNSStringValid(identifier)) {
         [_assetSessionDict setObject:session forKey:identifier];
     }
 }
 
 -(void)removeFileAVAssetExportSession:(NSString *)identifier{
-    if (ISNSStringValid(identifier)) {
+    if (ZXLISNSStringValid(identifier)) {
         AVAssetExportSession *session = [_assetSessionDict objectForKey:identifier];
         if (session) {
             [session cancelExport];
@@ -359,7 +360,7 @@
 }
 
 -(AVAssetExportSession *)getAVAssetExportSession:(NSString *)identifier{
-    if (ISNSStringValid(identifier)) {
+    if (ZXLISNSStringValid(identifier)) {
         return [_assetSessionDict objectForKey:identifier];
     }
     return nil;
@@ -371,7 +372,7 @@
  @param request Request
  */
 -(void)addUploadRequest:(id)request with:(NSString *)identifier{
-    if (request && ISNSStringValid(identifier)) {
+    if (request && ZXLISNSStringValid(identifier)) {
         [_sessionRequestDict setObject:request forKey:identifier];
     }
 }
@@ -382,7 +383,7 @@
  @param identifier 文件identifier
  */
 -(void)removeUploadRequest:(NSString *)identifier{
-    if (ISNSStringValid(identifier)) {
+    if (ZXLISNSStringValid(identifier)) {
         id request = [_sessionRequestDict objectForKey:identifier];
         if (request) {
             //注意:此处停止上传请求

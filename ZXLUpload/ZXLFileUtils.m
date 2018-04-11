@@ -7,6 +7,8 @@
 //
 
 #import "ZXLFileUtils.h"
+#import "ZXLUploadDefine.h"
+#import <AVFoundation/AVFoundation.h>
 #import <CommonCrypto/CommonCrypto.h>
 #define FileHashDefaultChunkSizeForReadingData 1024*8
 
@@ -173,7 +175,7 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
     CGImageRelease(image);
     
     if (!thumb) {
-        thumb = [UIImage baseImageNamed:@"JLBImageDefault.png"];
+//        thumb = [UIImage baseImageNamed:@"JLBImageDefault.png"];
     }
     
     return thumb;

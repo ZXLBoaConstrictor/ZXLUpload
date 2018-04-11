@@ -12,14 +12,14 @@
 //服务器域名
 #define ZXLFileServerAddress @"https://images2.bestjlb.com/"
 
-////NEW 对象
-//#define NewObject(object) [[object alloc]init];
-//
-////字符串空判断
-//#define ISNSStringValid(string) (string != NULL && [string length] > 0)
+//NEW 对象
+#define ZXLNewObject(object) [[object alloc]init];
+
+//字符串空判断
+#define ZXLISNSStringValid(string) (string != NULL && [string length] > 0)
 
 //字典空判断
-#define ISDictionaryValid(dictionary) (dictionary != NULL && [dictionary count] > 0)
+#define ZXLISDictionaryValid(dictionary) (dictionary != NULL && [dictionary count] > 0)
 
 //网络变化通知
 #define ZXLNetworkReachabilityNotification @"ZXLNetworkReachabilityNotification"

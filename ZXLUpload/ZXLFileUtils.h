@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ZXLUploadDefine.h"
+
+typedef NS_ENUM(NSUInteger, ZXLFileType);
 
 @interface ZXLFileUtils : NSObject
 

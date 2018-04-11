@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZXLUploadDefine.h"
+
 
 @class ZXLFileInfoModel;
+typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
 
 typedef void (^ZXLUploadFileResponseCallback)(ZXLFileUploadType nResult,NSString *resultURL);
 

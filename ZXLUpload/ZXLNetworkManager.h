@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZXLNetworkReachabilityManager.h"
+typedef NS_ENUM(NSInteger, ZXLNetworkReachabilityStatus);
+
 @interface ZXLNetworkManager : NSObject
 @property(nonatomic,assign)ZXLNetworkReachabilityStatus networkstatus;
 

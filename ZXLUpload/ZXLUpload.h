@@ -15,7 +15,7 @@ FOUNDATION_EXPORT double ZXLUploadVersionNumber;
 FOUNDATION_EXPORT const unsigned char ZXLUploadVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ZXLUpload/PublicHeader.h>
-
+#import "ZXLUploadDefine.h"
 #import "ZXLVideoUtils.h"
 #import "ZXLFileUtils.h"
 #import "ZXLDocumentUtils.h"
@@ -24,3 +24,11 @@ FOUNDATION_EXPORT const unsigned char ZXLUploadVersionString[];
 #import "ZXLUploadTaskManager.h"
 #import "ZXLUploadFileManager.h"
 #import "ZXLUploadFileResultCenter.h"
+#import "ZXLUploadUnifiedResponese.h"
+#import "ZXLSyncMapTable.h"
+#import "ZXLSyncMutableArray.h"
+#import "ZXLSyncMutableDictionary.h"
+#import "ZXLTimer.h"
+#import "ZXLNetworkManager.h"
+#import "ZXLNetworkReachabilityManager.h"
+#import "ZXLAliOSSManager.h"

@@ -8,18 +8,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZXLUploadDefine.h"
+
 
 @class ZXLFileInfoModel;
 @class ZXLTaskInfoModel;
-
-
-/**
- 文件上传任务结果block回调
-
- @param taskInfo 上传结果文件信息
- */
-typedef void (^ZXLUploadTaskResponseCallback)(ZXLTaskInfoModel *taskInfo);
+typedef NS_OPTIONS(NSInteger, ZXLRestUploadTaskType);
+typedef NS_ENUM(NSUInteger, ZXLUploadTaskType);
+typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
 
 
 /**
