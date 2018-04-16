@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  @param assets PHAsset 相册信息数组
  @return 上传文件信息model
  */
-+(NSMutableArray<ZXLFileInfoModel *> *)initWithAssets:(NSMutableArray <PHAsset *> *)assets;
++(NSMutableArray<ZXLFileInfoModel *> *)initWithAssets:(NSArray <PHAsset *> *)assets;
 
 /**
  以UIImage 类型 数组创建上传文件信息model 集合

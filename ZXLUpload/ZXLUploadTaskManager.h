@@ -15,6 +15,20 @@ typedef NS_OPTIONS(NSInteger, ZXLRestUploadTaskType);
 typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
 
 /**
+ 文件上传任务进度
+
+ @param progressPercent 进度百分比
+ */
+typedef void (^ZXLUploadTaskProgressCallback)(float progressPercent);
+
+/**
+文件上传任务压缩进度
+
+ @param compressPercent 压缩进度百分比
+ */
+typedef void (^ZXLUploadTaskCompressCallback)(float compressPercent);
+
+/**
  文件上传任务结果block回调
  
  @param taskInfo 上传结果文件信息
@@ -73,9 +87,14 @@ typedef void (^ZXLUploadTaskResponseCallback)(ZXLTaskInfoModel *taskInfo);
  （注: 此函数上传返回结果为block形式,返回结果如果添加了delegate，则返回结果任然会以block形式返回,
     断网、杀进程不会重传）
  @param identifier 任务唯一值
+ @param compress 压缩进度
+ @param progress 上传进度
  @param complete 上传结果
  */
-- (void)startUploadForIdentifier:(NSString *)identifier complete:(ZXLUploadTaskResponseCallback)complete;
+- (void)startUploadForIdentifier:(NSString *)identifier
+                        compress:(ZXLUploadTaskCompressCallback)compress
+                        progress:(ZXLUploadTaskProgressCallback)progress
+                        complete:(ZXLUploadTaskResponseCallback)complete;
 
 
 /**

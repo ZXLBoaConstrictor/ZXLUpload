@@ -18,4 +18,11 @@ typedef NS_ENUM(NSInteger, ZXLNetworkReachabilityStatus);
 @property(nonatomic,assign)BOOL networkStatusChange;
 
 + (instancetype)manager;
+
+/**
+ 判断App 是否有网络
+
+ @return 网络判断
+ */
++(BOOL)appHaveNetwork;
 @end

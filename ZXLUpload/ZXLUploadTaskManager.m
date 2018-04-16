@@ -20,6 +20,8 @@
 @interface ZXLUploadTaskManager ()
 @property (nonatomic,strong)ZXLSyncMapTable * uploadTaskDelegates;//需要当前界面返回上传结果的代理
 @property (nonatomic,strong)ZXLSyncMapTable * uploadTaskBlocks;//需要当前界面返回上传结果的block
+@property (nonatomic,strong)ZXLSyncMapTable * uploadTaskProgressBlocks;//需要当前界面返回上传进度的block
+@property (nonatomic,strong)ZXLSyncMapTable * uploadTaskCompressBlocks;//需要当前界面返回压缩进度的block
 @property (nonatomic,strong)ZXLSyncMutableDictionary * uploadTasks;//所有上传任务
 @property (nonatomic,strong)NSTimer * timer;//定时检查上传结果返回处理
 @end
@@ -39,6 +41,20 @@
         _uploadTaskBlocks = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableCopyIn];
     }
     return _uploadTaskBlocks;
+}
+
+-(ZXLSyncMapTable * )uploadTaskProgressBlocks{
+    if (!_uploadTaskProgressBlocks) {
+        _uploadTaskProgressBlocks = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableCopyIn];
+    }
+    return _uploadTaskProgressBlocks;
+}
+
+-(ZXLSyncMapTable * )uploadTaskCompressBlocks{
+    if (!_uploadTaskCompressBlocks) {
+        _uploadTaskCompressBlocks = [ZXLSyncMapTable mapTableWithKeyOptions:NSMapTableCopyIn valueOptions:NSMapTableCopyIn];
+    }
+    return _uploadTaskCompressBlocks;
 }
 
 -(ZXLSyncMutableDictionary * )uploadTasks{
@@ -77,7 +93,8 @@
     [self.uploadTasks removeAllObjects];
     [self.uploadTaskDelegates removeAllObjects];
     [self.uploadTaskBlocks removeAllObjects];
-    
+    [self.uploadTaskProgressBlocks removeAllObjects];
+    [self.uploadTaskCompressBlocks removeAllObjects];
     [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadTaskInfo];
     return YES;
 }
@@ -139,7 +156,10 @@
 -(void)restUploadTaskReStartProcess{
     for (NSString *identifier in [self.uploadTasks allKeys]) {
         ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
-        if (taskInfo && (taskInfo.resetUploadType&ZXLRestUploadTaskProcess)) {
+        if (taskInfo
+            && (taskInfo.resetUploadType&ZXLRestUploadTaskProcess)
+            && !taskInfo.completeResponese
+            && [taskInfo uploadTaskType] != ZXLUploadTaskSuccess) {
             [self startUploadWithUnifiedResponeseForIdentifier:taskInfo.identifier];
         }
     }
@@ -157,6 +177,28 @@
     [self.uploadTaskDelegates setObject:delegate forKey:identifier];
 }
 
+
+/**
+ 清空上传任务状态
+
+ @param identifier 任务唯一值
+ */
+-(void)clearUploadTaskResponeseForIdentifier:(NSString *)identifier{
+    if (!ZXLISNSStringValid(identifier)) return;
+    
+    //当任务为未做过返回处理的时候不做清空处理
+    ZXLTaskInfoModel * taskInfo = [self.uploadTasks objectForKey:identifier];
+    if (taskInfo && !taskInfo.completeResponese) {
+        return;
+    }
+
+    if (taskInfo){
+        taskInfo.unifiedResponese = NO;
+        taskInfo.completeResponese = NO;
+        taskInfo.resetUploadType = ZXLRestUploadTaskNone;
+    }
+}
+
 /**
  删除上传任务(建议在界面释放函数中释放identifier)
  
@@ -167,6 +209,18 @@
     
     if ([self.uploadTaskDelegates objectForKey:identifier]) {
         [self.uploadTaskDelegates removeObjectForKey:identifier];
+    }
+    
+    if ([self.uploadTaskBlocks objectForKey:identifier]) {
+        [self.uploadTaskBlocks removeObjectForKey:identifier];
+    }
+    
+    if ([self.uploadTaskProgressBlocks objectForKey:identifier]) {
+        [self.uploadTaskProgressBlocks removeObjectForKey:identifier];
+    }
+    
+    if ([self.uploadTaskCompressBlocks objectForKey:identifier]) {
+        [self.uploadTaskCompressBlocks removeObjectForKey:identifier];
     }
     
     ZXLTaskInfoModel * taskInfo = [self.uploadTasks objectForKey:identifier];
@@ -314,28 +368,62 @@
 }
 
 - (void)startUploadWithUnifiedResponeseForIdentifier:(NSString *)identifier resetUpload:(ZXLRestUploadTaskType)resetUploadType{
-    [self startUploadForIdentifier:identifier responeseDelegate:[ZXLUploadUnifiedResponese manager] resetUpload:resetUploadType complete:nil];
+    [self startUploadForIdentifier:identifier responeseDelegate:[ZXLUploadUnifiedResponese manager] resetUpload:resetUploadType compress:nil progress:nil complete:nil];
 }
 
 - (void)startUploadForIdentifier:(NSString *)identifier{
-    [self startUploadForIdentifier:identifier responeseDelegate:nil resetUpload:ZXLRestUploadTaskNone complete:nil];
+    [self startUploadForIdentifier:identifier responeseDelegate:nil resetUpload:ZXLRestUploadTaskNone compress:nil progress:nil complete:nil];
 }
 
-- (void)startUploadForIdentifier:(NSString *)identifier complete:(void (^)(ZXLTaskInfoModel *taskInfo))complete{
-    [self startUploadForIdentifier:identifier responeseDelegate:nil resetUpload:ZXLRestUploadTaskNone complete:complete];
+- (void)startUploadForIdentifier:(NSString *)identifier
+                        compress:(ZXLUploadTaskCompressCallback)compress
+                        progress:(ZXLUploadTaskProgressCallback)progress
+                        complete:(ZXLUploadTaskResponseCallback)complete{
+    [self startUploadForIdentifier:identifier responeseDelegate:nil resetUpload:ZXLRestUploadTaskNone compress:compress progress:progress complete:complete];
 }
 
 - (void)startUploadForIdentifier:(NSString *)identifier
                responeseDelegate:(id<ZXLUploadTaskResponeseDelegate>)delegate
                      resetUpload:(ZXLRestUploadTaskType)resetUploadType
+                        compress:(ZXLUploadTaskCompressCallback)compress
+                        progress:(ZXLUploadTaskProgressCallback)progress
                         complete:(ZXLUploadTaskResponseCallback)complete{
     
     if (!ZXLISNSStringValid(identifier)) return;
     
     ZXLTaskInfoModel * taskInfo = [self.uploadTasks objectForKey:identifier];
     if (taskInfo) {
+        //文件任务完成过成功结果返回时处理（由于上传结果删除时只是做了代理、block、存储删除，上传结果并未做处理，等App进程干掉或者清空缓存时才删除）
+        if (taskInfo.completeResponese && [taskInfo uploadTaskType] == ZXLUploadTaskSuccess) {
+            id checkDelegate = delegate;
+            if (checkDelegate && [checkDelegate respondsToSelector:@selector(uploadTaskResponese:)]) {
+                if (checkDelegate == [ZXLUploadUnifiedResponese manager]) {
+                    taskInfo.unifiedResponese = YES;
+                }
+                taskInfo.completeResponese = YES;
+                [checkDelegate uploadTaskResponese:taskInfo];
+            }else{
+                if (complete) {
+                    taskInfo.completeResponese = YES;
+                    complete(taskInfo);
+                }
+            }
+            return;
+        }
+    
         taskInfo.resetUploadType = resetUploadType;
         taskInfo.completeResponese = NO;
+        
+        //任务压缩进度block
+        if (compress) {
+            [self.uploadTaskCompressBlocks setObject:compress forKey:identifier];
+        }
+        
+        //任务上传进度block
+        if (progress) {
+            [self.uploadTaskProgressBlocks setObject:progress forKey:identifier];
+        }
+        
         //返回block存储（返回处理方式允许一种方式返回）
         if (complete) {
             [self.uploadTaskBlocks setObject:complete forKey:identifier];
@@ -358,7 +446,11 @@
         }
         
         //任务中所有文件开始上传
-        [taskInfo startUpload];
+        if ([ZXLNetworkManager appHaveNetwork]) {
+            [taskInfo startUpload];
+        }else{
+            [taskInfo networkError];
+        }
     }
     
     if ( !_timer) {
@@ -372,6 +464,23 @@
         ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
         if (taskInfo) {
             ZXLUploadTaskType uploadTaskType = [taskInfo uploadTaskType];
+            //任务压缩进度block 返回
+            if (uploadTaskType == ZXLUploadTaskTranscoding) {
+                ZXLUploadTaskCompressCallback  compress  = [self.uploadTaskCompressBlocks objectForKey:taskInfo.identifier];
+                if (compress) {
+                    compress([taskInfo compressProgress]);
+                }
+                continue;
+            }
+            //任务上传进度block返回
+            if (uploadTaskType == ZXLUploadTaskLoading) {
+                ZXLUploadTaskProgressCallback  progress  = [self.uploadTaskProgressBlocks objectForKey:taskInfo.identifier];
+                if (progress) {
+                    progress([taskInfo uploadProgress]);
+                }
+                continue;
+            }
+            //任务上传结果返回
             if (!taskInfo.completeResponese && (uploadTaskType == ZXLUploadTaskSuccess || uploadTaskType == ZXLUploadTaskError)) {
                 id  delegate  = [self.uploadTaskDelegates objectForKey:taskInfo.identifier];
                 if (delegate && [delegate respondsToSelector:@selector(uploadTaskResponese:)]) {
@@ -382,10 +491,6 @@
                     if (complete) {
                         taskInfo.completeResponese = YES;
                         complete(taskInfo);
-                        
-                        [self.uploadTaskBlocks removeObjectForKey:taskInfo.identifier];
-                        
-                        [self removeTaskForIdentifier:taskInfo.identifier];
                     }
                 }
             }

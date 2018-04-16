@@ -38,5 +38,7 @@
     }
     return self;
 }
-
++(BOOL)appHaveNetwork{
+    return ([ZXLNetworkManager manager].networkstatus == ZXLNetworkReachabilityStatusReachableViaWWAN || [ZXLNetworkManager manager].networkstatus == ZXLNetworkReachabilityStatusReachableViaWiFi);
+}
 @end

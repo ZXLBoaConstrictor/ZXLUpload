@@ -207,6 +207,7 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
             [_timer invalidate];
             _timer = nil;
         }
+        
         _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
         return;
     }
@@ -420,7 +421,6 @@ typedef void (^ZXLFileComprssCallback)(BOOL bResult);
                 }
             } progressHandler:nil networkAccessAllowed:YES];
         }else{
-            
             ZXLFileFromType fileFrom = ZXLFileFromLoacl;
             NSRange tempRang = [self.localURL rangeOfString:@"/tmp/"];
             if (tempRang.location != NSNotFound){

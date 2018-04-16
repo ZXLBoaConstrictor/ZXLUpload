@@ -275,8 +275,12 @@
     if (!fileInfo) return;
     
     //添加上传文件时 确保任务在准备上传状态 -- 上传结束状态要继续添加上传文件清空上传状态，然后再添加文件
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess)
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+    }
+    
     
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
@@ -288,8 +292,11 @@
 - (void)addUploadFiles:(NSMutableArray<ZXLFileInfoModel *> *)fileInfos{
     if (!fileInfos) return;
     
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess)
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+    }
     
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
@@ -303,8 +310,11 @@
     
     if (!fileInfo) return;
     
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess)
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+    }
     
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
@@ -320,8 +330,11 @@
 -(void)insertUploadFilesFirst:(NSMutableArray <ZXLFileInfoModel *> *)fileInfos{
     if (!fileInfos) return;
     
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess)
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+    }
     
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
@@ -340,8 +353,11 @@
 - (void)replaceUploadFileAtIndex:(NSUInteger)index withUploadFile:(ZXLFileInfoModel *)fileInfo{
     if (!fileInfo || index >= self.uploadFiles.count) return;
     
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess)
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+    }
     
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
@@ -357,8 +373,11 @@
 - (void)removeUploadFileAtIndex:(NSUInteger)index{
     if (index >= self.uploadFiles.count) return;
     
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess)
+    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+    }
     
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
@@ -371,6 +390,8 @@
     
     //只有在上传失败或者是准备上传的情况下才能删除文件信息
     if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskPrepareForUpload){
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
         
         for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
             ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
@@ -389,6 +410,9 @@
     //只有在上传失败或者是准备上传的情况下才能删除文件信息
     if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskPrepareForUpload){
         [self clearProgress];
+        self.completeResponese = NO;
+        self.unifiedResponese = NO;
+        
         [self.uploadFiles removeAllObjects];
     }
 }
