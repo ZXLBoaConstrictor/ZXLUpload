@@ -24,6 +24,8 @@
 //网络变化通知
 #define ZXLNetworkReachabilityNotification @"ZXLNetworkReachabilityNotification"
 
+//UIImagePickerController 选择的图片压缩比例
+#define ZXLUIImagePickerControllerImageScale 0.4
 /**
  文件类型（目前先支持 图片和视频）
  - ZXLFileTypeFile: 文件

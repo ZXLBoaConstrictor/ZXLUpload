@@ -50,3 +50,10 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  */
 +(NSInteger)fileCMTime:(NSString *)path;
 @end
+
+@interface UIImage (ZXLBundle)
+
++ (UIImage *)imageNamedFromZXLBundle:(NSString *)name;
+
+-(UIImage*)scaleByFactor:(float)scaleFactor;
+@end

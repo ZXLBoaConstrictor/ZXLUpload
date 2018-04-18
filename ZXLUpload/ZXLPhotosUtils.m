@@ -1,107 +1,98 @@
 //
-//  ZXLVideoUtils.m
+//  ZXLPhotosUtils.m
 //  ZXLUpload
 //  此处代码根据 TZImagePickerController 修改
-//  Created by 张小龙 on 2018/1/31.
+//  Created by 张小龙 on 2018/4/17.
 //  Copyright © 2018年 张小龙. All rights reserved.
 //
 
-#import "ZXLVideoUtils.h"
+#import "ZXLPhotosUtils.h"
+#import "ZXLUploadDefine.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@implementation ZXLVideoUtils
-
-/// 获取视频角度
-+ (int)degressFromVideoFileWithAsset:(AVAsset *)asset {
-    int degress = 0;
-    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-    if([tracks count] > 0) {
-        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
-        CGAffineTransform t = videoTrack.preferredTransform;
-        if(t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0){
-            // Portrait
-            degress = 90;
-        } else if(t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0){
-            // PortraitUpsideDown
-            degress = 270;
-        } else if(t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0){
-            // LandscapeRight
-            degress = 0;
-        } else if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0){
-            // LandscapeLeft
-            degress = 180;
+@implementation ZXLPhotosUtils
++(void)getPhotoAlbumThumbnail:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete{
+    if (!ZXLISNSStringValid(assetLocalIdentifier)){
+        if (complete) {
+            complete(nil);
         }
+        return;
     }
-    return degress;
+    
+    PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:assetLocalIdentifier] options:nil].firstObject;
+    if (!asset){
+        if (complete) {
+            complete(nil);
+        }
+        return;
+    }
+    
+    [ZXLPhotosUtils getPhotoWithAsset:asset photoWidth:200 completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+        if (!isDegraded && complete) {
+           complete(photo);
+        }
+    } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
+        
+    } networkAccessAllowed:YES];
 }
 
-// 获取优化后的视频转向信息
-+ (AVMutableVideoComposition *)fixedCompositionWithAsset:(AVAsset *)videoAsset {
-    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    // 视频转向
-    int degrees = [ZXLVideoUtils degressFromVideoFileWithAsset:videoAsset];
-    if (degrees != 0) {
-        CGAffineTransform translateToCenter;
-        CGAffineTransform mixedTransform;
-        videoComposition.frameDuration = CMTimeMake(1, 30);
-        
-        NSArray *tracks = [videoAsset tracksWithMediaType:AVMediaTypeVideo];
-        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
-        
-        if (degrees == 90) {
-            // 顺时针旋转90°
-            translateToCenter = CGAffineTransformMakeTranslation(videoTrack.naturalSize.height, 0.0);
-            mixedTransform = CGAffineTransformRotate(translateToCenter,M_PI_2);
-            videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height,videoTrack.naturalSize.width);
-        } else if(degrees == 180){
-            // 顺时针旋转180°
-            translateToCenter = CGAffineTransformMakeTranslation(videoTrack.naturalSize.width, videoTrack.naturalSize.height);
-            mixedTransform = CGAffineTransformRotate(translateToCenter,M_PI);
-            videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.width,videoTrack.naturalSize.height);
-        } else {
-            // 顺时针旋转270°
-            translateToCenter = CGAffineTransformMakeTranslation(0.0, videoTrack.naturalSize.width);
-            mixedTransform = CGAffineTransformRotate(translateToCenter,M_PI_2*3.0);
-            videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height,videoTrack.naturalSize.width);
++(void)getPhoto:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete{
+    if (!ZXLISNSStringValid(assetLocalIdentifier)){
+        if (complete) {
+            complete(nil);
         }
-        
-        AVMutableVideoCompositionInstruction *roateInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-        roateInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, [videoAsset duration]);
-        AVMutableVideoCompositionLayerInstruction *roateLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
-        
-        [roateLayerInstruction setTransform:mixedTransform atTime:kCMTimeZero];
-        
-        roateInstruction.layerInstructions = @[roateLayerInstruction];
-        // 加入视频方向信息
-        videoComposition.instructions = @[roateInstruction];
+        return;
     }
-    return videoComposition;
-}
-
-+ (PHImageRequestID)getPhotoWithAsset:(id)asset completion:(void (^)(UIImage *photo,NSDictionary *info,BOOL isDegraded))completion progressHandler:(void (^)(double progress, NSError *error, BOOL *stop, NSDictionary *info))progressHandler networkAccessAllowed:(BOOL)networkAccessAllowed {
+    
+    PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:assetLocalIdentifier] options:nil].firstObject;
+    if (!asset){
+        if (complete) {
+            complete(nil);
+        }
+        return;
+    }
+    
     CGFloat fullScreenWidth = [UIScreen mainScreen].bounds.size.width;
-    if (fullScreenWidth > 600) {
-        fullScreenWidth = 600;
+    if (fullScreenWidth > 1200) {
+        fullScreenWidth = 1200;
     }
-    return [ZXLVideoUtils getPhotoWithAsset:asset photoWidth:fullScreenWidth completion:completion progressHandler:progressHandler networkAccessAllowed:networkAccessAllowed];
+    
+    [ZXLPhotosUtils getPhotoWithAsset:asset photoWidth:fullScreenWidth completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+        if (!isDegraded && complete) {
+            complete(photo);
+        }
+    } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
+        
+    } networkAccessAllowed:YES];
 }
 
 + (PHImageRequestID)getPhotoWithAsset:(id)asset photoWidth:(CGFloat)photoWidth completion:(void (^)(UIImage *photo,NSDictionary *info,BOOL isDegraded))completion progressHandler:(void (^)(double progress, NSError *error, BOOL *stop, NSDictionary *info))progressHandler networkAccessAllowed:(BOOL)networkAccessAllowed {
+    
+    CGFloat screenScale = 2.0;
+    if ([UIScreen mainScreen].bounds.size.width > 700) {
+        screenScale = 1.5;
+    }
+    
     if ([asset isKindOfClass:[PHAsset class]]) {
-        
-        PHAsset *phAsset = (PHAsset *)asset;
-        CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
-        CGFloat pixelWidth = photoWidth * 1.0;
-        CGFloat pixelHeight = pixelWidth / aspectRatio;
-        CGSize imageSize = CGSizeMake(pixelWidth, pixelHeight);
-
+        CGSize imageSize;
+        if (photoWidth < [UIScreen mainScreen].bounds.size.width && photoWidth < 1200) {
+            CGFloat itemWH = ([UIScreen mainScreen].bounds.size.width - 4) / 4 - 4;
+            imageSize = CGSizeMake(itemWH * screenScale, itemWH * screenScale);
+        } else {
+            PHAsset *phAsset = (PHAsset *)asset;
+            CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
+            CGFloat pixelWidth = photoWidth * screenScale;
+            CGFloat pixelHeight = pixelWidth / aspectRatio;
+            imageSize = CGSizeMake(pixelWidth, pixelHeight);
+        }
+        // 修复获取图片时出现的瞬间内存过高问题
         PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
         option.resizeMode = PHImageRequestOptionsResizeModeFast;
         PHImageRequestID imageRequestID = [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:imageSize contentMode:PHImageContentModeAspectFill options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             BOOL downloadFinined = (![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey]);
             if (downloadFinined && result) {
-                result = [ZXLVideoUtils fixOrientation:result];
-                //                UIImage *resultImage = [UIImage imageWithData:UIImagePNGRepresentation(result) scale:0.1];
+                result = [ZXLPhotosUtils fixOrientation:result];
+                
                 if (completion) completion(result,info,[[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
             }
             // Download image from iCloud / 从iCloud下载图片
@@ -120,7 +111,7 @@
                     UIImage *resultImage = [UIImage imageWithData:imageData];
                     //                    resultImage = [self scaleImage:resultImage toSize:imageSize];
                     if (resultImage) {
-                        resultImage = [ZXLVideoUtils fixOrientation:resultImage];
+                        resultImage = [ZXLPhotosUtils fixOrientation:resultImage];
                         if (completion) completion(resultImage,info,[[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
                     }
                 }];
@@ -135,7 +126,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion) completion(thumbnailImage,nil,YES);
                 
-                if (photoWidth == [UIScreen mainScreen].bounds.size.width || photoWidth == 600) {
+                if (photoWidth == [UIScreen mainScreen].bounds.size.width || photoWidth == 1200) {
                     dispatch_async(dispatch_get_global_queue(0,0), ^{
                         ALAssetRepresentation *assetRep = [alAsset defaultRepresentation];
                         CGImageRef fullScrennImageRef = [assetRep fullScreenImage];
@@ -154,7 +145,7 @@
 
 /// 修正图片转向
 + (UIImage *)fixOrientation:(UIImage *)aImage {
-    
+   
     // No-op if the orientation is already correct
     if (aImage.imageOrientation == UIImageOrientationUp)
         return aImage;
@@ -229,5 +220,4 @@
     CGImageRelease(cgimg);
     return img;
 }
-
 @end

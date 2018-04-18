@@ -66,7 +66,7 @@
 
 +(NSString *)serverAddressFileURL:(NSString *)fileKey
 {
-    return [NSString stringWithFormat:@"%@/%@",ZXLFileServerAddress,fileKey];
+    return [NSString stringWithFormat:@"%@%@",ZXLFileServerAddress,fileKey];
 }
 
 +(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath{
@@ -175,7 +175,7 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
     CGImageRelease(image);
     
     if (!thumb) {
-//        thumb = [UIImage baseImageNamed:@"JLBImageDefault.png"];
+        thumb = [UIImage imageNamedFromZXLBundle:@"ZXLImageDefault.png"];
     }
     
     return thumb;
@@ -190,5 +190,61 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
     AVURLAsset *avUrl = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
     CMTime time = [avUrl duration];
     return ceil(time.value/time.timescale);
+}
+@end
+
+@implementation UIImage (ZXLBundle)
+
++ (UIImage *)imageNamedFromZXLBundle:(NSString *)name {
+    NSString * imagePath = [[NSBundle mainBundle] pathForResource:@"ZXLUpload" ofType:@"bundle"];
+    if (ZXLISNSStringValid(imagePath)) {
+        return [UIImage imageWithContentsOfFile:[imagePath stringByAppendingPathComponent:name]];
+    }
+    return nil;
+}
+
+-(UIImage*)scaleByFactor:(float)scaleFactor{
+    CGSize newSize = CGSizeMake(self.size.width * scaleFactor, self.size.height * scaleFactor);
+    size_t destWidth = (size_t)(newSize.width * self.scale);
+    size_t destHeight = (size_t)(newSize.height * self.scale);
+    if (self.imageOrientation == UIImageOrientationLeft
+        || self.imageOrientation == UIImageOrientationLeftMirrored
+        || self.imageOrientation == UIImageOrientationRight
+        || self.imageOrientation == UIImageOrientationRightMirrored){
+        size_t temp = destWidth;
+        destWidth = destHeight;
+        destHeight = temp;
+    }
+    
+    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
+    BOOL hasAlpha = (alpha == kCGImageAlphaFirst || alpha == kCGImageAlphaLast || alpha == kCGImageAlphaPremultipliedFirst || alpha == kCGImageAlphaPremultipliedLast);
+    
+    /// Create an ARGB bitmap context
+    CGImageAlphaInfo alphaInfo = (hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst);
+    CGContextRef bmContext = CGBitmapContextCreate(NULL, destWidth, destHeight, 8/*Bits per component*/, destWidth * 4, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrderDefault | alphaInfo);
+    
+    if (!bmContext)
+        return nil;
+    
+    /// Image quality
+    CGContextSetShouldAntialias(bmContext, true);
+    CGContextSetAllowsAntialiasing(bmContext, true);
+    CGContextSetInterpolationQuality(bmContext, kCGInterpolationHigh);
+    
+    /// Draw the image in the bitmap context
+    
+    UIGraphicsPushContext(bmContext);
+    CGContextDrawImage(bmContext, CGRectMake(0.0f, 0.0f, destWidth, destHeight), self.CGImage);
+    UIGraphicsPopContext();
+    
+    /// Create an image object from the context
+    CGImageRef scaledImageRef = CGBitmapContextCreateImage(bmContext);
+    UIImage* scaled = [UIImage imageWithCGImage:scaledImageRef scale:self.scale orientation:self.imageOrientation];
+    
+    /// Cleanup
+    CGImageRelease(scaledImageRef);
+    CGContextRelease(bmContext);
+    
+    return scaled;
 }
 @end

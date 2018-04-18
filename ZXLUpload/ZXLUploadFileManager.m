@@ -15,7 +15,9 @@
 #import "ZXLAliOSSManager.h"
 #import "ZXLSyncMutableDictionary.h"
 #import "ZXLSyncMapTable.h"
+#import "ZXLDocumentUtils.h"
 #import "ZXLTimer.h"
+#import "ZXLPhotosUtils.h"
 #import <AliyunOSSiOS/AliyunOSSiOS.h>
 
 
@@ -133,6 +135,7 @@
 }
 
 - (void)uploadFile:(ZXLFileInfoModel *)fileInfo
+          compress:(ZXLUploadFileCompressCallback)compress
           progress:(ZXLUploadFileProgressCallback)progress
           complete:(ZXLUploadFileResponseCallback)complete{
     //当有上传成功过的信息，不再继续进行压缩上传
@@ -151,19 +154,36 @@
     
     __block BOOL compressError = NO;
     dispatch_group_t group = dispatch_group_create();
-    dispatch_group_enter(group);
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (fileInfo.fileType == ZXLFileTypeVideo) {
-            [fileInfo videoCompress:^(BOOL bResult) {
+    
+    if (fileInfo.fileType == ZXLFileTypeVideo) {
+        dispatch_group_enter(group);
+        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [fileInfo videoCompress:^(CGFloat percent) {
+                if (compress) {
+                    compress(percent);
+                }
+            } complete:^(BOOL bResult) {
                 if (!bResult) {
-                   compressError = YES;
+                    compressError = YES;
                 }
                 dispatch_group_leave(group);
             }];
-        }else{
-            dispatch_group_leave(group);
-        }
-    });
+        });
+    }
+    
+    if (fileInfo.fileType == ZXLFileTypeImage
+        && ZXLISNSStringValid(fileInfo.assetLocalIdentifier)
+        && !ZXLISNSStringValid(fileInfo.localURL)) {
+        dispatch_group_enter(group);
+        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [ZXLPhotosUtils getPhoto:fileInfo.assetLocalIdentifier complete:^(UIImage *image) {
+                if (image) {
+                    fileInfo.localURL = [ZXLDocumentUtils saveImage:image name:[fileInfo uploadKey]];
+                }
+                dispatch_group_leave(group);
+            }];
+        });
+    }
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (compressError) {//文件压缩失败
@@ -175,7 +195,8 @@
                 complete(ZXLFileUploadError,@"");
             }
         }else{
-           [self taskUploadFile:fileInfo progress:progress complete:complete];
+            [fileInfo resetFileInfo];
+            [self taskUploadFile:fileInfo progress:progress complete:complete];
         }
     });
 }

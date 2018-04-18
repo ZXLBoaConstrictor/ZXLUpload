@@ -170,15 +170,14 @@
             [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
         }
         //删除本地缓存的文件(注图片不做文件删除)
-        if (fileInfo.fileType != ZXLFileTypeImage) {
-            NSString *filePath = [fileInfo localUploadURL];
-            if (ZXLISNSStringValid(filePath) && [[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                if (bRemove) {
-                    
-                }
+        NSString *filePath = [fileInfo localUploadURL];
+        if (ZXLISNSStringValid(filePath) && [[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+            if (bRemove) {
+                
             }
         }
+        
         //删除出错历史
         [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
         //删除上传信息

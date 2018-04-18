@@ -7,7 +7,7 @@
 //
 
 #import "ZXLTaskInfoModel.h"
-
+#import "ZXLPhotosUtils.h"
 #import "ZXLUploadDefine.h"
 #import "ZXLFileInfoModel.h"
 #import "ZXLUploadFileResultCenter.h"
@@ -175,15 +175,35 @@
             if (progressFileInfo || comprssFileInfo) {
                 continue;
             }
-            if (!successFileInfo && !progressFileInfo && !comprssFileInfo && fileInfo.fileType == ZXLFileTypeVideo) {
-                dispatch_group_enter(group);
-                dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [fileInfo videoCompress:^(BOOL bResult) {
-                        if (!bResult)
-                            compressError = YES;
-                        dispatch_group_leave(group);
-                    }];
-                });
+            if (!successFileInfo && !progressFileInfo && !comprssFileInfo) {
+                //压缩视频
+                if (fileInfo.fileType == ZXLFileTypeVideo) {
+                    dispatch_group_enter(group);
+                    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [fileInfo videoCompress:^(CGFloat percent) {
+                            
+                        } complete:^(BOOL bResult) {
+                            if (!bResult)
+                                compressError = YES;
+                            dispatch_group_leave(group);
+                        }];
+                    });
+                }
+                
+                //本地图片处理图片
+                if (fileInfo.fileType == ZXLFileTypeImage
+                    && ZXLISNSStringValid(fileInfo.assetLocalIdentifier)
+                    && !ZXLISNSStringValid(fileInfo.localURL)) {
+                    dispatch_group_enter(group);
+                    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [ZXLPhotosUtils getPhoto:fileInfo.assetLocalIdentifier complete:^(UIImage *image) {
+                            if (image) {
+                                fileInfo.localURL = [ZXLDocumentUtils saveImage:image name:[fileInfo uploadKey]];
+                            }
+                            dispatch_group_leave(group);
+                        }];
+                    });
+                }
             }
             [needUploadFiles addObject:fileInfo.identifier];
         }

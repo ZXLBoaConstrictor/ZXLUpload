@@ -69,6 +69,15 @@
 
 + (NSString *)saveImageByName:(UIImage *)image{
     NSString *fileName = [ZXLFileUtils fileNameWithidentifier:[ZXLFileUtils imageMD5:image] fileType:ZXLFileTypeImage];
+    return [ZXLDocumentUtils saveImage:image name:fileName];
+}
+
++ (NSString *)saveImage:(UIImage *)image name:(NSString *)fileName{
+    
+    if (!image || !ZXLISNSStringValid(fileName)) {
+        return @"";
+    }
+    
     NSString *filePath = FILE_Image_PATH(fileName);
     BOOL bWrite = YES;
     if ([ZXLFileUtils fileSizeByPath:filePath] <= 0) {

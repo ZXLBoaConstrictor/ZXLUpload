@@ -66,6 +66,16 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  */
 -(instancetype)initWithImage:(UIImage *)image;
 
+
+/**
+  以UIImage 类型 创建上传文件信息model
+ （注：此函数主要针对从 UIImagePickerController 拍照出来的照片选择原照片照片太大，而且上传后打开造成内存急速上涨问题）
+ 
+ @param image 要上传的图片iamge
+ @return 构建的上传文件信息model
+ */
+-(instancetype)initWithUIImagePickerControllerImage:(UIImage *)image;
+
 /**
  以文件路径 创建上传文件信息model
 
@@ -96,7 +106,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  
  注意：非视频文件或者拍摄的文件找不到才会返回NO
  */
--(void)videoCompress:(void (^)(BOOL bResult ))completed;
+-(void)videoCompress:(void (^)(CGFloat percent ))progress complete:(void (^)(BOOL bResult ))completed;
 
 /**
  本地上传路径 -- 视频文件要经过压缩才能获取

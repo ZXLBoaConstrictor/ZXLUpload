@@ -32,6 +32,8 @@
 		829961C5204E913B0040FF16 /* ZXLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 829961C3204E913B0040FF16 /* ZXLTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		829961C6204E913B0040FF16 /* ZXLTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 829961C4204E913B0040FF16 /* ZXLTimer.m */; };
 		829961C9204E95DE0040FF16 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829961C8204E95DE0040FF16 /* Photos.framework */; };
+		82B96E0720858925008ACDE3 /* ZXLPhotosUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 82B96E0520858925008ACDE3 /* ZXLPhotosUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82B96E0820858925008ACDE3 /* ZXLPhotosUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B96E0620858925008ACDE3 /* ZXLPhotosUtils.m */; };
 		82C8DFEE207DE465006AF4DC /* ZXLSyncMutableArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C8DFE6207DE464006AF4DC /* ZXLSyncMutableArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82C8DFEF207DE465006AF4DC /* ZXLSyncMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8DFE7207DE465006AF4DC /* ZXLSyncMapTable.m */; };
 		82C8DFF0207DE465006AF4DC /* ZXLSyncMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8DFE8207DE465006AF4DC /* ZXLSyncMutableArray.m */; };
@@ -75,6 +77,8 @@
 		829961C3204E913B0040FF16 /* ZXLTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLTimer.h; sourceTree = "<group>"; };
 		829961C4204E913B0040FF16 /* ZXLTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLTimer.m; sourceTree = "<group>"; };
 		829961C8204E95DE0040FF16 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		82B96E0520858925008ACDE3 /* ZXLPhotosUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLPhotosUtils.h; sourceTree = "<group>"; };
+		82B96E0620858925008ACDE3 /* ZXLPhotosUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLPhotosUtils.m; sourceTree = "<group>"; };
 		82C8DFE6207DE464006AF4DC /* ZXLSyncMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLSyncMutableArray.h; sourceTree = "<group>"; };
 		82C8DFE7207DE465006AF4DC /* ZXLSyncMapTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLSyncMapTable.m; sourceTree = "<group>"; };
 		82C8DFE8207DE465006AF4DC /* ZXLSyncMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLSyncMutableArray.m; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				828A67A02024764D0094CA92 /* ZXLUploadDefine.h */,
 				8269E8BE201F25C3002D540E /* ZXLFileUtils.h */,
 				8269E8BF201F25C3002D540E /* ZXLFileUtils.m */,
+				82B96E0520858925008ACDE3 /* ZXLPhotosUtils.h */,
+				82B96E0620858925008ACDE3 /* ZXLPhotosUtils.m */,
 				828A67912021B58D0094CA92 /* ZXLVideoUtils.h */,
 				828A67922021B58D0094CA92 /* ZXLVideoUtils.m */,
 				8269E8BA201F191C002D540E /* ZXLDocumentUtils.h */,
@@ -182,6 +188,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82B96E0720858925008ACDE3 /* ZXLPhotosUtils.h in Headers */,
 				828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */,
 				8269E8C0201F25C3002D540E /* ZXLFileUtils.h in Headers */,
 				8285F69D201C1A0700D0F682 /* ZXLUploadFileResultCenter.h in Headers */,
@@ -280,6 +287,7 @@
 				8269E8C1201F25C3002D540E /* ZXLFileUtils.m in Sources */,
 				82C8DFF4207DE465006AF4DC /* ZXLUploadUnifiedResponese.m in Sources */,
 				82C8DFF2207DE465006AF4DC /* ZXLSyncMutableDictionary.m in Sources */,
+				82B96E0820858925008ACDE3 /* ZXLPhotosUtils.m in Sources */,
 				828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */,
 				8269E8BD201F191C002D540E /* ZXLDocumentUtils.m in Sources */,
 				8285F6A2201C1A4A00D0F682 /* ZXLFileInfoModel.m in Sources */,

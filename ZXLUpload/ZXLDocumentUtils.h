@@ -78,6 +78,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  */
 + (NSString *)saveImageByName:(UIImage *)image;
 
++ (NSString *)saveImage:(UIImage *)image name:(NSString *)fileName;
 
 /**
  本地文件路径
