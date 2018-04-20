@@ -57,3 +57,17 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
 
 -(UIImage*)scaleByFactor:(float)scaleFactor;
 @end
+
+@interface NSDictionary (ZXLJSONString)
+- (NSString*)JSONString;
+@end
+
+@interface NSArray (ZXLJSONString)
+- (NSString*)JSONString;
+@end
+
+@interface NSString (ZXLJSONString)
+- (NSArray *)array;
+- (NSDictionary *)dictionary;
+@end
+

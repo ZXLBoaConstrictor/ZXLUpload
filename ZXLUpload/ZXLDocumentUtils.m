@@ -11,30 +11,6 @@
 #import "ZXLFileUtils.h"
 
 @implementation ZXLDocumentUtils
-+(NSMutableDictionary *)dictionaryByListName:(NSString *)fileName{
-    if (!ZXLISNSStringValid(fileName))
-        return nil;
-    NSMutableDictionary* dictconf = nil;
-    NSString *filePath = [ZXLDocumentUtils pathDocumentByName:fileName create:YES];
-    if(filePath && [filePath length] > 0){
-        //读取存储文件到字典
-        dictconf = [[NSMutableDictionary dictionary] initWithContentsOfFile:filePath];
-        if(dictconf)
-            return dictconf;
-    }
-    return nil;
-}
-
-+(BOOL)setDictionaryByListName:(NSMutableDictionary *)dict fileName:(NSString *)fileName{
-    if (!ZXLISNSStringValid(fileName) || !dict)
-        return NO;
-    
-    NSString *filePath = [ZXLDocumentUtils pathDocumentByName:fileName create:YES];
-    if (!ZXLISNSStringValid(filePath))
-        return NO;
-    
-    return ([dict writeToFile:filePath atomically:YES]);
-}
 
 +(NSString *)pathDocumentByName:(NSString *)fileName create:(BOOL)bCreate{
     NSString *documentsDirectory = FILE_DIRECTORY;

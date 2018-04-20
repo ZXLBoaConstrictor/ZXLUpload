@@ -13,6 +13,7 @@
 #import "ZXLFileInfoModel.h"
 #import "ZXLUploadTaskManager.h"
 #import "ZXLUploadTaskManager.h"
+#import "ZXLUploadFmdb.h"
 
 @interface ZXLUploadFileResultCenter()
 
@@ -76,38 +77,25 @@
          _sessionRequestDict = [[ZXLSyncMutableDictionary alloc] init];
          
          //读取本地上传结果文件信息
-         NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
-         if (ZXLISDictionaryValid(tmpUploadInfo)) {
-             [tmpUploadInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                 [self.uploadResultInfo setObject:[ZXLFileInfoModel dictionary:(NSDictionary *)obj] forKey:key];
+         NSMutableArray<ZXLFileInfoModel *> *fileModels =[[ZXLUploadFmdb manager] selectAllUploadSuccessFileResultInfo];
+         if (ZXLISArrayValid(fileModels)) {
+             [fileModels enumerateObjectsUsingBlock:^(ZXLFileInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                 [self.uploadResultInfo setObject:obj forKey:obj.identifier];
              }];
-         }else{
-             if (!tmpUploadInfo) {
-                [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadResultInfo];
-             }
          }
          
          //读取压缩成功的文件信息 并检查压缩成功的文件是否还在本地
-         NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-         if (ZXLISDictionaryValid(tempcomprssInfo)) {
-             NSArray * arrayKeys = [NSArray arrayWithArray:tempcomprssInfo.allKeys];
-             for (NSString * strKey in arrayKeys) {
-                 NSDictionary * obj = [tempcomprssInfo objectForKey:strKey];
-                 if (ZXLISDictionaryValid(obj)) {
-                     ZXLFileInfoModel *fileInfo =  [ZXLFileInfoModel dictionary:(NSDictionary *)obj];
-                     NSString * videoName = [fileInfo uploadKey];
-                     NSString * comprssURL = FILE_Video_PATH(videoName);
-                     if (fileInfo.comprssSuccess && [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
-                         [self.comprssResultInfo setObject:fileInfo forKey:strKey];
-                     }else{
-                         [tempcomprssInfo removeObjectForKey:strKey];
-                     }
+         NSMutableArray<ZXLFileInfoModel *> *compressFileModels =[[ZXLUploadFmdb manager] selectAllCompressFileInfo];
+         if (ZXLISArrayValid(compressFileModels)) {
+             [compressFileModels enumerateObjectsUsingBlock:^(ZXLFileInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                 NSString * videoName = [obj uploadKey];
+                 NSString * comprssURL = FILE_Video_PATH(videoName);
+                 if (obj.comprssSuccess && [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
+                     [self.comprssResultInfo setObject:obj forKey:obj.identifier];
+                 }else{
+                     [[ZXLUploadFmdb manager] deleteCompressFileInfo:obj];
                  }
-             }
-         }else{
-             if (!tempcomprssInfo) {
-                 [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentComprssInfo];
-             }
+             }];
          }
      }
     return self;
@@ -125,8 +113,8 @@
     [_uploadErrorInfo removeAllObjects];
     [_assetSessionDict removeAllObjects];
     [_sessionRequestDict removeAllObjects];
-    [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadResultInfo];
-    [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentComprssInfo];
+    [[ZXLUploadFmdb manager] clearUploadSuccessFileResultInfo];
+    [[ZXLUploadFmdb manager] clearCompressFileInfo];
     return YES;
 }
 
@@ -140,14 +128,10 @@
         fileInfo.comprssSuccess &&  //检查压缩成功后的地址和压缩后的文件是否存在
         [[NSFileManager defaultManager] fileExistsAtPath:comprssURL]) {
         
-        NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-        [tempcomprssInfo setValue:[fileInfo keyValues] forKey:fileInfo.identifier];
-        [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
-        
-        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tempcomprssInfo valueForKey:fileInfo.identifier]];
+        //压缩成功存储记录
+        [[ZXLUploadFmdb manager] insertCompressFileInfo:fileInfo];
         //存储成功记录
-        [_comprssResultInfo setObject:tempFileInfo forKey:fileInfo.identifier];
-        
+        [_comprssResultInfo setObject:[ZXLFileInfoModel dictionary:[fileInfo keyValues]] forKey:fileInfo.identifier];
         //压缩成功后把压缩过程存的文件信息删除
         [self removeFileAVAssetExportSession:fileInfo.identifier];
     }
@@ -163,11 +147,9 @@
         //删除压缩成功信息
         if (fileInfo.fileType == ZXLFileTypeVideo) {
             //压缩成功信息删除--内存
-           [_comprssResultInfo removeObjectForKey:fileInfo.identifier];
+            [_comprssResultInfo removeObjectForKey:fileInfo.identifier];
             //压缩成功信息删除--本地
-            NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-            [tempcomprssInfo removeObjectForKey:fileInfo.identifier];
-            [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
+            [[ZXLUploadFmdb manager] deleteCompressFileInfo:fileInfo];
         }
         //删除本地缓存的文件(注图片不做文件删除)
         NSString *filePath = [fileInfo localUploadURL];
@@ -177,18 +159,14 @@
                 
             }
         }
-        
         //删除出错历史
         [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
         //删除上传信息
         [self removeUploadRequest:fileInfo.identifier];
         //存储成功记录--本地
-        NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
-        [tmpUploadInfo setValue:[fileInfo keyValues] forKey:fileInfo.identifier];
-        [ZXLDocumentUtils setDictionaryByListName:tmpUploadInfo fileName:ZXLDocumentUploadResultInfo];
+        [[ZXLUploadFmdb manager] insertUploadSuccessFileResultInfo:fileInfo];
         //存储成功记录--内存
-        ZXLFileInfoModel * tempFileInfo = [ZXLFileInfoModel dictionary:[tmpUploadInfo valueForKey:fileInfo.identifier]];
-        [_uploadResultInfo setObject:tempFileInfo forKey:fileInfo.identifier];
+        [_uploadResultInfo setObject:[ZXLFileInfoModel dictionary:[fileInfo keyValues]] forKey:fileInfo.identifier];
         //设置所有任务上传的同文件都成功
         [[ZXLUploadTaskManager manager] setFileUploadResult:fileInfo.identifier type:ZXLFileUploadSuccess];
     }
@@ -262,9 +240,7 @@
         }else{
             [_comprssResultInfo removeObjectForKey:identifier];
             //文件不存在删除保存过的文件信息
-            NSMutableDictionary *tempcomprssInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentComprssInfo];
-            [tempcomprssInfo removeObjectForKey:fileInfo.identifier];
-            [ZXLDocumentUtils setDictionaryByListName:tempcomprssInfo fileName:ZXLDocumentComprssInfo];
+            [[ZXLUploadFmdb manager] deleteCompressFileInfo:fileInfo];
         }
     }
     return nil;
@@ -280,9 +256,7 @@
         }else{
             [_uploadResultInfo removeObjectForKey:identifier];
             //删除保存过但是错误的文件信息
-            NSMutableDictionary * tmpUploadInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadResultInfo];
-            [tmpUploadInfo removeObjectForKey:identifier];
-            [ZXLDocumentUtils setDictionaryByListName:tmpUploadInfo fileName:ZXLDocumentUploadResultInfo];
+            [[ZXLUploadFmdb manager] deleteUploadSuccessFileResultInfo:fileInfo];
         }
     }
     return nil;

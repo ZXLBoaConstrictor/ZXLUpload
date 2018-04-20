@@ -47,6 +47,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         self.uploadResult =             [[dictionary objectForKey:@"uploadResult"] integerValue];
         self.fileTime =                 [[dictionary objectForKey:@"fileTime"] integerValue];
         self.assetLocalIdentifier =     [dictionary objectForKey:@"assetLocalIdentifier"];
+        self.superTaskIdentifier =     [dictionary objectForKey:@"superTaskIdentifier"];
     }
     return self;
 }
@@ -64,6 +65,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
     [dictionary setValue:@(_uploadResult).stringValue forKey:@"uploadResult"];
     [dictionary setValue:@(_fileTime).stringValue forKey:@"fileTime"];
     [dictionary setValue:_assetLocalIdentifier forKey:@"assetLocalIdentifier"];
+    [dictionary setValue:_superTaskIdentifier forKey:@"superTaskIdentifier"];
     return dictionary;
 }
 
@@ -79,6 +81,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         }
         
         self.localURL =                 @"";
+        self.superTaskIdentifier =      @"";
         self.identifier =               [ZXLFileUtils base64EncodedString:asset.localIdentifier];
         self.comprssSuccess =           NO;
         self.uploadSize =               0;
@@ -109,6 +112,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         self.uploadResult =             ZXLFileUploadloading;
         self.fileTime =                 0;
         self.assetLocalIdentifier =     @"";
+        self.superTaskIdentifier =      @"";
     }
     
     return self;
@@ -141,6 +145,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         self.uploadResult =             ZXLFileUploadloading;
         self.fileTime =                 0;
         self.assetLocalIdentifier =     @"";
+        self.superTaskIdentifier =      @"";
         
         if (self.fileType == ZXLFileTypeVideo || self.fileType == ZXLFileTypeVoice) {
             self.fileTime =                 [ZXLFileUtils fileCMTime:fileURL];

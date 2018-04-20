@@ -248,3 +248,47 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
     return scaled;
 }
 @end
+
+@implementation NSDictionary (ZXLJSONString)
+- (NSString*)JSONString{
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:self
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (error == nil){
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ;
+    }
+    return nil;
+}
+@end
+
+@implementation NSArray (ZXLJSONString)
+- (NSString*)JSONString{
+    NSError* error = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:self
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (error == nil){
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ;
+    }
+    return nil;
+}
+@end
+
+@implementation NSString (ZXLJSONString)
+- (NSArray *)array{
+    id data = [NSJSONSerialization JSONObjectWithData:[self dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    if ([data isKindOfClass:[NSArray class]]) {
+        return data;
+    }
+    return nil;
+}
+
+- (NSDictionary *)dictionary{
+    id data = [NSJSONSerialization JSONObjectWithData:[self dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        return data;
+    }
+    return nil;
+}
+@end

@@ -7,6 +7,7 @@
 //
 
 #import "ZXLTaskInfoModel.h"
+#import "ZXLFileUtils.h"
 #import "ZXLPhotosUtils.h"
 #import "ZXLUploadDefine.h"
 #import "ZXLFileInfoModel.h"
@@ -14,6 +15,7 @@
 #import "ZXLUploadFileManager.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLSyncMutableArray.h"
+#import "ZXLUploadFmdb.h"
 
 @interface ZXLTaskInfoModel ()
 
@@ -497,33 +499,10 @@
 - (void)saveRestUploadTaskProcess{
     if ((self.resetUploadType&ZXLRestUploadTaskProcess)) {
         if (self.storageLocal) {
-            NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-            ZXLTaskInfoModel * tasInfo = [ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo objectForKey:self.identifier]];
-            BOOL bCompare = YES;
-            if ([tasInfo uploadFilesCount] != self.uploadFiles.count) {
-                bCompare = NO;
-            }else{
-                for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
-                    ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
-                    if (fileInfo && [fileInfo isKindOfClass:[ZXLFileInfoModel class]]) {
-                        bCompare = [tasInfo checkFileInTask:fileInfo.identifier];
-                        if (bCompare) {
-                            break;
-                        }
-                    }
-                }
-            }
-            if (bCompare) {
-                NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-                [tmpUploadTaskInfo setValue:[self keyValues] forKey:self.identifier];
-                [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
-            }
-        }else{
-            self.storageLocal = YES;
-            NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-            [tmpUploadTaskInfo setValue:[self keyValues] forKey:self.identifier];
-            [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
+            [[ZXLUploadFmdb manager] deleteUploadTaskInfo:self];
         }
+        self.storageLocal = YES;
+        [[ZXLUploadFmdb manager] insertUploadTaskInfo:self];
     }
 }
 
@@ -547,5 +526,16 @@
             }
         }
     }
+}
+
+- (NSString *)filesJSONString{
+    NSMutableArray * ayFileInfo = [NSMutableArray array];
+    for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
+        ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
+        if (fileInfo && [fileInfo isKindOfClass:[ZXLFileInfoModel class]]) {
+            [ayFileInfo addObject:[[fileInfo keyValues] JSONString]];
+        }
+    }
+    return [ayFileInfo JSONString];
 }
 @end

@@ -11,18 +11,14 @@
 
 typedef NS_ENUM(NSUInteger, ZXLFileType);
 
-#define ZXLDocumentUploadTaskInfo @"ZXLDocumentUploadTaskInfo"
-
-#define ZXLDocumentUploadResultInfo @"ZXLDocumentUploadResultInfo"
-
-#define ZXLDocumentComprssInfo @"ZXLDocumentComprssInfo"
-
 // 下载文件的总文件夹
 #define BASEDocument       @"ZXLDocumentFile"
 
 // 主目录
 #define FILE_DIRECTORY             [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
 
+//fmdb 存储路径
+#define ZXLUploadFmdbPath          [NSString stringWithFormat:@"%@/com.zxl.tool.ZXLUpload.db",FILE_DIRECTORY]
 
 // 视频文件夹路径
 #define FILE_Video_FOLDER          [NSString stringWithFormat:@"%@/%@/ZXLVideo",FILE_DIRECTORY,BASEDocument]
@@ -43,24 +39,6 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
 #define FILE_Other_PATH(name)      [NSString stringWithFormat:@"%@/%@",[ZXLDocumentUtils createFolder:FILE_Other_FOLDER],name]
 
 @interface ZXLDocumentUtils : NSObject
-
-
-/**
- 获取本地存储的字典信息
-
- @param fileName 文件名称
- @return 数据
- */
-+(NSMutableDictionary *)dictionaryByListName:(NSString *)fileName;
-
-/**
- 保存字典数据
-
- @param dict 数据
- @param fileName 名称
- @return 保存结果
- */
-+(BOOL)setDictionaryByListName:(NSMutableDictionary *)dict fileName:(NSString *)fileName;
 
 /**
  创建目录

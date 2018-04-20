@@ -16,6 +16,7 @@
 #import "ZXLNetworkReachabilityManager.h"
 #import "ZXLUploadUnifiedResponese.h"
 #import "ZXLTimer.h"
+#import "ZXLUploadFmdb.h"
 
 @interface ZXLUploadTaskManager ()
 @property (nonatomic,strong)ZXLSyncMapTable * uploadTaskDelegates;//需要当前界面返回上传结果的代理
@@ -95,7 +96,7 @@
     [self.uploadTaskBlocks removeAllObjects];
     [self.uploadTaskProgressBlocks removeAllObjects];
     [self.uploadTaskCompressBlocks removeAllObjects];
-    [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadTaskInfo];
+    [[ZXLUploadFmdb manager] clearUploadTaskInfo];
     return YES;
 }
 
@@ -142,14 +143,11 @@
 
 -(void)localTaskInfo{
     //读取本地上传结果文件信息
-    NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-    if (ZXLISDictionaryValid(tmpUploadTaskInfo)) {
-        for (NSString *dictKey in [tmpUploadTaskInfo allKeys]) {
-            ZXLTaskInfoModel * taskInfo =  [ZXLTaskInfoModel dictionary:[tmpUploadTaskInfo valueForKey:dictKey]];
-            [self.uploadTasks setObject:taskInfo forKey:dictKey];
-        }
-    }else{
-        [ZXLDocumentUtils setDictionaryByListName:[NSMutableDictionary dictionary] fileName:ZXLDocumentUploadTaskInfo];
+    NSMutableArray <ZXLTaskInfoModel *>*taskModels = [[ZXLUploadFmdb manager] selectAllUploadTaskInfo];
+    if (ZXLISArrayValid(taskModels)) {
+        [taskModels enumerateObjectsUsingBlock:^(ZXLTaskInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.uploadTasks setObject:obj forKey:obj.identifier];
+        }];
     }
 }
 
@@ -228,9 +226,7 @@
         [taskInfo removeAllUploadFiles];
         [self.uploadTasks removeObjectForKey:identifier];
         if (taskInfo.storageLocal) {
-            NSMutableDictionary * tmpUploadTaskInfo = [ZXLDocumentUtils dictionaryByListName:ZXLDocumentUploadTaskInfo];
-            [tmpUploadTaskInfo removeObjectForKey:identifier];
-            [ZXLDocumentUtils setDictionaryByListName:tmpUploadTaskInfo fileName:ZXLDocumentUploadTaskInfo];
+            [[ZXLUploadFmdb manager] deleteUploadTaskInfo:taskInfo];
         }
     }
 }

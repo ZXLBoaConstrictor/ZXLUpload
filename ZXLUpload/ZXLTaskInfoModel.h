@@ -167,4 +167,12 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
  */
 - (void)networkError;
 
+
+/**
+ 所有上传文件数组转JSONString
+ 
+ @return JSONString
+ */
+- (NSString *)filesJSONString;
+
 @end

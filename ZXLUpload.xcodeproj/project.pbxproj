@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		825B607B20898BD800DD88F0 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825B607A20898BD800DD88F0 /* FMDB.framework */; };
+		825B607E20898CF100DD88F0 /* ZXLUploadFmdb.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B607C20898CF100DD88F0 /* ZXLUploadFmdb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		825B607F20898CF100DD88F0 /* ZXLUploadFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B607D20898CF100DD88F0 /* ZXLUploadFmdb.m */; };
 		8269E8BC201F191C002D540E /* ZXLDocumentUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8269E8BA201F191C002D540E /* ZXLDocumentUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8269E8BD201F191C002D540E /* ZXLDocumentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269E8BB201F191C002D540E /* ZXLDocumentUtils.m */; };
 		8269E8C0201F25C3002D540E /* ZXLFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8269E8BE201F25C3002D540E /* ZXLFileUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +53,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		825B607A20898BD800DD88F0 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = ZXLUpload/FMDB.framework; sourceTree = "<group>"; };
+		825B607C20898CF100DD88F0 /* ZXLUploadFmdb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadFmdb.h; sourceTree = "<group>"; };
+		825B607D20898CF100DD88F0 /* ZXLUploadFmdb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadFmdb.m; sourceTree = "<group>"; };
 		8269E8BA201F191C002D540E /* ZXLDocumentUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLDocumentUtils.h; sourceTree = "<group>"; };
 		8269E8BB201F191C002D540E /* ZXLDocumentUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLDocumentUtils.m; sourceTree = "<group>"; };
 		8269E8BE201F25C3002D540E /* ZXLFileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLFileUtils.h; sourceTree = "<group>"; };
@@ -102,6 +108,7 @@
 				82C8DFFF207DEC4B006AF4DC /* SystemConfiguration.framework in Frameworks */,
 				82C8DFFD207DEC43006AF4DC /* CoreTelephony.framework in Frameworks */,
 				82C8DFFB207DE627006AF4DC /* AliyunOSSiOS.framework in Frameworks */,
+				825B607B20898BD800DD88F0 /* FMDB.framework in Frameworks */,
 				829961C9204E95DE0040FF16 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +140,8 @@
 				828A67A02024764D0094CA92 /* ZXLUploadDefine.h */,
 				8269E8BE201F25C3002D540E /* ZXLFileUtils.h */,
 				8269E8BF201F25C3002D540E /* ZXLFileUtils.m */,
+				825B607C20898CF100DD88F0 /* ZXLUploadFmdb.h */,
+				825B607D20898CF100DD88F0 /* ZXLUploadFmdb.m */,
 				82B96E0520858925008ACDE3 /* ZXLPhotosUtils.h */,
 				82B96E0620858925008ACDE3 /* ZXLPhotosUtils.m */,
 				828A67912021B58D0094CA92 /* ZXLVideoUtils.h */,
@@ -173,6 +182,7 @@
 		829961C7204E95DE0040FF16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				825B607A20898BD800DD88F0 /* FMDB.framework */,
 				82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */,
 				82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */,
 				82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */,
@@ -188,6 +198,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				825B607E20898CF100DD88F0 /* ZXLUploadFmdb.h in Headers */,
 				82B96E0720858925008ACDE3 /* ZXLPhotosUtils.h in Headers */,
 				828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */,
 				8269E8C0201F25C3002D540E /* ZXLFileUtils.h in Headers */,
@@ -286,6 +297,7 @@
 				829961C6204E913B0040FF16 /* ZXLTimer.m in Sources */,
 				8269E8C1201F25C3002D540E /* ZXLFileUtils.m in Sources */,
 				82C8DFF4207DE465006AF4DC /* ZXLUploadUnifiedResponese.m in Sources */,
+				825B607F20898CF100DD88F0 /* ZXLUploadFmdb.m in Sources */,
 				82C8DFF2207DE465006AF4DC /* ZXLSyncMutableDictionary.m in Sources */,
 				82B96E0820858925008ACDE3 /* ZXLPhotosUtils.m in Sources */,
 				828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */,
