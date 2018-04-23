@@ -95,6 +95,15 @@
 -(float)uploadProgress{
     float fProgress = 0;
     
+    if (self.taskUploadResult == ZXLUploadTaskSuccess || self.taskUploadResult == ZXLUploadTaskError) {
+        return 1.0f;
+    }
+    
+    [self uploadTaskType];
+    if (self.taskUploadResult < ZXLUploadTaskLoading) {
+        return 0;
+    }
+
     for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
         ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
         if (fileInfo && [fileInfo isKindOfClass:[ZXLFileInfoModel class]]) {
@@ -106,11 +115,23 @@
             }
         }
     }
-    return fProgress;
+    return fProgress/[self.uploadFiles count];
 }
 
 -(float)compressProgress{
     float fProgress = 0;
+    if (self.taskUploadResult == ZXLUploadTaskPrepareForUpload) {
+        [self uploadTaskType];
+    }
+    
+    if (self.taskUploadResult == ZXLUploadTaskPrepareForUpload) {
+        return fProgress;
+    }
+    
+    if (self.taskUploadResult != ZXLUploadTaskTranscoding) {
+        return 1.0f;
+    }
+    
     NSInteger fCompressFileCount = 0;
     for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
         ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
@@ -302,8 +323,7 @@
         self.completeResponese = NO;
         self.unifiedResponese = NO;
     }
-    
-    
+
     if (self.taskUploadResult != ZXLUploadTaskPrepareForUpload)
         return;
 
@@ -362,10 +382,6 @@
         return;
     
     if (self.uploadFiles.count > 0) {
-//        NSMutableArray<ZXLFileInfoModel *> * arrayTemp = [NSMutableArray arrayWithArray:self.uploadFiles];
-//        [self.uploadFiles removeAllObjects];
-//        [self.uploadFiles addObjectsFromArray:fileInfos];
-//        [self.uploadFiles addObjectsFromArray:arrayTemp];
         [self.uploadFiles addObjectsFromArrayAtFirst:fileInfos];
     }else{
         [self.uploadFiles addObjectsFromArray:fileInfos];
