@@ -514,8 +514,9 @@
 }
 
 - (void)networkError{
+    self.uploading = YES;
     ZXLUploadTaskType taskUploadResult = [self uploadTaskType];
-    if (taskUploadResult == ZXLUploadTaskTranscoding || taskUploadResult == ZXLUploadTaskLoading) {
+    if (taskUploadResult <= ZXLUploadTaskLoading) {
         for (NSInteger i = 0; i < [self.uploadFiles count]; i++) {
             ZXLFileInfoModel *fileInfo = [self.uploadFiles objectAtIndex:i];
             if (fileInfo && [fileInfo isKindOfClass:[ZXLFileInfoModel class]]) {

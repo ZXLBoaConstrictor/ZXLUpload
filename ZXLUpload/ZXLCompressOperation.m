@@ -108,7 +108,6 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     }
     
     [self.comprssCallback removeAllObjects];
-    [self.compressSession removeObserver:self forKeyPath:@"progress"];
 }
 
 - (void)start {

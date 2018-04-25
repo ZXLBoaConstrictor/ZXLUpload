@@ -78,32 +78,10 @@
         return;
     }
     
-    //当有相同文件正在上传的时候等待上传结果
-    ZXLFileInfoModel * progressFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier];
-    if (progressFileInfo) {
-        [fileInfo setUploadStateWithTheSame:progressFileInfo];
-        
-        [self.uploadFileProgressBlocks setObject:progress forKey:fileInfo.identifier];
-        [self.uploadFileResponseBlocks setObject:complete forKey:fileInfo.identifier];
-        [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
-        
-        if ( !_timer) {
-            _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) userInfo:nil repeats:YES];
-            [_timer fire];
-        }
-        return;
-    }
-    
     fileInfo.progressType = ZXLFileUploadProgressUpload;
- 
-    //上传后的文件key (即文件名称)
-    NSString * uploadKey = [fileInfo uploadKey];
-    //文件在本地地址
-    NSString *localUploadURL = [fileInfo localUploadURL];
-    
+    NSString * uploadKey = [fileInfo uploadKey];//上传后的文件key (即文件名称)
+    NSString *localUploadURL = [fileInfo localUploadURL]; //文件在本地地址
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
-    
-    //文件上传实现
     OSSRequest *request = [[ZXLAliOSSManager manager] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
         if (percent < 1) {
             if (progress) {
@@ -160,7 +138,6 @@
     ZXLFileInfoModel * progressFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier];
     if (progressFileInfo) {
         [fileInfo setUploadStateWithTheSame:progressFileInfo];
-        
         [self.uploadFileProgressBlocks setObject:progress forKey:fileInfo.identifier];
         [self.uploadFileResponseBlocks setObject:complete forKey:fileInfo.identifier];
         [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
