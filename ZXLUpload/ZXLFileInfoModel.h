@@ -32,12 +32,10 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  -id->请求相册文件保存本地(方便失败重传操作)->上传本地文件->删除本地保存文件
  */
 @property (nonatomic,copy)NSString*                        assetLocalIdentifier;
-
-
-//文件上传信息
 @property (nonatomic,copy)NSString  *                      superTaskIdentifier;//文件所在上传任务id标识（空则此次文件上传信息不在上传任务中）
-@property (nonatomic,assign)BOOL                           comprssSuccess;//压缩成功（针对视频文件）
+
 @property (nonatomic,assign)float                          progress; //文件上传进度
+@property (nonatomic,assign)BOOL                           comprssSuccess;//压缩成功（针对视频文件）
 @property (nonatomic,assign)ZXLFileUploadProgressType      progressType; //文件上传状态
 @property (nonatomic,assign)ZXLFileUploadType              uploadResult; //上传结果
 
@@ -106,7 +104,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  
  注意：非视频文件或者拍摄的文件找不到才会返回NO
  */
--(void)videoCompress:(void (^)(CGFloat percent ))progress complete:(void (^)(BOOL bResult ))completed;
+-(void)videoCompress:(void (^)(BOOL bResult ))completed;
 
 /**
  本地上传路径 -- 视频文件要经过压缩才能获取
@@ -137,6 +135,13 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
 
 
 /**
+ 设置当前文件状态基于另一个相同文件信息
+
+ @param sameFileInfo 相同文件信息
+ */
+-(void)setUploadStateWithTheSame:(ZXLFileInfoModel *)sameFileInfo;
+
+/**
  重置文件信息-（在上传失败的时候用）
  */
 -(void)resetFileInfo;
@@ -152,5 +157,6 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  上传任务遇到网络错误的时候
  */
 - (void)networkError;
+
 
 @end

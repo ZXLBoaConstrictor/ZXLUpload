@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */; };
+		82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82444F72208DAE3B009DC4B1 /* ZXLCompressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82444F70208DAE3B009DC4B1 /* ZXLCompressManager.m */; };
-		82444F75208DAE57009DC4B1 /* ZXLCompressOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F73208DAE57009DC4B1 /* ZXLCompressOperation.h */; };
+		82444F75208DAE57009DC4B1 /* ZXLCompressOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F73208DAE57009DC4B1 /* ZXLCompressOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82444F76208DAE57009DC4B1 /* ZXLCompressOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82444F74208DAE57009DC4B1 /* ZXLCompressOperation.m */; };
+		824ABAD5208F1C7F00D99D8A /* ZXLReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 824ABAD3208F1C7F00D99D8A /* ZXLReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		824ABAD6208F1C7F00D99D8A /* ZXLReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 824ABAD4208F1C7F00D99D8A /* ZXLReachability.m */; };
 		825B607B20898BD800DD88F0 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825B607A20898BD800DD88F0 /* FMDB.framework */; };
 		825B607E20898CF100DD88F0 /* ZXLUploadFmdb.h in Headers */ = {isa = PBXBuildFile; fileRef = 825B607C20898CF100DD88F0 /* ZXLUploadFmdb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		825B607F20898CF100DD88F0 /* ZXLUploadFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 825B607D20898CF100DD88F0 /* ZXLUploadFmdb.m */; };
@@ -32,8 +34,6 @@
 		828A679B202458990094CA92 /* ZXLUploadTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A6799202458990094CA92 /* ZXLUploadTaskManager.m */; };
 		828A679E2024595F0094CA92 /* ZXLUploadFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A679C2024595F0094CA92 /* ZXLUploadFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		828A679F2024595F0094CA92 /* ZXLUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A679D2024595F0094CA92 /* ZXLUploadFileManager.m */; };
-		828A67A32025B68D0094CA92 /* ZXLNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		828A67A42025B68D0094CA92 /* ZXLNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */; };
 		828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 828A67A52025BB210094CA92 /* ZXLNetworkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 828A67A62025BB210094CA92 /* ZXLNetworkManager.m */; };
 		829961C5204E913B0040FF16 /* ZXLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 829961C3204E913B0040FF16 /* ZXLTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -61,6 +61,8 @@
 		82444F70208DAE3B009DC4B1 /* ZXLCompressManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLCompressManager.m; sourceTree = "<group>"; };
 		82444F73208DAE57009DC4B1 /* ZXLCompressOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLCompressOperation.h; sourceTree = "<group>"; };
 		82444F74208DAE57009DC4B1 /* ZXLCompressOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLCompressOperation.m; sourceTree = "<group>"; };
+		824ABAD3208F1C7F00D99D8A /* ZXLReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLReachability.h; sourceTree = "<group>"; };
+		824ABAD4208F1C7F00D99D8A /* ZXLReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLReachability.m; sourceTree = "<group>"; };
 		825B607A20898BD800DD88F0 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = ZXLUpload/FMDB.framework; sourceTree = "<group>"; };
 		825B607C20898CF100DD88F0 /* ZXLUploadFmdb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadFmdb.h; sourceTree = "<group>"; };
 		825B607D20898CF100DD88F0 /* ZXLUploadFmdb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadFmdb.m; sourceTree = "<group>"; };
@@ -84,8 +86,6 @@
 		828A679C2024595F0094CA92 /* ZXLUploadFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadFileManager.h; sourceTree = "<group>"; };
 		828A679D2024595F0094CA92 /* ZXLUploadFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadFileManager.m; sourceTree = "<group>"; };
 		828A67A02024764D0094CA92 /* ZXLUploadDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadDefine.h; sourceTree = "<group>"; };
-		828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		828A67A52025BB210094CA92 /* ZXLNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLNetworkManager.h; sourceTree = "<group>"; };
 		828A67A62025BB210094CA92 /* ZXLNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLNetworkManager.m; sourceTree = "<group>"; };
 		829961C3204E913B0040FF16 /* ZXLTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLTimer.h; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 				82C8DFEC207DE465006AF4DC /* ZXLUploadUnifiedResponese.m */,
 				828A67A52025BB210094CA92 /* ZXLNetworkManager.h */,
 				828A67A62025BB210094CA92 /* ZXLNetworkManager.m */,
-				828A67A12025B68D0094CA92 /* ZXLNetworkReachabilityManager.h */,
-				828A67A22025B68D0094CA92 /* ZXLNetworkReachabilityManager.m */,
+				824ABAD3208F1C7F00D99D8A /* ZXLReachability.h */,
+				824ABAD4208F1C7F00D99D8A /* ZXLReachability.m */,
 				829961C3204E913B0040FF16 /* ZXLTimer.h */,
 				829961C4204E913B0040FF16 /* ZXLTimer.m */,
 				82C8DFEB207DE465006AF4DC /* ZXLSyncMapTable.h */,
@@ -210,6 +210,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				824ABAD5208F1C7F00D99D8A /* ZXLReachability.h in Headers */,
+				82444F75208DAE57009DC4B1 /* ZXLCompressOperation.h in Headers */,
+				82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */,
 				825B607E20898CF100DD88F0 /* ZXLUploadFmdb.h in Headers */,
 				82B96E0720858925008ACDE3 /* ZXLPhotosUtils.h in Headers */,
 				828A67A72025BB210094CA92 /* ZXLNetworkManager.h in Headers */,
@@ -221,12 +224,9 @@
 				82C8DFF1207DE465006AF4DC /* ZXLUploadUnifiedResponese.h in Headers */,
 				8285F6A9201C1A9D00D0F682 /* ZXLTaskInfoModel.h in Headers */,
 				828A67932021B58D0094CA92 /* ZXLVideoUtils.h in Headers */,
-				82444F75208DAE57009DC4B1 /* ZXLCompressOperation.h in Headers */,
 				8269E8BC201F191C002D540E /* ZXLDocumentUtils.h in Headers */,
 				8285F6A1201C1A4A00D0F682 /* ZXLFileInfoModel.h in Headers */,
-				82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */,
 				82C8DFF5207DE465006AF4DC /* ZXLSyncMutableDictionary.h in Headers */,
-				828A67A32025B68D0094CA92 /* ZXLNetworkReachabilityManager.h in Headers */,
 				82C8DFEE207DE465006AF4DC /* ZXLSyncMutableArray.h in Headers */,
 				82C8DFF3207DE465006AF4DC /* ZXLSyncMapTable.h in Headers */,
 				829961C5204E913B0040FF16 /* ZXLTimer.h in Headers */,
@@ -322,7 +322,7 @@
 				8285F69E201C1A0700D0F682 /* ZXLUploadFileResultCenter.m in Sources */,
 				8285F6AA201C1A9D00D0F682 /* ZXLTaskInfoModel.m in Sources */,
 				828A679F2024595F0094CA92 /* ZXLUploadFileManager.m in Sources */,
-				828A67A42025B68D0094CA92 /* ZXLNetworkReachabilityManager.m in Sources */,
+				824ABAD6208F1C7F00D99D8A /* ZXLReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

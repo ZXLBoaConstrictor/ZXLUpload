@@ -14,8 +14,6 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
 
 typedef void (^ZXLUploadFileResponseCallback)(ZXLFileUploadType nResult,NSString *resultURL);
 
-typedef void (^ZXLUploadFileCompressCallback)(float compressPercent);
-
 typedef void (^ZXLUploadFileProgressCallback)(float progressPercent);
 
 @interface ZXLUploadFileManager : NSObject
@@ -36,12 +34,10 @@ typedef void (^ZXLUploadFileProgressCallback)(float progressPercent);
  单个文件上传 （本来此处考虑，同文件多个地方上传情况，先不考虑。场景：上传任务中有文件正在上传，单个文件又上传）
 
  @param fileInfo 文件信息
- @param compress 压缩进度
  @param progress 上传进度
  @param complete 上传结果
  */
 - (void)uploadFile:(ZXLFileInfoModel *)fileInfo
-          compress:(ZXLUploadFileCompressCallback)compress
           progress:(ZXLUploadFileProgressCallback)progress
           complete:(ZXLUploadFileResponseCallback)complete;
 @end

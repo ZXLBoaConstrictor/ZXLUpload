@@ -13,11 +13,18 @@ typedef void (^ZXLComprssProgressCallback)(float percent);
 
 
 @interface ZXLCompressManager : NSObject
++(instancetype)manager;
 
 -(void)videoAsset:(AVURLAsset *)asset
    fileIdentifier:(NSString *)fileId
- progressCallback:(ZXLComprssProgressCallback)progressCallback
-         Callback:(ZXLComprssCallback)callback;
+         callback:(ZXLComprssCallback)callback;
 
-- (void)cancelCompressOperations;
+-(void)cancelCompressOperationForIdentifier:(NSString *)fileIdentifier;
+
+-(void)cancelCompressOperations;
+
+-(BOOL)checkFileCompressing:(NSString *)fileIdentifier;
+
+-(float)compressProgressForIdentifier:(NSString *)fileIdentifier;
+
 @end

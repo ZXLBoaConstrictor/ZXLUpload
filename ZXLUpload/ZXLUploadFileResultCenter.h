@@ -41,14 +41,6 @@
 -(void)saveUploadError:(ZXLFileInfoModel *)fileInfo;
 
 /**
- 保存文件压缩过程信息
- 
- @param fileInfo 文件信息
- */
--(void)saveComprssProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session;
-
-
-/**
  保存文件上传过程信息
  
  @param fileInfo 文件信息
@@ -70,15 +62,6 @@
  @return 上传成功过的文件信息
  */
 -(ZXLFileInfoModel *)checkUploadSuccessFileInfo:(NSString *)identifier;
-
-/**
- 检查文件是否正在压缩
- 
- @param identifier 文件identifier唯一值
- @return 压缩中的文件信息
- */
--(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)identifier;
-
 /**
  检查文件是否正在上传
  
@@ -95,31 +78,6 @@
  @return 上传失败过的文件信息
  */
 -(ZXLFileInfoModel *)checkUploadErrorFileInfo:(NSString *)identifier;
-
-/**
- 添加文件压缩进度session
- 
- @param session AVAssetExportSession
- @param identifier 文件identifier
- */
--(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)identifier;
-
-
-/**
- 删除文件压缩进度session
- 
- @param identifier 文件identifier
- */
--(void)removeFileAVAssetExportSession:(NSString *)identifier;
-
-
-/**
- 获取文件进度session
- 
- @param identifier 文件identifier
- @return AVAssetExportSession
- */
--(AVAssetExportSession *)getAVAssetExportSession:(NSString *)identifier;
 
 /**
  添加文件上传Request

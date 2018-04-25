@@ -13,7 +13,6 @@
 #import "ZXLTaskInfoModel.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLNetworkManager.h"
-#import "ZXLNetworkReachabilityManager.h"
 #import "ZXLUploadUnifiedResponese.h"
 #import "ZXLTimer.h"
 #import "ZXLUploadFmdb.h"
@@ -118,24 +117,22 @@
 }
 
 -(void)refreshNetWorkStatus{
-    if ([ZXLNetworkManager manager].networkStatusChange) {
-        //无网变有网络
-        if ([ZXLNetworkManager manager].networkstatus > ZXLNetworkReachabilityStatusNotReachable) {
-            for (NSString *identifier in [self.uploadTasks allKeys]) {
-                ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
-                if (taskInfo && (taskInfo.resetUploadType&ZXLRestUploadTaskNetwork)) {
-                    ZXLUploadTaskType taskUploadResult = [taskInfo uploadTaskType];
-                    if (taskUploadResult == ZXLUploadTaskError) {
-                        [self startUploadWithUnifiedResponeseForIdentifier:taskInfo.identifier];
-                    }
+    //无网变有网络
+    if ([ZXLNetworkManager appHaveNetwork]) {
+        for (NSString *identifier in [self.uploadTasks allKeys]) {
+            ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+            if (taskInfo && (taskInfo.resetUploadType&ZXLRestUploadTaskNetwork)) {
+                ZXLUploadTaskType taskUploadResult = [taskInfo uploadTaskType];
+                if (taskUploadResult == ZXLUploadTaskError) {
+                    [self startUploadWithUnifiedResponeseForIdentifier:taskInfo.identifier];
                 }
             }
-        }else{//有网络变无网络
-            for (NSString *identifier in [self.uploadTasks allKeys]) {
-                ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
-                if (taskInfo) {
-                    [taskInfo networkError];
-                }
+        }
+    }else{//有网络变无网络
+        for (NSString *identifier in [self.uploadTasks allKeys]) {
+            ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
+            if (taskInfo) {
+                [taskInfo networkError];
             }
         }
     }
@@ -348,9 +345,9 @@
     BOOL bExistence = NO;
     for (NSString *identifier in [self.uploadTasks allKeys]) {
         ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
-        if (taskInfo && ![taskIdentifier isEqualToString:taskInfo.identifier]) {
+        if (taskInfo && ![taskIdentifier isEqualToString:taskInfo.identifier] && [taskInfo checkFileInTask:fileIdentifier]) {
             ZXLUploadTaskType taskUploadResult = [taskInfo uploadTaskType];
-            if ((taskUploadResult == ZXLUploadTaskTranscoding || taskUploadResult == ZXLUploadTaskLoading) && [taskInfo checkFileInTask:fileIdentifier]) {
+            if (taskUploadResult == ZXLUploadTaskTranscoding || taskUploadResult == ZXLUploadTaskLoading) {
                 bExistence = YES;
                 break;
             }

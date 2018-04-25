@@ -17,7 +17,6 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 
 @interface ZXLCompressOperation()
 @property (nonatomic,strong)NSHashTable * comprssCallback;
-@property (nonatomic,strong)NSHashTable * comprssProgressCallback;
 @property (nonatomic,strong)AVAssetExportSession *compressSession;
 @property (nonatomic,assign)BOOL checkFailed;
 
@@ -37,24 +36,17 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     return _comprssCallback;
 }
 
--(NSHashTable *)comprssProgressCallback{
-    if (!_comprssProgressCallback) {
-        _comprssProgressCallback = [NSHashTable hashTableWithOptions:NSHashTableCopyIn];
-    }
-    return _comprssProgressCallback;
-}
-
 -(instancetype)initWithVideoAsset:(AVURLAsset *)asset
                    fileIdentifier:(NSString *)fileId
-                 progressCallback:(ZXLComprssProgressCallback)progressCallback
-                         Callback:(ZXLComprssCallback)callback{
+                         callback:(ZXLComprssCallback)callback{
     if (self = [super init]) {
         self.checkFailed = NO;
         self.compressSession = [[AVAssetExportSession alloc]initWithAsset:asset presetName:AVAssetExportPreset640x480];
-        [self.compressSession addObserver:self forKeyPath:@"progress" options:NSKeyValueObservingOptionNew context:nil];
         self.lock = [[NSRecursiveLock alloc] init];
         self.lock.name = ZXLCompressOperationLockName;
         self.runLoopModes = @[NSRunLoopCommonModes];
+        [self.comprssCallback addObject:callback];
+        self.identifier = fileId;
     }
     return self;
 }
@@ -80,22 +72,9 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     return _compressThread;
 }
 
-- (void)addComprssProgressCallback:(ZXLComprssProgressCallback)progressCallback
-                          callback:(ZXLComprssCallback)callback{
-    if (progressCallback) {
-        [self.comprssProgressCallback addObject:progressCallback];
-    }
-    
+- (void)addComprssCallback:(ZXLComprssCallback)callback{
     if (callback) {
         [self.comprssCallback addObject:callback];
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context{
-    if (object == self.compressSession && [keyPath isEqualToString:@"progress"]) {
-        if (self.compressSession.progress < 1) {
-            [self compressProgress:self.compressSession.progress];
-        }
     }
 }
 
@@ -113,8 +92,22 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 }
 
 - (void)cancelCompress {
+    if (self.compressSession.status == AVAssetExportSessionStatusWaiting||
+        self.compressSession.status == AVAssetExportSessionStatusExporting) {
+        [self.compressSession cancelExport];
+        
+        //中断压缩删除压缩未完成的文件
+        NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileType:ZXLFileTypeVideo];
+        NSString *resultPath = FILE_Video_PATH(videoName);
+        if (ZXLISNSStringValid(resultPath) && [[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
+            BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:resultPath error:nil];
+            if (bRemove) {
+                
+            }
+        }
+    }
+    
     [self.comprssCallback removeAllObjects];
-    [self.comprssProgressCallback removeAllObjects];
     [self.compressSession removeObserver:self forKeyPath:@"progress"];
 }
 
@@ -175,17 +168,8 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     }];
 }
 
--(void)compressProgress:(float)percent{
-    for (ZXLComprssProgressCallback progressCallback in self.comprssProgressCallback) {
-        if (progressCallback) {
-            progressCallback(percent);
-        }
-    }
-}
 
 -(void)comprssComplete:(NSString *)resultPath error:(NSString *)error{
-    [self compressProgress:1.0];
-    
     for (ZXLComprssCallback callback in self.comprssCallback) {
         if (callback) {
             callback(resultPath,error);
@@ -240,5 +224,12 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 
 - (void)runSelector:(SEL)selecotr {
     [self performSelector:selecotr onThread:[[self class] operationThread] withObject:nil waitUntilDone:NO modes:self.runLoopModes];
+}
+
+-(float)compressProgress{
+    if (self.compressSession) {
+        return self.compressSession.progress;
+    }
+    return 0;
 }
 @end

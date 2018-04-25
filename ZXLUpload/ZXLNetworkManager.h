@@ -7,16 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef NS_ENUM(NSInteger, ZXLNetworkReachabilityStatus);
-
 @interface ZXLNetworkManager : NSObject
-@property(nonatomic,assign)ZXLNetworkReachabilityStatus networkstatus;
-
-/**
- 判断网络状态从有网到无网的变化，或者从无网到有网的变化
- */
-@property(nonatomic,assign)BOOL networkStatusChange;
-
 + (instancetype)manager;
 
 /**

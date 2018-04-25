@@ -66,8 +66,9 @@
               complete:(ZXLUploadFileResponseCallback)complete{
     
     //当有上传成功过的信息，不再继续进行压缩上传
-    if ([[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier]) {
-        [fileInfo setUploadResultSuccess];
+    ZXLFileInfoModel * successFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier];
+    if (successFileInfo) {
+        [fileInfo setUploadStateWithTheSame:successFileInfo];
         if (progress) {
             progress(1.0);
         }
@@ -78,7 +79,10 @@
     }
     
     //当有相同文件正在上传的时候等待上传结果
-    if ([[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier]) {
+    ZXLFileInfoModel * progressFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier];
+    if (progressFileInfo) {
+        [fileInfo setUploadStateWithTheSame:progressFileInfo];
+        
         [self.uploadFileProgressBlocks setObject:progress forKey:fileInfo.identifier];
         [self.uploadFileResponseBlocks setObject:complete forKey:fileInfo.identifier];
         [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
@@ -91,12 +95,14 @@
     }
     
     fileInfo.progressType = ZXLFileUploadProgressUpload;
-    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
-    
+ 
     //上传后的文件key (即文件名称)
     NSString * uploadKey = [fileInfo uploadKey];
     //文件在本地地址
     NSString *localUploadURL = [fileInfo localUploadURL];
+    
+    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
+    
     //文件上传实现
     OSSRequest *request = [[ZXLAliOSSManager manager] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
         if (percent < 1) {
@@ -135,14 +141,12 @@
 }
 
 - (void)uploadFile:(ZXLFileInfoModel *)fileInfo
-          compress:(ZXLUploadFileCompressCallback)compress
           progress:(ZXLUploadFileProgressCallback)progress
           complete:(ZXLUploadFileResponseCallback)complete{
     //当有上传成功过的信息，不再继续进行压缩上传
-    if ([[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier]) {
-        [fileInfo setUploadResultSuccess];
-        
-        [self.uploadFileProgressBlocks objectForKey:fileInfo.identifier];
+    ZXLFileInfoModel * successFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier];
+    if (successFileInfo) {
+        [fileInfo setUploadStateWithTheSame:successFileInfo];
         if (progress) {
             progress(1.0);
         }
@@ -152,17 +156,28 @@
         return;
     }
     
+    //当有相同文件正在上传的时候等待上传结果
+    ZXLFileInfoModel * progressFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadProgressFileInfo:fileInfo.identifier];
+    if (progressFileInfo) {
+        [fileInfo setUploadStateWithTheSame:progressFileInfo];
+        
+        [self.uploadFileProgressBlocks setObject:progress forKey:fileInfo.identifier];
+        [self.uploadFileResponseBlocks setObject:complete forKey:fileInfo.identifier];
+        [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
+        
+        if ( !_timer) {
+            _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) userInfo:nil repeats:YES];
+            [_timer fire];
+        }
+        return;
+    }
+    
     __block BOOL compressError = NO;
     dispatch_group_t group = dispatch_group_create();
-    
     if (fileInfo.fileType == ZXLFileTypeVideo) {
         dispatch_group_enter(group);
         dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [fileInfo videoCompress:^(CGFloat percent) {
-                if (compress) {
-                    compress(percent);
-                }
-            } complete:^(BOOL bResult) {
+            [fileInfo videoCompress:^(BOOL bResult) {
                 if (!bResult) {
                     compressError = YES;
                 }

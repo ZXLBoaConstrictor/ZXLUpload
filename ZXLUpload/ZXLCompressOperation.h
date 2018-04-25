@@ -8,19 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-//#import <AssetsLibrary/AssetsLibrary.h>
 
 typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
-typedef void (^ZXLComprssProgressCallback)(float percent);
 
 @interface ZXLCompressOperation : NSOperation
 @property (nonatomic, copy) NSString *identifier;
 
 -(instancetype)initWithVideoAsset:(AVURLAsset *)asset
                    fileIdentifier:(NSString *)fileId
-                 progressCallback:(ZXLComprssProgressCallback)progressCallback
-                         Callback:(ZXLComprssCallback)callback;
+                         callback:(ZXLComprssCallback)callback;
 
-- (void)addComprssProgressCallback:(ZXLComprssProgressCallback)progressCallback
-                          callback:(ZXLComprssCallback)callback;
+- (void)addComprssCallback:(ZXLComprssCallback)callback;
+
+-(float)compressProgress;
 @end

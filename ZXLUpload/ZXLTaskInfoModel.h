@@ -51,7 +51,10 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
  */
 @property (nonatomic,assign)BOOL storageLocal;
 
-
+/**
+ 任务是否在上传中
+ */
+@property (nonatomic,assign)BOOL uploading;
 
 
 + (instancetype)dictionary:(NSDictionary *)dictionary;
@@ -76,19 +79,11 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
 - (NSInteger)uploadFilesCount;
 
 /**
- 上传和压缩总进度
-
- @return 总上传进度
- */
-- (float)uploadAndcompressProgress;
-
-/**
  当前任务上传进度 -- 不包含压缩进度
  
  @return 进度
  */
 - (float)uploadProgress;
-
 
 /**
  压缩进度

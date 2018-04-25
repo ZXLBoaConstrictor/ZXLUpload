@@ -16,18 +16,8 @@
 #import "ZXLDocumentUtils.h"
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadTaskManager.h"
-#import "ZXLTimer.h"
+#import "ZXLCompressManager.h"
 
-
-typedef void (^ZXLFileComprssCallback)(BOOL bResult);
-typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
-
-@interface ZXLFileInfoModel()
-@property (nonatomic,copy)ZXLFileComprssCallback comprssCallback;
-@property (nonatomic,copy)ZXLFileComprssProgressCallback comprssProgressCallback;
-@property (nonatomic,strong)NSTimer *timer;
-@property (nonatomic,strong)AVAssetExportSession *compressSession;
-@end
 
 @implementation ZXLFileInfoModel
 
@@ -48,6 +38,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         self.fileTime =                 [[dictionary objectForKey:@"fileTime"] integerValue];
         self.assetLocalIdentifier =     [dictionary objectForKey:@"assetLocalIdentifier"];
         self.superTaskIdentifier =     [dictionary objectForKey:@"superTaskIdentifier"];
+        
     }
     return self;
 }
@@ -105,7 +96,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         self.localURL =                 [ZXLDocumentUtils saveImageByName:image];
         self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
-        self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
+        self.uploadSize =               0;
         self.fileType =                 ZXLFileTypeImage;
         self.progress =                 0;
         self.progressType =             ZXLFileUploadProgressStartUpload;
@@ -139,7 +130,7 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
         
         self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
-        self.uploadSize =               [ZXLFileUtils fileSizeByPath:self.localURL];
+        self.uploadSize =               0;
         self.progress =                 0;
         self.progressType =             ZXLFileUploadProgressStartUpload;
         self.uploadResult =             ZXLFileUploadloading;
@@ -171,137 +162,43 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
 }
 
 -(void)dealloc{
-    if (_timer) {
-        [_timer invalidate];
-        _timer = nil;
-    }
-    
-    self.compressSession = nil;
+
 }
 
--(void)waitcomprssResult{
-    //检测同一文件是否有压缩成功过
-    ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.identifier];
-    if (successComprssFileInfo) {
-        if (_timer) {
-            [_timer invalidate];
-            _timer = nil;
-        }
-        self.comprssSuccess = YES;
-        self.uploadSize = successComprssFileInfo.uploadSize;
-        if (self.comprssProgressCallback) {
-            self.comprssProgressCallback(1);
-        }
-        if (self.comprssCallback) {
-          self.comprssCallback(YES);
-        }
-    }
-    
-    AVAssetExportSession * progressComprssSession = [[ZXLUploadFileResultCenter shareUploadResultCenter] getAVAssetExportSession:self.identifier];
-    if (progressComprssSession && self.comprssProgressCallback) {
-        self.comprssProgressCallback(progressComprssSession.progress);
-    }
-}
-
--(void)videoCompress:(void (^)(CGFloat percent ))progress complete:(void (^)(BOOL bResult ))completed{
+-(void)videoCompress:(void (^)(BOOL bResult ))completed{
     //非视频文件直接返回
     if (self.fileType != ZXLFileTypeVideo) {
-        
-        if (progress) {
-            progress(1);
-        }
-
         if (completed) {
             completed(NO);
         }
         return;
     }
     
+    self.progressType = ZXLFileUploadProgressTranscoding;
     //检测同一文件是否有压缩成功过
     ZXLFileInfoModel * successComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssSuccessFileInfo:self.identifier];
     if (successComprssFileInfo) {
         self.comprssSuccess = YES;
         self.uploadSize = successComprssFileInfo.uploadSize;
-        if (progress) {
-            progress(1);
-        }
-        
         if (completed) {
            completed(YES);
         }
         return;
     }
     
-    //有视频文件正在压缩还上传的地方等待视频压缩完成
-    ZXLFileInfoModel * progressComprssFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkComprssProgressFileInfo:self.identifier];
-    if (progressComprssFileInfo) {
-        self.progressType = ZXLFileUploadProgressTranscoding;
-        self.comprssCallback = completed;
-        self.comprssProgressCallback = progress;
-        if (_timer) {
-            [_timer invalidate];
-            _timer = nil;
-        }
-        
-        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(waitcomprssResult) userInfo:nil repeats:YES];
-        return;
-    }
-    
     typeof(self) __weak weakSelf = self;
-    if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册
-        
-        self.comprssProgressCallback = progress;
-        __block PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
-        [self getVideoOutputPathWithAsset:asset completion:^(NSString *outputPath, NSString *error) {
-            if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
-                weakSelf.comprssSuccess = YES;
-                weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
-                [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
-                
-                if (progress) {
-                    progress(1);
-                }
-                
-                if (completed) {
-                    completed(YES);
-                }
-            }else{
-                //文件信息错误
-                [weakSelf setUploadResultError:ZXLFileUploadFileError];
-                
-                if (progress) {
-                    progress(1);
-                }
-                
-                if (completed) {
-                    completed(NO);
-                }
-            }
-        }];
-        
-    }else//本地
-    {
-        self.localURL = [ZXLDocumentUtils takePhotoVideoURL:self.localURL];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:self.localURL]) {
-            self.comprssProgressCallback = progress;
-            AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:self.localURL]];
-            [self startExportVideoWithVideoAsset:asset completion:^(NSString *outputPath, NSString *error) {
+    [self getVideoOutputAVURLAsset:^(AVURLAsset *asset) {
+        if (asset) {
+            [[ZXLCompressManager manager] videoAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
                 if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
                     weakSelf.comprssSuccess = YES;
-                    weakSelf.uploadSize = [ZXLFileUtils fileSizeByPath:outputPath];
                     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
-                    if (progress) {
-                        progress(1);
-                    }
-                    
                     if (completed) {
                         completed(YES);
                     }
                 }else{
+                    //文件信息错误
                     [weakSelf setUploadResultError:ZXLFileUploadFileError];
-                    if (progress) {
-                        progress(1);
-                    }
                     if (completed) {
                         completed(NO);
                     }
@@ -309,126 +206,42 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
             }];
         }else{
             [weakSelf setUploadResultError:ZXLFileUploadFileError];
-            if (progress) {
-                progress(1);
-            }
             if (completed) {
                 completed(NO);
             }
         }
-    }
+    }];
 }
 
 /**
- 导出相册视频
- 
- @param asset 相册索引
- @param completion 导出结果
+ 导出视频的AVURLAsset 进行压缩
+
+ @param completion 返回结果
  */
-- (void)getVideoOutputPathWithAsset:(id)asset  completion:(void (^)(NSString *outputPath,NSString *error))completion {
-    if ([asset isKindOfClass:[PHAsset class]]) {
+-(void)getVideoOutputAVURLAsset:(void (^)(AVURLAsset * asset))completion{
+    if (ZXLISNSStringValid(self.assetLocalIdentifier)) {
+        __block PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
         PHVideoRequestOptions* options = [[PHVideoRequestOptions alloc] init];
         options.version = PHVideoRequestOptionsVersionOriginal;
         options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
         options.networkAccessAllowed = YES;
         [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset* avasset, AVAudioMix* audioMix, NSDictionary* info){
             AVURLAsset *videoAsset = (AVURLAsset*)avasset;
-            [self startExportVideoWithVideoAsset:videoAsset completion:completion];
-        }];
-    } else if ([asset isKindOfClass:[ALAsset class]]) {
-        NSURL *videoURL = [asset valueForProperty:ALAssetPropertyAssetURL]; // ALAssetPropertyURLs
-        AVURLAsset *videoAsset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
-        [self startExportVideoWithVideoAsset:videoAsset completion:completion];
-    }
-}
-
-/**
- 压缩导出视频为MP4
- 
- @param videoAsset 视频地址
- @param completion 导出结果
- */
-- (void)startExportVideoWithVideoAsset:(AVURLAsset *)videoAsset completion:(void (^)(NSString *outputPath,NSString *error))completion {
-    // Find compatible presets by video asset.
-    NSArray *presets = [AVAssetExportSession exportPresetsCompatibleWithAsset:videoAsset];
-    
-    if ([presets containsObject:AVAssetExportPreset640x480]) {
-        //转码中
-        self.progressType = ZXLFileUploadProgressTranscoding;
-        
-        AVAssetExportSession *session = [[AVAssetExportSession alloc]initWithAsset:videoAsset presetName:AVAssetExportPreset640x480];
-        
-        __block NSString * videoName = [self uploadKey];
-        __block NSString *resultPath = FILE_Video_PATH(videoName);
-        session.outputURL = [NSURL fileURLWithPath:resultPath];
-        
-        // Optimize for network use.
-        session.shouldOptimizeForNetworkUse = true;
-        NSArray *supportedTypeArray = session.supportedFileTypes;
-        if ([supportedTypeArray containsObject:AVFileTypeMPEG4]) {
-            session.outputFileType = AVFileTypeMPEG4;
-        } else if (supportedTypeArray.count == 0) {
-            completion(@"",@"视频类型暂不支持导出");
-            return;
-        } else {
-            session.outputFileType = [supportedTypeArray objectAtIndex:0];
-        }
-        
-        if ([[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:resultPath error:nil];
-        }
-        
-        AVMutableVideoComposition *videoComposition = [ZXLVideoUtils fixedCompositionWithAsset:videoAsset];
-        if (videoComposition.renderSize.width) {
-            // 修正视频转向
-            session.videoComposition = videoComposition;
-        }
-        
-        // Begin to export video to the output path asynchronously.
-        [session exportAsynchronouslyWithCompletionHandler:^(void) {
-            NSString *errorStr = @"";
-            switch (session.status) {
-                case AVAssetExportSessionStatusUnknown:
-                    errorStr = @"AVAssetExportSessionStatusUnknown";break;
-                case AVAssetExportSessionStatusWaiting:
-                    errorStr = @"AVAssetExportSessionStatusWaiting"; break;
-                case AVAssetExportSessionStatusExporting:
-                    errorStr = @"AVAssetExportSessionStatusExporting"; break;
-                case AVAssetExportSessionStatusCompleted:
-                    errorStr = @""; break;
-                case AVAssetExportSessionStatusFailed:
-                    errorStr = @"AVAssetExportSessionStatusFailed"; break;
-                default: break;
+            if (completion) {
+                completion(videoAsset);
             }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    if (ZXLISNSStringValid(errorStr)) {
-                        completion(@"",errorStr);
-                    }else{
-                        completion(resultPath,@"");
-                    }
-                }
-            });
         }];
-        self.compressSession = session;
-        [self.compressSession addObserver:self forKeyPath:@"progress" options:NSKeyValueObservingOptionNew context:nil];
-        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssProgress:self ExportSession:session];
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context{
-    if (object == self.compressSession && [keyPath isEqualToString:@"progress"]) {
-        if (self.compressSession.progress < 1) {
-            if (self.comprssProgressCallback) {
-                self.comprssProgressCallback(self.compressSession.progress);
+    }else{
+        self.localURL = [ZXLDocumentUtils takePhotoVideoURL:self.localURL];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:self.localURL]) {
+            AVURLAsset *videoAsset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:self.localURL]];
+            if (completion) {
+                completion(videoAsset);
             }
         }else{
-            if (self.comprssProgressCallback) {
-                self.comprssProgressCallback(1);
-                self.comprssProgressCallback = nil;
+            if (completion) {
+                completion(nil);
             }
-            [self.compressSession removeObserver:self forKeyPath:@"progress"];
         }
     }
 }
@@ -447,6 +260,9 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
     }else{
         localUploadURL = [ZXLDocumentUtils localFilePath:[self.localURL lastPathComponent] fileType:self.fileType];
     }
+    
+    self.uploadSize =               [ZXLFileUtils fileSizeByPath:localUploadURL];
+    
     return localUploadURL;
 }
 
@@ -472,6 +288,17 @@ typedef void (^ZXLFileComprssProgressCallback)(CGFloat percent);
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadError:self];
 }
 
+-(void)setUploadStateWithTheSame:(ZXLFileInfoModel *)sameFileInfo{
+    if ([self.identifier isEqualToString:sameFileInfo.identifier]) {
+        self.uploadResult = sameFileInfo.uploadResult;
+        self.progress = sameFileInfo.progress;
+        self.progressType =  sameFileInfo.progressType;
+        self.localURL =  sameFileInfo.localURL;
+        self.uploadSize = MAX(self.uploadSize, sameFileInfo.uploadSize);
+        self.comprssSuccess = sameFileInfo.comprssSuccess;
+        self.fileTime = sameFileInfo.fileTime;
+    }
+}
 
 -(void)resetFileInfo{
     self.progress = 0;

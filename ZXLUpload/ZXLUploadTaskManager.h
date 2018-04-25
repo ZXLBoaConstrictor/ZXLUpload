@@ -132,7 +132,7 @@ typedef void (^ZXLUploadTaskResponseCallback)(ZXLTaskInfoModel *taskInfo);
 
 
 /**
- 任务中心对文件 增、删操作
+ 任务中心对文件 增、删操作（注：只有任务未开始上传或者上传失败的情况下才能增、删）
 
  @param fileInfo 文件信息
  @param identifier 任务唯一标识

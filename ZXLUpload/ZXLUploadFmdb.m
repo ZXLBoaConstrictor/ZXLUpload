@@ -31,6 +31,7 @@
 @"unifiedResponese"                     @" BOOL DEFAULT FALSE, "            \
 @"completeResponese"                    @" BOOL DEFAULT FALSE, "            \
 @"storageLocal"                         @" BOOL DEFAULT FALSE, "            \
+@"uploading"                            @" BOOL DEFAULT FALSE, "            \
 @"uploadFiles"                          @" TEXT NOT NULL "                 \
 @")"
 
@@ -41,8 +42,9 @@
 @"unifiedResponese"                                         @", "           \
 @"completeResponese"                                        @", "           \
 @"storageLocal"                                             @", "           \
+@"uploading"                                                @", "           \
 @"uploadFiles"                                                              \
-@") VALUES(?, ?, ?, ?, ?, ?)"
+@") VALUES(?, ?, ?, ?, ?, ?, ?)"
 
 #define ZXLUploadTaskInfoTableDeleteSQL                                     \
 @"DELETE FROM " ZXLUploadTaskInfoTableName                                  \
@@ -180,6 +182,7 @@
                            @(taskModel.unifiedResponese),
                            @(taskModel.completeResponese),
                            @(taskModel.storageLocal),
+                           @(taskModel.uploading),
                            [taskModel filesJSONString]];
     dispatch_async(self.sqliteQueue, ^{
         [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
@@ -321,6 +324,7 @@
             [taskDictionary setObject:@([resultSet boolForColumn:@"unifiedResponese"]) forKey:@"unifiedResponese"];
             [taskDictionary setObject:@([resultSet boolForColumn:@"completeResponese"]) forKey:@"completeResponese"];
             [taskDictionary setObject:@([resultSet boolForColumn:@"storageLocal"]) forKey:@"storageLocal"];
+            [taskDictionary setObject:@([resultSet boolForColumn:@"uploading"]) forKey:@"uploading"];
             NSMutableArray *files = [NSMutableArray array];
             NSArray *jsonFiles = [[resultSet stringForColumn:@"uploadFiles"] array];
             for (NSInteger i = 0;i < jsonFiles.count;i++) {

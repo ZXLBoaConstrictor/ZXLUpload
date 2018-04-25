@@ -8,6 +8,7 @@
 
 #import "ZXLCompressManager.h"
 #import "ZXLCompressOperation.h"
+#import "ZXLUploadDefine.h"
 
 @interface ZXLCompressManager ()
 @property (nonatomic, strong) NSOperationQueue *compressQueue;
@@ -29,21 +30,22 @@
 
 -(void)videoAsset:(AVURLAsset *)asset
    fileIdentifier:(NSString *)fileId
- progressCallback:(ZXLComprssProgressCallback)progressCallback
-         Callback:(ZXLComprssCallback)callback{
+         callback:(ZXLComprssCallback)callback{
     __weak typeof(self) weakSelf = self;
     dispatch_async(self.addOperationSerialQueue, ^{
         ZXLCompressOperation * operation = [weakSelf isCompressingFile:fileId];
         if (operation) {
-            [operation addComprssProgressCallback:progressCallback callback:callback];
+            [operation addComprssCallback:callback];
         }else{
-            operation = [[ZXLCompressOperation alloc] initWithVideoAsset:asset fileIdentifier:fileId progressCallback:progressCallback Callback:callback];
+            operation = [[ZXLCompressOperation alloc] initWithVideoAsset:asset fileIdentifier:fileId callback:callback];
             [weakSelf.compressQueue addOperation:operation];
         }
     });
 }
 
 - (ZXLCompressOperation *)isCompressingFile:(NSString *)fileIdentifier {
+    if (!ZXLISNSStringValid(fileIdentifier)) return nil;
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier = %@", fileIdentifier];
     NSArray *filterResult = [self.compressQueue.operations filteredArrayUsingPredicate:predicate];
     if (filterResult.count > 0) {
@@ -58,5 +60,26 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.compressQueue cancelAllOperations];
     });
+}
+
+-(void)cancelCompressOperationForIdentifier:(NSString *)fileIdentifier{
+    ZXLCompressOperation * operation = [self isCompressingFile:fileIdentifier];
+    if (operation && ![operation isCancelled]) {
+        [operation cancel];
+    }
+}
+
+#pragma mark - check
+-(BOOL)checkFileCompressing:(NSString *)fileIdentifier{
+    return ([self isCompressingFile:fileIdentifier] != nil);
+}
+
+#pragma mark - compressprogress
+-(float)compressProgressForIdentifier:(NSString *)fileIdentifier{
+    ZXLCompressOperation * operation = [self isCompressingFile:fileIdentifier];
+    if (operation) {
+        return [operation compressProgress];
+    }
+    return 0;
 }
 @end

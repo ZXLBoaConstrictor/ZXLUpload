@@ -14,6 +14,7 @@
 #import "ZXLUploadTaskManager.h"
 #import "ZXLUploadTaskManager.h"
 #import "ZXLUploadFmdb.h"
+#import "ZXLCompressManager.h"
 
 @interface ZXLUploadFileResultCenter()
 
@@ -39,16 +40,6 @@
 @property(nonatomic,strong)ZXLSyncMutableDictionary * uploadInfo;
 
 /**
- 压缩过程中的文件信息
- */
-@property(nonatomic,strong)ZXLSyncMutableDictionary * comprssInfo;
-
-/**
- 文件压缩session
- */
-@property(nonatomic,strong)ZXLSyncMutableDictionary * assetSessionDict;
-
-/**
   上传 session 任务
  */
 @property(nonatomic,strong)ZXLSyncMutableDictionary * sessionRequestDict;
@@ -72,8 +63,6 @@
          _uploadErrorInfo = [[ZXLSyncMutableDictionary alloc] init];
          _comprssResultInfo = [[ZXLSyncMutableDictionary alloc] init];
          _uploadInfo = [[ZXLSyncMutableDictionary alloc] init];
-         _comprssInfo = [[ZXLSyncMutableDictionary alloc] init];
-         _assetSessionDict = [[ZXLSyncMutableDictionary alloc] init];
          _sessionRequestDict = [[ZXLSyncMutableDictionary alloc] init];
          
          //读取本地上传结果文件信息
@@ -109,9 +98,7 @@
     [_uploadResultInfo removeAllObjects];
     [_comprssResultInfo removeAllObjects];
     [_uploadInfo removeAllObjects];
-    [_comprssInfo removeAllObjects];
     [_uploadErrorInfo removeAllObjects];
-    [_assetSessionDict removeAllObjects];
     [_sessionRequestDict removeAllObjects];
     [[ZXLUploadFmdb manager] clearUploadSuccessFileResultInfo];
     [[ZXLUploadFmdb manager] clearCompressFileInfo];
@@ -132,8 +119,6 @@
         [[ZXLUploadFmdb manager] insertCompressFileInfo:fileInfo];
         //存储成功记录
         [_comprssResultInfo setObject:[ZXLFileInfoModel dictionary:[fileInfo keyValues]] forKey:fileInfo.identifier];
-        //压缩成功后把压缩过程存的文件信息删除
-        [self removeFileAVAssetExportSession:fileInfo.identifier];
     }
 }
 
@@ -183,31 +168,6 @@
         [self removeUploadRequest:fileInfo.identifier];
     }
 }
-
-/**
- 保存文件压缩过程信息
- 
- @param fileInfo 文件信息
- */
--(void)saveComprssProgress:(ZXLFileInfoModel *)fileInfo ExportSession:(AVAssetExportSession *)session{
-    if (!fileInfo || !session ||fileInfo.fileType != ZXLFileTypeVideo) return;
-    
-    ZXLFileInfoModel *tempFileInfo = [_comprssInfo objectForKey:fileInfo.identifier];
-    if (!tempFileInfo) {
-        tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
-        [_comprssInfo setObject:tempFileInfo forKey:tempFileInfo.identifier];
-        
-        //文件开始压缩的时候先删除出错历史
-        [_uploadErrorInfo removeObjectForKey:fileInfo.identifier];
-        //保存session
-        [self addFileAVAssetExportSession:session with:fileInfo.identifier];
-        
-    }else{
-        tempFileInfo.progress = fileInfo.progress;
-        tempFileInfo.progressType = ZXLFileUploadProgressTranscoding;
-    }
-}
-
 
 /**
  保存文件上传过程信息
@@ -263,18 +223,6 @@
 }
 
 /**
- 检查文件是否正在压缩
- 
- @param identifier 文件identifier唯一值
- @return 压缩中的文件信息
- */
--(ZXLFileInfoModel *)checkComprssProgressFileInfo:(NSString *)identifier{
-    if (!ZXLISNSStringValid(identifier))  return nil;
-    
-    return [_comprssInfo objectForKey:identifier];
-}
-
-/**
  检查文件是否正在上传
  
  @param identifier 文件identifier唯一值
@@ -296,47 +244,6 @@
     if (!ZXLISNSStringValid(identifier))  return nil;
     
     return [_uploadErrorInfo objectForKey:identifier];
-}
-
-
--(void)addFileAVAssetExportSession:(AVAssetExportSession *)session with:(NSString *)identifier{
-    if (session && ZXLISNSStringValid(identifier)) {
-        [_assetSessionDict setObject:session forKey:identifier];
-    }
-}
-
--(void)removeFileAVAssetExportSession:(NSString *)identifier{
-    if (ZXLISNSStringValid(identifier)) {
-        AVAssetExportSession *session = [_assetSessionDict objectForKey:identifier];
-        if (session) {
-            [session cancelExport];
-            [_assetSessionDict removeObjectForKey:identifier];
-        }
-        
-        ZXLFileInfoModel *fileInfo = [_comprssInfo objectForKey:identifier];
-        if (fileInfo) {
-            //删除压缩过没有压缩完的视频,且没有成功记录的视频
-            if (![_comprssResultInfo objectForKey:identifier]) {
-                NSString * videoName = [fileInfo uploadKey];
-                NSString *strComprssUrl = FILE_Video_PATH(videoName);
-                if ([[NSFileManager defaultManager] fileExistsAtPath:strComprssUrl]) {
-                    BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:strComprssUrl error:nil];
-                    if (bRemove) {
-                        //                 NSLog(@"删除没有压缩完成的视频%@",strComprssUrl);
-                    }
-                }
-            }
-            
-            [_comprssInfo removeObjectForKey:identifier];
-        }
-    }
-}
-
--(AVAssetExportSession *)getAVAssetExportSession:(NSString *)identifier{
-    if (ZXLISNSStringValid(identifier)) {
-        return [_assetSessionDict objectForKey:identifier];
-    }
-    return nil;
 }
 
 /**
@@ -377,15 +284,12 @@
  @param identifier 文件identifier
  */
 -(void)removeFileInfoUpload:(NSString *)identifier{
-    //删除正在压缩记录
-    [self removeFileAVAssetExportSession:identifier];
-    
+    //删除压缩
+    [[ZXLCompressManager manager] cancelCompressOperationForIdentifier:identifier];
     //删除上传请求
     [self removeUploadRequest:identifier];
-    
     //删除出错历史
     [_uploadErrorInfo removeObjectForKey:identifier];
-    
 }
 
 

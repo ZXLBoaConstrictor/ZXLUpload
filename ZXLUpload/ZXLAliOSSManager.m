@@ -14,8 +14,7 @@
 
 @implementation ZXLAliOSSManager
 
-+(instancetype)manager
-{
++(instancetype)manager{
     static dispatch_once_t pred = 0;
     __strong static ZXLAliOSSManager * _sharedObject = nil;
     dispatch_once(&pred, ^{
@@ -57,8 +56,7 @@
 -(OSSRequest *)uploadFile:(NSString *)objectKey
             localFilePath:(NSString *)filePath
                  progress:(void (^)(float percent))progress
-                   result:(void (^)(OSSTask *task))result
-{
+                   result:(void (^)(OSSTask *task))result{
     OSSResumableUploadRequest* resumableRequest = [[OSSResumableUploadRequest alloc] init];
     resumableRequest.bucketName = self.bucketName;
     resumableRequest.objectKey = objectKey;
@@ -99,8 +97,7 @@
 -(OSSRequest *)bigFileUploadFile:(NSString *)objectKey
                    localFilePath:(NSString *)filePath
                         progress:(void (^)(float percent))progress
-                          result:(void (^)(OSSTask *task))result
-{
+                          result:(void (^)(OSSTask *task))result{
     OSSResumableUploadRequest* resumableRequest = [[OSSResumableUploadRequest alloc] init];
     resumableRequest.bucketName = [self bucketName];
     resumableRequest.objectKey = objectKey;
@@ -142,8 +139,7 @@
 -(OSSRequest *)imageUploadFile:(UIImage *)image
                      objectKey:(NSString *)objectKey
                       progress:(void (^)(float percent))progress
-                        result:(void (^)(OSSTask *task))result
-{
+                        result:(void (^)(OSSTask *task))result{
     
     OSSPutObjectRequest * put = [[OSSPutObjectRequest alloc] init];
     
