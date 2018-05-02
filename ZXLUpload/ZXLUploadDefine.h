@@ -40,16 +40,18 @@
 
 /**
  文件类型（目前先支持 图片和视频）
- - ZXLFileTypeFile: 文件
+ - ZXLFileTypeNoFile: 未知文件
  - ZXLFileTypeImage: 图片
  - ZXLFileTypeVoice: 语音
  - ZXLFileTypeVideo: 视频
+ - ZXLFileTypeFile: 文件
  */
 typedef NS_ENUM(NSUInteger, ZXLFileType){
-    ZXLFileTypeFile,
+    ZXLFileTypeNoFile,
     ZXLFileTypeImage,
     ZXLFileTypeVoice,
     ZXLFileTypeVideo,
+    ZXLFileTypeFile
 } ;
 
 typedef NS_ENUM(NSUInteger, ZXLFileFromType){

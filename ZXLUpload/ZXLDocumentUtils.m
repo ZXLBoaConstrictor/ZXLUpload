@@ -44,7 +44,7 @@
 }
 
 + (NSString *)saveImageByName:(UIImage *)image{
-    NSString *fileName = [ZXLFileUtils fileNameWithidentifier:[ZXLFileUtils imageMD5:image] fileType:ZXLFileTypeImage];
+    NSString *fileName = [ZXLFileUtils fileNameWithidentifier:[ZXLFileUtils imageMD5:image] fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeImage]];
     return [ZXLDocumentUtils saveImage:image name:fileName];
 }
 

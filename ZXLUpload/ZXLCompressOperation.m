@@ -54,22 +54,26 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 + (void)compressThreadEntryPoint:(id)__unused object {
     @autoreleasepool {
         [[NSThread currentThread] setName:@"ZXLCompressAsyncOperation"];
-        
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
         [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
         [runLoop run];
     }
 }
+static NSThread *_compressThread = nil;
+static dispatch_once_t oncePredicate;
 
 + (NSThread *)operationThread {
-    static NSThread *_compressThread = nil;
-    static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _compressThread = [[NSThread alloc] initWithTarget:self selector:@selector(compressThreadEntryPoint:) object:nil];
         [_compressThread start];
     });
-    
     return _compressThread;
+}
+
++(void)operationThreadAttemptDealloc{
+    oncePredicate = 0;
+    [_compressThread cancel];
+    _compressThread = nil;
 }
 
 - (void)addComprssCallback:(ZXLComprssCallback)callback{
@@ -84,20 +88,19 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     if (!self.isCancelled && !self.isFinished) {
         [super cancel];
         [self KVONotificationWithNotiKey:@"isCancelled" state:&_cancelled stateValue:YES];
-        if (self.isExecuting) {
-            [self runSelector:@selector(cancelCompress)];
-        }
+        
+        [self runSelector:@selector(cancelCompress)];
     }
     [self.lock unlock];
 }
 
 - (void)cancelCompress {
-    if (self.compressSession.status == AVAssetExportSessionStatusWaiting||
-        self.compressSession.status == AVAssetExportSessionStatusExporting) {
+    if (self.isExecuting && (self.compressSession.status == AVAssetExportSessionStatusWaiting||
+        self.compressSession.status == AVAssetExportSessionStatusExporting)) {
         [self.compressSession cancelExport];
         
         //中断压缩删除压缩未完成的文件
-        NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileType:ZXLFileTypeVideo];
+        NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
         NSString *resultPath = FILE_Video_PATH(videoName);
         if (ZXLISNSStringValid(resultPath) && [[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
             BOOL bRemove = [[NSFileManager defaultManager] removeItemAtPath:resultPath error:nil];
@@ -108,6 +111,7 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     }
     
     [self.comprssCallback removeAllObjects];
+    [self finish];
 }
 
 - (void)start {
@@ -179,7 +183,7 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 
 //视频压缩配置
 -(void)assetExportSessionConfig{
-    __block NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileType:ZXLFileTypeVideo];
+    __block NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
     __block NSString *resultPath = FILE_Video_PATH(videoName);
     self.compressSession.outputURL = [NSURL fileURLWithPath:resultPath];
     self.compressSession.shouldOptimizeForNetworkUse = true;

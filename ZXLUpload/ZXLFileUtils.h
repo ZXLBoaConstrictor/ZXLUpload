@@ -21,13 +21,20 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  */
 +(NSString *)fileExtension:(ZXLFileType)fileType;
 
+
+/**
+ 根据文件路径返回文件类型（简单做了音频MP3、视频MP4、图片的判断）
+
+ @param filePath 文件路径
+ @return 文件类型
+ */
 +(ZXLFileType)fileTypeByURL:(NSString *)filePath;
 
 +(NSInteger)fileSizeByPath:(NSString *)localURL;
 
 +(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath;
 
-+(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType;
++(NSString *)fileNameWithidentifier:(NSString *)identifier fileExtension:(NSString *)extension;
 
 +(NSString *)serverAddressFileURL:(NSString *)fileKey;
 /**

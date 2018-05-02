@@ -21,11 +21,24 @@
     __strong static ZXLCompressManager * _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[ZXLCompressManager alloc] init];
-        _sharedObject.compressQueue = [[NSOperationQueue alloc] init];
-        _sharedObject.compressQueue.maxConcurrentOperationCount = 3;//控制压缩视频数量没有实际真实测试过暂定为3个吧
-        _sharedObject.addOperationSerialQueue = dispatch_queue_create("com.ZXLUpload.ZXLCompressManagerAddOperationSerializeQueue", DISPATCH_QUEUE_SERIAL);
     });
     return _sharedObject;
+}
+
+-(instancetype)init{
+    if (self = [super init]) {
+        _compressQueue = [[NSOperationQueue alloc] init];
+        _compressQueue.maxConcurrentOperationCount = 3;//控制压缩视频数量没有实际真实测试过暂定为3个吧
+        [_compressQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
+        _addOperationSerialQueue = dispatch_queue_create("com.ZXLUpload.ZXLCompressManagerAddOperationSerializeQueue", DISPATCH_QUEUE_SERIAL);
+    }
+    return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if (object ==self.compressQueue && self.compressQueue.operationCount == 0) {
+        [ZXLCompressOperation operationThreadAttemptDealloc];
+    }
 }
 
 -(void)videoAsset:(AVURLAsset *)asset

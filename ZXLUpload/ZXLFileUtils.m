@@ -31,16 +31,26 @@
 }
 
 +(ZXLFileType)fileTypeByURL:(NSString *)filePath{
+    if (!ZXLISNSStringValid(filePath)) return ZXLFileTypeNoFile;
+    
+    NSString *fileExtension = [filePath pathExtension];
+    if (!ZXLISNSStringValid(fileExtension))  return ZXLFileTypeNoFile;
+    
+    //只是加了些常用的文件类型判断，此处可以加更多
+    NSString *imageFormat = @"jpg,jpeg,png";
+    NSString *videoFormat = @"mp4,mov";
+    NSString *voiceFormat = @"mp3,caf,wave";
+    
     ZXLFileType fileType = ZXLFileTypeFile;
-    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeImage]]) {
+    if ([imageFormat rangeOfString:fileExtension].location != NSNotFound) {
         fileType = ZXLFileTypeImage;
     }
     
-    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]]) {
+    if ([videoFormat rangeOfString:fileExtension].location != NSNotFound) {
         fileType = ZXLFileTypeVideo;
     }
     
-    if ([filePath hasSuffix:[ZXLFileUtils fileExtension:ZXLFileTypeVoice]]) {
+    if ([voiceFormat rangeOfString:fileExtension].location != NSNotFound) {
         fileType = ZXLFileTypeVoice;
     }
     
@@ -154,8 +164,8 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
              ] lowercaseString];
 }
 
-+(NSString *)fileNameWithidentifier:(NSString *)identifier fileType:(ZXLFileType)fileType{
-    return [NSString stringWithFormat:@"%@%@.%@",ZXLFilePrefixion,identifier,[ZXLFileUtils fileExtension:fileType]];
++(NSString *)fileNameWithidentifier:(NSString *)identifier fileExtension:(NSString *)extension{
+    return [NSString stringWithFormat:@"%@%@.%@",ZXLFilePrefixion,identifier,extension];
 }
 
 +(UIImage *)localVideoThumbnail:(NSString *)path{

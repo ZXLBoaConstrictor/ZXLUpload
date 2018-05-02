@@ -124,8 +124,7 @@
             self.fileType =             ZXLFileTypeVideo;
         }else{
             self.fileType =             [ZXLFileUtils fileTypeByURL:fileURL];
-            //路径筛查检测
-            self.localURL =             [ZXLDocumentUtils localFilePath:[fileURL lastPathComponent] fileType:self.fileType];
+            self.localURL =             fileURL;
         }
         
         self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
@@ -267,7 +266,17 @@
 }
 
 -(NSString *)uploadKey{
-    return [ZXLFileUtils fileNameWithidentifier:self.identifier fileType:self.fileType];
+    
+    NSString * fileKey = @"";
+    if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册文件类型固定
+        fileKey =  [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:self.fileType]];
+    }
+    
+    if (!ZXLISNSStringValid(fileKey) && ZXLISNSStringValid(self.localURL)) {
+        fileKey = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[self.localURL pathExtension]];
+    }
+    
+    return fileKey;
 }
 
 -(void)setUploadResultSuccess{
