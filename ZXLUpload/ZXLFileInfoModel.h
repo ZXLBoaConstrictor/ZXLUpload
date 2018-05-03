@@ -13,8 +13,13 @@ typedef NS_ENUM(NSUInteger, ZXLFileUploadType);
 typedef NS_ENUM(NSUInteger, ZXLFileType);
 
 @interface ZXLFileInfoModel : NSObject
-//文件信息
-@property (nonatomic,copy)NSString  *                      identifier;//唯一值
+
+/**
+ 文件信息的唯一值
+ 1.相册文件:用文件的assetLocalIdentifier的base64(base64EncodedString)作为identifier
+ 2.路径文件:用文件的信息的MD5值（fileMd5HashCreateWithPath）作为identifier
+ */
+@property (nonatomic,copy)NSString  *                      identifier;
 
 /**
  文件本地路径(非绝对路径，注意IOS在App进程重启的时候路径都会变掉)

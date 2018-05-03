@@ -88,10 +88,10 @@ static dispatch_once_t oncePredicate;
     if (!self.isCancelled && !self.isFinished) {
         [super cancel];
         [self KVONotificationWithNotiKey:@"isCancelled" state:&_cancelled stateValue:YES];
-        
         [self runSelector:@selector(cancelCompress)];
     }
     [self.lock unlock];
+    [self finish];
 }
 
 - (void)cancelCompress {
@@ -111,7 +111,6 @@ static dispatch_once_t oncePredicate;
     }
     
     [self.comprssCallback removeAllObjects];
-    [self finish];
 }
 
 - (void)start {
