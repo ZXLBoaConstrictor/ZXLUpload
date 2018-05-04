@@ -8,6 +8,11 @@
 
 #import "ZXLAliOSSManager.h"
 #import <AliyunOSSiOS/AliyunOSSiOS.h>
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
 @interface ZXLAliOSSManager()
 @property (nonatomic,strong)OSSClient *client;
 @end
@@ -24,21 +29,19 @@
     return _sharedObject;
 }
 
-/**
- *    @brief    获取FederationToken 外部利用扩展实现 getFederationToken
- *
- *    @return OSSFederationToken
- */
-- (OSSFederationToken *) getFederationToken {
- 
-    return nil;
-}
-
--(NSString *)endPoint{
+-(NSString *)getEndPoint{
+    SEL selEndPoint = NSSelectorFromString(@"endPoint");
+    if ([self respondsToSelector:selEndPoint]) {
+        return [self performSelector:selEndPoint];
+    }
     return @"";
 }
 
--(NSString *)bucketName{
+-(NSString *)getBucketName{
+    SEL selBucketName = NSSelectorFromString(@"endPoint");
+    if ([self respondsToSelector:selBucketName]) {
+        return [self performSelector:selBucketName];
+    }
     return @"";
 }
 
@@ -46,11 +49,18 @@
  *    @brief    初始化获取OSSClient
  */
 - (void)ossInit {
+
     id<OSSCredentialProvider> credential = [[OSSFederationCredentialProvider alloc] initWithFederationTokenGetter:^OSSFederationToken * {
-        return [self getFederationToken];
+        //获取FederationToken 外部利用扩展实现 getFederationToken
+        SEL selToken = NSSelectorFromString(@"getFederationToken");
+        if ([self respondsToSelector:selToken]) {
+            return [self performSelector:selToken];
+        }else{
+            return nil;
+        }
     }];
     
-    _client = [[OSSClient alloc] initWithEndpoint:[self endPoint] credentialProvider:credential];
+    _client = [[OSSClient alloc] initWithEndpoint:[self getEndPoint] credentialProvider:credential];
 }
 
 -(OSSRequest *)uploadFile:(NSString *)objectKey
@@ -58,7 +68,7 @@
                  progress:(void (^)(float percent))progress
                    result:(void (^)(OSSTask *task))result{
     OSSResumableUploadRequest* resumableRequest = [[OSSResumableUploadRequest alloc] init];
-    resumableRequest.bucketName = self.bucketName;
+    resumableRequest.bucketName = [self getBucketName];
     resumableRequest.objectKey = objectKey;
     resumableRequest.uploadingFileURL = [NSURL fileURLWithPath:filePath];
     resumableRequest.partSize = 256 * 1024;//256K 分片上传
@@ -68,7 +78,7 @@
     };
     
     OSSInitMultipartUploadRequest * init = [[OSSInitMultipartUploadRequest alloc] init];
-    init.bucketName = [self bucketName];
+    init.bucketName = [self getBucketName];
     init.objectKey = objectKey;
     
     OSSTask * task = [_client multipartUploadInit:init];
@@ -99,7 +109,7 @@
                         progress:(void (^)(float percent))progress
                           result:(void (^)(OSSTask *task))result{
     OSSResumableUploadRequest* resumableRequest = [[OSSResumableUploadRequest alloc] init];
-    resumableRequest.bucketName = [self bucketName];
+    resumableRequest.bucketName = [self getBucketName];
     resumableRequest.objectKey = objectKey;
     resumableRequest.uploadingFileURL = [NSURL fileURLWithPath:filePath];
     resumableRequest.partSize = 256 * 1024;//256K 分片上传
@@ -110,7 +120,7 @@
     };
     
     OSSInitMultipartUploadRequest * init = [[OSSInitMultipartUploadRequest alloc] init];
-    init.bucketName = self.bucketName;
+    init.bucketName = [self getBucketName];
     init.objectKey = objectKey;
     
     OSSTask * task = [_client multipartUploadInit:init];
@@ -144,7 +154,7 @@
     OSSPutObjectRequest * put = [[OSSPutObjectRequest alloc] init];
     
     // required fields
-    put.bucketName = [self bucketName];
+    put.bucketName = [self getBucketName];
     put.objectKey = objectKey;
     put.uploadingData = UIImageJPEGRepresentation(image, 1.0);
     
@@ -165,5 +175,6 @@
     
     return put;
 }
-
 @end
+
+#pragma clang diagnostic pop

@@ -19,14 +19,12 @@
 }
 
 - (void)uploadTaskResponese:(ZXLTaskInfoModel *)taskInfo {
-    if ([self respondsToSelector:@selector(extensionUnifiedResponese:)]) {
-        [self extensionUnifiedResponese:taskInfo];
-    }
-}
-
--(void)extensionUnifiedResponese:(ZXLTaskInfoModel *)taskInfo{
-    if (taskInfo) {
-        
+    SEL selResponese = NSSelectorFromString(@"extensionUnifiedResponese:");
+    if ([self respondsToSelector:selResponese]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:selResponese withObject:taskInfo];
+#pragma clang diagnostic pop
     }
 }
 @end
