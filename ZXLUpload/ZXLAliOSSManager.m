@@ -38,7 +38,7 @@
 }
 
 -(NSString *)getBucketName{
-    SEL selBucketName = NSSelectorFromString(@"endPoint");
+    SEL selBucketName = NSSelectorFromString(@"bucketName");
     if ([self respondsToSelector:selBucketName]) {
         return [self performSelector:selBucketName];
     }

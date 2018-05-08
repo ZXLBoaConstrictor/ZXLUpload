@@ -273,7 +273,11 @@
     }
     
     if (!ZXLISNSStringValid(fileKey) && ZXLISNSStringValid(self.localURL)) {
-        fileKey = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[self.localURL pathExtension]];
+        if (self.fileType == ZXLFileTypeVideo) {//所有视频都会压缩成MP4
+            fileKey = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:self.fileType]];
+        }else{
+            fileKey = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[self.localURL pathExtension]];
+        }
     }
     
     return fileKey;

@@ -36,6 +36,8 @@
     NSString *fileExtension = [filePath pathExtension];
     if (!ZXLISNSStringValid(fileExtension))  return ZXLFileTypeNoFile;
     
+    fileExtension = [fileExtension lowercaseString];
+    
     //只是加了些常用的文件类型判断，此处可以加更多
     NSString *imageFormat = @"jpg,jpeg,png";
     NSString *videoFormat = @"mp4,mov";
