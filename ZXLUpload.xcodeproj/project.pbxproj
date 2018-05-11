@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		823033C220A536FA009343DC /* ZXLUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 823033C020A536FA009343DC /* ZXLUploadManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		823033C320A536FA009343DC /* ZXLUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 823033C120A536FA009343DC /* ZXLUploadManager.m */; };
 		82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82444F72208DAE3B009DC4B1 /* ZXLCompressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82444F70208DAE3B009DC4B1 /* ZXLCompressManager.m */; };
 		82444F75208DAE57009DC4B1 /* ZXLCompressOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F73208DAE57009DC4B1 /* ZXLCompressOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,14 +51,13 @@
 		82C8DFF3207DE465006AF4DC /* ZXLSyncMapTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C8DFEB207DE465006AF4DC /* ZXLSyncMapTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82C8DFF4207DE465006AF4DC /* ZXLUploadUnifiedResponese.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8DFEC207DE465006AF4DC /* ZXLUploadUnifiedResponese.m */; };
 		82C8DFF5207DE465006AF4DC /* ZXLSyncMutableDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C8DFED207DE465006AF4DC /* ZXLSyncMutableDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		82C8DFF8207DE5D8006AF4DC /* ZXLAliOSSManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C8DFF6207DE5D8006AF4DC /* ZXLAliOSSManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		82C8DFF9207DE5D8006AF4DC /* ZXLAliOSSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8DFF7207DE5D8006AF4DC /* ZXLAliOSSManager.m */; };
-		82C8DFFB207DE627006AF4DC /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */; };
 		82C8DFFD207DEC43006AF4DC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */; };
 		82C8DFFF207DEC4B006AF4DC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		823033C020A536FA009343DC /* ZXLUploadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadManager.h; sourceTree = "<group>"; };
+		823033C120A536FA009343DC /* ZXLUploadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadManager.m; sourceTree = "<group>"; };
 		82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLCompressManager.h; sourceTree = "<group>"; };
 		82444F70208DAE3B009DC4B1 /* ZXLCompressManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLCompressManager.m; sourceTree = "<group>"; };
 		82444F73208DAE57009DC4B1 /* ZXLCompressOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLCompressOperation.h; sourceTree = "<group>"; };
@@ -101,9 +102,6 @@
 		82C8DFEB207DE465006AF4DC /* ZXLSyncMapTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLSyncMapTable.h; sourceTree = "<group>"; };
 		82C8DFEC207DE465006AF4DC /* ZXLUploadUnifiedResponese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadUnifiedResponese.m; sourceTree = "<group>"; };
 		82C8DFED207DE465006AF4DC /* ZXLSyncMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLSyncMutableDictionary.h; sourceTree = "<group>"; };
-		82C8DFF6207DE5D8006AF4DC /* ZXLAliOSSManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLAliOSSManager.h; sourceTree = "<group>"; };
-		82C8DFF7207DE5D8006AF4DC /* ZXLAliOSSManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLAliOSSManager.m; sourceTree = "<group>"; };
-		82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunOSSiOS.framework; path = ZXLUpload/AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -115,7 +113,6 @@
 			files = (
 				82C8DFFF207DEC4B006AF4DC /* SystemConfiguration.framework in Frameworks */,
 				82C8DFFD207DEC43006AF4DC /* CoreTelephony.framework in Frameworks */,
-				82C8DFFB207DE627006AF4DC /* AliyunOSSiOS.framework in Frameworks */,
 				825B607B20898BD800DD88F0 /* FMDB.framework in Frameworks */,
 				829961C9204E95DE0040FF16 /* Photos.framework in Frameworks */,
 			);
@@ -180,8 +177,8 @@
 				82C8DFE8207DE465006AF4DC /* ZXLSyncMutableArray.m */,
 				82C8DFED207DE465006AF4DC /* ZXLSyncMutableDictionary.h */,
 				82C8DFEA207DE465006AF4DC /* ZXLSyncMutableDictionary.m */,
-				82C8DFF6207DE5D8006AF4DC /* ZXLAliOSSManager.h */,
-				82C8DFF7207DE5D8006AF4DC /* ZXLAliOSSManager.m */,
+				823033C020A536FA009343DC /* ZXLUploadManager.h */,
+				823033C120A536FA009343DC /* ZXLUploadManager.m */,
 				82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */,
 				82444F70208DAE3B009DC4B1 /* ZXLCompressManager.m */,
 				82444F73208DAE57009DC4B1 /* ZXLCompressOperation.h */,
@@ -197,7 +194,6 @@
 				825B607A20898BD800DD88F0 /* FMDB.framework */,
 				82C8DFFE207DEC4B006AF4DC /* SystemConfiguration.framework */,
 				82C8DFFC207DEC43006AF4DC /* CoreTelephony.framework */,
-				82C8DFFA207DE627006AF4DC /* AliyunOSSiOS.framework */,
 				829961C8204E95DE0040FF16 /* Photos.framework */,
 			);
 			name = Frameworks;
@@ -210,6 +206,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				823033C220A536FA009343DC /* ZXLUploadManager.h in Headers */,
 				824ABAD5208F1C7F00D99D8A /* ZXLReachability.h in Headers */,
 				82444F75208DAE57009DC4B1 /* ZXLCompressOperation.h in Headers */,
 				82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */,
@@ -231,7 +228,6 @@
 				82C8DFF3207DE465006AF4DC /* ZXLSyncMapTable.h in Headers */,
 				829961C5204E913B0040FF16 /* ZXLTimer.h in Headers */,
 				828504E4207E063200C754B0 /* ZXLUploadDefine.h in Headers */,
-				82C8DFF8207DE5D8006AF4DC /* ZXLAliOSSManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +302,6 @@
 				82444F76208DAE57009DC4B1 /* ZXLCompressOperation.m in Sources */,
 				828A67942021B58D0094CA92 /* ZXLVideoUtils.m in Sources */,
 				82444F72208DAE3B009DC4B1 /* ZXLCompressManager.m in Sources */,
-				82C8DFF9207DE5D8006AF4DC /* ZXLAliOSSManager.m in Sources */,
 				82C8DFEF207DE465006AF4DC /* ZXLSyncMapTable.m in Sources */,
 				82C8DFF0207DE465006AF4DC /* ZXLSyncMutableArray.m in Sources */,
 				828A679B202458990094CA92 /* ZXLUploadTaskManager.m in Sources */,
@@ -317,6 +312,7 @@
 				82C8DFF2207DE465006AF4DC /* ZXLSyncMutableDictionary.m in Sources */,
 				82B96E0820858925008ACDE3 /* ZXLPhotosUtils.m in Sources */,
 				828A67A82025BB210094CA92 /* ZXLNetworkManager.m in Sources */,
+				823033C320A536FA009343DC /* ZXLUploadManager.m in Sources */,
 				8269E8BD201F191C002D540E /* ZXLDocumentUtils.m in Sources */,
 				8285F6A2201C1A4A00D0F682 /* ZXLFileInfoModel.m in Sources */,
 				8285F69E201C1A0700D0F682 /* ZXLUploadFileResultCenter.m in Sources */,

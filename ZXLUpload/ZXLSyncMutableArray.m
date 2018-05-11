@@ -22,7 +22,7 @@
 
 -(dispatch_queue_t)dispatchQueue{
     if (!_dispatchQueue) {
-        _dispatchQueue = dispatch_queue_create("com.zxlupload.zxlsycmutablearray", DISPATCH_QUEUE_CONCURRENT);
+        _dispatchQueue = dispatch_queue_create("com.zxlupload.zxlsyncmutablearray", DISPATCH_QUEUE_CONCURRENT);
     }
     return _dispatchQueue;
 }

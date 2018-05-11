@@ -61,7 +61,6 @@
 }
 
 -(void)dealloc{
-    [self clearProgress];
     [self.uploadFiles removeAllObjects];
     self.uploadFiles = nil;
 }
@@ -424,7 +423,9 @@
     if (self.uploadFiles.count == 0) return;
     
     //只有在上传失败或者是准备上传的情况下才能删除文件信息
-    if (self.taskUploadResult == ZXLUploadTaskError || self.taskUploadResult == ZXLUploadTaskPrepareForUpload){
+    if (self.taskUploadResult == ZXLUploadTaskError
+        || self.taskUploadResult == ZXLUploadTaskPrepareForUpload
+        || self.taskUploadResult == ZXLUploadTaskSuccess){
         [self clearProgress];
         self.completeResponese = NO;
         self.unifiedResponese = NO;

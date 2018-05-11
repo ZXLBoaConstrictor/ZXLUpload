@@ -21,7 +21,7 @@
 
 -(dispatch_queue_t)dispatchQueue{
     if (!_dispatchQueue) {
-        _dispatchQueue = dispatch_queue_create("com.zxlupload.zxlsycmutablearray", DISPATCH_QUEUE_SERIAL);
+        _dispatchQueue = dispatch_queue_create("com.zxlupload.zxlsyncmaptable", DISPATCH_QUEUE_SERIAL);
     }
     return _dispatchQueue;
 }

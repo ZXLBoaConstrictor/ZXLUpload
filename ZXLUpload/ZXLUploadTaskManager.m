@@ -89,13 +89,10 @@
     BOOL bHaveUpload = [self haveUploadTaskLoading];
     
     if (bHaveUpload) return NO;
-
-    [self.uploadTasks removeAllObjects];
-    [self.uploadTaskDelegates removeAllObjects];
-    [self.uploadTaskBlocks removeAllObjects];
-    [self.uploadTaskProgressBlocks removeAllObjects];
-    [self.uploadTaskCompressBlocks removeAllObjects];
-    [[ZXLUploadFmdb manager] clearUploadTaskInfo];
+    
+    for (NSString *identifier in [self.uploadTasks allKeys]) {
+        [self removeTaskForIdentifier:identifier];
+    }
     return YES;
 }
 

@@ -12,14 +12,12 @@
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLFileInfoModel.h"
 #import "ZXLNetworkManager.h"
-#import "ZXLAliOSSManager.h"
 #import "ZXLSyncMutableDictionary.h"
 #import "ZXLSyncMapTable.h"
 #import "ZXLDocumentUtils.h"
 #import "ZXLTimer.h"
 #import "ZXLPhotosUtils.h"
-#import <AliyunOSSiOS/AliyunOSSiOS.h>
-
+#import "ZXLUploadManager.h"
 
 @interface ZXLUploadFileManager ()
 @property (nonatomic,strong)ZXLSyncMapTable * uploadFileResponseBlocks;
@@ -82,7 +80,8 @@
     NSString * uploadKey = [fileInfo uploadKey];//上传后的文件key (即文件名称)
     NSString *localUploadURL = [fileInfo localUploadURL]; //文件在本地地址
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
-    OSSRequest *request = [[ZXLAliOSSManager manager] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
+    
+    id request = [[ZXLUploadManager manager] uploadFile:uploadKey localFilePath:localUploadURL progress:^(float percent) {
         if (percent < 1) {
             if (progress) {
                 progress(percent);
@@ -90,9 +89,8 @@
             fileInfo.progress = percent;
             [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
         }
-    } result:^(OSSTask *task) {
-        OSSInitMultipartUploadResult * uploadResult = task.result;
-        if (task && uploadResult && uploadResult.httpResponseCode == 200) {
+    } complete:^(BOOL result) {
+        if (result) {
             //上传结束 成功
             [fileInfo setUploadResultSuccess];
             if (progress) {

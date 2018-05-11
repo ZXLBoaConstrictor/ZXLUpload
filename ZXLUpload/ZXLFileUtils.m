@@ -8,7 +8,7 @@
 
 #import "ZXLFileUtils.h"
 #import "ZXLUploadDefine.h"
-#import "ZXLAliOSSManager.h"
+#import "ZXLUploadManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CommonCrypto/CommonCrypto.h>
 #define FileHashDefaultChunkSizeForReadingData 1024*8
@@ -79,7 +79,7 @@
 
 +(NSString *)serverAddressFileURL:(NSString *)fileKey
 {
-    return [NSString stringWithFormat:@"%@%@",[ZXLAliOSSManager manager].fileServerAddress,fileKey];
+    return [NSString stringWithFormat:@"%@%@",[ZXLUploadManager manager].fileServerAddress,fileKey];
 }
 
 +(NSString *)fileMd5HashCreateWithPath:(NSString *)filePath{

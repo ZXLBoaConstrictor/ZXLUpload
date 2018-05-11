@@ -23,17 +23,17 @@
 
 -(dispatch_queue_t)dispatchQueue{
     if (!_dispatchQueue) {
-        _dispatchQueue = dispatch_queue_create("com.zxlupload.zxlsycmutablearray", DISPATCH_QUEUE_SERIAL);
+        _dispatchQueue = dispatch_queue_create("com.zxlupload.zxlsyncmutabledictionary", DISPATCH_QUEUE_SERIAL);
     }
     return _dispatchQueue;
 }
 
 - (NSInteger)count{
-    __block NSArray *allKeys = nil;
+    __block NSInteger dictionaryCount = 0;
     dispatch_sync(self.dispatchQueue, ^{
-        allKeys = [self.dictionary allKeys];
+        dictionaryCount = [self.dictionary count];
     });
-    return allKeys.count;
+    return dictionaryCount;
 }
 
 - (NSArray *)allKeys {

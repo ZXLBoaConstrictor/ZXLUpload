@@ -31,7 +31,7 @@ FOUNDATION_EXPORT const unsigned char ZXLUploadVersionString[];
 #import "ZXLSyncMutableDictionary.h"
 #import "ZXLTimer.h"
 #import "ZXLNetworkManager.h"
-#import "ZXLAliOSSManager.h"
+#import "ZXLUploadManager.h"
 #import "ZXLUploadFmdb.h"
 #import "ZXLReachability.h"
 #import "ZXLCompressManager.h"
