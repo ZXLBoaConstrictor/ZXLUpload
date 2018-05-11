@@ -76,5 +76,6 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
 @interface NSString (ZXLJSONString)
 - (NSArray *)array;
 - (NSDictionary *)dictionary;
++ (NSString *)ZXLUploadViewCreateTimeIdentifier;
 @end
 

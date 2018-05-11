@@ -9,9 +9,6 @@
 //文件前缀
 #define ZXLFilePrefixion @"jlboss"
 
-//服务器域名
-#define ZXLFileServerAddress @"https://images2.bestjlb.com/"
-
 //NEW 对象
 #define ZXLNewObject(object) [[object alloc]init];
 

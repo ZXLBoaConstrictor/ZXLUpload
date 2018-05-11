@@ -14,7 +14,7 @@
 @class OSSTask;
 
 @interface ZXLAliOSSManager : NSObject
-
+@property (nonatomic,copy)NSString * fileServerAddress;
 +(instancetype)manager;
 
 /**

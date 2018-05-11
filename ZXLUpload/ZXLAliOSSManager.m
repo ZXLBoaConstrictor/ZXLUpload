@@ -29,6 +29,25 @@
     return _sharedObject;
 }
 
+
+/**
+ 获取文件地址域名
+
+ @return 文件地址域名
+ */
+-(NSString *)getZXLUploadfileServerAddress{
+    SEL selServerAddress = NSSelectorFromString(@"serverAddress");
+    if ([self respondsToSelector:selServerAddress]) {
+        return [self performSelector:selServerAddress];
+    }
+    return @"";
+}
+
+/**
+ 获取阿里上传endPoint
+ 
+ @return endPoint
+ */
 -(NSString *)getEndPoint{
     SEL selEndPoint = NSSelectorFromString(@"endPoint");
     if ([self respondsToSelector:selEndPoint]) {
@@ -37,6 +56,11 @@
     return @"";
 }
 
+/**
+ 获取阿里上传BucketName
+ 
+ @return BucketName
+ */
 -(NSString *)getBucketName{
     SEL selBucketName = NSSelectorFromString(@"bucketName");
     if ([self respondsToSelector:selBucketName]) {
@@ -49,6 +73,7 @@
  *    @brief    初始化获取OSSClient
  */
 - (void)ossInit {
+    self.fileServerAddress = [self getZXLUploadfileServerAddress];
 
     id<OSSCredentialProvider> credential = [[OSSFederationCredentialProvider alloc] initWithFederationTokenGetter:^OSSFederationToken * {
         //获取FederationToken 外部利用扩展实现 getFederationToken
