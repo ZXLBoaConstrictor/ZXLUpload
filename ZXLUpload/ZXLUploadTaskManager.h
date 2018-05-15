@@ -52,6 +52,11 @@ typedef void (^ZXLUploadTaskResponseCallback)(ZXLTaskInfoModel *taskInfo);
 -(BOOL)haveUploadTaskLoading;
 
 /**
+ 网络环境变化
+ */
+-(void)refreshNetWorkStatus;
+
+/**
  app 重启后重新开始上传存储的本地任务
  (注：此函数重传 ZXLRestUploadTaskProcess 标志的 ZXLTaskInfoModel)
  */

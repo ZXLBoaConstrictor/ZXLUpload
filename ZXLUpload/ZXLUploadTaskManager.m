@@ -76,13 +76,8 @@
 - (instancetype)init{
     if (self = [super init]) {
         [self localTaskInfo];
-        [ZXLNetworkManager manager];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshNetWorkStatus) name:ZXLNetworkReachabilityNotification object:nil];
     }
     return self;
-}
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(BOOL)clearUploadTask{

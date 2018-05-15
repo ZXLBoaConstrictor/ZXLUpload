@@ -159,13 +159,13 @@
 
 -(void)saveUploadError:(ZXLFileInfoModel *)fileInfo{
     if (!fileInfo) return;
-    
+   
     ZXLFileInfoModel *tempFileInfo = [_uploadErrorInfo objectForKey:fileInfo.identifier];
     if (!tempFileInfo) {
         tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
         [_uploadErrorInfo setObject:tempFileInfo forKey:tempFileInfo.identifier];
         //删除上传任务
-        [self removeUploadRequest:fileInfo.identifier];
+        [self removeFileInfoUpload:fileInfo.identifier];
     }
 }
 
@@ -292,5 +292,13 @@
     [_uploadErrorInfo removeObjectForKey:identifier];
 }
 
-
+- (void)networkError{
+    //中断所有压缩
+    [[ZXLCompressManager manager] cancelCompressOperations];
+    //中断所有上传
+    NSArray * ayIdentifier = [_sessionRequestDict allKeys];
+    for (NSString *identifier in ayIdentifier) {
+        [self removeUploadRequest:identifier];
+    }
+}
 @end

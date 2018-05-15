@@ -18,6 +18,7 @@
 #import "ZXLTimer.h"
 #import "ZXLPhotosUtils.h"
 #import "ZXLUploadManager.h"
+#import "ZXLUploadTaskManager.h"
 
 @interface ZXLUploadFileManager ()
 @property (nonatomic,strong)ZXLSyncMapTable * uploadFileResponseBlocks;
@@ -54,9 +55,30 @@
     __strong static ZXLUploadFileManager * _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[ZXLUploadFileManager alloc] init];
+
         
     });
     return _sharedObject;
+}
+- (instancetype)init{
+    if (self = [super init]) {
+        [ZXLNetworkManager manager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshNetWorkStatus) name:ZXLNetworkReachabilityNotification object:nil];
+    }
+    return self;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)refreshNetWorkStatus{
+    //上传任务中处理所有上传文件跟随网络环境变化
+    [[ZXLUploadTaskManager manager] refreshNetWorkStatus];
+    //停止所有非上传任务文件上传
+    if (![ZXLNetworkManager appHaveNetwork]) {
+        [[ZXLUploadFileResultCenter shareUploadResultCenter] networkError];
+    }
 }
 
 - (void)taskUploadFile:(ZXLFileInfoModel *)fileInfo
@@ -119,6 +141,18 @@
 - (void)uploadFile:(ZXLFileInfoModel *)fileInfo
           progress:(ZXLUploadFileProgressCallback)progress
           complete:(ZXLUploadFileResponseCallback)complete{
+    
+    //单文件上传的时候无网络直接返回上传出错，不做错误记录
+    if (![ZXLNetworkManager appHaveNetwork]) {
+        if (progress) {
+            progress(1.0);
+        }
+        if (complete) {
+            complete(ZXLFileUploadError,@"");
+        }
+        return;
+    }
+    
     //当有上传成功过的信息，不再继续进行压缩上传
     ZXLFileInfoModel * successFileInfo = [[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:fileInfo.identifier];
     if (successFileInfo) {

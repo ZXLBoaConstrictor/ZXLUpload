@@ -385,7 +385,6 @@
 
 - (void)networkError{
     if (self.uploadResult == ZXLFileUploadloading && ![[ZXLUploadFileResultCenter shareUploadResultCenter] checkUploadSuccessFileInfo:self.identifier]) {
-        [[ZXLUploadFileResultCenter shareUploadResultCenter] removeFileInfoUpload:self.identifier];
         [self setUploadResultError:ZXLFileUploadError];
     }
 }

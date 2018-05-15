@@ -99,4 +99,10 @@
  @param identifier 文件identifier
  */
 -(void)removeFileInfoUpload:(NSString *)identifier;
+
+
+/**
+ 上传任务遇到网络错误的时候
+ */
+- (void)networkError;
 @end
