@@ -160,12 +160,13 @@
 -(void)saveUploadError:(ZXLFileInfoModel *)fileInfo{
     if (!fileInfo) return;
    
+    //删除上传任务
+    [self removeFileInfoUpload:fileInfo.identifier];
+    
     ZXLFileInfoModel *tempFileInfo = [_uploadErrorInfo objectForKey:fileInfo.identifier];
     if (!tempFileInfo) {
         tempFileInfo = [ZXLFileInfoModel dictionary:[fileInfo keyValues]];
         [_uploadErrorInfo setObject:tempFileInfo forKey:tempFileInfo.identifier];
-        //删除上传任务
-        [self removeFileInfoUpload:fileInfo.identifier];
     }
 }
 

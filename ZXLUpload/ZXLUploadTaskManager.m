@@ -386,7 +386,7 @@
     if (taskInfo) {
         //文件任务完成过成功结果返回时处理（由于上传结果删除时只是做了代理、block、存储删除，上传结果并未做处理，等App进程干掉或者清空缓存时才删除）
         if ((taskInfo.completeResponese && [taskInfo uploadTaskType] == ZXLUploadTaskSuccess)
-            ||([taskInfo uploadTaskType] == ZXLUploadTaskError && [ZXLNetworkManager appHaveNetwork])) {
+            ||([taskInfo uploadTaskType] == ZXLUploadTaskError && ![ZXLNetworkManager appHaveNetwork])) {
             id checkDelegate = delegate;
             if (checkDelegate && [checkDelegate respondsToSelector:@selector(uploadTaskResponese:)]) {
                 if (checkDelegate == [ZXLUploadUnifiedResponese manager]) {
