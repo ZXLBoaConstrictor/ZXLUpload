@@ -141,6 +141,12 @@
 }
 
 -(void)restUploadTaskReStartProcess{
+    
+    //无网络的情况下直接返回
+    if (![ZXLNetworkManager appHaveNetwork]) {
+        return;
+    }
+    
     for (NSString *identifier in [self.uploadTasks allKeys]) {
         ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
         if (taskInfo
@@ -395,6 +401,12 @@
             }
             return;
         }
+        
+        //此任务已经开始的时候直接返回
+        if ([taskInfo uploadTaskType] == ZXLUploadTaskTranscoding || [taskInfo uploadTaskType] == ZXLUploadTaskLoading) {
+            return;
+        }
+        
     
         taskInfo.resetUploadType = resetUploadType;
         taskInfo.completeResponese = NO;
