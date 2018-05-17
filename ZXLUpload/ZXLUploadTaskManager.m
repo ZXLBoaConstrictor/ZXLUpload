@@ -75,9 +75,15 @@
 
 - (instancetype)init{
     if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshNetWorkStatus) name:ZXLNetworkReachabilityNotification object:nil];
+        [ZXLNetworkManager manager];
         [self localTaskInfo];
     }
     return self;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(BOOL)clearUploadTask{
@@ -141,12 +147,6 @@
 }
 
 -(void)restUploadTaskReStartProcess{
-    
-    //无网络的情况下直接返回
-    if (![ZXLNetworkManager appHaveNetwork]) {
-        return;
-    }
-    
     for (NSString *identifier in [self.uploadTasks allKeys]) {
         ZXLTaskInfoModel *taskInfo = [self.uploadTasks objectForKey:identifier];
         if (taskInfo

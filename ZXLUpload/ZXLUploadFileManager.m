@@ -62,8 +62,8 @@
 }
 - (instancetype)init{
     if (self = [super init]) {
-        [ZXLNetworkManager manager];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshNetWorkStatus) name:ZXLNetworkReachabilityNotification object:nil];
+        [ZXLNetworkManager manager];
     }
     return self;
 }
@@ -73,9 +73,7 @@
 }
 
 -(void)refreshNetWorkStatus{
-    //上传任务中处理所有上传文件跟随网络环境变化
-    [[ZXLUploadTaskManager manager] refreshNetWorkStatus];
-    //停止所有非上传任务文件上传
+    //停止所有非上传任务文件上传(主要针对单个文件上传)
     if (![ZXLNetworkManager appHaveNetwork]) {
         [[ZXLUploadFileResultCenter shareUploadResultCenter] networkError];
     }
