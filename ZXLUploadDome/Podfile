@@ -11,4 +11,5 @@ target ‘ZXLUploadDome’ do
 pod 'TZImagePickerController'
 pod 'Masonry'
 pod 'SVProgressHUD'
+pod 'FMDB'
 end

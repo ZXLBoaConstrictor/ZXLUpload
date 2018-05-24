@@ -20,7 +20,6 @@
 		82C8EA3B209C5AA400797BA9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */; };
 		82C8EA3D209C5AD700797BA9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */; };
 		82C8EA3F209C5AF500797BA9 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3E209C5AF500797BA9 /* libresolv.tbd */; };
-		82C8EA43209C6AA300797BA9 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA42209C6AA300797BA9 /* FMDB.framework */; };
 		82C8EA4F209C6B0400797BA9 /* JLBUploadTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA45209C6B0400797BA9 /* JLBUploadTaskModel.m */; };
 		82C8EA50209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA47209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m */; };
 		82C8EA51209C6B0400797BA9 /* ZXLTaskFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA4C209C6B0400797BA9 /* ZXLTaskFmdb.m */; };
@@ -54,7 +53,6 @@
 		82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		82C8EA3E209C5AF500797BA9 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		82C8EA42209C6AA300797BA9 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = ZXLUploadDome/FMDB.framework; sourceTree = "<group>"; };
 		82C8EA45209C6B0400797BA9 /* JLBUploadTaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBUploadTaskModel.m; sourceTree = "<group>"; };
 		82C8EA46209C6B0400797BA9 /* ZXLTaskFmdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLTaskFmdb.h; sourceTree = "<group>"; };
 		82C8EA47209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZXLUploadUnifiedResponese+Exension.m"; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 				82C8EA3D209C5AD700797BA9 /* SystemConfiguration.framework in Frameworks */,
 				82C8EA3B209C5AA400797BA9 /* CoreTelephony.framework in Frameworks */,
 				82C8EA39209C587500797BA9 /* AliyunOSSiOS.framework in Frameworks */,
-				82C8EA43209C6AA300797BA9 /* FMDB.framework in Frameworks */,
 				C44DE69FD7FEDC7742CFFA62 /* libPods-ZXLUploadDome.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,7 +159,6 @@
 			children = (
 				82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */,
 				821B072920A186BE0011D116 /* MobileCoreServices.framework */,
-				82C8EA42209C6AA300797BA9 /* FMDB.framework */,
 				82C8EA3E209C5AF500797BA9 /* libresolv.tbd */,
 				82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */,
 				82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */,
