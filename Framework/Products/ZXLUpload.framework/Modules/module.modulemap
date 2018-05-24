@@ -1,6 +1,0 @@
-framework module ZXLUpload {
-  umbrella header "ZXLUpload.h"
-
-  export *
-  module * { export * }
-}
