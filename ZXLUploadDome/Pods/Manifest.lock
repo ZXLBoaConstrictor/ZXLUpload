@@ -1,0 +1,24 @@
+PODS:
+  - Masonry (1.1.0)
+  - SVProgressHUD (2.1.2)
+  - TZImagePickerController (2.0.1)
+
+DEPENDENCIES:
+  - Masonry
+  - SVProgressHUD
+  - TZImagePickerController
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Masonry
+    - SVProgressHUD
+    - TZImagePickerController
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  TZImagePickerController: 34ecb53af8c349964394407e42b6e54e22589ebe
+
+PODFILE CHECKSUM: 7f30b7e5fdd485a6002a2d42347a52322a106a50
+
+COCOAPODS: 1.5.0

@@ -1,0 +1,498 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		821B072320A17C410011D116 /* UICollectionViewLeftAlignedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 821B072220A17C410011D116 /* UICollectionViewLeftAlignedLayout.m */; };
+		821B072620A17D620011D116 /* FilesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 821B072520A17D620011D116 /* FilesCollectionViewCell.m */; };
+		821B072820A17F0C0011D116 /* videoplay.png in Resources */ = {isa = PBXBuildFile; fileRef = 821B072720A17F0C0011D116 /* videoplay.png */; };
+		821B072A20A186BE0011D116 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821B072920A186BE0011D116 /* MobileCoreServices.framework */; };
+		82C8EA0F209C4F7A00797BA9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA0E209C4F7A00797BA9 /* AppDelegate.m */; };
+		82C8EA12209C4F7A00797BA9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA11209C4F7A00797BA9 /* ViewController.m */; };
+		82C8EA17209C4F7B00797BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C8EA16209C4F7B00797BA9 /* Assets.xcassets */; };
+		82C8EA1D209C4F7B00797BA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA1C209C4F7B00797BA9 /* main.m */; };
+		82C8EA37209C584000797BA9 /* ZXLUpload.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82C8EA36209C584000797BA9 /* ZXLUpload.bundle */; };
+		82C8EA39209C587500797BA9 /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA38209C587500797BA9 /* AliyunOSSiOS.framework */; };
+		82C8EA3B209C5AA400797BA9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */; };
+		82C8EA3D209C5AD700797BA9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */; };
+		82C8EA3F209C5AF500797BA9 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3E209C5AF500797BA9 /* libresolv.tbd */; };
+		82C8EA43209C6AA300797BA9 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA42209C6AA300797BA9 /* FMDB.framework */; };
+		82C8EA4F209C6B0400797BA9 /* JLBUploadTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA45209C6B0400797BA9 /* JLBUploadTaskModel.m */; };
+		82C8EA50209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA47209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m */; };
+		82C8EA51209C6B0400797BA9 /* ZXLTaskFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA4C209C6B0400797BA9 /* ZXLTaskFmdb.m */; };
+		82C8EA53209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA4E209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m */; };
+		82D933AC20B6BC19002B17D3 /* ZXLUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */; };
+		82D933B120B6BCB8002B17D3 /* ZXLUploadManager+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D933AF20B6BCB8002B17D3 /* ZXLUploadManager+Extension.m */; };
+		82D933B220B6BCB8002B17D3 /* JLBAliOSSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D933B020B6BCB8002B17D3 /* JLBAliOSSManager.m */; };
+		C44DE69FD7FEDC7742CFFA62 /* libPods-ZXLUploadDome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8093D2917726CF3BE01E134 /* libPods-ZXLUploadDome.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0761FA166F914FF8A9843EA1 /* Pods-ZXLUploadDome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZXLUploadDome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZXLUploadDome/Pods-ZXLUploadDome.debug.xcconfig"; sourceTree = "<group>"; };
+		2364011F8BCAB8925B7F0891 /* Pods-ZXLUploadDome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZXLUploadDome.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZXLUploadDome/Pods-ZXLUploadDome.release.xcconfig"; sourceTree = "<group>"; };
+		821B072120A17C410011D116 /* UICollectionViewLeftAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLeftAlignedLayout.h; sourceTree = "<group>"; };
+		821B072220A17C410011D116 /* UICollectionViewLeftAlignedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLeftAlignedLayout.m; sourceTree = "<group>"; };
+		821B072420A17D620011D116 /* FilesCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilesCollectionViewCell.h; sourceTree = "<group>"; };
+		821B072520A17D620011D116 /* FilesCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilesCollectionViewCell.m; sourceTree = "<group>"; };
+		821B072720A17F0C0011D116 /* videoplay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = videoplay.png; sourceTree = "<group>"; };
+		821B072920A186BE0011D116 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		82C8EA0A209C4F7A00797BA9 /* ZXLUploadDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXLUploadDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		82C8EA0D209C4F7A00797BA9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		82C8EA0E209C4F7A00797BA9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		82C8EA10209C4F7A00797BA9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		82C8EA11209C4F7A00797BA9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		82C8EA16209C4F7B00797BA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		82C8EA1B209C4F7B00797BA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82C8EA1C209C4F7B00797BA9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		82C8EA32209C552500797BA9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		82C8EA36209C584000797BA9 /* ZXLUpload.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZXLUpload.bundle; sourceTree = "<group>"; };
+		82C8EA38209C587500797BA9 /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunOSSiOS.framework; path = ZXLUploadDome/AliyunOSSiOS.framework; sourceTree = "<group>"; };
+		82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		82C8EA3E209C5AF500797BA9 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		82C8EA42209C6AA300797BA9 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = ZXLUploadDome/FMDB.framework; sourceTree = "<group>"; };
+		82C8EA45209C6B0400797BA9 /* JLBUploadTaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBUploadTaskModel.m; sourceTree = "<group>"; };
+		82C8EA46209C6B0400797BA9 /* ZXLTaskFmdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLTaskFmdb.h; sourceTree = "<group>"; };
+		82C8EA47209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZXLUploadUnifiedResponese+Exension.m"; sourceTree = "<group>"; };
+		82C8EA48209C6B0400797BA9 /* JLBAsyncUploadTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLBAsyncUploadTaskManager.h; sourceTree = "<group>"; };
+		82C8EA4A209C6B0400797BA9 /* JLBUploadTaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLBUploadTaskModel.h; sourceTree = "<group>"; };
+		82C8EA4B209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZXLUploadUnifiedResponese+Exension.h"; sourceTree = "<group>"; };
+		82C8EA4C209C6B0400797BA9 /* ZXLTaskFmdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLTaskFmdb.m; sourceTree = "<group>"; };
+		82C8EA4E209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBAsyncUploadTaskManager.m; sourceTree = "<group>"; };
+		82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZXLUpload.framework; path = ../Framework/Products/ZXLUpload.framework; sourceTree = "<group>"; };
+		82D933AD20B6BCB7002B17D3 /* JLBAliOSSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLBAliOSSManager.h; sourceTree = "<group>"; };
+		82D933AE20B6BCB8002B17D3 /* ZXLUploadManager+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZXLUploadManager+Extension.h"; sourceTree = "<group>"; };
+		82D933AF20B6BCB8002B17D3 /* ZXLUploadManager+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZXLUploadManager+Extension.m"; sourceTree = "<group>"; };
+		82D933B020B6BCB8002B17D3 /* JLBAliOSSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBAliOSSManager.m; sourceTree = "<group>"; };
+		E8093D2917726CF3BE01E134 /* libPods-ZXLUploadDome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZXLUploadDome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82C8EA07209C4F7A00797BA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				821B072A20A186BE0011D116 /* MobileCoreServices.framework in Frameworks */,
+				82C8EA3F209C5AF500797BA9 /* libresolv.tbd in Frameworks */,
+				82D933AC20B6BC19002B17D3 /* ZXLUpload.framework in Frameworks */,
+				82C8EA3D209C5AD700797BA9 /* SystemConfiguration.framework in Frameworks */,
+				82C8EA3B209C5AA400797BA9 /* CoreTelephony.framework in Frameworks */,
+				82C8EA39209C587500797BA9 /* AliyunOSSiOS.framework in Frameworks */,
+				82C8EA43209C6AA300797BA9 /* FMDB.framework in Frameworks */,
+				C44DE69FD7FEDC7742CFFA62 /* libPods-ZXLUploadDome.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		821B072020A17C410011D116 /* UICollectionViewLeftAlignedLayout */ = {
+			isa = PBXGroup;
+			children = (
+				821B072120A17C410011D116 /* UICollectionViewLeftAlignedLayout.h */,
+				821B072220A17C410011D116 /* UICollectionViewLeftAlignedLayout.m */,
+			);
+			path = UICollectionViewLeftAlignedLayout;
+			sourceTree = "<group>";
+		};
+		82C8EA01209C4F7A00797BA9 = {
+			isa = PBXGroup;
+			children = (
+				82C8EA0C209C4F7A00797BA9 /* ZXLUploadDome */,
+				82C8EA0B209C4F7A00797BA9 /* Products */,
+				DDC4767E599886B8E0ACBF19 /* Pods */,
+				9DA7F1BF3AEBC5F441D0C2CA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		82C8EA0B209C4F7A00797BA9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82C8EA0A209C4F7A00797BA9 /* ZXLUploadDome.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		82C8EA0C209C4F7A00797BA9 /* ZXLUploadDome */ = {
+			isa = PBXGroup;
+			children = (
+				82C8EA0D209C4F7A00797BA9 /* AppDelegate.h */,
+				82C8EA0E209C4F7A00797BA9 /* AppDelegate.m */,
+				82C8EA10209C4F7A00797BA9 /* ViewController.h */,
+				82C8EA11209C4F7A00797BA9 /* ViewController.m */,
+				821B072420A17D620011D116 /* FilesCollectionViewCell.h */,
+				821B072520A17D620011D116 /* FilesCollectionViewCell.m */,
+				821B072020A17C410011D116 /* UICollectionViewLeftAlignedLayout */,
+				82C8EA44209C6B0400797BA9 /* ZXLUploadManager */,
+				82C8EA16209C4F7B00797BA9 /* Assets.xcassets */,
+				82C8EA1B209C4F7B00797BA9 /* Info.plist */,
+				82C8EA1C209C4F7B00797BA9 /* main.m */,
+				821B072720A17F0C0011D116 /* videoplay.png */,
+				82C8EA32209C552500797BA9 /* PrefixHeader.pch */,
+				82C8EA36209C584000797BA9 /* ZXLUpload.bundle */,
+			);
+			path = ZXLUploadDome;
+			sourceTree = "<group>";
+		};
+		82C8EA44209C6B0400797BA9 /* ZXLUploadManager */ = {
+			isa = PBXGroup;
+			children = (
+				82C8EA46209C6B0400797BA9 /* ZXLTaskFmdb.h */,
+				82C8EA4C209C6B0400797BA9 /* ZXLTaskFmdb.m */,
+				82C8EA4A209C6B0400797BA9 /* JLBUploadTaskModel.h */,
+				82C8EA45209C6B0400797BA9 /* JLBUploadTaskModel.m */,
+				82D933AD20B6BCB7002B17D3 /* JLBAliOSSManager.h */,
+				82D933B020B6BCB8002B17D3 /* JLBAliOSSManager.m */,
+				82D933AE20B6BCB8002B17D3 /* ZXLUploadManager+Extension.h */,
+				82D933AF20B6BCB8002B17D3 /* ZXLUploadManager+Extension.m */,
+				82C8EA4B209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.h */,
+				82C8EA47209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m */,
+				82C8EA48209C6B0400797BA9 /* JLBAsyncUploadTaskManager.h */,
+				82C8EA4E209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m */,
+			);
+			path = ZXLUploadManager;
+			sourceTree = "<group>";
+		};
+		9DA7F1BF3AEBC5F441D0C2CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */,
+				821B072920A186BE0011D116 /* MobileCoreServices.framework */,
+				82C8EA42209C6AA300797BA9 /* FMDB.framework */,
+				82C8EA3E209C5AF500797BA9 /* libresolv.tbd */,
+				82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */,
+				82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */,
+				82C8EA38209C587500797BA9 /* AliyunOSSiOS.framework */,
+				E8093D2917726CF3BE01E134 /* libPods-ZXLUploadDome.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDC4767E599886B8E0ACBF19 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0761FA166F914FF8A9843EA1 /* Pods-ZXLUploadDome.debug.xcconfig */,
+				2364011F8BCAB8925B7F0891 /* Pods-ZXLUploadDome.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82C8EA09209C4F7A00797BA9 /* ZXLUploadDome */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82C8EA20209C4F7B00797BA9 /* Build configuration list for PBXNativeTarget "ZXLUploadDome" */;
+			buildPhases = (
+				472B88979CA5C09706AD6A04 /* [CP] Check Pods Manifest.lock */,
+				82C8EA06209C4F7A00797BA9 /* Sources */,
+				82C8EA07209C4F7A00797BA9 /* Frameworks */,
+				82C8EA08209C4F7A00797BA9 /* Resources */,
+				3DFF94F98E04CCF3C1CCD9F0 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZXLUploadDome;
+			productName = ZXLUploadDome;
+			productReference = 82C8EA0A209C4F7A00797BA9 /* ZXLUploadDome.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		82C8EA02209C4F7A00797BA9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "张小龙";
+				TargetAttributes = {
+					82C8EA09209C4F7A00797BA9 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 82C8EA05209C4F7A00797BA9 /* Build configuration list for PBXProject "ZXLUploadDome" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 82C8EA01209C4F7A00797BA9;
+			productRefGroup = 82C8EA0B209C4F7A00797BA9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82C8EA09209C4F7A00797BA9 /* ZXLUploadDome */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		82C8EA08209C4F7A00797BA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				821B072820A17F0C0011D116 /* videoplay.png in Resources */,
+				82C8EA17209C4F7B00797BA9 /* Assets.xcassets in Resources */,
+				82C8EA37209C584000797BA9 /* ZXLUpload.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3DFF94F98E04CCF3C1CCD9F0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZXLUploadDome/Pods-ZXLUploadDome-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZXLUploadDome/Pods-ZXLUploadDome-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		472B88979CA5C09706AD6A04 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZXLUploadDome-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		82C8EA06209C4F7A00797BA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82C8EA50209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m in Sources */,
+				82C8EA4F209C6B0400797BA9 /* JLBUploadTaskModel.m in Sources */,
+				821B072620A17D620011D116 /* FilesCollectionViewCell.m in Sources */,
+				82C8EA12209C4F7A00797BA9 /* ViewController.m in Sources */,
+				82C8EA1D209C4F7B00797BA9 /* main.m in Sources */,
+				82C8EA51209C6B0400797BA9 /* ZXLTaskFmdb.m in Sources */,
+				82C8EA0F209C4F7A00797BA9 /* AppDelegate.m in Sources */,
+				82D933B220B6BCB8002B17D3 /* JLBAliOSSManager.m in Sources */,
+				82D933B120B6BCB8002B17D3 /* ZXLUploadManager+Extension.m in Sources */,
+				821B072320A17C410011D116 /* UICollectionViewLeftAlignedLayout.m in Sources */,
+				82C8EA53209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		82C8EA1E209C4F7B00797BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		82C8EA1F209C4F7B00797BA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		82C8EA21209C4F7B00797BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0761FA166F914FF8A9843EA1 /* Pods-ZXLUploadDome.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3EZVVYFZCE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZXLUploadDome",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ZXLUploadDome/PrefixHeader.pch;
+				INFOPLIST_FILE = ZXLUploadDome/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zxl.uploadDome.ZXLUploadDome;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		82C8EA22209C4F7B00797BA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2364011F8BCAB8925B7F0891 /* Pods-ZXLUploadDome.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3EZVVYFZCE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZXLUploadDome",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ZXLUploadDome/PrefixHeader.pch;
+				INFOPLIST_FILE = ZXLUploadDome/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zxl.uploadDome.ZXLUploadDome;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		82C8EA05209C4F7A00797BA9 /* Build configuration list for PBXProject "ZXLUploadDome" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82C8EA1E209C4F7B00797BA9 /* Debug */,
+				82C8EA1F209C4F7B00797BA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82C8EA20209C4F7B00797BA9 /* Build configuration list for PBXNativeTarget "ZXLUploadDome" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82C8EA21209C4F7B00797BA9 /* Debug */,
+				82C8EA22209C4F7B00797BA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 82C8EA02209C4F7A00797BA9 /* Project object */;
+}
