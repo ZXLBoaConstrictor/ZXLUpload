@@ -5,9 +5,6 @@
       location = "group:ZXLUploadDome.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../Framework/ZXLUpload.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

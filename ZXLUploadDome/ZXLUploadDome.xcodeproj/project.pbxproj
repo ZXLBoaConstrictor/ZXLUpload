@@ -24,7 +24,6 @@
 		82C8EA50209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA47209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m */; };
 		82C8EA51209C6B0400797BA9 /* ZXLTaskFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA4C209C6B0400797BA9 /* ZXLTaskFmdb.m */; };
 		82C8EA53209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA4E209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m */; };
-		82D933AC20B6BC19002B17D3 /* ZXLUpload.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */; };
 		82D933B120B6BCB8002B17D3 /* ZXLUploadManager+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D933AF20B6BCB8002B17D3 /* ZXLUploadManager+Extension.m */; };
 		82D933B220B6BCB8002B17D3 /* JLBAliOSSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D933B020B6BCB8002B17D3 /* JLBAliOSSManager.m */; };
 		C44DE69FD7FEDC7742CFFA62 /* libPods-ZXLUploadDome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8093D2917726CF3BE01E134 /* libPods-ZXLUploadDome.a */; };
@@ -61,7 +60,6 @@
 		82C8EA4B209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZXLUploadUnifiedResponese+Exension.h"; sourceTree = "<group>"; };
 		82C8EA4C209C6B0400797BA9 /* ZXLTaskFmdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLTaskFmdb.m; sourceTree = "<group>"; };
 		82C8EA4E209C6B0400797BA9 /* JLBAsyncUploadTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLBAsyncUploadTaskManager.m; sourceTree = "<group>"; };
-		82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZXLUpload.framework; path = ../Framework/Products/ZXLUpload.framework; sourceTree = "<group>"; };
 		82D933AD20B6BCB7002B17D3 /* JLBAliOSSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLBAliOSSManager.h; sourceTree = "<group>"; };
 		82D933AE20B6BCB8002B17D3 /* ZXLUploadManager+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZXLUploadManager+Extension.h"; sourceTree = "<group>"; };
 		82D933AF20B6BCB8002B17D3 /* ZXLUploadManager+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZXLUploadManager+Extension.m"; sourceTree = "<group>"; };
@@ -76,7 +74,6 @@
 			files = (
 				821B072A20A186BE0011D116 /* MobileCoreServices.framework in Frameworks */,
 				82C8EA3F209C5AF500797BA9 /* libresolv.tbd in Frameworks */,
-				82D933AC20B6BC19002B17D3 /* ZXLUpload.framework in Frameworks */,
 				82C8EA3D209C5AD700797BA9 /* SystemConfiguration.framework in Frameworks */,
 				82C8EA3B209C5AA400797BA9 /* CoreTelephony.framework in Frameworks */,
 				82C8EA39209C587500797BA9 /* AliyunOSSiOS.framework in Frameworks */,
@@ -157,7 +154,6 @@
 		9DA7F1BF3AEBC5F441D0C2CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				82D933AB20B6BC19002B17D3 /* ZXLUpload.framework */,
 				821B072920A186BE0011D116 /* MobileCoreServices.framework */,
 				82C8EA3E209C5AF500797BA9 /* libresolv.tbd */,
 				82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */,
