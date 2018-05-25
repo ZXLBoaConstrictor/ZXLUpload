@@ -246,7 +246,7 @@
 }
 
 -(NSString *)localUploadURL{
-    NSString *localUploadURL = self.localURL;
+    NSString *localUploadURL = @"";
     if (self.fileType == ZXLFileTypeVideo) {
         NSString * videoName = [self uploadKey];
         localUploadURL = FILE_Video_PATH(videoName);
@@ -258,6 +258,12 @@
         }
     }else{
         localUploadURL = [ZXLDocumentUtils localFilePath:[self.localURL lastPathComponent] fileType:self.fileType];
+    }
+    
+    if (ZXLISNSStringValid(localUploadURL) && [[NSFileManager defaultManager] fileExistsAtPath:localUploadURL]) {
+        self.localURL = localUploadURL;
+    }else{
+        localUploadURL = self.localURL;
     }
     
     self.uploadSize =               [ZXLFileUtils fileSizeByPath:localUploadURL];
