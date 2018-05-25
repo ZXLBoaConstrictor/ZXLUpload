@@ -6,7 +6,7 @@ PODS:
   - SVProgressHUD (2.1.2)
   - TZImagePickerController (2.0.1)
   - ZXLRecorder (1.0.1)
-  - ZXLUpload (1.0.0):
+  - ZXLUpload (1.0.1):
     - FMDB
 
 DEPENDENCIES:
@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TZImagePickerController: 34ecb53af8c349964394407e42b6e54e22589ebe
   ZXLRecorder: 9bb6afdc114adc7e2fdd6325542ed71213e96bfd
-  ZXLUpload: ba88a2d6f270a777f57be0e3054ea8e061dc6c06
+  ZXLUpload: 4f6ac217c9dc316892b9bfe6f8c3a162c88af06a
 
 PODFILE CHECKSUM: b27f3e53ca2323b95df84b1fc0c707df1f7800b3
 

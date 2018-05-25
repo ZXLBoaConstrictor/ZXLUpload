@@ -7,146 +7,146 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		020425301E62988D84099C78C5EA1EE9 /* SVIndefiniteAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FB7E302CF3F187DAC55D10CDAF07D30 /* SVIndefiniteAnimatedView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		027DEFAE0389CD4DCF23F913094C0FCE /* ZXLRecorder-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F0CA06CC4933B136283277BDF461A632 /* ZXLRecorder-dummy.m */; };
-		03DD242ED000DFC02C40B81CF1BA32E9 /* TZImagePickerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDA3396A25CB8D3D2FEB338FEE22B8 /* TZImagePickerController-dummy.m */; };
-		0929F48F4B6E0FFC413C159790DDFC84 /* ZXLDocumentUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D88A69F2993BB822F6C5043457D807E /* ZXLDocumentUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		09EBDBDB227CA61D475BA0127FC09B99 /* SVProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BD3D395F3659306664B21A18F4C223 /* SVProgressHUD.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0C7FB28BB5F158890215146313AFE79D /* ZXLUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C35EDEB66F14167925BF311CA61A18 /* ZXLUploadManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		0CB26B376ECD90AF62EF7A36BD1E0404 /* TZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28686962ED41C821719AA717673D9521 /* TZImagePickerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		020425301E62988D84099C78C5EA1EE9 /* SVIndefiniteAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E19527B1EBCEB3DB2CBD79E542CCF7B /* SVIndefiniteAnimatedView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		027DEFAE0389CD4DCF23F913094C0FCE /* ZXLRecorder-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 937F5A1AF6E074514305591C7BD982D1 /* ZXLRecorder-dummy.m */; };
+		03DD242ED000DFC02C40B81CF1BA32E9 /* TZImagePickerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F11E40B155D4EB98CF88FFD72D6C3 /* TZImagePickerController-dummy.m */; };
+		0929F48F4B6E0FFC413C159790DDFC84 /* ZXLDocumentUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9ECD3F3A1CD7889E4CD6C241FB8424 /* ZXLDocumentUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		09EBDBDB227CA61D475BA0127FC09B99 /* SVProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 27BABB06C9151C5A6B807D4E7CC4121F /* SVProgressHUD.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0C7FB28BB5F158890215146313AFE79D /* ZXLUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B67EB9F41EA343F579DB25F61ED276 /* ZXLUploadManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		0CB26B376ECD90AF62EF7A36BD1E0404 /* TZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888F68D9C98B48F46C2042D9F1ED1A08 /* TZImagePickerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		0F1F56390E87CA393CED4C6BDEFFBA00 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A2216648A540A4E5F9DAF068BFA1F1 /* SystemConfiguration.framework */; };
-		0F581A74395A167EE0BC7A167BC8CCDA /* ZXLNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BD90667DD2DD11F1D7828C017E11FB9D /* ZXLNetworkManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		100DCBFE39E91CF7A296FABFAB4D7CC6 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 379EF71CC5D448ED4221CD27C2573FF8 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1446C684FD3E9279C34C5B6F9E0DD41B /* ZXLUploadFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 54F7EBF262D64906F8D53C3499A05ED1 /* ZXLUploadFileManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		14B65CE3038761FA8F6F5D1ECED6A562 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BD34F05C2F3C38B2936FFEF160B2327D /* NSArray+MASAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		173BB65104C2D71E590BE359FE7D1D7D /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A07013E0EA42E642DBC46FC985A4878 /* TZPhotoPickerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		189FF879206CFCFE0F16656CE161B2BD /* TZAssetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BF8D17C7FB6095EFE522E4905144A67 /* TZAssetCell.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1AF513D8D71B663D5422760106B13723 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E1270FEC07675AD7B326B6C94A32C /* MASConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		0F581A74395A167EE0BC7A167BC8CCDA /* ZXLNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 860181683A47FECCEDD7BB982B850703 /* ZXLNetworkManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		100DCBFE39E91CF7A296FABFAB4D7CC6 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 9711B089FCF30EA638B7EB617FF0C5FC /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1446C684FD3E9279C34C5B6F9E0DD41B /* ZXLUploadFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B1003B08051C139235FBE0EEED6A33D /* ZXLUploadFileManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		14B65CE3038761FA8F6F5D1ECED6A562 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3D4E3AB2793B6697A43AFFD3DCB7FA /* NSArray+MASAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		173BB65104C2D71E590BE359FE7D1D7D /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D9566FFC048834699054B07AB36FAE /* TZPhotoPickerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		189FF879206CFCFE0F16656CE161B2BD /* TZAssetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 90A167ABBE6E17B605A71182104065EE /* TZAssetCell.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1AF513D8D71B663D5422760106B13723 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8442346A451440DFE14A15B4CDB99A /* MASConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1B0CF0F8504CC59C115BDF94A3207F84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
 		1D36E7C5B7F4C3C9A6D096A187C3BC0D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AEBC318E6A7970C349614E4FE896966 /* AssetsLibrary.framework */; };
-		1D665080992A5A2B192D26DACA513199 /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CFA71022D2F0842DF10436AB514B2 /* TZPhotoPreviewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		1F6CBA8ABF55755C5F5093B2BD118BB6 /* TZImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DDCB25349AA1DB07C5DA6F16C42D1D8 /* TZImagePickerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1FA47EBC8B6ABA3D0FAA3E5AF492B164 /* ZXLVideoUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8BADCF9706D279AC9DA0D53A06F517 /* ZXLVideoUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		214DF0B6664033C87D6B846599FB477A /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BC62141817FD32865D83D1F7C5E2F3FC /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2535B52B53A9DCDB8D82F6AF51AD7E74 /* ZXLTaskInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D24FD83DF6EDFC5B858C2B7F6DE0386E /* ZXLTaskInfoModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		26736D501BCF4C2A3965B28CD8194BF9 /* TZImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1E18B05BA88010E7A19D69D306DED6 /* TZImageManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2BAF605CB29217726746221850A4A75E /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD17120BA97D0E52702A707281D1F88 /* FMResultSet.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2BBB25C8F39AA8708E3F7BCD19D7D506 /* ZXLUploadFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6F177D3F4100A9500B6F89377F3BF9 /* ZXLUploadFmdb.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2C1E08F08BC7A1C7325CCBFC72939A5F /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82995B6AAEBDEE312F3FD32F434425F6 /* TZProgressView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2C41E93CF9F63753E9F5D4AF7410C9E6 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E8047B54C55F22FA08A24E41546A18A3 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2C82C2B40D2367BD23040FE42C4D56C2 /* ZXLNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB553FB0027E835C9F13FCE61C1A564 /* ZXLNetworkManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		304CE493CB3539FF9BF10D5707A889A2 /* ZXLReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = BD793962706760C013715D636C689AA6 /* ZXLReachability.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		34CA843263A70327D4E20430EB27B171 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 05A54F9B73D863A7D27611E709D00C41 /* FMDatabase.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		354798287D9CC74D17542A0480115FAA /* ZXLUploadTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D787C8BA408125D88887D9D0EA987AA0 /* ZXLUploadTaskManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1D665080992A5A2B192D26DACA513199 /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64BEF982CC75AD384D49F74FDB14068D /* TZPhotoPreviewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1F6CBA8ABF55755C5F5093B2BD118BB6 /* TZImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 317E58128717B014AF397360E6EE7901 /* TZImagePickerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1FA47EBC8B6ABA3D0FAA3E5AF492B164 /* ZXLVideoUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 19EA72725D2C353F0541887A1982D55E /* ZXLVideoUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		214DF0B6664033C87D6B846599FB477A /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 77176A2DCCF0B5197450A545383AEDDC /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2535B52B53A9DCDB8D82F6AF51AD7E74 /* ZXLTaskInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA6B352F79777C389B63437FDDF1840 /* ZXLTaskInfoModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		26736D501BCF4C2A3965B28CD8194BF9 /* TZImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05709614A9B167385A3FD91BB26642A3 /* TZImageManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		2BAF605CB29217726746221850A4A75E /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 39FCF119CEF4F457064C2ADB971B65BD /* FMResultSet.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2BBB25C8F39AA8708E3F7BCD19D7D506 /* ZXLUploadFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = AC214E90B44A3B555903DD4DFE55C051 /* ZXLUploadFmdb.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		2C1E08F08BC7A1C7325CCBFC72939A5F /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD13CEF9544CC31DA757A29A77B4E10 /* TZProgressView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		2C41E93CF9F63753E9F5D4AF7410C9E6 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2E8A1FA7C4E45A22F03748A7E4F2D3 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		2C82C2B40D2367BD23040FE42C4D56C2 /* ZXLNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AECB2AA521421C6794CA3C606E1AD4 /* ZXLNetworkManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		304CE493CB3539FF9BF10D5707A889A2 /* ZXLReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = EBF8852E9FF82EA239768979F4A80297 /* ZXLReachability.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		34CA843263A70327D4E20430EB27B171 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D6714DDBB51053D124899AD4872CAB9 /* FMDatabase.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		354798287D9CC74D17542A0480115FAA /* ZXLUploadTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1C998464889FC689F663733BE2877B /* ZXLUploadTaskManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		370086412F3C935595597A53D5AD1712 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C62C256BC9047FC6F5D0C2BE1B94AA4 /* AVFoundation.framework */; };
-		370B70CE4990B2EC5A78FF1EE335200C /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CD5321311953EF5AEC6CA7AC506B68 /* NSBundle+TZImagePicker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		3888B8641B2C76DFD4A82E8CBE7A88D3 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C8A80F9F1E7991007DF8FC0169E2F9 /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3AF896107C6654F199702FC4ACBDF2F0 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 145249C7E6597CA1D07C16BD76FB08B5 /* TZImageCropManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		3DB55E35BA47642359FD32FEF0BF2361 /* ZXLUploadDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B78CA1A231AC52300EBBE0F5CE7B1A3 /* ZXLUploadDefine.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3EE13A010166BDC5A177FEE440E8C3B5 /* TZPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF9758E10E9BF4E8CC62858248D8E9E /* TZPhotoPreviewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		370B70CE4990B2EC5A78FF1EE335200C /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C60BCDF6D8A2CF31D22E08D1F9416C /* NSBundle+TZImagePicker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		3888B8641B2C76DFD4A82E8CBE7A88D3 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C7BA4B2B68BF123CA05E379CDA6D43BA /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3AF896107C6654F199702FC4ACBDF2F0 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DC5B01A807E97D9FEFBC854254480B /* TZImageCropManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		3DB55E35BA47642359FD32FEF0BF2361 /* ZXLUploadDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = DD1634660D52FE12A13AE9BD434C50F5 /* ZXLUploadDefine.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3EE13A010166BDC5A177FEE440E8C3B5 /* TZPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 806BCC09B879F17E9048583ED818F779 /* TZPhotoPreviewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3FECFDE87253334FA356C4898AA1478D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
 		44E74A19E9A769D4EFF5F4511A6AD171 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
-		466869E41EB306F74C8A6E87CC1539BF /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B847CD362F2C53D350EC2AA24C014525 /* ViewController+MASAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		4A731452A78EDF0D84AA3D749C867C52 /* TZAssetModel.h in Headers */ = {isa = PBXBuildFile; fileRef = D55C664A7D15D593585DEFE8F051767F /* TZAssetModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4C9571B621269D8389D3B853123A5C9C /* ZXLRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DE45C10CCC4C208363D1BA027282713 /* ZXLRecorder.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4CE454FB899E400ABAFAF04676ED2461 /* ZXLUploadFmdb.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F81A59190FA528D80475CF5651384B /* ZXLUploadFmdb.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		523F69012549DCADB26D11EFB6593B5B /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F9C8348C162FCE17E2087B7D90DC906 /* Masonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		52D63D25181A9119655517459396B9EB /* ZXLPhotosUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EA053065665BA67FA9354FDF5D40B58C /* ZXLPhotosUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		5332C8FA340F0F3803ECB274BB4E639E /* ZXLTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = C27E246384AF13ACA65B01F34033D922 /* ZXLTimer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		548BBD5B63FA097F419829C3EE8EA068 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F21F76E446DC38A75651BF40758B7BD /* View+MASAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		54B1B3F824D2C3FCA0703B58E70764F5 /* ZXLReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 349932838684519332D269068B01957D /* ZXLReachability.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		55650D9F3A7416B787B31D298981E7B6 /* UIView+Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = CC20E1AE812DCCB808C111445FDEA717 /* UIView+Layout.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		466869E41EB306F74C8A6E87CC1539BF /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B81F4637560A3414D20ABB321B340F /* ViewController+MASAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		4A731452A78EDF0D84AA3D749C867C52 /* TZAssetModel.h in Headers */ = {isa = PBXBuildFile; fileRef = C4B558C52BADFCF746DF3CEB7960AC41 /* TZAssetModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4C9571B621269D8389D3B853123A5C9C /* ZXLRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = DE6735B40763DF930E8E88C594D5C7DA /* ZXLRecorder.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4CE454FB899E400ABAFAF04676ED2461 /* ZXLUploadFmdb.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DC8CA93AC4B3B3D78B5B6BEC03F393 /* ZXLUploadFmdb.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		523F69012549DCADB26D11EFB6593B5B /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = DDDE2E7C3CFCA222725673C281D3788B /* Masonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		52D63D25181A9119655517459396B9EB /* ZXLPhotosUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A763AD098B063EDCC3F0424A3102DBA9 /* ZXLPhotosUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5332C8FA340F0F3803ECB274BB4E639E /* ZXLTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = D22F1B803223B8649B13F42BFCEF8266 /* ZXLTimer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		548BBD5B63FA097F419829C3EE8EA068 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BEBC443ACC7BA27549B1E63E87003 /* View+MASAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		54B1B3F824D2C3FCA0703B58E70764F5 /* ZXLReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B85C6BD7B6256915197177B03482 /* ZXLReachability.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		55650D9F3A7416B787B31D298981E7B6 /* UIView+Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D9FB1BF965DC7745B47F704C951A850 /* UIView+Layout.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		56B1A5A91674B870DB72EF57C14A61F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
-		57D359EDC04901C23D10B5A22F4F88B0 /* ZXLFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA20D415F7B357F464B12D30C5ABD3C /* ZXLFileUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5B46C39A3F939EDB676981756CC24007 /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A53A708C6B6454672C9C37FB48F5F /* Masonry-dummy.m */; };
+		57D359EDC04901C23D10B5A22F4F88B0 /* ZXLFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F751BF174969F59E28FC448A8E26358 /* ZXLFileUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5B46C39A3F939EDB676981756CC24007 /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F41902902D5C8B1DAD917C90423FB6B7 /* Masonry-dummy.m */; };
 		5C415A05D9073A5DC358F6BE3A2E5BBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
-		5EBFADB0ACACA114B98082EBD8FDA650 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A8C4404C28089B7D716A0B924E1C930F /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5F4BC305C5190AFDD4D93999780A0BED /* SVProgressAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = E9013F1F4688DF16F8FB6F4D124505E6 /* SVProgressAnimatedView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5EBFADB0ACACA114B98082EBD8FDA650 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 748D422A1561D0B45161417DA2A20A96 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5F4BC305C5190AFDD4D93999780A0BED /* SVProgressAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = D5E5843BE52BB25CDF4E8CA1D8228382 /* SVProgressAnimatedView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		60663739B77AE0CB946DFB79E175CADA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
-		61C611ABFFC5FFF35ACE70883CB8F523 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 414E9D812C2C1EBD037ABB3C13AE63E9 /* MASLayoutConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		61C611ABFFC5FFF35ACE70883CB8F523 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C535769704DE1A6AF61731F40671CCD7 /* MASLayoutConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		6209E20926D79222E59F58B962BFAA1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38182C79A7D9D86AE009A79906DD74D5 /* UIKit.framework */; };
-		657FD9F738532BDF3FA559DCB3026E88 /* TZPhotoPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C515F991E088CF7BF19CF3FB36E9D80 /* TZPhotoPickerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		69ABAC167F5F6C283E60F34220C44A2B /* ZXLUpload.h in Headers */ = {isa = PBXBuildFile; fileRef = 618F397F51C5442AB5B3E82E5171906A /* ZXLUpload.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6AB24E46F15C33A2FA9CBA5F271A4244 /* ZXLFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E5D6EDA2FEE8EF6F6E226571E5BFF3 /* ZXLFileUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		6DEA7A6D11BEF45C33632B316DFC6225 /* TZVideoPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = CF83771B1E49A760E469FB42E3D62EC3 /* TZVideoPlayerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6FBEF9BEF976F73220F5EA0246FA6674 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B65651DE8634EB23E227971B5984A0 /* MASConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		718B6A33180D929A6A9E4D25C9810375 /* ZXLSyncMutableDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 94313C089ED9C4AED726E784A93D07C0 /* ZXLSyncMutableDictionary.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		71BFF7D1CB4D6E7617486DBA6A592AD2 /* ZXLPhotosUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 906B189F7CEC8C11CBE90627B7037082 /* ZXLPhotosUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7265B55378088FD8421DA7EFA71AD9BF /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B1B8490B0A43C177D9CB4532B613A0C /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7930B3F8978219803CEBE7561EBF4867 /* ZXLCompressManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E507729FB59177FC9E76015ACBEE4A2 /* ZXLCompressManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7AC0D0965486ED43C064F1BC177ACBC9 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D0B057F22BDDB2068840DD0C68B83C6 /* MASUtilities.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7BD7167F56281CA829635DBAC53063B0 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E634EB2D928DD2C760E19095B1BFB86 /* TZVideoPlayerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		7CDBF7EA5C30D66F866F8E3BA32F1712 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 555636190F8A9F46CFC9FA0A1C66EF12 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8102B1599738370ADD6BB0D0821163D7 /* TZPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0064DD8F43E8861FB24B50E59172F6 /* TZPhotoPreviewCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8163C8B94AD97F82AC40990699510299 /* ZXLCompressOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = DD2A0DB335BD6E0F9B3B6E1F3AE269EA /* ZXLCompressOperation.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		81C1291C7ABA4942277F5756671AEE37 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA690B6AE5B8AC641BA199CB03B88B4 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		657FD9F738532BDF3FA559DCB3026E88 /* TZPhotoPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AF95406BDFABB03EA64A5229FFD1AA /* TZPhotoPickerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		69ABAC167F5F6C283E60F34220C44A2B /* ZXLUpload.h in Headers */ = {isa = PBXBuildFile; fileRef = A89A2CB1E57DFD7353196827F08CA0FD /* ZXLUpload.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6AB24E46F15C33A2FA9CBA5F271A4244 /* ZXLFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC44CAC3DA47CC7E8C32A6479EA73E7 /* ZXLFileUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		6DEA7A6D11BEF45C33632B316DFC6225 /* TZVideoPlayerController.h in Headers */ = {isa = PBXBuildFile; fileRef = EF7DDBCCB198F2D28A5716C78A22EFE5 /* TZVideoPlayerController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6FBEF9BEF976F73220F5EA0246FA6674 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D1F981F9ECBB9FE24AE8449481CAAAF /* MASConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		718B6A33180D929A6A9E4D25C9810375 /* ZXLSyncMutableDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = B1731A26A57FF880911A0E7D4F6019F1 /* ZXLSyncMutableDictionary.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		71BFF7D1CB4D6E7617486DBA6A592AD2 /* ZXLPhotosUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A1360643FCAD9E8B674CC0396B1D29 /* ZXLPhotosUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7265B55378088FD8421DA7EFA71AD9BF /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EF6D3D5D39BBB9BB5FE2BA9EDC9F7D5 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7930B3F8978219803CEBE7561EBF4867 /* ZXLCompressManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F3C3F6537A89A55C31F8DDA3897017D8 /* ZXLCompressManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7AC0D0965486ED43C064F1BC177ACBC9 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = D64AB1220C59C20E1822AAAC1011DF86 /* MASUtilities.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7BD7167F56281CA829635DBAC53063B0 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2413225DD3CC30249D478BDDF16F926 /* TZVideoPlayerController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7CDBF7EA5C30D66F866F8E3BA32F1712 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1D5A25427256E71F74963183711F6 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8102B1599738370ADD6BB0D0821163D7 /* TZPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0AFB27B0D46E9602B51F908C129D7F /* TZPhotoPreviewCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8163C8B94AD97F82AC40990699510299 /* ZXLCompressOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 616703198350357236A76EFCA8662DFB /* ZXLCompressOperation.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		81C1291C7ABA4942277F5756671AEE37 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FE8AAEC422704284996339854CAE548 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		84C3BB13AE9B4BDFDC9591CC8DF1CF5B /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11866CB42E90E0BB4EE17CE402D38BC /* Photos.framework */; };
-		856D8A9CA3F3AFBCFD5424703B23ADF6 /* TZPhotoPreviewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F76C50697C04F3188D83D7AC8E5AF984 /* TZPhotoPreviewCell.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		86B2DF4CC6E598AAA73D0CC6EEBA0E96 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B61DCB4C67E52B71AF8ED38D43DCC28 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8BAB5791CC96934C43D494666AA1F47A /* ZXLThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 32691D68C795AF6771002CDBE57F5B9D /* ZXLThread.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8F082E3A5A18A875BE483EC80B0D5E50 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E29D1560C0765BF3F1554F82954EC5BF /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		903D16EEE10FFB91B8B4742586EDC09F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D766B03D1AB7F8B9862E97F46FCDCB /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		92711327ED7920702A69A828271279AE /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 783659592340E7695DF0FF07D6AD738C /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		951899A44D9D8C2B02012CC75AC96937 /* TZImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 36E498A8FF51FD39504099DD92FDA947 /* TZImageManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		95427DB103D75751DB1380AF5EC12A70 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 375EBF64D7C173E2D9928D5C1314D9CE /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		961EA204CEA2D749A1C289C95195F347 /* ZXLVideoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 118D2F613034B157F0E6FE37CFF46CA0 /* ZXLVideoUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		96A14B882C3AA9FE699E6AD4A2867987 /* ZXLUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F303C3146AFE42C213726579619BD5 /* ZXLUploadManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		976E340B23C62B27B7ED9BDB05E0606F /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = E392DA3FD5387B012CDDDB726CD99648 /* FMDB.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		99E00D593F76D7E6C96300345E211282 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 305F98DB0DD13309A81B1D352E908306 /* MASConstraintMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		9AB27A7F752AB644728D50B0228A070E /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 6290E42260D2A9E23415B77420C620A0 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9ADF10193F5A1E2AD22E391B041773DF /* SVProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5763CB0D302E673952459CF1C81D36 /* SVProgressHUD-dummy.m */; };
-		9B8F215C3C7726E36F3721161C51B93D /* ZXLFileInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA796820BD357DA4FFD8808FE79B2E2 /* ZXLFileInfoModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		9BFAE06AC2F3B426C64EEDBF8C99A69E /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 90AF4BCB7D0B2B62A4F75136D65530F3 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9C0908154FC1320D13F5FA40C47E47D7 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 157C03DDDA6A4C020F747EB8BBF19ADF /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		9F033F784C9080650C5EBF614CE9519A /* TZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DF1C02BDAF676088D92AF935D20CD3 /* TZLocationManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		9F3FF0C48B40FC093E194DA0CCAC2F31 /* SVRadialGradientLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F49F245BE7F9605BB867123A41FF86D /* SVRadialGradientLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A16889983D033B87401BA32ACCAC6DCC /* ZXLSyncMutableArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 62998E69DE9856974C761DAD9AF9A112 /* ZXLSyncMutableArray.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A6A63BB54A580EE091BD63E82341230C /* ZXLSyncMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD4131874D66277675DB1318620765 /* ZXLSyncMutableDictionary.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		A8BA8E8261CE6AC5D5FF8D4B6C08D240 /* ZXLSyncMapTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 934286B45EEF297F8D8C3A51C8E0D436 /* ZXLSyncMapTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A9408A74D97828D34BA4B3595F71A794 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29248CC858337CCD15328A95EB30F0C0 /* SVIndefiniteAnimatedView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		AA78E5F37D94129C4B080AEC139096E9 /* TZProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = CF226A9A329052EDDB7E0FE45CC5053B /* TZProgressView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AE8D86168C2CEB9EA6476811BBD12468 /* ZXLThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F775B6604CCBC76915AF49961EE9C08 /* ZXLThread.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		B5EC5518E18B05A5334C49ABBF4C78F7 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 9526E46F0268C7F76B1CE8D9CDDEF006 /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B656C0A6A2645E1764E786D620A01CFF /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D85490B0CDFEAE6B8418B7878714EB /* TZAssetModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		B6A2D254BAEDA5C64DE969EB9F70A46C /* ZXLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 47CD9C1DD676FBAE7784BD2A6AAE5DDA /* ZXLTimer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		856D8A9CA3F3AFBCFD5424703B23ADF6 /* TZPhotoPreviewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BD9568039F2172A46096C6F3A626C5B2 /* TZPhotoPreviewCell.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		86B2DF4CC6E598AAA73D0CC6EEBA0E96 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1127C6F0D37695CB26A9CC51B86EC3CA /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8BAB5791CC96934C43D494666AA1F47A /* ZXLThread.h in Headers */ = {isa = PBXBuildFile; fileRef = A2722FB9FD1CDE08525F338D251E19E1 /* ZXLThread.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8F082E3A5A18A875BE483EC80B0D5E50 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D6472E470370989A756D203FFB75401 /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		903D16EEE10FFB91B8B4742586EDC09F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5DF484D82A099AC9994552082FEC4E /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		92711327ED7920702A69A828271279AE /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BA7DEAF4B4CD2DA0FCDC1FEBE7CC8D4 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		951899A44D9D8C2B02012CC75AC96937 /* TZImageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F981D4AAEC0418BA333CF856004B2F4B /* TZImageManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		95427DB103D75751DB1380AF5EC12A70 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AF11F25D35D11A39CE6E00094BFDDEEE /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		961EA204CEA2D749A1C289C95195F347 /* ZXLVideoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D9EE69153D898D9E935977C5748B1A /* ZXLVideoUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		96A14B882C3AA9FE699E6AD4A2867987 /* ZXLUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 50C0B8D979A8A6E35E3130C2F148035E /* ZXLUploadManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		976E340B23C62B27B7ED9BDB05E0606F /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 9696D072EC8005084395E5663A81DD9D /* FMDB.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		99E00D593F76D7E6C96300345E211282 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 348F5FBDECFF4277DBE5D55EAD121A76 /* MASConstraintMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		9AB27A7F752AB644728D50B0228A070E /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 8247ECB32C0030E3394C7E51B8B740FC /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9ADF10193F5A1E2AD22E391B041773DF /* SVProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 308EFDFD82DBC157554632047130F5B2 /* SVProgressHUD-dummy.m */; };
+		9B8F215C3C7726E36F3721161C51B93D /* ZXLFileInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 513615E6FBDB08FAED5E1F2C77EC7EBC /* ZXLFileInfoModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		9BFAE06AC2F3B426C64EEDBF8C99A69E /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C24F3FE264B544A7E8540A8F91D01FA6 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9C0908154FC1320D13F5FA40C47E47D7 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEAEF0714BD3DCC6D64269ECFD5A41 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		9F033F784C9080650C5EBF614CE9519A /* TZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 793BCABA8F70BC3E4D70BF2FCE13E1E5 /* TZLocationManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		9F3FF0C48B40FC093E194DA0CCAC2F31 /* SVRadialGradientLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 12B29E7C0954621858B8BA6B29DABBD3 /* SVRadialGradientLayer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A16889983D033B87401BA32ACCAC6DCC /* ZXLSyncMutableArray.h in Headers */ = {isa = PBXBuildFile; fileRef = B44AF8636840E524E73C74E24D711B5C /* ZXLSyncMutableArray.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A6A63BB54A580EE091BD63E82341230C /* ZXLSyncMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA568640E433F7762428840EFEB47643 /* ZXLSyncMutableDictionary.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A8BA8E8261CE6AC5D5FF8D4B6C08D240 /* ZXLSyncMapTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1526DF0DBB1CDD0F7AF40DC37F9D2 /* ZXLSyncMapTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A9408A74D97828D34BA4B3595F71A794 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77D3C914FAC5D63071C97B5338E02E /* SVIndefiniteAnimatedView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		AA78E5F37D94129C4B080AEC139096E9 /* TZProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7867AFE32CC26D5884D7317AD82CDB3A /* TZProgressView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AE8D86168C2CEB9EA6476811BBD12468 /* ZXLThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 948CC0E7D4ECAB5DEAEF1DD5973E7D49 /* ZXLThread.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		B5EC5518E18B05A5334C49ABBF4C78F7 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CFD823F1DBE40DA871A6CAF401BC82 /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B656C0A6A2645E1764E786D620A01CFF /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A940F4F2630A0C248C2A219F028D /* TZAssetModel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		B6A2D254BAEDA5C64DE969EB9F70A46C /* ZXLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = C4DC8EA2D90603FEE5E3D65CC3215F92 /* ZXLTimer.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B6DCD07548D6C60CC8D21D72584DA2DD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 462ADBE9A1F1293EB49E69C47BC78674 /* CoreTelephony.framework */; };
-		B953667D411D1DCD919CBD314F568A92 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD76969FECABC14A71B806EC0DFD460 /* NSLayoutConstraint+MASDebugAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		BC2BED4E0909C7AD914B6A882BBDB9F8 /* ZXLSyncMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CDD507634983B2A3732BDF2FAF7FF8 /* ZXLSyncMutableArray.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C2F768D2A8FCDEBADE0E35949F3B36AF /* TZGifPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D6516214D2E04C25E8AC1E4BB283A9 /* TZGifPhotoPreviewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C40CFE1274D588CA1A9DF9394BF76EAE /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFD9C58877D2B6FA02BE0BC7224AF7 /* FMDB-dummy.m */; };
-		C593DE36D948D75181BAA60673C2275C /* ZXLUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D4F00D95DC5379BE85B97B149637AF /* ZXLUploadFileManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C6E83C10646E2DF6C83A578CE6AF0E5A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AD25CDD95C0629B2E2305B4FE5475C70 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CAB796A3964EB9C66ADBBC498CA59DC5 /* ZXLUploadUnifiedResponese.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C1A395E43D5D7CB482D3C41BA9EF20 /* ZXLUploadUnifiedResponese.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		CBACF7D3E10B4A9E08F5E4E4C1FD6121 /* ZXLFileInfoModel.h in Headers */ = {isa = PBXBuildFile; fileRef = DE3122281B834DE8EDD920A03A185E72 /* ZXLFileInfoModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CEF7E139022FFA4F5C99D4DC5DE67990 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 890EE49ED25D00FE85C3F138E314AD1E /* MASViewAttribute.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		B953667D411D1DCD919CBD314F568A92 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D9889401B02784C33FC2D64FF54A17 /* NSLayoutConstraint+MASDebugAdditions.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		BC2BED4E0909C7AD914B6A882BBDB9F8 /* ZXLSyncMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A83D486E2B155509461728D614A4C0B /* ZXLSyncMutableArray.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		C2F768D2A8FCDEBADE0E35949F3B36AF /* TZGifPhotoPreviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 81AE895410B239F8588D23D067BFC559 /* TZGifPhotoPreviewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C40CFE1274D588CA1A9DF9394BF76EAE /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 049CBD552E085AF3E15C2117400AA80F /* FMDB-dummy.m */; };
+		C593DE36D948D75181BAA60673C2275C /* ZXLUploadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFFA43D4078451433FB12850B5F1773E /* ZXLUploadFileManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		C6E83C10646E2DF6C83A578CE6AF0E5A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F333F0A3AF88BDBE4D35B1711B7E9D5 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CAB796A3964EB9C66ADBBC498CA59DC5 /* ZXLUploadUnifiedResponese.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D535F0316565D034CC3BAEA8DDE2535 /* ZXLUploadUnifiedResponese.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		CBACF7D3E10B4A9E08F5E4E4C1FD6121 /* ZXLFileInfoModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 600F1A4D0C53B0B35B39B97AAC59303C /* ZXLFileInfoModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CEF7E139022FFA4F5C99D4DC5DE67990 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 47657361D1DAB2AD065F90FB1C6CE86F /* MASViewAttribute.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		CF7CAF90FB61370D77129C5E11A18CC1 /* Pods-ZXLUploadDome-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D4C563E8E7053DDFF058503FA82C0C /* Pods-ZXLUploadDome-dummy.m */; };
-		D2E2D49F178FBD9A48BFB7663B7BB854 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22179E7982D187A4BC6A1D18890A016 /* SVProgressAnimatedView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D3CD1C7F20066D0C541A0792A1B1DD2A /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F2E66228E9AF43EDA32974517859B7 /* SVRadialGradientLayer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D6D9455020E4FD7AE6B7E4DC4A70844A /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3B84A8A662F984D228C8F8A26B5FB7 /* TZAssetCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D72BB6CA56EB8E5C4AE6D33FC244AAAE /* ZXLUploadTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9208554A4F73C3AFC199F5A85B0879C9 /* ZXLUploadTaskManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D2E2D49F178FBD9A48BFB7663B7BB854 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8437B39ABF030A6A1C32651C89D04CD /* SVProgressAnimatedView.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D3CD1C7F20066D0C541A0792A1B1DD2A /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E4728CB253905623ABABC024C4D7C6 /* SVRadialGradientLayer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D6D9455020E4FD7AE6B7E4DC4A70844A /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD17B034ABD68A1858A04E20654D697 /* TZAssetCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D72BB6CA56EB8E5C4AE6D33FC244AAAE /* ZXLUploadTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 83A147D69790E671281DE182BDC44991 /* ZXLUploadTaskManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		D825758A269689714503460EBF409C6F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11866CB42E90E0BB4EE17CE402D38BC /* Photos.framework */; };
-		D8CDBD493172F570051E95C6791A722C /* TZGifPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B1C571DD916529577322A5AE24043 /* TZGifPhotoPreviewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D8D72BEC4364E9F77BCC6B8AB4E30DF3 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = D902A8954426E00C265E8598519D7E1A /* MASViewConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DA4AF7284F86C8E2DAE4AEBA04A48B5E /* ZXLSyncMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A45EAE7B1B4E379E355FF40A9B11681 /* ZXLSyncMapTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DC8B69EBAF7BFC1C0ADB0636DBBF25E2 /* ZXLCompressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6A34E0FE918E87EB3A2888162ACEC6 /* ZXLCompressManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E2C4DB7CEF9EF39A68A76A4DF85AADF6 /* ZXLUploadUnifiedResponese.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DAC0E292AC439BDA896E02B713B9ED6 /* ZXLUploadUnifiedResponese.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E8DA627719BCBFC683D86E560BBC3DB1 /* ZXLUploadFileResultCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = F954B89C85AB116E15DC8E23A75A0A51 /* ZXLUploadFileResultCenter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		EF0905C594B474CFA9A8A2F27469B1A5 /* NSBundle+TZImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 54194A610E23C147421AB9A67FF0822B /* NSBundle+TZImagePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D8CDBD493172F570051E95C6791A722C /* TZGifPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F17FE1A4508BF22EA39134FF25DD2 /* TZGifPhotoPreviewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D8D72BEC4364E9F77BCC6B8AB4E30DF3 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 205BC357F02D15E5A721E81F87575696 /* MASViewConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		DA4AF7284F86C8E2DAE4AEBA04A48B5E /* ZXLSyncMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8987346897E51AAAEC3DAEACEF845063 /* ZXLSyncMapTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		DC8B69EBAF7BFC1C0ADB0636DBBF25E2 /* ZXLCompressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B86122965D12DD2A2FDD06AD4B5C6D /* ZXLCompressManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		E2C4DB7CEF9EF39A68A76A4DF85AADF6 /* ZXLUploadUnifiedResponese.h in Headers */ = {isa = PBXBuildFile; fileRef = F2E24DBEE5C02D492F8F8279A36B774A /* ZXLUploadUnifiedResponese.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E8DA627719BCBFC683D86E560BBC3DB1 /* ZXLUploadFileResultCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = DD61E95C5811E140B4962AA24B794C5C /* ZXLUploadFileResultCenter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EF0905C594B474CFA9A8A2F27469B1A5 /* NSBundle+TZImagePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = D4EAA3817D21790B55B6149CA6D6F223 /* NSBundle+TZImagePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		F0B56A7D38A399A2F67F9920C9526A66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */; };
-		F165DAE674DDBE37634731EDDEFD14B3 /* ZXLUploadFileResultCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1733AB760011CFFF74DE530D9C09AF43 /* ZXLUploadFileResultCenter.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F2848F27B54AABA0DA9EEA32ABE8B65F /* TZLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D0641B1FF0CB2BA56D472F1CDB9DB405 /* TZLocationManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F390D582745DF3516ADD4D910A2ACFFA /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFA270FB51154AEE10DC2A393A46EB2 /* MASCompositeConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F3F44281EEB91003B92A2167304442B0 /* TZImageCropManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B23CF68ABF16D70F48EEA27E230EAD1B /* TZImageCropManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F42D3D33B0FD8814A3C33FC46FE1690A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D937D0664A983925DB1F7D07F5862BF4 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F57BBAAC83640C0F62E0C2AB4078F039 /* ZXLUpload-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 827CDCE1CD564F64CCC744A79251EA80 /* ZXLUpload-dummy.m */; };
-		F6433BDE7969A3EB824BB21BB0A48181 /* ZXLRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = A64B61BDD8D624DEBEA6FE9D658FF42C /* ZXLRecorder.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F742E4D40DC262DE5C06FF0BF2E0E0FD /* ZXLTaskInfoModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF054320FF4018D5B3E65AE79E1DCEF /* ZXLTaskInfoModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F861D2DADCE8A8F94F1DCB22EB8A6CE2 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD8483456A1D5FE998AECE2119E5420 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F95DE0547FF0CED630F1A726EA35C160 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A246196A37A6AF8255AA8FF4472BA5 /* UIView+Layout.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FB415F79751F1A1F2203183C3CEE0723 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A088F969431800D6A87D28E417AD4762 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F165DAE674DDBE37634731EDDEFD14B3 /* ZXLUploadFileResultCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 54925C539662F1D454B05E934BF253FD /* ZXLUploadFileResultCenter.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		F2848F27B54AABA0DA9EEA32ABE8B65F /* TZLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 35A2624CBD9B0511E5B1989914D48676 /* TZLocationManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F390D582745DF3516ADD4D910A2ACFFA /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A4EE5496387843C63F240544FB7A9F /* MASCompositeConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		F3F44281EEB91003B92A2167304442B0 /* TZImageCropManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C033F1AB1D69817A30D4082BF249A3F /* TZImageCropManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F42D3D33B0FD8814A3C33FC46FE1690A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B22B01606039FD176AF9AF2CC6F9479 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		F57BBAAC83640C0F62E0C2AB4078F039 /* ZXLUpload-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C3B1EBE9AC7F390A81BC5EE21FAB2 /* ZXLUpload-dummy.m */; };
+		F6433BDE7969A3EB824BB21BB0A48181 /* ZXLRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 943DE11FDCC600B44E2116179B277077 /* ZXLRecorder.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		F742E4D40DC262DE5C06FF0BF2E0E0FD /* ZXLTaskInfoModel.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5763DA15A81FF5514D83582620203F /* ZXLTaskInfoModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F861D2DADCE8A8F94F1DCB22EB8A6CE2 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E312CF41DC4EBA2D8FFE227DAC61DF /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F95DE0547FF0CED630F1A726EA35C160 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 753321671365E77F3166EAC8A2BA675E /* UIView+Layout.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		FB415F79751F1A1F2203183C3CEE0723 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 71B5A4012A6DAA513ACCB29D3F32A32B /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FD75EA9362B0CA0B8BC780A33F3488CC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49BAA3F0F7301741FE7362181355F0C /* QuartzCore.framework */; };
-		FEE98D6A59553E2E3B5CF6152B911DF5 /* ZXLDocumentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A252618EAD8C39F95C2E8168020940CC /* ZXLDocumentUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FFF26610CF2ACE597E335F9027B6A21D /* ZXLCompressOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3EBADABB861F64D29FFCCA1045CF429 /* ZXLCompressOperation.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		FEE98D6A59553E2E3B5CF6152B911DF5 /* ZXLDocumentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D878A703730FF0EE86CB671778822A /* ZXLDocumentUtils.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		FFF26610CF2ACE597E335F9027B6A21D /* ZXLCompressOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0359284740A6CFCE567F2591A596ED69 /* ZXLCompressOperation.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,168 +202,169 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0181F23CF2AAA2048C01E6071D28F959 /* ZXLUpload.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = ZXLUpload.bundle; path = Framework/ZXLUpload.bundle; sourceTree = "<group>"; };
 		025E2CBDDC335314DB4D54BD593B23C3 /* libZXLUpload.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libZXLUpload.a; path = libZXLUpload.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		05A54F9B73D863A7D27611E709D00C41 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
+		0359284740A6CFCE567F2591A596ED69 /* ZXLCompressOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLCompressOperation.m; path = Framework/ZXLUpload/ZXLCompressOperation.m; sourceTree = "<group>"; };
+		03C60BCDF6D8A2CF31D22E08D1F9416C /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+TZImagePicker.m"; path = "TZImagePickerController/TZImagePickerController/NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
+		049CBD552E085AF3E15C2117400AA80F /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
+		0531B85C6BD7B6256915197177B03482 /* ZXLReachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLReachability.m; path = Framework/ZXLUpload/ZXLReachability.m; sourceTree = "<group>"; };
+		05709614A9B167385A3FD91BB26642A3 /* TZImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImageManager.m; path = TZImagePickerController/TZImagePickerController/TZImageManager.m; sourceTree = "<group>"; };
 		05FD9323945F0BF02055885CF35A5F56 /* Pods-ZXLUploadDome-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZXLUploadDome-frameworks.sh"; sourceTree = "<group>"; };
-		08E5D6EDA2FEE8EF6F6E226571E5BFF3 /* ZXLFileUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLFileUtils.m; path = Framework/ZXLUpload/ZXLFileUtils.m; sourceTree = "<group>"; };
-		0AA796820BD357DA4FFD8808FE79B2E2 /* ZXLFileInfoModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLFileInfoModel.m; path = Framework/ZXLUpload/ZXLFileInfoModel.m; sourceTree = "<group>"; };
-		0B78CA1A231AC52300EBBE0F5CE7B1A3 /* ZXLUploadDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadDefine.h; path = Framework/ZXLUpload/ZXLUploadDefine.h; sourceTree = "<group>"; };
-		10478AEC0788D9EF1E0A80768AEAD42B /* lame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lame.framework; path = ZXLRecorder/lame.framework; sourceTree = "<group>"; };
-		118D2F613034B157F0E6FE37CFF46CA0 /* ZXLVideoUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLVideoUtils.m; path = Framework/ZXLUpload/ZXLVideoUtils.m; sourceTree = "<group>"; };
-		11C7417AD16FFD9B5684146D9B547DAC /* ZXLRecorder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZXLRecorder.xcconfig; sourceTree = "<group>"; };
-		13A246196A37A6AF8255AA8FF4472BA5 /* UIView+Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Layout.m"; path = "TZImagePickerController/TZImagePickerController/UIView+Layout.m"; sourceTree = "<group>"; };
-		145249C7E6597CA1D07C16BD76FB08B5 /* TZImageCropManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImageCropManager.m; path = TZImagePickerController/TZImagePickerController/TZImageCropManager.m; sourceTree = "<group>"; };
+		0BA7DEAF4B4CD2DA0FCDC1FEBE7CC8D4 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		0CA6B352F79777C389B63437FDDF1840 /* ZXLTaskInfoModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLTaskInfoModel.m; path = Framework/ZXLUpload/ZXLTaskInfoModel.m; sourceTree = "<group>"; };
+		0EF6D3D5D39BBB9BB5FE2BA9EDC9F7D5 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
+		0F333F0A3AF88BDBE4D35B1711B7E9D5 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
+		10D9889401B02784C33FC2D64FF54A17 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		111BEBC443ACC7BA27549B1E63E87003 /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
+		1127C6F0D37695CB26A9CC51B86EC3CA /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		12B29E7C0954621858B8BA6B29DABBD3 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVRadialGradientLayer.h; path = SVProgressHUD/SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		13DC8CA93AC4B3B3D78B5B6BEC03F393 /* ZXLUploadFmdb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadFmdb.h; path = Framework/ZXLUpload/ZXLUploadFmdb.h; sourceTree = "<group>"; };
+		13EDE4D7081956F5AE344C6FA80984B5 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
+		14D1526DF0DBB1CDD0F7AF40DC37F9D2 /* ZXLSyncMapTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLSyncMapTable.h; path = Framework/ZXLUpload/ZXLSyncMapTable.h; sourceTree = "<group>"; };
 		14D15C1F20EAFA4A7D1BB16ABCB14E49 /* libSVProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSVProgressHUD.a; path = libSVProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		157C03DDDA6A4C020F747EB8BBF19ADF /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
-		15E51C3380F4B1275A7A1BA82405E862 /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
-		1733AB760011CFFF74DE530D9C09AF43 /* ZXLUploadFileResultCenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadFileResultCenter.m; path = Framework/ZXLUpload/ZXLUploadFileResultCenter.m; sourceTree = "<group>"; };
-		1B6F177D3F4100A9500B6F89377F3BF9 /* ZXLUploadFmdb.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadFmdb.m; path = Framework/ZXLUpload/ZXLUploadFmdb.m; sourceTree = "<group>"; };
+		154EB96547D5B91616E6CE2D78384E68 /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
+		19EA72725D2C353F0541887A1982D55E /* ZXLVideoUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLVideoUtils.h; path = Framework/ZXLUpload/ZXLVideoUtils.h; sourceTree = "<group>"; };
+		1D1F981F9ECBB9FE24AE8449481CAAAF /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
 		1E914A42C3B7D789E83204F2D610B162 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		28686962ED41C821719AA717673D9521 /* TZImagePickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImagePickerController.m; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.m; sourceTree = "<group>"; };
-		28AD4131874D66277675DB1318620765 /* ZXLSyncMutableDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLSyncMutableDictionary.m; path = Framework/ZXLUpload/ZXLSyncMutableDictionary.m; sourceTree = "<group>"; };
-		29248CC858337CCD15328A95EB30F0C0 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVIndefiniteAnimatedView.m; path = SVProgressHUD/SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		20472ED3151547F9E2A529676B688F98 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
+		205BC357F02D15E5A721E81F87575696 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
+		25D9566FFC048834699054B07AB36FAE /* TZPhotoPickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPickerController.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPickerController.m; sourceTree = "<group>"; };
+		27BABB06C9151C5A6B807D4E7CC4121F /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		2AD17B034ABD68A1858A04E20654D697 /* TZAssetCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZAssetCell.m; path = TZImagePickerController/TZImagePickerController/TZAssetCell.m; sourceTree = "<group>"; };
+		2B1003B08051C139235FBE0EEED6A33D /* ZXLUploadFileManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadFileManager.h; path = Framework/ZXLUpload/ZXLUploadFileManager.h; sourceTree = "<group>"; };
 		2B39A454D7EA9AF4B81D65B5B14026B0 /* Pods-ZXLUploadDome-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZXLUploadDome-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2C515F991E088CF7BF19CF3FB36E9D80 /* TZPhotoPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPickerController.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPickerController.h; sourceTree = "<group>"; };
-		2CA690B6AE5B8AC641BA199CB03B88B4 /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
-		2D0B057F22BDDB2068840DD0C68B83C6 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
-		2DE45C10CCC4C208363D1BA027282713 /* ZXLRecorder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLRecorder.h; path = ZXLRecorder/Recorder/ZXLRecorder.h; sourceTree = "<group>"; };
-		2E634EB2D928DD2C760E19095B1BFB86 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZVideoPlayerController.m; path = TZImagePickerController/TZImagePickerController/TZVideoPlayerController.m; sourceTree = "<group>"; };
-		2F775B6604CCBC76915AF49961EE9C08 /* ZXLThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLThread.m; path = ZXLRecorder/Recorder/ZXLThread.m; sourceTree = "<group>"; };
-		305F98DB0DD13309A81B1D352E908306 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
-		32691D68C795AF6771002CDBE57F5B9D /* ZXLThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLThread.h; path = ZXLRecorder/Recorder/ZXLThread.h; sourceTree = "<group>"; };
-		335CFA71022D2F0842DF10436AB514B2 /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewController.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.m; sourceTree = "<group>"; };
-		349932838684519332D269068B01957D /* ZXLReachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLReachability.m; path = Framework/ZXLUpload/ZXLReachability.m; sourceTree = "<group>"; };
-		36E498A8FF51FD39504099DD92FDA947 /* TZImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImageManager.h; path = TZImagePickerController/TZImagePickerController/TZImageManager.h; sourceTree = "<group>"; };
-		375EBF64D7C173E2D9928D5C1314D9CE /* SVProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
-		379EF71CC5D448ED4221CD27C2573FF8 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		2C033F1AB1D69817A30D4082BF249A3F /* TZImageCropManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImageCropManager.h; path = TZImagePickerController/TZImagePickerController/TZImageCropManager.h; sourceTree = "<group>"; };
+		2C8F17FE1A4508BF22EA39134FF25DD2 /* TZGifPhotoPreviewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZGifPhotoPreviewController.m; path = TZImagePickerController/TZImagePickerController/TZGifPhotoPreviewController.m; sourceTree = "<group>"; };
+		2D8442346A451440DFE14A15B4CDB99A /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
+		308EFDFD82DBC157554632047130F5B2 /* SVProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		317E58128717B014AF397360E6EE7901 /* TZImagePickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImagePickerController.h; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.h; sourceTree = "<group>"; };
+		348F5FBDECFF4277DBE5D55EAD121A76 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
+		34E312CF41DC4EBA2D8FFE227DAC61DF /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
+		35A2624CBD9B0511E5B1989914D48676 /* TZLocationManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZLocationManager.h; path = TZImagePickerController/TZImagePickerController/TZLocationManager.h; sourceTree = "<group>"; };
+		364B46D3CFF22ED089AE558CA49B5AE9 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TZImagePickerController.bundle; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle; sourceTree = "<group>"; };
 		38182C79A7D9D86AE009A79906DD74D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		38D4F00D95DC5379BE85B97B149637AF /* ZXLUploadFileManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadFileManager.m; path = Framework/ZXLUpload/ZXLUploadFileManager.m; sourceTree = "<group>"; };
-		3B1B8490B0A43C177D9CB4532B613A0C /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
-		3FB7E302CF3F187DAC55D10CDAF07D30 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVIndefiniteAnimatedView.h; path = SVProgressHUD/SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		3FBFD9C58877D2B6FA02BE0BC7224AF7 /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
-		3FFA270FB51154AEE10DC2A393A46EB2 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
+		39FCF119CEF4F457064C2ADB971B65BD /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
+		3B22B01606039FD176AF9AF2CC6F9479 /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
+		3D6714DDBB51053D124899AD4872CAB9 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
 		412A73A652E2DFBD75B537DEE7E5775C /* Pods-ZXLUploadDome-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ZXLUploadDome-acknowledgements.plist"; sourceTree = "<group>"; };
-		414E9D812C2C1EBD037ABB3C13AE63E9 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
-		41C3D5B9994DC36E3BFE1DD55E696A1C /* SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SVProgressHUD.xcconfig; sourceTree = "<group>"; };
 		459E9F9DCC5B2E8D0E3763DE47640DC9 /* Pods-ZXLUploadDome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZXLUploadDome.release.xcconfig"; sourceTree = "<group>"; };
+		45B67EB9F41EA343F579DB25F61ED276 /* ZXLUploadManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadManager.m; path = Framework/ZXLUpload/ZXLUploadManager.m; sourceTree = "<group>"; };
 		462ADBE9A1F1293EB49E69C47BC78674 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		463383B9F16A66E485EAF38EBF4E1BA1 /* Pods-ZXLUploadDome-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ZXLUploadDome-resources.sh"; sourceTree = "<group>"; };
-		47CD9C1DD676FBAE7784BD2A6AAE5DDA /* ZXLTimer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLTimer.h; path = Framework/ZXLUpload/ZXLTimer.h; sourceTree = "<group>"; };
-		4C3EC759FCBEC4771C2A1C58F82E19F2 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TZImagePickerController.bundle; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle; sourceTree = "<group>"; };
-		4C6A34E0FE918E87EB3A2888162ACEC6 /* ZXLCompressManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLCompressManager.m; path = Framework/ZXLUpload/ZXLCompressManager.m; sourceTree = "<group>"; };
-		4D5763CB0D302E673952459CF1C81D36 /* SVProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD-dummy.m"; sourceTree = "<group>"; };
-		4D88A69F2993BB822F6C5043457D807E /* ZXLDocumentUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLDocumentUtils.h; path = Framework/ZXLUpload/ZXLDocumentUtils.h; sourceTree = "<group>"; };
-		4DAC0E292AC439BDA896E02B713B9ED6 /* ZXLUploadUnifiedResponese.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadUnifiedResponese.h; path = Framework/ZXLUpload/ZXLUploadUnifiedResponese.h; sourceTree = "<group>"; };
-		4DDCB25349AA1DB07C5DA6F16C42D1D8 /* TZImagePickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImagePickerController.h; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.h; sourceTree = "<group>"; };
-		4FD17120BA97D0E52702A707281D1F88 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
-		54194A610E23C147421AB9A67FF0822B /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+TZImagePicker.h"; path = "TZImagePickerController/TZImagePickerController/NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
-		54F7EBF262D64906F8D53C3499A05ED1 /* ZXLUploadFileManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadFileManager.h; path = Framework/ZXLUpload/ZXLUploadFileManager.h; sourceTree = "<group>"; };
-		555636190F8A9F46CFC9FA0A1C66EF12 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		5AB553FB0027E835C9F13FCE61C1A564 /* ZXLNetworkManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLNetworkManager.m; path = Framework/ZXLUpload/ZXLNetworkManager.m; sourceTree = "<group>"; };
-		5BF8D17C7FB6095EFE522E4905144A67 /* TZAssetCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZAssetCell.h; path = TZImagePickerController/TZImagePickerController/TZAssetCell.h; sourceTree = "<group>"; };
-		5C8BADCF9706D279AC9DA0D53A06F517 /* ZXLVideoUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLVideoUtils.h; path = Framework/ZXLUpload/ZXLVideoUtils.h; sourceTree = "<group>"; };
-		5ECF379D139F71AA0FA3EFEA445A2BE9 /* ZXLUpload.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZXLUpload.xcconfig; sourceTree = "<group>"; };
-		5F21F76E446DC38A75651BF40758B7BD /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
-		618F397F51C5442AB5B3E82E5171906A /* ZXLUpload.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUpload.h; path = Framework/ZXLUpload/ZXLUpload.h; sourceTree = "<group>"; };
-		61CD5321311953EF5AEC6CA7AC506B68 /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+TZImagePicker.m"; path = "TZImagePickerController/TZImagePickerController/NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
-		6290E42260D2A9E23415B77420C620A0 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
-		62998E69DE9856974C761DAD9AF9A112 /* ZXLSyncMutableArray.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLSyncMutableArray.h; path = Framework/ZXLUpload/ZXLSyncMutableArray.h; sourceTree = "<group>"; };
-		66BD3D395F3659306664B21A18F4C223 /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		47369D9772309220B4745A204FB18022 /* TZImagePickerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TZImagePickerController.xcconfig; sourceTree = "<group>"; };
+		47657361D1DAB2AD065F90FB1C6CE86F /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
+		50C0B8D979A8A6E35E3130C2F148035E /* ZXLUploadManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadManager.h; path = Framework/ZXLUpload/ZXLUploadManager.h; sourceTree = "<group>"; };
+		513615E6FBDB08FAED5E1F2C77EC7EBC /* ZXLFileInfoModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLFileInfoModel.m; path = Framework/ZXLUpload/ZXLFileInfoModel.m; sourceTree = "<group>"; };
+		54925C539662F1D454B05E934BF253FD /* ZXLUploadFileResultCenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadFileResultCenter.m; path = Framework/ZXLUpload/ZXLUploadFileResultCenter.m; sourceTree = "<group>"; };
+		55CFD823F1DBE40DA871A6CAF401BC82 /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
+		5A83D486E2B155509461728D614A4C0B /* ZXLSyncMutableArray.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLSyncMutableArray.m; path = Framework/ZXLUpload/ZXLSyncMutableArray.m; sourceTree = "<group>"; };
+		5DA1D5A25427256E71F74963183711F6 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		5E3F1DC2CC8FA7988B57EDDF34B79AE0 /* SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SVProgressHUD.xcconfig; sourceTree = "<group>"; };
+		5F751BF174969F59E28FC448A8E26358 /* ZXLFileUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLFileUtils.h; path = Framework/ZXLUpload/ZXLFileUtils.h; sourceTree = "<group>"; };
+		5FE8AAEC422704284996339854CAE548 /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
+		600F1A4D0C53B0B35B39B97AAC59303C /* ZXLFileInfoModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLFileInfoModel.h; path = Framework/ZXLUpload/ZXLFileInfoModel.h; sourceTree = "<group>"; };
+		616703198350357236A76EFCA8662DFB /* ZXLCompressOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLCompressOperation.h; path = Framework/ZXLUpload/ZXLCompressOperation.h; sourceTree = "<group>"; };
+		64BEF982CC75AD384D49F74FDB14068D /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewController.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.m; sourceTree = "<group>"; };
+		65CAB73857343EBF068D54BD443B7B8D /* TZImagePickerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TZImagePickerController-prefix.pch"; sourceTree = "<group>"; };
+		66D878A703730FF0EE86CB671778822A /* ZXLDocumentUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLDocumentUtils.m; path = Framework/ZXLUpload/ZXLDocumentUtils.m; sourceTree = "<group>"; };
 		68B395D4CF5AF45E106CB3756A43E324 /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFMDB.a; path = libFMDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B61DCB4C67E52B71AF8ED38D43DCC28 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		6F9C8348C162FCE17E2087B7D90DC906 /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
-		6FA20D415F7B357F464B12D30C5ABD3C /* ZXLFileUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLFileUtils.h; path = Framework/ZXLUpload/ZXLFileUtils.h; sourceTree = "<group>"; };
+		69AF95406BDFABB03EA64A5229FFD1AA /* TZPhotoPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPickerController.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPickerController.h; sourceTree = "<group>"; };
+		6CD13CEF9544CC31DA757A29A77B4E10 /* TZProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZProgressView.m; path = TZImagePickerController/TZImagePickerController/TZProgressView.m; sourceTree = "<group>"; };
+		6D535F0316565D034CC3BAEA8DDE2535 /* ZXLUploadUnifiedResponese.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadUnifiedResponese.m; path = Framework/ZXLUpload/ZXLUploadUnifiedResponese.m; sourceTree = "<group>"; };
+		6F2F11E40B155D4EB98CF88FFD72D6C3 /* TZImagePickerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TZImagePickerController-dummy.m"; sourceTree = "<group>"; };
+		71B5A4012A6DAA513ACCB29D3F32A32B /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		722E65E1E187C782A02294859DF3DAEF /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libMasonry.a; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		783659592340E7695DF0FF07D6AD738C /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		7D3E1270FEC07675AD7B326B6C94A32C /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
-		7F49F245BE7F9605BB867123A41FF86D /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVRadialGradientLayer.h; path = SVProgressHUD/SVRadialGradientLayer.h; sourceTree = "<group>"; };
-		827CDCE1CD564F64CCC744A79251EA80 /* ZXLUpload-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZXLUpload-dummy.m"; sourceTree = "<group>"; };
-		82995B6AAEBDEE312F3FD32F434425F6 /* TZProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZProgressView.m; path = TZImagePickerController/TZImagePickerController/TZProgressView.m; sourceTree = "<group>"; };
-		843A53A708C6B6454672C9C37FB48F5F /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
-		873B1C571DD916529577322A5AE24043 /* TZGifPhotoPreviewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZGifPhotoPreviewController.m; path = TZImagePickerController/TZImagePickerController/TZGifPhotoPreviewController.m; sourceTree = "<group>"; };
-		890EE49ED25D00FE85C3F138E314AD1E /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
-		89B65651DE8634EB23E227971B5984A0 /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
-		89F81A59190FA528D80475CF5651384B /* ZXLUploadFmdb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadFmdb.h; path = Framework/ZXLUpload/ZXLUploadFmdb.h; sourceTree = "<group>"; };
+		748D422A1561D0B45161417DA2A20A96 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
+		74DC5B01A807E97D9FEFBC854254480B /* TZImageCropManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImageCropManager.m; path = TZImagePickerController/TZImagePickerController/TZImageCropManager.m; sourceTree = "<group>"; };
+		753321671365E77F3166EAC8A2BA675E /* UIView+Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Layout.m"; path = "TZImagePickerController/TZImagePickerController/UIView+Layout.m"; sourceTree = "<group>"; };
+		77176A2DCCF0B5197450A545383AEDDC /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		7867AFE32CC26D5884D7317AD82CDB3A /* TZProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZProgressView.h; path = TZImagePickerController/TZImagePickerController/TZProgressView.h; sourceTree = "<group>"; };
+		793BCABA8F70BC3E4D70BF2FCE13E1E5 /* TZLocationManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZLocationManager.m; path = TZImagePickerController/TZImagePickerController/TZLocationManager.m; sourceTree = "<group>"; };
+		7B0AFB27B0D46E9602B51F908C129D7F /* TZPhotoPreviewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewCell.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.m; sourceTree = "<group>"; };
+		7B88A41C821CD6D36CB2847F79E11CCC /* ZXLUpload.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZXLUpload.xcconfig; sourceTree = "<group>"; };
+		7D9FB1BF965DC7745B47F704C951A850 /* UIView+Layout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Layout.h"; path = "TZImagePickerController/TZImagePickerController/UIView+Layout.h"; sourceTree = "<group>"; };
+		806BCC09B879F17E9048583ED818F779 /* TZPhotoPreviewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewController.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.h; sourceTree = "<group>"; };
+		81AE895410B239F8588D23D067BFC559 /* TZGifPhotoPreviewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZGifPhotoPreviewController.h; path = TZImagePickerController/TZImagePickerController/TZGifPhotoPreviewController.h; sourceTree = "<group>"; };
+		8247ECB32C0030E3394C7E51B8B740FC /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
+		83A147D69790E671281DE182BDC44991 /* ZXLUploadTaskManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadTaskManager.h; path = Framework/ZXLUpload/ZXLUploadTaskManager.h; sourceTree = "<group>"; };
+		846C3B1EBE9AC7F390A81BC5EE21FAB2 /* ZXLUpload-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZXLUpload-dummy.m"; sourceTree = "<group>"; };
+		860181683A47FECCEDD7BB982B850703 /* ZXLNetworkManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLNetworkManager.h; path = Framework/ZXLUpload/ZXLNetworkManager.h; sourceTree = "<group>"; };
+		888F68D9C98B48F46C2042D9F1ED1A08 /* TZImagePickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImagePickerController.m; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.m; sourceTree = "<group>"; };
+		88B86122965D12DD2A2FDD06AD4B5C6D /* ZXLCompressManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLCompressManager.m; path = Framework/ZXLUpload/ZXLCompressManager.m; sourceTree = "<group>"; };
+		8987346897E51AAAEC3DAEACEF845063 /* ZXLSyncMapTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLSyncMapTable.m; path = Framework/ZXLUpload/ZXLSyncMapTable.m; sourceTree = "<group>"; };
 		8C62C256BC9047FC6F5D0C2BE1B94AA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		8E507729FB59177FC9E76015ACBEE4A2 /* ZXLCompressManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLCompressManager.h; path = Framework/ZXLUpload/ZXLCompressManager.h; sourceTree = "<group>"; };
-		8EF054320FF4018D5B3E65AE79E1DCEF /* ZXLTaskInfoModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLTaskInfoModel.h; path = Framework/ZXLUpload/ZXLTaskInfoModel.h; sourceTree = "<group>"; };
-		906B189F7CEC8C11CBE90627B7037082 /* ZXLPhotosUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLPhotosUtils.h; path = Framework/ZXLUpload/ZXLPhotosUtils.h; sourceTree = "<group>"; };
-		90AF4BCB7D0B2B62A4F75136D65530F3 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		91F2E66228E9AF43EDA32974517859B7 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVRadialGradientLayer.m; path = SVProgressHUD/SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		9208554A4F73C3AFC199F5A85B0879C9 /* ZXLUploadTaskManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadTaskManager.h; path = Framework/ZXLUpload/ZXLUploadTaskManager.h; sourceTree = "<group>"; };
-		92D0E1B5EC227E9489F5174EE94F45D9 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
-		934286B45EEF297F8D8C3A51C8E0D436 /* ZXLSyncMapTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLSyncMapTable.h; path = Framework/ZXLUpload/ZXLSyncMapTable.h; sourceTree = "<group>"; };
+		8D6472E470370989A756D203FFB75401 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		8F77D3C914FAC5D63071C97B5338E02E /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVIndefiniteAnimatedView.m; path = SVProgressHUD/SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		8FEBBF035E6EF61964002488100372F7 /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		90A167ABBE6E17B605A71182104065EE /* TZAssetCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZAssetCell.h; path = TZImagePickerController/TZImagePickerController/TZAssetCell.h; sourceTree = "<group>"; };
+		937F5A1AF6E074514305591C7BD982D1 /* ZXLRecorder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZXLRecorder-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		94313C089ED9C4AED726E784A93D07C0 /* ZXLSyncMutableDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLSyncMutableDictionary.h; path = Framework/ZXLUpload/ZXLSyncMutableDictionary.h; sourceTree = "<group>"; };
-		9526E46F0268C7F76B1CE8D9CDDEF006 /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
-		97C8A80F9F1E7991007DF8FC0169E2F9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		9A07013E0EA42E642DBC46FC985A4878 /* TZPhotoPickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPickerController.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPickerController.m; sourceTree = "<group>"; };
-		9A45EAE7B1B4E379E355FF40A9B11681 /* ZXLSyncMapTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLSyncMapTable.m; path = Framework/ZXLUpload/ZXLSyncMapTable.m; sourceTree = "<group>"; };
+		943DE11FDCC600B44E2116179B277077 /* ZXLRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLRecorder.m; path = ZXLRecorder/Recorder/ZXLRecorder.m; sourceTree = "<group>"; };
+		948CC0E7D4ECAB5DEAEF1DD5973E7D49 /* ZXLThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLThread.m; path = ZXLRecorder/Recorder/ZXLThread.m; sourceTree = "<group>"; };
+		9696D072EC8005084395E5663A81DD9D /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		9711B089FCF30EA638B7EB617FF0C5FC /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		9A0642B0AE143BD5AA78C59909BCF8C5 /* lame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lame.framework; path = ZXLRecorder/lame.framework; sourceTree = "<group>"; };
 		9AEBC318E6A7970C349614E4FE896966 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
-		9CBDA3396A25CB8D3D2FEB338FEE22B8 /* TZImagePickerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TZImagePickerController-dummy.m"; sourceTree = "<group>"; };
-		A088F969431800D6A87D28E417AD4762 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		A252618EAD8C39F95C2E8168020940CC /* ZXLDocumentUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLDocumentUtils.m; path = Framework/ZXLUpload/ZXLDocumentUtils.m; sourceTree = "<group>"; };
+		9E19527B1EBCEB3DB2CBD79E542CCF7B /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVIndefiniteAnimatedView.h; path = SVProgressHUD/SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		A1E016CDE9863864BD1B2ED39E6D6265 /* ZXLRecorder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZXLRecorder.xcconfig; sourceTree = "<group>"; };
+		A2722FB9FD1CDE08525F338D251E19E1 /* ZXLThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLThread.h; path = ZXLRecorder/Recorder/ZXLThread.h; sourceTree = "<group>"; };
 		A3A2216648A540A4E5F9DAF068BFA1F1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		A4209F7D35ADC12A4AC374E71E6656D4 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
-		A64B61BDD8D624DEBEA6FE9D658FF42C /* ZXLRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLRecorder.m; path = ZXLRecorder/Recorder/ZXLRecorder.m; sourceTree = "<group>"; };
-		A731EF7CC2A27658AFDFC17816D9DDEB /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
-		A8C4404C28089B7D716A0B924E1C930F /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
+		A6AECB2AA521421C6794CA3C606E1AD4 /* ZXLNetworkManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLNetworkManager.m; path = Framework/ZXLUpload/ZXLNetworkManager.m; sourceTree = "<group>"; };
+		A763AD098B063EDCC3F0424A3102DBA9 /* ZXLPhotosUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLPhotosUtils.m; path = Framework/ZXLUpload/ZXLPhotosUtils.m; sourceTree = "<group>"; };
+		A89A2CB1E57DFD7353196827F08CA0FD /* ZXLUpload.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUpload.h; path = Framework/ZXLUpload/ZXLUpload.h; sourceTree = "<group>"; };
 		AB3D9C85B1627E981CCA204D32050D0F /* libTZImagePickerController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libTZImagePickerController.a; path = libTZImagePickerController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD25CDD95C0629B2E2305B4FE5475C70 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
-		AF3B84A8A662F984D228C8F8A26B5FB7 /* TZAssetCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZAssetCell.m; path = TZImagePickerController/TZImagePickerController/TZAssetCell.m; sourceTree = "<group>"; };
-		B0CDD507634983B2A3732BDF2FAF7FF8 /* ZXLSyncMutableArray.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLSyncMutableArray.m; path = Framework/ZXLUpload/ZXLSyncMutableArray.m; sourceTree = "<group>"; };
-		B23CF68ABF16D70F48EEA27E230EAD1B /* TZImageCropManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImageCropManager.h; path = TZImagePickerController/TZImagePickerController/TZImageCropManager.h; sourceTree = "<group>"; };
-		B39DB75BC7A4687AAC8EE27900459CA2 /* ZXLUpload-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZXLUpload-prefix.pch"; sourceTree = "<group>"; };
-		B6D766B03D1AB7F8B9862E97F46FCDCB /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
-		B847CD362F2C53D350EC2AA24C014525 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		BC62141817FD32865D83D1F7C5E2F3FC /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		BD34F05C2F3C38B2936FFEF160B2327D /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		BD793962706760C013715D636C689AA6 /* ZXLReachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLReachability.h; path = Framework/ZXLUpload/ZXLReachability.h; sourceTree = "<group>"; };
-		BD90667DD2DD11F1D7828C017E11FB9D /* ZXLNetworkManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLNetworkManager.h; path = Framework/ZXLUpload/ZXLNetworkManager.h; sourceTree = "<group>"; };
-		BF64FD8DBEA745E62A2D1B089A0D1F07 /* TZImagePickerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TZImagePickerController-prefix.pch"; sourceTree = "<group>"; };
-		C27E246384AF13ACA65B01F34033D922 /* ZXLTimer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLTimer.m; path = Framework/ZXLUpload/ZXLTimer.m; sourceTree = "<group>"; };
-		C3EBADABB861F64D29FFCCA1045CF429 /* ZXLCompressOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLCompressOperation.m; path = Framework/ZXLUpload/ZXLCompressOperation.m; sourceTree = "<group>"; };
-		C60697B4664D3B532CECF5673B2170E6 /* ZXLRecorder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZXLRecorder-prefix.pch"; sourceTree = "<group>"; };
-		C7C35EDEB66F14167925BF311CA61A18 /* ZXLUploadManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadManager.m; path = Framework/ZXLUpload/ZXLUploadManager.m; sourceTree = "<group>"; };
-		CC20E1AE812DCCB808C111445FDEA717 /* UIView+Layout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Layout.h"; path = "TZImagePickerController/TZImagePickerController/UIView+Layout.h"; sourceTree = "<group>"; };
-		CEF9758E10E9BF4E8CC62858248D8E9E /* TZPhotoPreviewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewController.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.h; sourceTree = "<group>"; };
-		CF226A9A329052EDDB7E0FE45CC5053B /* TZProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZProgressView.h; path = TZImagePickerController/TZImagePickerController/TZProgressView.h; sourceTree = "<group>"; };
-		CF522C54AACA74B709EAAA1FF6EBB58D /* TZImagePickerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TZImagePickerController.xcconfig; sourceTree = "<group>"; };
-		CF83771B1E49A760E469FB42E3D62EC3 /* TZVideoPlayerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZVideoPlayerController.h; path = TZImagePickerController/TZImagePickerController/TZVideoPlayerController.h; sourceTree = "<group>"; };
-		D0641B1FF0CB2BA56D472F1CDB9DB405 /* TZLocationManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZLocationManager.h; path = TZImagePickerController/TZImagePickerController/TZLocationManager.h; sourceTree = "<group>"; };
-		D0D85490B0CDFEAE6B8418B7878714EB /* TZAssetModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZAssetModel.m; path = TZImagePickerController/TZImagePickerController/TZAssetModel.m; sourceTree = "<group>"; };
-		D22179E7982D187A4BC6A1D18890A016 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
-		D24FD83DF6EDFC5B858C2B7F6DE0386E /* ZXLTaskInfoModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLTaskInfoModel.m; path = Framework/ZXLUpload/ZXLTaskInfoModel.m; sourceTree = "<group>"; };
+		AC214E90B44A3B555903DD4DFE55C051 /* ZXLUploadFmdb.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadFmdb.m; path = Framework/ZXLUpload/ZXLUploadFmdb.m; sourceTree = "<group>"; };
+		AEB8A940F4F2630A0C248C2A219F028D /* TZAssetModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZAssetModel.m; path = TZImagePickerController/TZImagePickerController/TZAssetModel.m; sourceTree = "<group>"; };
+		AF11F25D35D11A39CE6E00094BFDDEEE /* SVProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
+		AF9ECD3F3A1CD7889E4CD6C241FB8424 /* ZXLDocumentUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLDocumentUtils.h; path = Framework/ZXLUpload/ZXLDocumentUtils.h; sourceTree = "<group>"; };
+		B1731A26A57FF880911A0E7D4F6019F1 /* ZXLSyncMutableDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLSyncMutableDictionary.h; path = Framework/ZXLUpload/ZXLSyncMutableDictionary.h; sourceTree = "<group>"; };
+		B44AF8636840E524E73C74E24D711B5C /* ZXLSyncMutableArray.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLSyncMutableArray.h; path = Framework/ZXLUpload/ZXLSyncMutableArray.h; sourceTree = "<group>"; };
+		B9CEAEF0714BD3DCC6D64269ECFD5A41 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
+		BC3D4E3AB2793B6697A43AFFD3DCB7FA /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		BD9568039F2172A46096C6F3A626C5B2 /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewCell.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.h; sourceTree = "<group>"; };
+		BFFA43D4078451433FB12850B5F1773E /* ZXLUploadFileManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadFileManager.m; path = Framework/ZXLUpload/ZXLUploadFileManager.m; sourceTree = "<group>"; };
+		C2413225DD3CC30249D478BDDF16F926 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZVideoPlayerController.m; path = TZImagePickerController/TZImagePickerController/TZVideoPlayerController.m; sourceTree = "<group>"; };
+		C24F3FE264B544A7E8540A8F91D01FA6 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		C4B558C52BADFCF746DF3CEB7960AC41 /* TZAssetModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZAssetModel.h; path = TZImagePickerController/TZImagePickerController/TZAssetModel.h; sourceTree = "<group>"; };
+		C4DC8EA2D90603FEE5E3D65CC3215F92 /* ZXLTimer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLTimer.h; path = Framework/ZXLUpload/ZXLTimer.h; sourceTree = "<group>"; };
+		C535769704DE1A6AF61731F40671CCD7 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
+		C7BA4B2B68BF123CA05E379CDA6D43BA /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		C8437B39ABF030A6A1C32651C89D04CD /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		C95C3BD41F9A50485574D0ABBFC2D1F8 /* ZXLRecorder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZXLRecorder-prefix.pch"; sourceTree = "<group>"; };
+		D22F1B803223B8649B13F42BFCEF8266 /* ZXLTimer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLTimer.m; path = Framework/ZXLUpload/ZXLTimer.m; sourceTree = "<group>"; };
 		D2D4C563E8E7053DDFF058503FA82C0C /* Pods-ZXLUploadDome-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ZXLUploadDome-dummy.m"; sourceTree = "<group>"; };
-		D55C664A7D15D593585DEFE8F051767F /* TZAssetModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZAssetModel.h; path = TZImagePickerController/TZImagePickerController/TZAssetModel.h; sourceTree = "<group>"; };
-		D6C1A395E43D5D7CB482D3C41BA9EF20 /* ZXLUploadUnifiedResponese.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadUnifiedResponese.m; path = Framework/ZXLUpload/ZXLUploadUnifiedResponese.m; sourceTree = "<group>"; };
-		D787C8BA408125D88887D9D0EA987AA0 /* ZXLUploadTaskManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadTaskManager.m; path = Framework/ZXLUpload/ZXLUploadTaskManager.m; sourceTree = "<group>"; };
-		D7DF1C02BDAF676088D92AF935D20CD3 /* TZLocationManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZLocationManager.m; path = TZImagePickerController/TZImagePickerController/TZLocationManager.m; sourceTree = "<group>"; };
-		D902A8954426E00C265E8598519D7E1A /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
-		D937D0664A983925DB1F7D07F5862BF4 /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
-		DB845FA3B9D49587B9936E287A832DB2 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
-		DD2A0DB335BD6E0F9B3B6E1F3AE269EA /* ZXLCompressOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLCompressOperation.h; path = Framework/ZXLUpload/ZXLCompressOperation.h; sourceTree = "<group>"; };
-		DE3122281B834DE8EDD920A03A185E72 /* ZXLFileInfoModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLFileInfoModel.h; path = Framework/ZXLUpload/ZXLFileInfoModel.h; sourceTree = "<group>"; };
-		DFD8483456A1D5FE998AECE2119E5420 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		E247096FE13C6BC41C4B9D9EA2C84F70 /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
-		E29D1560C0765BF3F1554F82954EC5BF /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
-		E392DA3FD5387B012CDDDB726CD99648 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		D4B81F4637560A3414D20ABB321B340F /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		D4EAA3817D21790B55B6149CA6D6F223 /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+TZImagePicker.h"; path = "TZImagePickerController/TZImagePickerController/NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
+		D5E5843BE52BB25CDF4E8CA1D8228382 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressAnimatedView.h; path = SVProgressHUD/SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		D64AB1220C59C20E1822AAAC1011DF86 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
+		D6D9EE69153D898D9E935977C5748B1A /* ZXLVideoUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLVideoUtils.m; path = Framework/ZXLUpload/ZXLVideoUtils.m; sourceTree = "<group>"; };
+		DD1634660D52FE12A13AE9BD434C50F5 /* ZXLUploadDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadDefine.h; path = Framework/ZXLUpload/ZXLUploadDefine.h; sourceTree = "<group>"; };
+		DD61E95C5811E140B4962AA24B794C5C /* ZXLUploadFileResultCenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadFileResultCenter.h; path = Framework/ZXLUpload/ZXLUploadFileResultCenter.h; sourceTree = "<group>"; };
+		DDDE2E7C3CFCA222725673C281D3788B /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
+		DE5DF484D82A099AC9994552082FEC4E /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		DE6735B40763DF930E8E88C594D5C7DA /* ZXLRecorder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLRecorder.h; path = ZXLRecorder/Recorder/ZXLRecorder.h; sourceTree = "<group>"; };
 		E49BAA3F0F7301741FE7362181355F0C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		E6D6516214D2E04C25E8AC1E4BB283A9 /* TZGifPhotoPreviewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZGifPhotoPreviewController.h; path = TZImagePickerController/TZImagePickerController/TZGifPhotoPreviewController.h; sourceTree = "<group>"; };
-		E8047B54C55F22FA08A24E41546A18A3 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
-		E9013F1F4688DF16F8FB6F4D124505E6 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressAnimatedView.h; path = SVProgressHUD/SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		E4A1360643FCAD9E8B674CC0396B1D29 /* ZXLPhotosUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLPhotosUtils.h; path = Framework/ZXLUpload/ZXLPhotosUtils.h; sourceTree = "<group>"; };
 		E93A261A6496E7C34138B27AE50B6A14 /* Pods-ZXLUploadDome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ZXLUploadDome.debug.xcconfig"; sourceTree = "<group>"; };
-		EA053065665BA67FA9354FDF5D40B58C /* ZXLPhotosUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLPhotosUtils.m; path = Framework/ZXLUpload/ZXLPhotosUtils.m; sourceTree = "<group>"; };
+		EA568640E433F7762428840EFEB47643 /* ZXLSyncMutableDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLSyncMutableDictionary.m; path = Framework/ZXLUpload/ZXLSyncMutableDictionary.m; sourceTree = "<group>"; };
 		EAA899EB13836BD575C317AFE0D82BF8 /* libPods-ZXLUploadDome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ZXLUploadDome.a"; path = "libPods-ZXLUploadDome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EDD76969FECABC14A71B806EC0DFD460 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		EE1E18B05BA88010E7A19D69D306DED6 /* TZImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZImageManager.m; path = TZImagePickerController/TZImagePickerController/TZImageManager.m; sourceTree = "<group>"; };
-		F0CA06CC4933B136283277BDF461A632 /* ZXLRecorder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZXLRecorder-dummy.m"; sourceTree = "<group>"; };
+		EAC44CAC3DA47CC7E8C32A6479EA73E7 /* ZXLFileUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLFileUtils.m; path = Framework/ZXLUpload/ZXLFileUtils.m; sourceTree = "<group>"; };
+		EBF8852E9FF82EA239768979F4A80297 /* ZXLReachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLReachability.h; path = Framework/ZXLUpload/ZXLReachability.h; sourceTree = "<group>"; };
+		ED5C38D53755CD8CB5155A2EE167C423 /* ZXLUpload-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZXLUpload-prefix.pch"; sourceTree = "<group>"; };
+		EF7DDBCCB198F2D28A5716C78A22EFE5 /* TZVideoPlayerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZVideoPlayerController.h; path = TZImagePickerController/TZImagePickerController/TZVideoPlayerController.h; sourceTree = "<group>"; };
+		EFB58A841D04820A252EB1FB0C26BA96 /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
+		F0E4728CB253905623ABABC024C4D7C6 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVRadialGradientLayer.m; path = SVProgressHUD/SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		F11866CB42E90E0BB4EE17CE402D38BC /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
+		F2E24DBEE5C02D492F8F8279A36B774A /* ZXLUploadUnifiedResponese.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadUnifiedResponese.h; path = Framework/ZXLUpload/ZXLUploadUnifiedResponese.h; sourceTree = "<group>"; };
+		F3C3F6537A89A55C31F8DDA3897017D8 /* ZXLCompressManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLCompressManager.h; path = Framework/ZXLUpload/ZXLCompressManager.h; sourceTree = "<group>"; };
+		F41902902D5C8B1DAD917C90423FB6B7 /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
 		F58CDEDE2D5AD51AA75EE6D4A55B331C /* libZXLRecorder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libZXLRecorder.a; path = libZXLRecorder.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F76C50697C04F3188D83D7AC8E5AF984 /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewCell.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.h; sourceTree = "<group>"; };
-		F8F303C3146AFE42C213726579619BD5 /* ZXLUploadManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadManager.h; path = Framework/ZXLUpload/ZXLUploadManager.h; sourceTree = "<group>"; };
-		F954B89C85AB116E15DC8E23A75A0A51 /* ZXLUploadFileResultCenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLUploadFileResultCenter.h; path = Framework/ZXLUpload/ZXLUploadFileResultCenter.h; sourceTree = "<group>"; };
-		FC0064DD8F43E8861FB24B50E59172F6 /* TZPhotoPreviewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewCell.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.m; sourceTree = "<group>"; };
+		F981D4AAEC0418BA333CF856004B2F4B /* TZImageManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImageManager.h; path = TZImagePickerController/TZImagePickerController/TZImageManager.h; sourceTree = "<group>"; };
+		F9A4EE5496387843C63F240544FB7A9F /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
+		FA83039E5BC6CC2AA716B390D24BCFE8 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
+		FB1C998464889FC689F663733BE2877B /* ZXLUploadTaskManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ZXLUploadTaskManager.m; path = Framework/ZXLUpload/ZXLUploadTaskManager.m; sourceTree = "<group>"; };
+		FB2E8A1FA7C4E45A22F03748A7E4F2D3 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
+		FC5763DA15A81FF5514D83582620203F /* ZXLTaskInfoModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZXLTaskInfoModel.h; path = Framework/ZXLUpload/ZXLTaskInfoModel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,38 +435,94 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		18B9D965779CEF3B2DC40345942AB0BC /* Masonry */ = {
+		058F572D8ACC1460586BEA41EF2ED574 /* ZXLUpload */ = {
 			isa = PBXGroup;
 			children = (
-				DFD8483456A1D5FE998AECE2119E5420 /* MASCompositeConstraint.h */,
-				3FFA270FB51154AEE10DC2A393A46EB2 /* MASCompositeConstraint.m */,
-				89B65651DE8634EB23E227971B5984A0 /* MASConstraint.h */,
-				7D3E1270FEC07675AD7B326B6C94A32C /* MASConstraint.m */,
-				2CA690B6AE5B8AC641BA199CB03B88B4 /* MASConstraint+Private.h */,
-				9526E46F0268C7F76B1CE8D9CDDEF006 /* MASConstraintMaker.h */,
-				305F98DB0DD13309A81B1D352E908306 /* MASConstraintMaker.m */,
-				6290E42260D2A9E23415B77420C620A0 /* MASLayoutConstraint.h */,
-				414E9D812C2C1EBD037ABB3C13AE63E9 /* MASLayoutConstraint.m */,
-				6F9C8348C162FCE17E2087B7D90DC906 /* Masonry.h */,
-				2D0B057F22BDDB2068840DD0C68B83C6 /* MASUtilities.h */,
-				379EF71CC5D448ED4221CD27C2573FF8 /* MASViewAttribute.h */,
-				890EE49ED25D00FE85C3F138E314AD1E /* MASViewAttribute.m */,
-				A8C4404C28089B7D716A0B924E1C930F /* MASViewConstraint.h */,
-				D902A8954426E00C265E8598519D7E1A /* MASViewConstraint.m */,
-				90AF4BCB7D0B2B62A4F75136D65530F3 /* NSArray+MASAdditions.h */,
-				BD34F05C2F3C38B2936FFEF160B2327D /* NSArray+MASAdditions.m */,
-				A088F969431800D6A87D28E417AD4762 /* NSArray+MASShorthandAdditions.h */,
-				BC62141817FD32865D83D1F7C5E2F3FC /* NSLayoutConstraint+MASDebugAdditions.h */,
-				EDD76969FECABC14A71B806EC0DFD460 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				AD25CDD95C0629B2E2305B4FE5475C70 /* View+MASAdditions.h */,
-				5F21F76E446DC38A75651BF40758B7BD /* View+MASAdditions.m */,
-				783659592340E7695DF0FF07D6AD738C /* View+MASShorthandAdditions.h */,
-				6B61DCB4C67E52B71AF8ED38D43DCC28 /* ViewController+MASAdditions.h */,
-				B847CD362F2C53D350EC2AA24C014525 /* ViewController+MASAdditions.m */,
-				B808D4BF5C0521364DC0E212B3F40781 /* Support Files */,
+				F3C3F6537A89A55C31F8DDA3897017D8 /* ZXLCompressManager.h */,
+				88B86122965D12DD2A2FDD06AD4B5C6D /* ZXLCompressManager.m */,
+				616703198350357236A76EFCA8662DFB /* ZXLCompressOperation.h */,
+				0359284740A6CFCE567F2591A596ED69 /* ZXLCompressOperation.m */,
+				AF9ECD3F3A1CD7889E4CD6C241FB8424 /* ZXLDocumentUtils.h */,
+				66D878A703730FF0EE86CB671778822A /* ZXLDocumentUtils.m */,
+				600F1A4D0C53B0B35B39B97AAC59303C /* ZXLFileInfoModel.h */,
+				513615E6FBDB08FAED5E1F2C77EC7EBC /* ZXLFileInfoModel.m */,
+				5F751BF174969F59E28FC448A8E26358 /* ZXLFileUtils.h */,
+				EAC44CAC3DA47CC7E8C32A6479EA73E7 /* ZXLFileUtils.m */,
+				860181683A47FECCEDD7BB982B850703 /* ZXLNetworkManager.h */,
+				A6AECB2AA521421C6794CA3C606E1AD4 /* ZXLNetworkManager.m */,
+				E4A1360643FCAD9E8B674CC0396B1D29 /* ZXLPhotosUtils.h */,
+				A763AD098B063EDCC3F0424A3102DBA9 /* ZXLPhotosUtils.m */,
+				EBF8852E9FF82EA239768979F4A80297 /* ZXLReachability.h */,
+				0531B85C6BD7B6256915197177B03482 /* ZXLReachability.m */,
+				14D1526DF0DBB1CDD0F7AF40DC37F9D2 /* ZXLSyncMapTable.h */,
+				8987346897E51AAAEC3DAEACEF845063 /* ZXLSyncMapTable.m */,
+				B44AF8636840E524E73C74E24D711B5C /* ZXLSyncMutableArray.h */,
+				5A83D486E2B155509461728D614A4C0B /* ZXLSyncMutableArray.m */,
+				B1731A26A57FF880911A0E7D4F6019F1 /* ZXLSyncMutableDictionary.h */,
+				EA568640E433F7762428840EFEB47643 /* ZXLSyncMutableDictionary.m */,
+				FC5763DA15A81FF5514D83582620203F /* ZXLTaskInfoModel.h */,
+				0CA6B352F79777C389B63437FDDF1840 /* ZXLTaskInfoModel.m */,
+				C4DC8EA2D90603FEE5E3D65CC3215F92 /* ZXLTimer.h */,
+				D22F1B803223B8649B13F42BFCEF8266 /* ZXLTimer.m */,
+				A89A2CB1E57DFD7353196827F08CA0FD /* ZXLUpload.h */,
+				DD1634660D52FE12A13AE9BD434C50F5 /* ZXLUploadDefine.h */,
+				2B1003B08051C139235FBE0EEED6A33D /* ZXLUploadFileManager.h */,
+				BFFA43D4078451433FB12850B5F1773E /* ZXLUploadFileManager.m */,
+				DD61E95C5811E140B4962AA24B794C5C /* ZXLUploadFileResultCenter.h */,
+				54925C539662F1D454B05E934BF253FD /* ZXLUploadFileResultCenter.m */,
+				13DC8CA93AC4B3B3D78B5B6BEC03F393 /* ZXLUploadFmdb.h */,
+				AC214E90B44A3B555903DD4DFE55C051 /* ZXLUploadFmdb.m */,
+				50C0B8D979A8A6E35E3130C2F148035E /* ZXLUploadManager.h */,
+				45B67EB9F41EA343F579DB25F61ED276 /* ZXLUploadManager.m */,
+				83A147D69790E671281DE182BDC44991 /* ZXLUploadTaskManager.h */,
+				FB1C998464889FC689F663733BE2877B /* ZXLUploadTaskManager.m */,
+				F2E24DBEE5C02D492F8F8279A36B774A /* ZXLUploadUnifiedResponese.h */,
+				6D535F0316565D034CC3BAEA8DDE2535 /* ZXLUploadUnifiedResponese.m */,
+				19EA72725D2C353F0541887A1982D55E /* ZXLVideoUtils.h */,
+				D6D9EE69153D898D9E935977C5748B1A /* ZXLVideoUtils.m */,
+				B3BE61D316FDA67A9AAC520799B50E12 /* Resources */,
+				477CF19DBDA4A37D289439D9CC5B620D /* Support Files */,
 			);
-			name = Masonry;
-			path = Masonry;
+			name = ZXLUpload;
+			path = ZXLUpload;
+			sourceTree = "<group>";
+		};
+		180D3B8B0DD0BB279A8C5D13E682ACE4 /* TZImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				D4EAA3817D21790B55B6149CA6D6F223 /* NSBundle+TZImagePicker.h */,
+				03C60BCDF6D8A2CF31D22E08D1F9416C /* NSBundle+TZImagePicker.m */,
+				90A167ABBE6E17B605A71182104065EE /* TZAssetCell.h */,
+				2AD17B034ABD68A1858A04E20654D697 /* TZAssetCell.m */,
+				C4B558C52BADFCF746DF3CEB7960AC41 /* TZAssetModel.h */,
+				AEB8A940F4F2630A0C248C2A219F028D /* TZAssetModel.m */,
+				81AE895410B239F8588D23D067BFC559 /* TZGifPhotoPreviewController.h */,
+				2C8F17FE1A4508BF22EA39134FF25DD2 /* TZGifPhotoPreviewController.m */,
+				2C033F1AB1D69817A30D4082BF249A3F /* TZImageCropManager.h */,
+				74DC5B01A807E97D9FEFBC854254480B /* TZImageCropManager.m */,
+				F981D4AAEC0418BA333CF856004B2F4B /* TZImageManager.h */,
+				05709614A9B167385A3FD91BB26642A3 /* TZImageManager.m */,
+				317E58128717B014AF397360E6EE7901 /* TZImagePickerController.h */,
+				888F68D9C98B48F46C2042D9F1ED1A08 /* TZImagePickerController.m */,
+				35A2624CBD9B0511E5B1989914D48676 /* TZLocationManager.h */,
+				793BCABA8F70BC3E4D70BF2FCE13E1E5 /* TZLocationManager.m */,
+				69AF95406BDFABB03EA64A5229FFD1AA /* TZPhotoPickerController.h */,
+				25D9566FFC048834699054B07AB36FAE /* TZPhotoPickerController.m */,
+				BD9568039F2172A46096C6F3A626C5B2 /* TZPhotoPreviewCell.h */,
+				7B0AFB27B0D46E9602B51F908C129D7F /* TZPhotoPreviewCell.m */,
+				806BCC09B879F17E9048583ED818F779 /* TZPhotoPreviewController.h */,
+				64BEF982CC75AD384D49F74FDB14068D /* TZPhotoPreviewController.m */,
+				7867AFE32CC26D5884D7317AD82CDB3A /* TZProgressView.h */,
+				6CD13CEF9544CC31DA757A29A77B4E10 /* TZProgressView.m */,
+				EF7DDBCCB198F2D28A5716C78A22EFE5 /* TZVideoPlayerController.h */,
+				C2413225DD3CC30249D478BDDF16F926 /* TZVideoPlayerController.m */,
+				7D9FB1BF965DC7745B47F704C951A850 /* UIView+Layout.h */,
+				753321671365E77F3166EAC8A2BA675E /* UIView+Layout.m */,
+				C4BD0A9D5A6F12CAA36BF3983C40F466 /* Resources */,
+				356728E49B08C5CCDB47F5134A7B0772 /* Support Files */,
+			);
+			name = TZImagePickerController;
+			path = TZImagePickerController;
 			sourceTree = "<group>";
 		};
 		1B426C1716F97BB4E859739FA64A6A40 /* Targets Support Files */ = {
@@ -476,54 +533,15 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		224EF04BFCDDA1012873BAE96D412685 /* Support Files */ = {
+		2748E0BA7505175C103D5ACBBF6E094A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				15E51C3380F4B1275A7A1BA82405E862 /* FMDB.xcconfig */,
-				3FBFD9C58877D2B6FA02BE0BC7224AF7 /* FMDB-dummy.m */,
-				92D0E1B5EC227E9489F5174EE94F45D9 /* FMDB-prefix.pch */,
+				5E3F1DC2CC8FA7988B57EDDF34B79AE0 /* SVProgressHUD.xcconfig */,
+				308EFDFD82DBC157554632047130F5B2 /* SVProgressHUD-dummy.m */,
+				8FEBBF035E6EF61964002488100372F7 /* SVProgressHUD-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/FMDB";
-			sourceTree = "<group>";
-		};
-		24CAA24BAD45E7BB64DD2ED7DC4585C7 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				3FB7E302CF3F187DAC55D10CDAF07D30 /* SVIndefiniteAnimatedView.h */,
-				29248CC858337CCD15328A95EB30F0C0 /* SVIndefiniteAnimatedView.m */,
-				E9013F1F4688DF16F8FB6F4D124505E6 /* SVProgressAnimatedView.h */,
-				D22179E7982D187A4BC6A1D18890A016 /* SVProgressAnimatedView.m */,
-				66BD3D395F3659306664B21A18F4C223 /* SVProgressHUD.h */,
-				375EBF64D7C173E2D9928D5C1314D9CE /* SVProgressHUD.m */,
-				7F49F245BE7F9605BB867123A41FF86D /* SVRadialGradientLayer.h */,
-				91F2E66228E9AF43EDA32974517859B7 /* SVRadialGradientLayer.m */,
-				2F9B43BE725CD9311824C63E4E0CB06E /* Resources */,
-				ECB8F5796F8138F957830912A029C9BF /* Support Files */,
-			);
-			name = SVProgressHUD;
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
-		2BD2AEB7CF740B2A654EAEBC8D875DD5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8E73863B9DEAB897EAC9949903460D64 /* FMDB */,
-				18B9D965779CEF3B2DC40345942AB0BC /* Masonry */,
-				24CAA24BAD45E7BB64DD2ED7DC4585C7 /* SVProgressHUD */,
-				FADE921F4A7A512C78D94E412743E83A /* TZImagePickerController */,
-				D7CA8B8C1A0152AE33A22053A6B8EECB /* ZXLRecorder */,
-				75B82E876FE3DE0FE94E1C3E903AD175 /* ZXLUpload */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		2F9B43BE725CD9311824C63E4E0CB06E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DB845FA3B9D49587B9936E287A832DB2 /* SVProgressHUD.bundle */,
-			);
-			name = Resources;
+			path = "../Target Support Files/SVProgressHUD";
 			sourceTree = "<group>";
 		};
 		316B7F8AEB3993C0B2760F828D2FBFDC /* Products */ = {
@@ -540,15 +558,57 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		531E2251722759AC837152258D3B5303 /* Support Files */ = {
+		356728E49B08C5CCDB47F5134A7B0772 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5ECF379D139F71AA0FA3EFEA445A2BE9 /* ZXLUpload.xcconfig */,
-				827CDCE1CD564F64CCC744A79251EA80 /* ZXLUpload-dummy.m */,
-				B39DB75BC7A4687AAC8EE27900459CA2 /* ZXLUpload-prefix.pch */,
+				47369D9772309220B4745A204FB18022 /* TZImagePickerController.xcconfig */,
+				6F2F11E40B155D4EB98CF88FFD72D6C3 /* TZImagePickerController-dummy.m */,
+				65CAB73857343EBF068D54BD443B7B8D /* TZImagePickerController-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TZImagePickerController";
+			sourceTree = "<group>";
+		};
+		477CF19DBDA4A37D289439D9CC5B620D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B88A41C821CD6D36CB2847F79E11CCC /* ZXLUpload.xcconfig */,
+				846C3B1EBE9AC7F390A81BC5EE21FAB2 /* ZXLUpload-dummy.m */,
+				ED5C38D53755CD8CB5155A2EE167C423 /* ZXLUpload-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/ZXLUpload";
+			sourceTree = "<group>";
+		};
+		4C2DD43FDAFEF9EBFAA5C11B84D85717 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				9E19527B1EBCEB3DB2CBD79E542CCF7B /* SVIndefiniteAnimatedView.h */,
+				8F77D3C914FAC5D63071C97B5338E02E /* SVIndefiniteAnimatedView.m */,
+				D5E5843BE52BB25CDF4E8CA1D8228382 /* SVProgressAnimatedView.h */,
+				C8437B39ABF030A6A1C32651C89D04CD /* SVProgressAnimatedView.m */,
+				27BABB06C9151C5A6B807D4E7CC4121F /* SVProgressHUD.h */,
+				AF11F25D35D11A39CE6E00094BFDDEEE /* SVProgressHUD.m */,
+				12B29E7C0954621858B8BA6B29DABBD3 /* SVRadialGradientLayer.h */,
+				F0E4728CB253905623ABABC024C4D7C6 /* SVRadialGradientLayer.m */,
+				8AF6049A2E4D1964709A4E80FAAA5189 /* Resources */,
+				2748E0BA7505175C103D5ACBBF6E094A /* Support Files */,
+			);
+			name = SVProgressHUD;
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		59CFAAA4BF137CBA514578107FAE228B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8FA5341CC223614B928895181F252638 /* FMDB */,
+				FB179253CAA649EC2A725B2905930D50 /* Masonry */,
+				4C2DD43FDAFEF9EBFAA5C11B84D85717 /* SVProgressHUD */,
+				180D3B8B0DD0BB279A8C5D13E682ACE4 /* TZImagePickerController */,
+				8C3E3B764B1A9BB3B5ED08F42DBA501B /* ZXLRecorder */,
+				058F572D8ACC1460586BEA41EF2ED574 /* ZXLUpload */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		5BCE19EE3BA59A392F84037933F2677A /* iOS */ = {
@@ -566,57 +626,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		75B82E876FE3DE0FE94E1C3E903AD175 /* ZXLUpload */ = {
-			isa = PBXGroup;
-			children = (
-				8E507729FB59177FC9E76015ACBEE4A2 /* ZXLCompressManager.h */,
-				4C6A34E0FE918E87EB3A2888162ACEC6 /* ZXLCompressManager.m */,
-				DD2A0DB335BD6E0F9B3B6E1F3AE269EA /* ZXLCompressOperation.h */,
-				C3EBADABB861F64D29FFCCA1045CF429 /* ZXLCompressOperation.m */,
-				4D88A69F2993BB822F6C5043457D807E /* ZXLDocumentUtils.h */,
-				A252618EAD8C39F95C2E8168020940CC /* ZXLDocumentUtils.m */,
-				DE3122281B834DE8EDD920A03A185E72 /* ZXLFileInfoModel.h */,
-				0AA796820BD357DA4FFD8808FE79B2E2 /* ZXLFileInfoModel.m */,
-				6FA20D415F7B357F464B12D30C5ABD3C /* ZXLFileUtils.h */,
-				08E5D6EDA2FEE8EF6F6E226571E5BFF3 /* ZXLFileUtils.m */,
-				BD90667DD2DD11F1D7828C017E11FB9D /* ZXLNetworkManager.h */,
-				5AB553FB0027E835C9F13FCE61C1A564 /* ZXLNetworkManager.m */,
-				906B189F7CEC8C11CBE90627B7037082 /* ZXLPhotosUtils.h */,
-				EA053065665BA67FA9354FDF5D40B58C /* ZXLPhotosUtils.m */,
-				BD793962706760C013715D636C689AA6 /* ZXLReachability.h */,
-				349932838684519332D269068B01957D /* ZXLReachability.m */,
-				934286B45EEF297F8D8C3A51C8E0D436 /* ZXLSyncMapTable.h */,
-				9A45EAE7B1B4E379E355FF40A9B11681 /* ZXLSyncMapTable.m */,
-				62998E69DE9856974C761DAD9AF9A112 /* ZXLSyncMutableArray.h */,
-				B0CDD507634983B2A3732BDF2FAF7FF8 /* ZXLSyncMutableArray.m */,
-				94313C089ED9C4AED726E784A93D07C0 /* ZXLSyncMutableDictionary.h */,
-				28AD4131874D66277675DB1318620765 /* ZXLSyncMutableDictionary.m */,
-				8EF054320FF4018D5B3E65AE79E1DCEF /* ZXLTaskInfoModel.h */,
-				D24FD83DF6EDFC5B858C2B7F6DE0386E /* ZXLTaskInfoModel.m */,
-				47CD9C1DD676FBAE7784BD2A6AAE5DDA /* ZXLTimer.h */,
-				C27E246384AF13ACA65B01F34033D922 /* ZXLTimer.m */,
-				618F397F51C5442AB5B3E82E5171906A /* ZXLUpload.h */,
-				0B78CA1A231AC52300EBBE0F5CE7B1A3 /* ZXLUploadDefine.h */,
-				54F7EBF262D64906F8D53C3499A05ED1 /* ZXLUploadFileManager.h */,
-				38D4F00D95DC5379BE85B97B149637AF /* ZXLUploadFileManager.m */,
-				F954B89C85AB116E15DC8E23A75A0A51 /* ZXLUploadFileResultCenter.h */,
-				1733AB760011CFFF74DE530D9C09AF43 /* ZXLUploadFileResultCenter.m */,
-				89F81A59190FA528D80475CF5651384B /* ZXLUploadFmdb.h */,
-				1B6F177D3F4100A9500B6F89377F3BF9 /* ZXLUploadFmdb.m */,
-				F8F303C3146AFE42C213726579619BD5 /* ZXLUploadManager.h */,
-				C7C35EDEB66F14167925BF311CA61A18 /* ZXLUploadManager.m */,
-				9208554A4F73C3AFC199F5A85B0879C9 /* ZXLUploadTaskManager.h */,
-				D787C8BA408125D88887D9D0EA987AA0 /* ZXLUploadTaskManager.m */,
-				4DAC0E292AC439BDA896E02B713B9ED6 /* ZXLUploadUnifiedResponese.h */,
-				D6C1A395E43D5D7CB482D3C41BA9EF20 /* ZXLUploadUnifiedResponese.m */,
-				5C8BADCF9706D279AC9DA0D53A06F517 /* ZXLVideoUtils.h */,
-				118D2F613034B157F0E6FE37CFF46CA0 /* ZXLVideoUtils.m */,
-				531E2251722759AC837152258D3B5303 /* Support Files */,
-			);
-			name = ZXLUpload;
-			path = ZXLUpload;
-			sourceTree = "<group>";
-		};
 		785553737B06AFC3DA711DDEB7D56194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -625,117 +634,122 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		7D0BDE356E32F7EE64008CA84CB4946B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				785553737B06AFC3DA711DDEB7D56194 /* Frameworks */,
-				2BD2AEB7CF740B2A654EAEBC8D875DD5 /* Pods */,
-				316B7F8AEB3993C0B2760F828D2FBFDC /* Products */,
-				1B426C1716F97BB4E859739FA64A6A40 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		8E73863B9DEAB897EAC9949903460D64 /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				C16B3BC417EE1AEB7CE3D3780DD83862 /* standard */,
-				224EF04BFCDDA1012873BAE96D412685 /* Support Files */,
-			);
-			name = FMDB;
-			path = FMDB;
-			sourceTree = "<group>";
-		};
-		AFC28197D98EE4B400CF31767A011CFE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4C3EC759FCBEC4771C2A1C58F82E19F2 /* TZImagePickerController.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		B56ABD9C33F6750349CC069D881F68CB /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				11C7417AD16FFD9B5684146D9B547DAC /* ZXLRecorder.xcconfig */,
-				F0CA06CC4933B136283277BDF461A632 /* ZXLRecorder-dummy.m */,
-				C60697B4664D3B532CECF5673B2170E6 /* ZXLRecorder-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/ZXLRecorder";
-			sourceTree = "<group>";
-		};
-		B808D4BF5C0521364DC0E212B3F40781 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				E247096FE13C6BC41C4B9D9EA2C84F70 /* Masonry.xcconfig */,
-				843A53A708C6B6454672C9C37FB48F5F /* Masonry-dummy.m */,
-				A4209F7D35ADC12A4AC374E71E6656D4 /* Masonry-prefix.pch */,
+				EFB58A841D04820A252EB1FB0C26BA96 /* Masonry.xcconfig */,
+				F41902902D5C8B1DAD917C90423FB6B7 /* Masonry-dummy.m */,
+				20472ED3151547F9E2A529676B688F98 /* Masonry-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Masonry";
 			sourceTree = "<group>";
 		};
-		C16B3BC417EE1AEB7CE3D3780DD83862 /* standard */ = {
+		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
-				05A54F9B73D863A7D27611E709D00C41 /* FMDatabase.h */,
-				E8047B54C55F22FA08A24E41546A18A3 /* FMDatabase.m */,
-				97C8A80F9F1E7991007DF8FC0169E2F9 /* FMDatabaseAdditions.h */,
-				555636190F8A9F46CFC9FA0A1C66EF12 /* FMDatabaseAdditions.m */,
-				3B1B8490B0A43C177D9CB4532B613A0C /* FMDatabasePool.h */,
-				157C03DDDA6A4C020F747EB8BBF19ADF /* FMDatabasePool.m */,
-				E29D1560C0765BF3F1554F82954EC5BF /* FMDatabaseQueue.h */,
-				B6D766B03D1AB7F8B9862E97F46FCDCB /* FMDatabaseQueue.m */,
-				E392DA3FD5387B012CDDDB726CD99648 /* FMDB.h */,
-				4FD17120BA97D0E52702A707281D1F88 /* FMResultSet.h */,
-				D937D0664A983925DB1F7D07F5862BF4 /* FMResultSet.m */,
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				785553737B06AFC3DA711DDEB7D56194 /* Frameworks */,
+				59CFAAA4BF137CBA514578107FAE228B /* Pods */,
+				316B7F8AEB3993C0B2760F828D2FBFDC /* Products */,
+				1B426C1716F97BB4E859739FA64A6A40 /* Targets Support Files */,
 			);
-			name = standard;
 			sourceTree = "<group>";
 		};
-		C6D14BA3E69A71F6C60F002BD0394EE9 /* Frameworks */ = {
+		80957A09BD967AC658E6173F5F258265 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				10478AEC0788D9EF1E0A80768AEAD42B /* lame.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C9158D1A0116FC18B99D317C2FCB6177 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				CF522C54AACA74B709EAAA1FF6EBB58D /* TZImagePickerController.xcconfig */,
-				9CBDA3396A25CB8D3D2FEB338FEE22B8 /* TZImagePickerController-dummy.m */,
-				BF64FD8DBEA745E62A2D1B089A0D1F07 /* TZImagePickerController-prefix.pch */,
+				154EB96547D5B91616E6CE2D78384E68 /* FMDB.xcconfig */,
+				049CBD552E085AF3E15C2117400AA80F /* FMDB-dummy.m */,
+				FA83039E5BC6CC2AA716B390D24BCFE8 /* FMDB-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/TZImagePickerController";
+			path = "../Target Support Files/FMDB";
 			sourceTree = "<group>";
 		};
-		D7CA8B8C1A0152AE33A22053A6B8EECB /* ZXLRecorder */ = {
+		832558A76C4F5A7C5E4F5EA942AC7050 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				2DE45C10CCC4C208363D1BA027282713 /* ZXLRecorder.h */,
-				A64B61BDD8D624DEBEA6FE9D658FF42C /* ZXLRecorder.m */,
-				32691D68C795AF6771002CDBE57F5B9D /* ZXLThread.h */,
-				2F775B6604CCBC76915AF49961EE9C08 /* ZXLThread.m */,
-				C6D14BA3E69A71F6C60F002BD0394EE9 /* Frameworks */,
-				B56ABD9C33F6750349CC069D881F68CB /* Support Files */,
+				A1E016CDE9863864BD1B2ED39E6D6265 /* ZXLRecorder.xcconfig */,
+				937F5A1AF6E074514305591C7BD982D1 /* ZXLRecorder-dummy.m */,
+				C95C3BD41F9A50485574D0ABBFC2D1F8 /* ZXLRecorder-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ZXLRecorder";
+			sourceTree = "<group>";
+		};
+		8AF6049A2E4D1964709A4E80FAAA5189 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				13EDE4D7081956F5AE344C6FA80984B5 /* SVProgressHUD.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8C3E3B764B1A9BB3B5ED08F42DBA501B /* ZXLRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				DE6735B40763DF930E8E88C594D5C7DA /* ZXLRecorder.h */,
+				943DE11FDCC600B44E2116179B277077 /* ZXLRecorder.m */,
+				A2722FB9FD1CDE08525F338D251E19E1 /* ZXLThread.h */,
+				948CC0E7D4ECAB5DEAEF1DD5973E7D49 /* ZXLThread.m */,
+				F3EED429F82E2F154DDF2E89E47D73BC /* Frameworks */,
+				832558A76C4F5A7C5E4F5EA942AC7050 /* Support Files */,
 			);
 			name = ZXLRecorder;
 			path = ZXLRecorder;
 			sourceTree = "<group>";
 		};
-		ECB8F5796F8138F957830912A029C9BF /* Support Files */ = {
+		8FA5341CC223614B928895181F252638 /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
-				41C3D5B9994DC36E3BFE1DD55E696A1C /* SVProgressHUD.xcconfig */,
-				4D5763CB0D302E673952459CF1C81D36 /* SVProgressHUD-dummy.m */,
-				A731EF7CC2A27658AFDFC17816D9DDEB /* SVProgressHUD-prefix.pch */,
+				E07FD30F61E3A22421D47CEBAB8E53E8 /* standard */,
+				80957A09BD967AC658E6173F5F258265 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SVProgressHUD";
+			name = FMDB;
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		B3BE61D316FDA67A9AAC520799B50E12 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0181F23CF2AAA2048C01E6071D28F959 /* ZXLUpload.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C4BD0A9D5A6F12CAA36BF3983C40F466 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				364B46D3CFF22ED089AE558CA49B5AE9 /* TZImagePickerController.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E07FD30F61E3A22421D47CEBAB8E53E8 /* standard */ = {
+			isa = PBXGroup;
+			children = (
+				3D6714DDBB51053D124899AD4872CAB9 /* FMDatabase.h */,
+				FB2E8A1FA7C4E45A22F03748A7E4F2D3 /* FMDatabase.m */,
+				C7BA4B2B68BF123CA05E379CDA6D43BA /* FMDatabaseAdditions.h */,
+				5DA1D5A25427256E71F74963183711F6 /* FMDatabaseAdditions.m */,
+				0EF6D3D5D39BBB9BB5FE2BA9EDC9F7D5 /* FMDatabasePool.h */,
+				B9CEAEF0714BD3DCC6D64269ECFD5A41 /* FMDatabasePool.m */,
+				8D6472E470370989A756D203FFB75401 /* FMDatabaseQueue.h */,
+				DE5DF484D82A099AC9994552082FEC4E /* FMDatabaseQueue.m */,
+				9696D072EC8005084395E5663A81DD9D /* FMDB.h */,
+				39FCF119CEF4F457064C2ADB971B65BD /* FMResultSet.h */,
+				3B22B01606039FD176AF9AF2CC6F9479 /* FMResultSet.m */,
+			);
+			name = standard;
+			sourceTree = "<group>";
+		};
+		F3EED429F82E2F154DDF2E89E47D73BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A0642B0AE143BD5AA78C59909BCF8C5 /* lame.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F4667B7530ABE5E1F61E58DE25C2F4D6 /* Pods-ZXLUploadDome */ = {
@@ -753,42 +767,38 @@
 			path = "Target Support Files/Pods-ZXLUploadDome";
 			sourceTree = "<group>";
 		};
-		FADE921F4A7A512C78D94E412743E83A /* TZImagePickerController */ = {
+		FB179253CAA649EC2A725B2905930D50 /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
-				54194A610E23C147421AB9A67FF0822B /* NSBundle+TZImagePicker.h */,
-				61CD5321311953EF5AEC6CA7AC506B68 /* NSBundle+TZImagePicker.m */,
-				5BF8D17C7FB6095EFE522E4905144A67 /* TZAssetCell.h */,
-				AF3B84A8A662F984D228C8F8A26B5FB7 /* TZAssetCell.m */,
-				D55C664A7D15D593585DEFE8F051767F /* TZAssetModel.h */,
-				D0D85490B0CDFEAE6B8418B7878714EB /* TZAssetModel.m */,
-				E6D6516214D2E04C25E8AC1E4BB283A9 /* TZGifPhotoPreviewController.h */,
-				873B1C571DD916529577322A5AE24043 /* TZGifPhotoPreviewController.m */,
-				B23CF68ABF16D70F48EEA27E230EAD1B /* TZImageCropManager.h */,
-				145249C7E6597CA1D07C16BD76FB08B5 /* TZImageCropManager.m */,
-				36E498A8FF51FD39504099DD92FDA947 /* TZImageManager.h */,
-				EE1E18B05BA88010E7A19D69D306DED6 /* TZImageManager.m */,
-				4DDCB25349AA1DB07C5DA6F16C42D1D8 /* TZImagePickerController.h */,
-				28686962ED41C821719AA717673D9521 /* TZImagePickerController.m */,
-				D0641B1FF0CB2BA56D472F1CDB9DB405 /* TZLocationManager.h */,
-				D7DF1C02BDAF676088D92AF935D20CD3 /* TZLocationManager.m */,
-				2C515F991E088CF7BF19CF3FB36E9D80 /* TZPhotoPickerController.h */,
-				9A07013E0EA42E642DBC46FC985A4878 /* TZPhotoPickerController.m */,
-				F76C50697C04F3188D83D7AC8E5AF984 /* TZPhotoPreviewCell.h */,
-				FC0064DD8F43E8861FB24B50E59172F6 /* TZPhotoPreviewCell.m */,
-				CEF9758E10E9BF4E8CC62858248D8E9E /* TZPhotoPreviewController.h */,
-				335CFA71022D2F0842DF10436AB514B2 /* TZPhotoPreviewController.m */,
-				CF226A9A329052EDDB7E0FE45CC5053B /* TZProgressView.h */,
-				82995B6AAEBDEE312F3FD32F434425F6 /* TZProgressView.m */,
-				CF83771B1E49A760E469FB42E3D62EC3 /* TZVideoPlayerController.h */,
-				2E634EB2D928DD2C760E19095B1BFB86 /* TZVideoPlayerController.m */,
-				CC20E1AE812DCCB808C111445FDEA717 /* UIView+Layout.h */,
-				13A246196A37A6AF8255AA8FF4472BA5 /* UIView+Layout.m */,
-				AFC28197D98EE4B400CF31767A011CFE /* Resources */,
-				C9158D1A0116FC18B99D317C2FCB6177 /* Support Files */,
+				34E312CF41DC4EBA2D8FFE227DAC61DF /* MASCompositeConstraint.h */,
+				F9A4EE5496387843C63F240544FB7A9F /* MASCompositeConstraint.m */,
+				1D1F981F9ECBB9FE24AE8449481CAAAF /* MASConstraint.h */,
+				2D8442346A451440DFE14A15B4CDB99A /* MASConstraint.m */,
+				5FE8AAEC422704284996339854CAE548 /* MASConstraint+Private.h */,
+				55CFD823F1DBE40DA871A6CAF401BC82 /* MASConstraintMaker.h */,
+				348F5FBDECFF4277DBE5D55EAD121A76 /* MASConstraintMaker.m */,
+				8247ECB32C0030E3394C7E51B8B740FC /* MASLayoutConstraint.h */,
+				C535769704DE1A6AF61731F40671CCD7 /* MASLayoutConstraint.m */,
+				DDDE2E7C3CFCA222725673C281D3788B /* Masonry.h */,
+				D64AB1220C59C20E1822AAAC1011DF86 /* MASUtilities.h */,
+				9711B089FCF30EA638B7EB617FF0C5FC /* MASViewAttribute.h */,
+				47657361D1DAB2AD065F90FB1C6CE86F /* MASViewAttribute.m */,
+				748D422A1561D0B45161417DA2A20A96 /* MASViewConstraint.h */,
+				205BC357F02D15E5A721E81F87575696 /* MASViewConstraint.m */,
+				C24F3FE264B544A7E8540A8F91D01FA6 /* NSArray+MASAdditions.h */,
+				BC3D4E3AB2793B6697A43AFFD3DCB7FA /* NSArray+MASAdditions.m */,
+				71B5A4012A6DAA513ACCB29D3F32A32B /* NSArray+MASShorthandAdditions.h */,
+				77176A2DCCF0B5197450A545383AEDDC /* NSLayoutConstraint+MASDebugAdditions.h */,
+				10D9889401B02784C33FC2D64FF54A17 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				0F333F0A3AF88BDBE4D35B1711B7E9D5 /* View+MASAdditions.h */,
+				111BEBC443ACC7BA27549B1E63E87003 /* View+MASAdditions.m */,
+				0BA7DEAF4B4CD2DA0FCDC1FEBE7CC8D4 /* View+MASShorthandAdditions.h */,
+				1127C6F0D37695CB26A9CC51B86EC3CA /* ViewController+MASAdditions.h */,
+				D4B81F4637560A3414D20ABB321B340F /* ViewController+MASAdditions.m */,
+				7D0BDE356E32F7EE64008CA84CB4946B /* Support Files */,
 			);
-			name = TZImagePickerController;
-			path = TZImagePickerController;
+			name = Masonry;
+			path = Masonry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1221,7 +1231,7 @@
 /* Begin XCBuildConfiguration section */
 		04F0E02173F93E495E7EFCCD09A613C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15E51C3380F4B1275A7A1BA82405E862 /* FMDB.xcconfig */;
+			baseConfigurationReference = 154EB96547D5B91616E6CE2D78384E68 /* FMDB.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1245,7 +1255,7 @@
 		};
 		0B00A6F0B674FEBBC176D8DBF862A724 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41C3D5B9994DC36E3BFE1DD55E696A1C /* SVProgressHUD.xcconfig */;
+			baseConfigurationReference = 5E3F1DC2CC8FA7988B57EDDF34B79AE0 /* SVProgressHUD.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1332,7 +1342,7 @@
 		};
 		468DAACD3E5B5235C7A2B186C7636C1F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41C3D5B9994DC36E3BFE1DD55E696A1C /* SVProgressHUD.xcconfig */;
+			baseConfigurationReference = 5E3F1DC2CC8FA7988B57EDDF34B79AE0 /* SVProgressHUD.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1355,7 +1365,7 @@
 		};
 		59E1EEDEC2D8CF834B4B4A71D5F5E54F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11C7417AD16FFD9B5684146D9B547DAC /* ZXLRecorder.xcconfig */;
+			baseConfigurationReference = A1E016CDE9863864BD1B2ED39E6D6265 /* ZXLRecorder.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1379,7 +1389,7 @@
 		};
 		6033A2127E806DD5C86A515742F7445E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E247096FE13C6BC41C4B9D9EA2C84F70 /* Masonry.xcconfig */;
+			baseConfigurationReference = EFB58A841D04820A252EB1FB0C26BA96 /* Masonry.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1402,7 +1412,7 @@
 		};
 		6681B1A324732F8264BB932595DFA69B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E247096FE13C6BC41C4B9D9EA2C84F70 /* Masonry.xcconfig */;
+			baseConfigurationReference = EFB58A841D04820A252EB1FB0C26BA96 /* Masonry.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1426,7 +1436,7 @@
 		};
 		73D3E2C17E9EC9F5D6FE4C147B528885 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5ECF379D139F71AA0FA3EFEA445A2BE9 /* ZXLUpload.xcconfig */;
+			baseConfigurationReference = 7B88A41C821CD6D36CB2847F79E11CCC /* ZXLUpload.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1471,7 +1481,7 @@
 		};
 		ADFE04C57C6F3B02FB305071EBC52069 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15E51C3380F4B1275A7A1BA82405E862 /* FMDB.xcconfig */;
+			baseConfigurationReference = 154EB96547D5B91616E6CE2D78384E68 /* FMDB.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1496,7 +1506,7 @@
 		};
 		AE2F3990BCABE63932536EB99989FDDA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11C7417AD16FFD9B5684146D9B547DAC /* ZXLRecorder.xcconfig */;
+			baseConfigurationReference = A1E016CDE9863864BD1B2ED39E6D6265 /* ZXLRecorder.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1519,7 +1529,7 @@
 		};
 		AE918F3D7523631A16B8722991FF3EEE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF522C54AACA74B709EAAA1FF6EBB58D /* TZImagePickerController.xcconfig */;
+			baseConfigurationReference = 47369D9772309220B4745A204FB18022 /* TZImagePickerController.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1622,7 +1632,7 @@
 		};
 		FACFE94C61D36EDEF0900D264DA90225 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF522C54AACA74B709EAAA1FF6EBB58D /* TZImagePickerController.xcconfig */;
+			baseConfigurationReference = 47369D9772309220B4745A204FB18022 /* TZImagePickerController.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1645,7 +1655,7 @@
 		};
 		FD48EF7AA53D608EAF5805D40BE1278E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5ECF379D139F71AA0FA3EFEA445A2BE9 /* ZXLUpload.xcconfig */;
+			baseConfigurationReference = 7B88A41C821CD6D36CB2847F79E11CCC /* ZXLUpload.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
