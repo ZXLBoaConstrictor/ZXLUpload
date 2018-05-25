@@ -12,17 +12,28 @@
 #import "FilesCollectionViewCell.h"
 #import "JLBAsyncUploadTaskManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <ZXLRecorder.h>
 
 static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
 
-@interface ViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZXLRecorderDelegate>
 @property(nonatomic,strong)UIButton * addFilesBtn;
+@property(nonatomic,strong)UIButton * recorderBtn;
 @property(nonatomic,strong)UICollectionView * collectionView;
 @property(nonatomic,copy)NSString * uploadIdentifier;
 @property(nonatomic,assign)NSInteger uploadFilesCount;
+@property(nonatomic,strong)ZXLRecorder * recorder;
 @end
 
 @implementation ViewController
+-(ZXLRecorder *)recorder{
+    if (!_recorder) {
+        _recorder = [[ZXLRecorder alloc] initWithDelegate:self];
+        _recorder.maxTime = 20;
+    }
+    return _recorder;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,9 +57,27 @@ static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
             make.width.equalTo(@100);
             make.height.equalTo(@40);
             make.top.equalTo(@50);
-            make.centerX.equalTo(self.view);
+            make.left.equalTo(@50);
         }];
     }
+    
+    if (!_recorderBtn) {
+        _recorderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _recorderBtn.layer.borderColor = [UIColor grayColor].CGColor;
+        _recorderBtn.layer.borderWidth = 1.0f;
+        _recorderBtn.layer.cornerRadius = 6.0f;
+        [_recorderBtn setTitle:@"录音" forState:UIControlStateNormal];
+        [_recorderBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_recorderBtn addTarget:self action:@selector(addMP3Files) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_recorderBtn];
+        [_recorderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@100);
+            make.height.equalTo(@40);
+            make.top.equalTo(@50);
+            make.left.equalTo(self.addFilesBtn.mas_right).offset(20);
+        }];
+    }
+    
     
     if (!_collectionView) {
         UICollectionViewLeftAlignedLayout *layout = [[UICollectionViewLeftAlignedLayout alloc] init];
@@ -81,6 +110,17 @@ static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: @"取消" style: UIAlertActionStyleCancel handler:nil]];
     [self presentViewController: alertController animated: YES completion: nil];
+}
+
+-(void)addMP3Files{
+    if ([self.recorder isRecording]) {
+        [self.recorder stop];
+        [_recorderBtn setTitle:@"录音" forState:UIControlStateNormal];
+        return;
+    }
+    
+    [self.recorder start];
+    [_recorderBtn setTitle:@"结束" forState:UIControlStateNormal];
 }
 
 -(void)takePhoto:(NSInteger)type{
@@ -240,6 +280,16 @@ static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
             [weakSelf collectionViewInsertFilsCount:1];
         });
     }];
+}
+
+- (void)endConvertWithMP3FileName:(NSString *)filePath{
+    ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithFileURL:filePath];
+    [[ZXLUploadTaskManager manager] addUploadFile:model forIdentifier:self.uploadIdentifier];
+    [self collectionViewInsertFilsCount:1];
+}
+
+- (void)failRecord{
+    [SVProgressHUD showErrorWithStatus:@"录音失败"];
 }
 
 @end

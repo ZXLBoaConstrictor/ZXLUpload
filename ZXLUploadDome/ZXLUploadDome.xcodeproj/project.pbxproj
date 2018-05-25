@@ -15,7 +15,6 @@
 		82C8EA12209C4F7A00797BA9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA11209C4F7A00797BA9 /* ViewController.m */; };
 		82C8EA17209C4F7B00797BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C8EA16209C4F7B00797BA9 /* Assets.xcassets */; };
 		82C8EA1D209C4F7B00797BA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA1C209C4F7B00797BA9 /* main.m */; };
-		82C8EA37209C584000797BA9 /* ZXLUpload.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 82C8EA36209C584000797BA9 /* ZXLUpload.bundle */; };
 		82C8EA39209C587500797BA9 /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA38209C587500797BA9 /* AliyunOSSiOS.framework */; };
 		82C8EA3B209C5AA400797BA9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */; };
 		82C8EA3D209C5AD700797BA9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */; };
@@ -47,7 +46,6 @@
 		82C8EA1B209C4F7B00797BA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82C8EA1C209C4F7B00797BA9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		82C8EA32209C552500797BA9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		82C8EA36209C584000797BA9 /* ZXLUpload.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZXLUpload.bundle; sourceTree = "<group>"; };
 		82C8EA38209C587500797BA9 /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunOSSiOS.framework; path = ZXLUploadDome/AliyunOSSiOS.framework; sourceTree = "<group>"; };
 		82C8EA3A209C5AA300797BA9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		82C8EA3C209C5AD700797BA9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -127,7 +125,6 @@
 				82C8EA1C209C4F7B00797BA9 /* main.m */,
 				821B072720A17F0C0011D116 /* videoplay.png */,
 				82C8EA32209C552500797BA9 /* PrefixHeader.pch */,
-				82C8EA36209C584000797BA9 /* ZXLUpload.bundle */,
 			);
 			path = ZXLUploadDome;
 			sourceTree = "<group>";
@@ -234,7 +231,6 @@
 			files = (
 				821B072820A17F0C0011D116 /* videoplay.png in Resources */,
 				82C8EA17209C4F7B00797BA9 /* Assets.xcassets in Resources */,
-				82C8EA37209C584000797BA9 /* ZXLUpload.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
