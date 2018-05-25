@@ -60,6 +60,38 @@
 4.2、上传性能考虑。（阿里云上传库里面解决了此问题、如果用的是七牛的库可以参考压缩新能考虑的做上传处理）
 
 
-使用DOME 还在编写中....请耐心等待
-库中使用了阿里云库 和FMDB库
-个人邮箱244061043@qq.com
+
+对于ZXLUpload的使用
+
+创建文件模型
+1.1 创建相册文件模型 ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithAsset:asset];
+
+1.2 创建拍摄的图片
+
+如果图片不大或者编辑过的图片
+
+ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithImage:image];
+
+拍摄的原图（内部对图片做了处理）
+
+ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithUIImagePickerControllerImage:image];
+
+1.3创建拍摄的视频或者路径文件
+
+ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithFileURL:filePath];
+
+文件上传 2.1 等待上传结果
+[JLBAsyncUploadTaskManager startUploadForIdentifier:self.uploadIdentifier       complete:^(ZXLTaskInfoModel *taskInfo) {
+if (taskInfo) {
+[self submitFinishWithTaskInfo:taskInfo];
+}
+}];
+2.2 统一处理上传结果
+
+[[ZXLUploadTaskManager manager]  startUploadWithUnifiedResponeseForIdentifier:self.uploadIdentifier];
+
+//处理中心在Dome ZXLUploadUnifiedResponese+Exension 文件中
+-(void)extensionUnifiedResponese:(ZXLTaskInfoModel *)taskInfo
+函数中
+
+如果有什么疑问留言 或者邮件 244061043@qq.com
