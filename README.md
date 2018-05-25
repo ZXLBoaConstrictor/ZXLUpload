@@ -60,8 +60,7 @@
 4.2、上传性能考虑。（阿里云上传库里面解决了此问题、如果用的是七牛的库可以参考压缩新能考虑的做上传处理）
 
 
-
-对于ZXLUpload的使用
+# 对于ZXLUpload的使用
 
 创建文件模型
 1.1 创建相册文件模型 ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithAsset:asset];
