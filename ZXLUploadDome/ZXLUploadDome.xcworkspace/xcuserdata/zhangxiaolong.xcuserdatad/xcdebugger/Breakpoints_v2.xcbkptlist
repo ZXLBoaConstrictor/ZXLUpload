@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZXLUploadDome/ZXLUploadManager/JLBAliOSSManager.m"
-            timestampString = "548928730.949626"
+            filePath = "ZXLUploadDome/UploadViewController.m"
+            timestampString = "550389148.029453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-uploadFile:localFilePath:progress:result:"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

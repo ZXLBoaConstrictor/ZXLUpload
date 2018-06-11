@@ -63,10 +63,11 @@
 }
 
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index{
+    if (!anObject)
+        return;
+    
     __block NSUInteger blockindex = index;
     dispatch_barrier_async(self.dispatchQueue, ^{
-        if (!anObject)
-            return;
         NSUInteger count = CFArrayGetCount(self->_array);
         if (blockindex > count) {
             blockindex = count;
@@ -77,26 +78,26 @@
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
     dispatch_barrier_async(self.dispatchQueue, ^{
-        NSUInteger count = CFArrayGetCount(self->_array);
-        if (index < count) {
+        if (index < CFArrayGetCount(self->_array)) {
             CFArrayRemoveValueAtIndex(self->_array, index);
         }
     });
 }
 
 - (void)addObject:(id)anObject{
+    if (!anObject)
+        return;
+    
     dispatch_barrier_async(self.dispatchQueue, ^{
-        if (!anObject)
-            return;
         CFArrayAppendValue(self->_array, (__bridge const void *)anObject);
     });
 }
 
 - (void)addObjectsFromArray:(NSArray *)otherArray{
+    if (!otherArray || otherArray.count == 0)
+        return;
+    
     dispatch_barrier_async(self.dispatchQueue, ^{
-        if (!otherArray || otherArray.count == 0)
-            return;
-        
         for (NSInteger i = 0; i < otherArray.count; i++) {
             CFArrayAppendValue(self->_array, (__bridge const void*)[otherArray objectAtIndex:i]);
         }
@@ -104,10 +105,10 @@
 }
 
 - (void)addObjectsFromArrayAtFirst:(NSArray *)otherArray{
+    if (!otherArray || otherArray.count == 0)
+        return;
+    
     dispatch_barrier_async(self.dispatchQueue, ^{
-        if (!otherArray || otherArray.count == 0)
-            return;
-        
         CFMutableArrayRef tempArray = CFArrayCreateMutable(kCFAllocatorDefault, otherArray.count,  &kCFTypeArrayCallBacks);
         for (NSInteger i = 0; i < otherArray.count; i++) {
             CFArrayAppendValue(tempArray, (__bridge const void*)[otherArray objectAtIndex:i]);
@@ -126,10 +127,13 @@
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
+    if (!anObject)
+        return;
+    
     dispatch_barrier_async(self.dispatchQueue, ^{
-        if (!anObject || index >= CFArrayGetCount(self->_array) )
-            return;
-        CFArraySetValueAtIndex(self->_array, index, (__bridge const void*)anObject);
+        if (index < CFArrayGetCount(self->_array) ) {
+            CFArraySetValueAtIndex(self->_array, index, (__bridge const void*)anObject);
+        }
     });
 }
 
@@ -141,6 +145,9 @@
 }
 
 - (void)removeObject:(id)anObject{
+    if (!anObject)
+        return;
+    
     dispatch_barrier_async(self.dispatchQueue, ^{
         NSInteger result = CFArrayGetFirstIndexOfValue(self->_array, CFRangeMake(0, CFArrayGetCount(self->_array)), (__bridge const void *)(anObject));
         if (result != NSNotFound) {
@@ -153,7 +160,7 @@
     if (!anObject)
         return NSNotFound;
     
-    __block NSUInteger result;
+    __block NSUInteger result = NSNotFound;
     dispatch_sync(self.dispatchQueue, ^{
         result = CFArrayGetFirstIndexOfValue(self->_array, CFRangeMake(0, CFArrayGetCount(self->_array)), (__bridge const void *)(anObject));
     });

@@ -12,11 +12,12 @@
 #import "ZXLFileUtils.h"
 #import "ZXLVideoUtils.h"
 #import "ZXLUploadDefine.h"
+#import "ZXLSyncHashTable.h"
 
 static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLockName";
 
 @interface ZXLCompressOperation()
-@property (nonatomic,strong)NSHashTable * comprssCallback;
+@property (nonatomic,strong)ZXLSyncHashTable * comprssCallback;
 @property (nonatomic,strong)AVAssetExportSession *compressSession;
 @property (nonatomic,assign)BOOL checkFailed;
 
@@ -29,9 +30,9 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 @synthesize finished  = _finished;
 @synthesize cancelled = _cancelled;
 
--(NSHashTable *)comprssCallback{
+-(ZXLSyncHashTable *)comprssCallback{
     if (!_comprssCallback) {
-        _comprssCallback = [NSHashTable hashTableWithOptions:NSHashTableCopyIn];
+        _comprssCallback = [ZXLSyncHashTable hashTableWithOptions:NSHashTableCopyIn];
     }
     return _comprssCallback;
 }
@@ -157,7 +158,7 @@ static dispatch_once_t oncePredicate;
                 case AVAssetExportSessionStatusCompleted:
                     errorStr = @""; break;
                 case AVAssetExportSessionStatusFailed:
-                    errorStr = @"AVAssetExportSessionStatusFailed"; break;
+                    errorStr = [weakSelf.compressSession.error localizedDescription]; break;
                 default: break;
             }
             
@@ -172,7 +173,7 @@ static dispatch_once_t oncePredicate;
 
 
 -(void)comprssComplete:(NSString *)resultPath error:(NSString *)error{
-    for (ZXLComprssCallback callback in self.comprssCallback) {
+    for (ZXLComprssCallback callback in self.comprssCallback.allObjects) {
         if (callback) {
             callback(resultPath,error);
         }
@@ -184,6 +185,10 @@ static dispatch_once_t oncePredicate;
 -(void)assetExportSessionConfig{
     __block NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
     __block NSString *resultPath = FILE_Video_PATH(videoName);
+    if ([[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:resultPath error:nil];
+    }
+    
     self.compressSession.outputURL = [NSURL fileURLWithPath:resultPath];
     self.compressSession.shouldOptimizeForNetworkUse = true;
     NSArray *supportedTypeArray =  self.compressSession.supportedFileTypes;
@@ -194,9 +199,14 @@ static dispatch_once_t oncePredicate;
     } else {
          self.compressSession.outputFileType = [supportedTypeArray objectAtIndex:0];
     }
-    if ([[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
-        [[NSFileManager defaultManager] removeItemAtPath:resultPath error:nil];
+    
+    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:self.compressSession.asset];
+    self.checkFailed = [compatiblePresets containsObject:AVAssetExportPreset640x480];
+    
+    if (self.checkFailed) {
+        return;
     }
+    
     AVMutableVideoComposition *videoComposition = [ZXLVideoUtils fixedCompositionWithAsset:self.compressSession.asset];
     if (videoComposition.renderSize.width) {       // 修正视频转向
         self.compressSession.videoComposition = videoComposition;

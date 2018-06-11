@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		822C24D920CA7027005454A0 /* ZXLSyncHashTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 822C24D720CA7027005454A0 /* ZXLSyncHashTable.h */; };
+		822C24DA20CA7027005454A0 /* ZXLSyncHashTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 822C24D820CA7027005454A0 /* ZXLSyncHashTable.m */; };
 		823033C220A536FA009343DC /* ZXLUploadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 823033C020A536FA009343DC /* ZXLUploadManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		823033C320A536FA009343DC /* ZXLUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 823033C120A536FA009343DC /* ZXLUploadManager.m */; };
 		82444F71208DAE3B009DC4B1 /* ZXLCompressManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		822C24D720CA7027005454A0 /* ZXLSyncHashTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLSyncHashTable.h; sourceTree = "<group>"; };
+		822C24D820CA7027005454A0 /* ZXLSyncHashTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLSyncHashTable.m; sourceTree = "<group>"; };
 		823033C020A536FA009343DC /* ZXLUploadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLUploadManager.h; sourceTree = "<group>"; };
 		823033C120A536FA009343DC /* ZXLUploadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXLUploadManager.m; sourceTree = "<group>"; };
 		82444F6F208DAE3B009DC4B1 /* ZXLCompressManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXLCompressManager.h; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				829961C4204E913B0040FF16 /* ZXLTimer.m */,
 				82C8DFEB207DE465006AF4DC /* ZXLSyncMapTable.h */,
 				82C8DFE7207DE465006AF4DC /* ZXLSyncMapTable.m */,
+				822C24D720CA7027005454A0 /* ZXLSyncHashTable.h */,
+				822C24D820CA7027005454A0 /* ZXLSyncHashTable.m */,
 				82C8DFE6207DE464006AF4DC /* ZXLSyncMutableArray.h */,
 				82C8DFE8207DE465006AF4DC /* ZXLSyncMutableArray.m */,
 				82C8DFED207DE465006AF4DC /* ZXLSyncMutableDictionary.h */,
@@ -221,6 +227,7 @@
 				82C8DFF1207DE465006AF4DC /* ZXLUploadUnifiedResponese.h in Headers */,
 				8285F6A9201C1A9D00D0F682 /* ZXLTaskInfoModel.h in Headers */,
 				828A67932021B58D0094CA92 /* ZXLVideoUtils.h in Headers */,
+				822C24D920CA7027005454A0 /* ZXLSyncHashTable.h in Headers */,
 				8269E8BC201F191C002D540E /* ZXLDocumentUtils.h in Headers */,
 				8285F6A1201C1A4A00D0F682 /* ZXLFileInfoModel.h in Headers */,
 				82C8DFF5207DE465006AF4DC /* ZXLSyncMutableDictionary.h in Headers */,
@@ -317,6 +324,7 @@
 				8285F6A2201C1A4A00D0F682 /* ZXLFileInfoModel.m in Sources */,
 				8285F69E201C1A0700D0F682 /* ZXLUploadFileResultCenter.m in Sources */,
 				8285F6AA201C1A9D00D0F682 /* ZXLTaskInfoModel.m in Sources */,
+				822C24DA20CA7027005454A0 /* ZXLSyncHashTable.m in Sources */,
 				828A679F2024595F0094CA92 /* ZXLUploadFileManager.m in Sources */,
 				824ABAD6208F1C7F00D99D8A /* ZXLReachability.m in Sources */,
 			);

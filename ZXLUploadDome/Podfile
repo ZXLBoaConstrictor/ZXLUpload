@@ -12,6 +12,5 @@ pod 'TZImagePickerController'
 pod 'Masonry'
 pod 'SVProgressHUD'
 pod 'FMDB'
-pod 'ZXLUpload'
 pod 'ZXLRecorder'
 end

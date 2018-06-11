@@ -6,8 +6,6 @@ PODS:
   - SVProgressHUD (2.1.2)
   - TZImagePickerController (2.0.1)
   - ZXLRecorder (1.0.1)
-  - ZXLUpload (1.0.2):
-    - FMDB
 
 DEPENDENCIES:
   - FMDB
@@ -15,7 +13,6 @@ DEPENDENCIES:
   - SVProgressHUD
   - TZImagePickerController
   - ZXLRecorder
-  - ZXLUpload
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -24,7 +21,6 @@ SPEC REPOS:
     - SVProgressHUD
     - TZImagePickerController
     - ZXLRecorder
-    - ZXLUpload
 
 SPEC CHECKSUMS:
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
@@ -32,8 +28,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TZImagePickerController: 34ecb53af8c349964394407e42b6e54e22589ebe
   ZXLRecorder: 9bb6afdc114adc7e2fdd6325542ed71213e96bfd
-  ZXLUpload: a974b9855ee21208f5f780799a381220d730adc0
 
-PODFILE CHECKSUM: b27f3e53ca2323b95df84b1fc0c707df1f7800b3
+PODFILE CHECKSUM: f9853aa56e1ccb579d6aca6652052d2c6f1b4d52
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3
