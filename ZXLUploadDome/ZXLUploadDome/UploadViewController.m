@@ -271,10 +271,10 @@ static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
         }
         //如果是录像
         else if([mediaType isEqualToString:(NSString *)kUTTypeMovie]){
-            NSURL *mediaURL = info[@"UIImagePickerControllerMediaURL"];
-            NSString *thumbPath = [mediaURL.absoluteString substringFromIndex:7];
+            NSURL *videoUrl = (NSURL*)[info objectForKey:UIImagePickerControllerMediaURL];
+            NSString *videoPath = [videoUrl path];
             
-            ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithFileURL:thumbPath];
+            ZXLFileInfoModel *model = [[ZXLFileInfoModel alloc] initWithFileURL:videoPath];
             [[ZXLUploadTaskManager manager] addUploadFile:model forIdentifier:weakSelf.uploadIdentifier];
         }
         dispatch_async(dispatch_get_main_queue(), ^{

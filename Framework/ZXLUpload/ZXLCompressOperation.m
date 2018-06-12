@@ -92,7 +92,10 @@ static dispatch_once_t oncePredicate;
         [self runSelector:@selector(cancelCompress)];
     }
     [self.lock unlock];
-    [self finish];
+    
+    if (self.executing) {
+       [self finish];
+    }
 }
 
 - (void)cancelCompress {
@@ -146,9 +149,10 @@ static dispatch_once_t oncePredicate;
     }
     __weak typeof(self) weakSelf = self;
     [self.compressSession exportAsynchronouslyWithCompletionHandler:^{
-        if (weakSelf) {
+        typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
             NSString *errorStr = @"";
-            switch (weakSelf.compressSession.status) {
+            switch (strongSelf.compressSession.status) {
                 case AVAssetExportSessionStatusUnknown:
                     errorStr = @"AVAssetExportSessionStatusUnknown";break;
                 case AVAssetExportSessionStatusWaiting:
@@ -158,14 +162,14 @@ static dispatch_once_t oncePredicate;
                 case AVAssetExportSessionStatusCompleted:
                     errorStr = @""; break;
                 case AVAssetExportSessionStatusFailed:
-                    errorStr = [weakSelf.compressSession.error localizedDescription]; break;
+                    errorStr = [strongSelf.compressSession.error localizedDescription]; break;
                 default: break;
             }
             
             if (ZXLISNSStringValid(errorStr)) {
-                [weakSelf comprssComplete:@"" error:errorStr];
+                [strongSelf comprssComplete:@"" error:errorStr];
             }else{
-                [weakSelf comprssComplete:weakSelf.compressSession.outputURL.absoluteString error:@""];
+                [strongSelf comprssComplete:strongSelf.compressSession.outputURL.absoluteString error:@""];
             }
         }
     }];
@@ -201,7 +205,7 @@ static dispatch_once_t oncePredicate;
     }
     
     NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:self.compressSession.asset];
-    self.checkFailed = [compatiblePresets containsObject:AVAssetExportPreset640x480];
+    self.checkFailed = !([compatiblePresets containsObject:AVAssetExportPreset640x480]);
     
     if (self.checkFailed) {
         return;

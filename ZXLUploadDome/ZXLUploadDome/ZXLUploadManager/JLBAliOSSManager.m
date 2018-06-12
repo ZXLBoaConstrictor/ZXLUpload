@@ -62,7 +62,7 @@
     NSString *strSTSServer = @"http://10.10.10.23:8101/upload/token/get?tokenType=Ali";//公司获取阿里云token接口
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:strSTSServer]];
     request.HTTPMethod = @"post";
-    NSString *strToken = @"";//公司登录后的token 公司内部获取阿里云上传token使用
+    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTUyODg1NzA3NSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJkYzQwY2E3Mi0zMWIwLTQ2MTEtOTE5Zi00MGFlZThmYTNhNmEifQ.ZdxyfMT-fte9DIPGgdMH9y5UeH4qmvJGveEDuJV9vTjPREZkqLY75qRWi7oyaHDjYeayZDTlxQL0nQiNWmZvDA";//公司登录后的token 公司内部获取阿里云上传token使用
     if (ZXLISNSStringValid(strToken)) {
         [request setValue:[NSString stringWithFormat:@"Bearer %@",strToken] forHTTPHeaderField:@"Authorization"];
     }
