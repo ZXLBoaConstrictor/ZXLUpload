@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
 typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
 
 @interface ZXLCompressManager : NSObject

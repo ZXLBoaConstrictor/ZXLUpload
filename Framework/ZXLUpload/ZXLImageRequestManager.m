@@ -38,7 +38,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if (object ==self.compressQueue && self.compressQueue.operationCount == 0) {
-        [ZXLCompressOperation operationThreadAttemptDealloc];
+        [ZXLImageRequestOperation operationThreadAttemptDealloc];
     }
 }
 
