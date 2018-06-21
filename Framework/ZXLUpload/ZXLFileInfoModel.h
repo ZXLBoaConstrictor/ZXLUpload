@@ -112,6 +112,13 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
 -(void)videoCompress:(void (^)(BOOL bResult ))completed;
 
 /**
+ 相册图片进行获取
+
+ @param completed 获取结果
+ */
+-(void)albumImageRequest:(void (^)(BOOL bResult ))completed;
+
+/**
  本地上传路径 -- 视频文件要经过压缩才能获取
  
  @return 上传路径

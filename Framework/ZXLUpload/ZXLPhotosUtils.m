@@ -36,12 +36,12 @@
     } networkAccessAllowed:YES];
 }
 
-+(void)getPhoto:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete{
++(PHImageRequestID)getPhoto:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete{
     if (!ZXLISNSStringValid(assetLocalIdentifier)){
         if (complete) {
             complete(nil);
         }
-        return;
+        return 0;
     }
     
     PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:assetLocalIdentifier] options:nil].firstObject;
@@ -49,7 +49,7 @@
         if (complete) {
             complete(nil);
         }
-        return;
+        return 0;
     }
     
     CGFloat fullScreenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -57,7 +57,7 @@
         fullScreenWidth = 1200;
     }
     
-    [ZXLPhotosUtils getPhotoWithAsset:asset photoWidth:fullScreenWidth completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+   return [ZXLPhotosUtils getPhotoWithAsset:asset photoWidth:fullScreenWidth completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
         if (!isDegraded && complete) {
             complete(photo);
         }
@@ -118,27 +118,6 @@
             }
         }];
         return imageRequestID;
-    } else if ([asset isKindOfClass:[ALAsset class]]) {
-        ALAsset *alAsset = (ALAsset *)asset;
-        dispatch_async(dispatch_get_global_queue(0,0), ^{
-            CGImageRef thumbnailImageRef = alAsset.thumbnail;
-            UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef scale:2.0 orientation:UIImageOrientationUp];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) completion(thumbnailImage,nil,YES);
-                
-                if (photoWidth == [UIScreen mainScreen].bounds.size.width || photoWidth == 1200) {
-                    dispatch_async(dispatch_get_global_queue(0,0), ^{
-                        ALAssetRepresentation *assetRep = [alAsset defaultRepresentation];
-                        CGImageRef fullScrennImageRef = [assetRep fullScreenImage];
-                        UIImage *fullScrennImage = [UIImage imageWithCGImage:fullScrennImageRef scale:2.0 orientation:UIImageOrientationUp];
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            if (completion) completion(fullScrennImage,nil,NO);
-                        });
-                    });
-                }
-            });
-        });
     }
     return 0;
 }

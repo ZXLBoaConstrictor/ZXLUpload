@@ -15,6 +15,7 @@
 #import "ZXLUploadTaskManager.h"
 #import "ZXLUploadFmdb.h"
 #import "ZXLCompressManager.h"
+#import "ZXLImageRequestManager.h"
 
 @interface ZXLUploadFileResultCenter()
 
@@ -287,6 +288,8 @@
 -(void)removeFileInfoUpload:(NSString *)identifier{
     //删除压缩
     [[ZXLCompressManager manager] cancelCompressOperationForIdentifier:identifier];
+    //删除图片获取
+    [[ZXLImageRequestManager manager] cancelImageRequestOperationForIdentifier:identifier];
     //删除上传请求
     [self removeUploadRequest:identifier];
     //删除出错历史
@@ -296,6 +299,8 @@
 - (void)networkError{
     //中断所有压缩
     [[ZXLCompressManager manager] cancelCompressOperations];
+    //中断所有获取图片
+    [[ZXLImageRequestManager manager] cancelImageRequestOperations];
     //中断所有上传
     NSArray * ayIdentifier = [_sessionRequestDict allKeys];
     for (NSString *identifier in ayIdentifier) {

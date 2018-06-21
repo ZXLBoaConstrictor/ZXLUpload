@@ -59,14 +59,14 @@
 }
 
 - (OSSFederationToken *) getFederationToken{
-    NSString *strSTSServer = @"http://10.10.10.23:8101/upload/token/get?tokenType=Ali";//公司获取阿里云token接口
+    NSString *strSTSServer = @"https://test-web-api.bestjlb.com/upload/token/get?tokenType=Ali";//公司获取阿里云token接口
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:strSTSServer]];
     request.HTTPMethod = @"post";
-    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTUyODg1NzA3NSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJkYzQwY2E3Mi0zMWIwLTQ2MTEtOTE5Zi00MGFlZThmYTNhNmEifQ.ZdxyfMT-fte9DIPGgdMH9y5UeH4qmvJGveEDuJV9vTjPREZkqLY75qRWi7oyaHDjYeayZDTlxQL0nQiNWmZvDA";//公司登录后的token 公司内部获取阿里云上传token使用
+    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTUyOTYzMjIwNSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJhYTU1Njc0MC00Y2E0LTQ0MzAtODFkYy1hZmI4Yzc5MTZjZjAifQ.RHMCRi-frxYg_2dvcKfkS9PpxIZX8qfB8e-GniL1Gl-lMLeskfO2YQpk-HBqHfxEiIWiJjJI3SEW9ceE7Iz5izd-scD1KFUpIWH1sNzsP-oKg8pHp3fKm8mZs1a_Js_ksJ6GmY1A7tYK7UVtjQURjzQjmBMLZ7A5ioyL_sYER1msXlD-bbT7E1dHA8o3lN8RlFE8_GnKEJUYQ5hMFTJ0keYYQ4D-LeerSOB51AKTQJ85aguKJP8cSnXPDn22vDg-KgPWSCyavDyAGT16efQGfkeriXsvSeSy-5zbtNPO9zAWpljXbGK2uGkbpbpVKsYdCkwW5oIXMBLrM7bcT7kZvw";//公司登录后的token 公司内部获取阿里云上传token使用
     if (ZXLISNSStringValid(strToken)) {
         [request setValue:[NSString stringWithFormat:@"Bearer %@",strToken] forHTTPHeaderField:@"Authorization"];
     }
-    [request setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forHTTPHeaderField:@"JLBIOSVersion"];
+    [request setValue:@"3.4.7" forHTTPHeaderField:@"JLBIOSVersion"];
     
     OSSTaskCompletionSource * tcs = [OSSTaskCompletionSource taskCompletionSource];
     

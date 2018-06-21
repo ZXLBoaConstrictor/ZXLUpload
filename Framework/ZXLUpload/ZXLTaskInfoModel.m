@@ -17,6 +17,7 @@
 #import "ZXLSyncMutableArray.h"
 #import "ZXLUploadFmdb.h"
 #import "ZXLCompressManager.h"
+#import "ZXLImageRequestManager.h"
 
 @interface ZXLTaskInfoModel ()
 
@@ -226,10 +227,9 @@
                     && !ZXLISNSStringValid(fileInfo.localURL)) {
                     dispatch_group_enter(group);
                     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        [ZXLPhotosUtils getPhoto:fileInfo.assetLocalIdentifier complete:^(UIImage *image) {
-                            if (image) {
-                                fileInfo.localURL = [ZXLDocumentUtils saveImage:image name:[fileInfo uploadKey]];
-                            }
+                        [fileInfo albumImageRequest:^(BOOL bResult) {
+                            if (!bResult)
+                                compressError = YES;
                             dispatch_group_leave(group);
                         }];
                     });

@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
-typedef void (^ZXLComprssProgressCallback)(float percent);
-
 
 @interface ZXLCompressManager : NSObject
 +(instancetype)manager;
@@ -18,6 +16,10 @@ typedef void (^ZXLComprssProgressCallback)(float percent);
 -(void)videoAsset:(AVURLAsset *)asset
    fileIdentifier:(NSString *)fileId
          callback:(ZXLComprssCallback)callback;
+
+-(void)mp4VideoPHAsset:(PHAsset *)asset
+        fileIdentifier:(NSString *)fileId
+              callback:(ZXLComprssCallback)callback;
 
 -(void)cancelCompressOperationForIdentifier:(NSString *)fileIdentifier;
 

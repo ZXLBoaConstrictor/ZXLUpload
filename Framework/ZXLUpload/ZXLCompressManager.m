@@ -44,6 +44,9 @@
 -(void)videoAsset:(AVURLAsset *)asset
    fileIdentifier:(NSString *)fileId
          callback:(ZXLComprssCallback)callback{
+    if (asset == nil || !ZXLISNSStringValid(fileId)) {
+        return;
+    }
     __weak typeof(self) weakSelf = self;
     dispatch_async(self.addOperationSerialQueue, ^{
         ZXLCompressOperation * operation = [weakSelf isCompressingFile:fileId];
@@ -51,6 +54,21 @@
             [operation addComprssCallback:callback];
         }else{
             operation = [[ZXLCompressOperation alloc] initWithVideoAsset:asset fileIdentifier:fileId callback:callback];
+            [weakSelf.compressQueue addOperation:operation];
+        }
+    });
+}
+
+-(void)mp4VideoPHAsset:(PHAsset *)asset
+        fileIdentifier:(NSString *)fileId
+              callback:(ZXLComprssCallback)callback{
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(self.addOperationSerialQueue, ^{
+        ZXLCompressOperation * operation = [weakSelf isCompressingFile:fileId];
+        if (operation) {
+            [operation addComprssCallback:callback];
+        }else{
+            operation = [[ZXLCompressOperation alloc] initWithMp4VideoPHAsset:asset fileIdentifier:fileId callback:callback];
             [weakSelf.compressQueue addOperation:operation];
         }
     });

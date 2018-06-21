@@ -17,6 +17,7 @@
 #import "ZXLUploadFileResultCenter.h"
 #import "ZXLUploadTaskManager.h"
 #import "ZXLCompressManager.h"
+#import "ZXLImageRequestManager.h"
 
 
 @implementation ZXLFileInfoModel
@@ -188,21 +189,42 @@
     typeof(self) __weak weakSelf = self;
     [self getVideoOutputAVURLAsset:^(AVURLAsset *asset) {
         if (asset) {
-            [[ZXLCompressManager manager] videoAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
-                if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
-                    weakSelf.comprssSuccess = YES;
-                    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
-                    if (completed) {
-                        completed(YES);
+            NSString * fileExtension = [asset.URL.absoluteString pathExtension];
+            fileExtension = [fileExtension lowercaseString];
+            if ([fileExtension hasSuffix:@"mp4"]) {
+                PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
+                [[ZXLCompressManager manager] mp4VideoPHAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
+                    if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
+                        weakSelf.comprssSuccess = YES;
+                        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                        if (completed) {
+                            completed(YES);
+                        }
+                    }else{
+                        //文件信息错误
+                        [weakSelf setUploadResultError:ZXLFileUploadFileError];
+                        if (completed) {
+                            completed(NO);
+                        }
                     }
-                }else{
-                    //文件信息错误
-                    [weakSelf setUploadResultError:ZXLFileUploadFileError];
-                    if (completed) {
-                        completed(NO);
+                }];
+            }else{
+                [[ZXLCompressManager manager] videoAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
+                    if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
+                        weakSelf.comprssSuccess = YES;
+                        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                        if (completed) {
+                            completed(YES);
+                        }
+                    }else{
+                        //文件信息错误
+                        [weakSelf setUploadResultError:ZXLFileUploadFileError];
+                        if (completed) {
+                            completed(NO);
+                        }
                     }
-                }
-            }];
+                }];
+            }
         }else{
             [weakSelf setUploadResultError:ZXLFileUploadFileError];
             if (completed) {
@@ -241,6 +263,32 @@
             if (completion) {
                 completion(nil);
             }
+        }
+    }
+}
+
+-(void)albumImageRequest:(void (^)(BOOL bResult ))completed{
+    if (self.fileType == ZXLFileTypeImage
+        && ZXLISNSStringValid(self.assetLocalIdentifier)
+        && !ZXLISNSStringValid(self.localURL)) {
+        typeof(self) __weak weakSelf = self;
+        [[ZXLImageRequestManager manager] imageRequest:self.assetLocalIdentifier fileIdentifier:self.identifier callback:^(UIImage *image, NSString *error) {
+            typeof(self) strongSelf = weakSelf;
+            if (!ZXLISNSStringValid(error) && image) {
+                strongSelf.localURL = [ZXLDocumentUtils saveImage:image name:[strongSelf uploadKey]];
+                if (completed) {
+                    completed(YES);
+                }
+            }else{
+                [strongSelf setUploadResultError:ZXLFileUploadFileError];
+                if (completed) {
+                    completed(NO);
+                }
+            }
+        }];
+    }else{
+        if (completed) {
+            completed(YES);
         }
     }
 }
@@ -331,7 +379,6 @@
 }
 
 -(void)getThumbnail:(void (^)(UIImage * image))completed{
-    
     if (self.fileType == ZXLFileTypeImage) {
         if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册图片
             [ZXLPhotosUtils getPhotoAlbumThumbnail:self.assetLocalIdentifier complete:^(UIImage *image) {
@@ -341,11 +388,8 @@
             }];
             
             if (!ZXLISNSStringValid(self.localURL)) {
-                typeof(self) __weak weakSelf = self;
-                [ZXLPhotosUtils getPhoto:self.assetLocalIdentifier complete:^(UIImage *image) {
-                    if (image) {
-                       weakSelf.localURL = [ZXLDocumentUtils saveImage:image name:[weakSelf uploadKey]];
-                    }
+                [self albumImageRequest:^(BOOL bResult) {
+                    
                 }];
             }
         }else{

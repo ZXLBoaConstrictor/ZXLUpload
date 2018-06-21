@@ -140,6 +140,7 @@ static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
     TZImagePickerController *pVC =  [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
     pVC.allowPickingVideo = YES;
     pVC.isSelectOriginalPhoto = YES;
+    pVC.maxImagesCount = 100;
     pVC.photoWidth = 2000;
     pVC.photoPreviewMaxWidth = 2000;
     [self.navigationController presentViewController:pVC animated:YES completion:nil];

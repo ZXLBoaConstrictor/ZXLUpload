@@ -127,28 +127,7 @@
             }
         }];
         return imageRequestID;
-    } else if ([asset isKindOfClass:[ALAsset class]]) {
-        ALAsset *alAsset = (ALAsset *)asset;
-        dispatch_async(dispatch_get_global_queue(0,0), ^{
-            CGImageRef thumbnailImageRef = alAsset.thumbnail;
-            UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef scale:2.0 orientation:UIImageOrientationUp];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) completion(thumbnailImage,nil,YES);
-                
-                if (photoWidth == [UIScreen mainScreen].bounds.size.width || photoWidth == 600) {
-                    dispatch_async(dispatch_get_global_queue(0,0), ^{
-                        ALAssetRepresentation *assetRep = [alAsset defaultRepresentation];
-                        CGImageRef fullScrennImageRef = [assetRep fullScreenImage];
-                        UIImage *fullScrennImage = [UIImage imageWithCGImage:fullScrennImageRef scale:2.0 orientation:UIImageOrientationUp];
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            if (completion) completion(fullScrennImage,nil,NO);
-                        });
-                    });
-                }
-            });
-        });
-    }
+    } 
     return 0;
 }
 

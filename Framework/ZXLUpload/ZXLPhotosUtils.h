@@ -18,7 +18,7 @@
  */
 +(void)getPhotoAlbumThumbnail:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete;
 
-+(void)getPhoto:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete;
++(PHImageRequestID)getPhoto:(NSString *)assetLocalIdentifier complete:(void (^)(UIImage *image))complete;
 
 + (UIImage *)fixOrientation:(UIImage *)aImage;
 @end

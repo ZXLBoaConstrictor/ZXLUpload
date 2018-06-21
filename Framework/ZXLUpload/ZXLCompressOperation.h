@@ -18,6 +18,10 @@ typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
                    fileIdentifier:(NSString *)fileId
                          callback:(ZXLComprssCallback)callback;
 
+-(instancetype)initWithMp4VideoPHAsset:(PHAsset *)asset
+                        fileIdentifier:(NSString *)fileId
+                              callback:(ZXLComprssCallback)callback;
+
 - (void)addComprssCallback:(ZXLComprssCallback)callback;
 
 -(float)compressProgress;

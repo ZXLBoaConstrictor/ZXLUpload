@@ -8,6 +8,7 @@
 
 #import "ZXLCompressOperation.h"
 #import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
 #import "ZXLDocumentUtils.h"
 #import "ZXLFileUtils.h"
 #import "ZXLVideoUtils.h"
@@ -18,8 +19,13 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
 
 @interface ZXLCompressOperation()
 @property (nonatomic,strong)ZXLSyncHashTable * comprssCallback;
-@property (nonatomic,strong)AVAssetExportSession *compressSession;
 @property (nonatomic,assign)BOOL checkFailed;
+@property (nonatomic,assign)BOOL mp4Video;
+//mp4
+@property (nonatomic,strong)PHAsset * asset;
+@property (nonatomic,assign)double mp4Progress;
+//非MP4
+@property (nonatomic,strong)AVAssetExportSession *compressSession;
 
 @property (nonatomic, strong) NSRecursiveLock *lock;
 @property (nonatomic, copy) NSArray *runLoopModes;
@@ -42,7 +48,25 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
                          callback:(ZXLComprssCallback)callback{
     if (self = [super init]) {
         self.checkFailed = NO;
+        self.mp4Video = NO;
         self.compressSession = [[AVAssetExportSession alloc]initWithAsset:asset presetName:AVAssetExportPreset640x480];
+        self.lock = [[NSRecursiveLock alloc] init];
+        self.lock.name = ZXLCompressOperationLockName;
+        self.runLoopModes = @[NSRunLoopCommonModes];
+        [self.comprssCallback addObject:callback];
+        self.identifier = fileId;
+    }
+    return self;
+}
+
+-(instancetype)initWithMp4VideoPHAsset:(PHAsset *)asset
+                        fileIdentifier:(NSString *)fileId
+                              callback:(ZXLComprssCallback)callback{
+    if (self = [super init]) {
+        self.checkFailed = NO;
+        self.mp4Video = YES;
+        self.mp4Progress = 0;
+        self.asset = asset;
         self.lock = [[NSRecursiveLock alloc] init];
         self.lock.name = ZXLCompressOperationLockName;
         self.runLoopModes = @[NSRunLoopCommonModes];
@@ -99,10 +123,9 @@ static dispatch_once_t oncePredicate;
 }
 
 - (void)cancelCompress {
-    if (self.isExecuting && (self.compressSession.status == AVAssetExportSessionStatusWaiting||
-        self.compressSession.status == AVAssetExportSessionStatusExporting)) {
-        [self.compressSession cancelExport];
+    if (self.isExecuting && !self.mp4Video &&(self.compressSession.status == AVAssetExportSessionStatusWaiting ||self.compressSession.status == AVAssetExportSessionStatusExporting)) {
         
+        [self.compressSession cancelExport];
         //中断压缩删除压缩未完成的文件
         NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
         NSString *resultPath = FILE_Video_PATH(videoName);
@@ -147,32 +170,67 @@ static dispatch_once_t oncePredicate;
         [self comprssComplete:@"" error:@"视频类型暂不支持导出"];
         return;
     }
+    
     __weak typeof(self) weakSelf = self;
-    [self.compressSession exportAsynchronouslyWithCompletionHandler:^{
-        typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
-            NSString *errorStr = @"";
-            switch (strongSelf.compressSession.status) {
-                case AVAssetExportSessionStatusUnknown:
-                    errorStr = @"AVAssetExportSessionStatusUnknown";break;
-                case AVAssetExportSessionStatusWaiting:
-                    errorStr = @"AVAssetExportSessionStatusWaiting"; break;
-                case AVAssetExportSessionStatusExporting:
-                    errorStr = @"AVAssetExportSessionStatusExporting"; break;
-                case AVAssetExportSessionStatusCompleted:
-                    errorStr = @""; break;
-                case AVAssetExportSessionStatusFailed:
-                    errorStr = [strongSelf.compressSession.error localizedDescription]; break;
-                default: break;
-            }
-            
-            if (ZXLISNSStringValid(errorStr)) {
-                [strongSelf comprssComplete:@"" error:errorStr];
-            }else{
-                [strongSelf comprssComplete:strongSelf.compressSession.outputURL.absoluteString error:@""];
+    if (self.mp4Video) {
+        NSArray *assetResources = [PHAssetResource assetResourcesForAsset:self.asset];
+        PHAssetResource *resource = nil;
+        for (PHAssetResource *assetRes in assetResources) {
+            if (@available(iOS 9.1, *)) {
+                if (assetRes.type == PHAssetResourceTypePairedVideo || assetRes.type == PHAssetResourceTypeVideo) {
+                    resource = assetRes;
+                }
+            } else {
+                if (assetRes.type == PHAssetResourceTypeVideo) {
+                    resource = assetRes;
+                }
             }
         }
-    }];
+        
+        NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
+        __block NSString *resultPath = FILE_Video_PATH(videoName);
+        PHAssetResourceRequestOptions *requestOptions = [[PHAssetResourceRequestOptions alloc] init];
+        requestOptions.networkAccessAllowed = YES;
+        requestOptions.progressHandler = ^(double progress) {
+            typeof(self) strongSelf = weakSelf;
+            strongSelf.mp4Progress = progress;
+        };
+        [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resource toFile:[NSURL fileURLWithPath:resultPath] options:requestOptions completionHandler:^(NSError *_Nullable error) {
+            typeof(self) strongSelf = weakSelf;
+            strongSelf.mp4Progress = 1.0;
+            if (error) {
+                [strongSelf comprssComplete:@"" error:[error localizedDescription]];
+            } else {
+                [strongSelf comprssComplete:resultPath error:@""];
+            }
+        }];
+    }else{
+        [self.compressSession exportAsynchronouslyWithCompletionHandler:^{
+            typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                NSString *errorStr = @"";
+                switch (strongSelf.compressSession.status) {
+                    case AVAssetExportSessionStatusUnknown:
+                        errorStr = @"AVAssetExportSessionStatusUnknown";break;
+                    case AVAssetExportSessionStatusWaiting:
+                        errorStr = @"AVAssetExportSessionStatusWaiting"; break;
+                    case AVAssetExportSessionStatusExporting:
+                        errorStr = @"AVAssetExportSessionStatusExporting"; break;
+                    case AVAssetExportSessionStatusCompleted:
+                        errorStr = @""; break;
+                    case AVAssetExportSessionStatusFailed:
+                        errorStr = [strongSelf.compressSession.error localizedDescription]; break;
+                    default: break;
+                }
+                
+                if (ZXLISNSStringValid(errorStr)) {
+                    [strongSelf comprssComplete:@"" error:errorStr];
+                }else{
+                    [strongSelf comprssComplete:strongSelf.compressSession.outputURL.absoluteString error:@""];
+                }
+            }
+        }];
+    }
 }
 
 
@@ -187,33 +245,53 @@ static dispatch_once_t oncePredicate;
 
 //视频压缩配置
 -(void)assetExportSessionConfig{
-    __block NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
-    __block NSString *resultPath = FILE_Video_PATH(videoName);
+    NSString * videoName = [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeVideo]];
+    NSString *resultPath = FILE_Video_PATH(videoName);
     if ([[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
         [[NSFileManager defaultManager] removeItemAtPath:resultPath error:nil];
     }
     
-    self.compressSession.outputURL = [NSURL fileURLWithPath:resultPath];
-    self.compressSession.shouldOptimizeForNetworkUse = true;
-    NSArray *supportedTypeArray =  self.compressSession.supportedFileTypes;
-    if ([supportedTypeArray containsObject:AVFileTypeMPEG4]) {
-         self.compressSession.outputFileType = AVFileTypeMPEG4;
-    } else if (supportedTypeArray.count == 0) {
-        self.checkFailed = YES;
-    } else {
-         self.compressSession.outputFileType = [supportedTypeArray objectAtIndex:0];
-    }
-    
-    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:self.compressSession.asset];
-    self.checkFailed = !([compatiblePresets containsObject:AVAssetExportPreset640x480]);
-    
-    if (self.checkFailed) {
-        return;
-    }
-    
-    AVMutableVideoComposition *videoComposition = [ZXLVideoUtils fixedCompositionWithAsset:self.compressSession.asset];
-    if (videoComposition.renderSize.width) {       // 修正视频转向
-        self.compressSession.videoComposition = videoComposition;
+    if (!self.mp4Video) {
+        self.compressSession.outputURL = [NSURL fileURLWithPath:resultPath];
+        self.compressSession.shouldOptimizeForNetworkUse = true;
+        NSArray *supportedTypeArray =  self.compressSession.supportedFileTypes;
+        if ([supportedTypeArray containsObject:AVFileTypeMPEG4]) {
+            self.compressSession.outputFileType = AVFileTypeMPEG4;
+        } else if (supportedTypeArray.count == 0) {
+            self.checkFailed = YES;
+        } else {
+            self.compressSession.outputFileType = [supportedTypeArray objectAtIndex:0];
+        }
+        
+        NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:self.compressSession.asset];
+        self.checkFailed = !([compatiblePresets containsObject:AVAssetExportPreset640x480]);
+        
+        if (self.checkFailed) {
+            return;
+        }
+        
+        AVMutableVideoComposition *videoComposition = [ZXLVideoUtils fixedCompositionWithAsset:self.compressSession.asset];
+        if (videoComposition.renderSize.width) {       // 修正视频转向
+            self.compressSession.videoComposition = videoComposition;
+        }
+    }else{
+        NSArray *assetResources = [PHAssetResource assetResourcesForAsset:self.asset];
+        PHAssetResource *resource = nil;
+        for (PHAssetResource *assetRes in assetResources) {
+            if (@available(iOS 9.1, *)) {
+                if (assetRes.type == PHAssetResourceTypePairedVideo || assetRes.type == PHAssetResourceTypeVideo) {
+                    resource = assetRes;
+                }
+            } else {
+                if (assetRes.type == PHAssetResourceTypeVideo) {
+                    resource = assetRes;
+                }
+            }
+        }
+        
+        if (!resource) {
+            self.checkFailed = YES;
+        }
     }
 }
 
@@ -243,8 +321,12 @@ static dispatch_once_t oncePredicate;
 }
 
 -(float)compressProgress{
-    if (self.compressSession) {
-        return self.compressSession.progress;
+    if (self.mp4Video) {
+        return MAX(0, self.mp4Progress);
+    }else{
+        if (self.compressSession) {
+            return self.compressSession.progress;
+        }
     }
     return 0;
 }

@@ -25,78 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Framework/ZXLUpload/ZXLCompressManager.m"
-            timestampString = "550475557.483126"
+            filePath = "ZXLUploadDome/UploadViewController.m"
+            timestampString = "551239211.738793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-submitFinishWithTaskInfo:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../Framework/ZXLUpload/ZXLFileInfoModel.m"
-            timestampString = "550476107.236526"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "-dealloc"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../Framework/ZXLUpload/ZXLCompressOperation.m"
-            timestampString = "550476107.2366"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-comprssComplete:error:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ZXLCompressOperation comprssComplete:error:]"
-                  moduleName = "ZXLUploadDome"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhangxiaolong/Documents/GitHub/ZXLUpload/Framework/ZXLUpload/ZXLCompressOperation.m"
-                  timestampString = "550476107.350603"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ZXLCompressOperation comprssComplete:error:]"
-                  moduleName = "ZXLUploadDome"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhangxiaolong/Documents/GitHub/ZXLUpload/Framework/ZXLUpload/ZXLCompressOperation.m"
-                  timestampString = "550476107.3527091"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "148">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
