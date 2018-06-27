@@ -125,6 +125,10 @@
                     }
                 }];
             }
+            
+            if (downloadFinined && !result) {
+                if (completion) completion(result,info,[[info objectForKey:PHImageResultIsDegradedKey] boolValue]);
+            }
         }];
         return imageRequestID;
     } 
