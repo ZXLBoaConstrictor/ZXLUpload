@@ -10,9 +10,11 @@
 #import "ZXLImageRequestOperation.h"
 #import "ZXLUploadDefine.h"
 
+#define ZXLMaxConcurrentOperationCount 5 //控制执行数量
+
 @interface ZXLImageRequestManager ()
-@property (nonatomic, strong) NSOperationQueue *compressQueue;
 @property (nonatomic, strong) dispatch_queue_t addOperationSerialQueue;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 @end
 
 @implementation ZXLImageRequestManager
@@ -26,18 +28,24 @@
     return _sharedObject;
 }
 
--(instancetype)init{
-    if (self = [super init]) {
-        _compressQueue = [[NSOperationQueue alloc] init];
-        _compressQueue.maxConcurrentOperationCount = 5;//控制图片获取数量
-        [_compressQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
+-(dispatch_queue_t)addOperationSerialQueue{
+    if (!_addOperationSerialQueue) {
         _addOperationSerialQueue = dispatch_queue_create("com.ZXLUpload.ZXLImageRequestManagerAddOperationSerializeQueue", DISPATCH_QUEUE_SERIAL);
     }
-    return self;
+    return _addOperationSerialQueue;
+}
+
+-(NSOperationQueue *)operationQueue{
+    if (!_operationQueue) {
+        _operationQueue = [[NSOperationQueue alloc] init];
+        _operationQueue.maxConcurrentOperationCount = ZXLMaxConcurrentOperationCount;
+        [_operationQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return _operationQueue;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    if (object ==self.compressQueue && self.compressQueue.operationCount == 0) {
+    if (object ==self.operationQueue && self.operationQueue.operationCount == 0) {
         [ZXLImageRequestOperation operationThreadAttemptDealloc];
     }
 }
@@ -57,7 +65,7 @@
             [operation addImageRequestCallback:callback];
         }else{
             operation = [[ZXLImageRequestOperation alloc] initWithIdentifier:assetLocalIdentifier fileIdentifier:fileId callback:callback];
-            [weakSelf.compressQueue addOperation:operation];
+            [weakSelf.operationQueue addOperation:operation];
         }
     });
 }
@@ -66,7 +74,7 @@
     if (!ZXLISNSStringValid(fileIdentifier)) return nil;
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier = %@", fileIdentifier];
-    NSArray *filterResult = [self.compressQueue.operations filteredArrayUsingPredicate:predicate];
+    NSArray *filterResult = [self.operationQueue.operations filteredArrayUsingPredicate:predicate];
     if (filterResult.count > 0) {
         return (ZXLImageRequestOperation *)[filterResult firstObject];
     }
@@ -83,7 +91,7 @@
 -(void)cancelImageRequestOperations{
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.compressQueue cancelAllOperations];
+        [weakSelf.operationQueue cancelAllOperations];
     });
 
 }

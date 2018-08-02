@@ -192,22 +192,30 @@
             NSString * fileExtension = [asset.URL.absoluteString pathExtension];
             fileExtension = [fileExtension lowercaseString];
             if ([fileExtension hasSuffix:@"mp4"]) {
-                PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
-                [[ZXLCompressManager manager] mp4VideoPHAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
-                    if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
-                        weakSelf.comprssSuccess = YES;
-                        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
-                        if (completed) {
-                            completed(YES);
+                if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册文件
+                    PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
+                    [[ZXLCompressManager manager] mp4VideoPHAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
+                        if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
+                            weakSelf.comprssSuccess = YES;
+                            [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                            if (completed) {
+                                completed(YES);
+                            }
+                        }else{
+                            //文件信息错误
+                            [weakSelf setUploadResultError:ZXLFileUploadFileError];
+                            if (completed) {
+                                completed(NO);
+                            }
                         }
-                    }else{
-                        //文件信息错误
-                        [weakSelf setUploadResultError:ZXLFileUploadFileError];
-                        if (completed) {
-                            completed(NO);
-                        }
+                    }];
+                }else{//沙盒文件--不用压缩
+                    weakSelf.comprssSuccess = YES;
+                    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                    if (completed) {
+                        completed(YES);
                     }
-                }];
+                }
             }else{
                 [[ZXLCompressManager manager] videoAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
                     if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
