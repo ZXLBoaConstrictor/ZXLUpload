@@ -1,7 +1,7 @@
 //
 //  ZXLCompressManager.h
 //  ZXLUpload
-//
+//  控制视频压缩处理数量
 //  Created by 张小龙 on 2018/4/23.
 //  Copyright © 2018年 张小龙. All rights reserved.
 //

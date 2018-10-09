@@ -15,7 +15,7 @@
 #import "ZXLSyncMutableDictionary.h"
 #import "ZXLSyncMapTable.h"
 #import "ZXLDocumentUtils.h"
-#import "ZXLTimer.h"
+#import "ZXLCGDTimer.h"
 #import "ZXLPhotosUtils.h"
 #import "ZXLUploadManager.h"
 #import "ZXLUploadTaskManager.h"
@@ -24,7 +24,7 @@
 @property (nonatomic,strong)ZXLSyncMapTable * uploadFileResponseBlocks;
 @property (nonatomic,strong)ZXLSyncMapTable * uploadFileProgressBlocks;
 @property (nonatomic,strong)ZXLSyncMutableDictionary * waitResultFiles;
-@property (nonatomic,strong)NSTimer * timer;//定时检查上传结果返回处理
+@property (nonatomic,strong)ZXLCGDTimer * timer;//定时检查上传结果返回处理
 @end
 
 @implementation ZXLUploadFileManager
@@ -173,8 +173,8 @@
         [self.waitResultFiles setObject:fileInfo forKey:fileInfo.identifier];
         
         if ( !_timer) {
-            _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) userInfo:nil repeats:YES];
-            [_timer fire];
+            _timer = [[ZXLCGDTimer alloc] initWithTimeInterval:1.0 target:self selector:@selector(fileUploadProgress) parameter:nil];
+            [_timer start];
         }
         return;
     }

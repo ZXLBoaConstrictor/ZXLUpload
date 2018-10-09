@@ -14,7 +14,7 @@
 #import "ZXLDocumentUtils.h"
 #import "ZXLNetworkManager.h"
 #import "ZXLUploadUnifiedResponese.h"
-#import "ZXLTimer.h"
+#import "ZXLCGDTimer.h"
 #import "ZXLUploadFmdb.h"
 
 @interface ZXLUploadTaskManager ()
@@ -23,7 +23,7 @@
 @property (nonatomic,strong)ZXLSyncMapTable * uploadTaskProgressBlocks;//需要当前界面返回上传进度的block
 @property (nonatomic,strong)ZXLSyncMapTable * uploadTaskCompressBlocks;//需要当前界面返回压缩进度的block
 @property (nonatomic,strong)ZXLSyncMutableDictionary * uploadTasks;//所有上传任务
-@property (nonatomic,strong)NSTimer * timer;//定时检查上传结果返回处理
+@property (nonatomic,strong)ZXLCGDTimer * timer;//定时检查上传结果返回处理
 @end
 
 @implementation ZXLUploadTaskManager
@@ -450,8 +450,8 @@
     }
     
     if ( !_timer) {
-        _timer = [ZXLTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(taskUploadProgress) userInfo:nil repeats:YES];
-        [_timer fire];
+        _timer = [[ZXLCGDTimer alloc] initWithTimeInterval:1.0 target:self selector:@selector(taskUploadProgress) parameter:nil];
+        [_timer start];
     }
 }
 

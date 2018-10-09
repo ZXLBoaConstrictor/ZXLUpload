@@ -29,7 +29,7 @@ FOUNDATION_EXPORT const unsigned char ZXLUploadVersionString[];
 #import "ZXLSyncMapTable.h"
 #import "ZXLSyncMutableArray.h"
 #import "ZXLSyncMutableDictionary.h"
-#import "ZXLTimer.h"
+#import "ZXLCGDTimer.h"
 #import "ZXLNetworkManager.h"
 #import "ZXLUploadManager.h"
 #import "ZXLUploadFmdb.h"
