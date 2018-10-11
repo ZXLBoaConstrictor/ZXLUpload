@@ -56,6 +56,23 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  @return 时长
  */
 +(NSInteger)fileCMTime:(NSString *)path;
+
+/**
+ 获取文件所在的系统文件夹
+
+ @param fileURL 文件路径Documents、Library、tmp（常用的3个文件夹）
+ @return 系统文件夹
+ */
++(NSString *)systemtFolderName:(NSString *)fileURL;
+
+
+/**
+ 替换掉文件路径的相对文件在本地的路径（如果更换失败返回原来的文件路径）
+
+ @param fileURL 文件路径
+ @return 替换后的文件路径
+ */
++(NSString *)replaceSystemtFolder:(NSString *)fileURL;
 @end
 
 @interface UIImage (ZXLBundle)

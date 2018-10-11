@@ -125,7 +125,7 @@
             self.fileType =             ZXLFileTypeVideo;
         }else{
             self.fileType =             [ZXLFileUtils fileTypeByURL:fileURL];
-            self.localURL =             fileURL;
+            self.localURL =             [ZXLFileUtils replaceSystemtFolder:fileURL];
         }
         
         self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];

@@ -204,6 +204,37 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
     CMTime time = [avUrl duration];
     return ceil(time.value/time.timescale);
 }
+
++(NSString *)systemtFolderName:(NSString *)fileURL{
+    if ([fileURL rangeOfString:@"var/mobile/Containers/Data/Application/"].location == NSNotFound)
+        return @"";
+    
+    if ([fileURL rangeOfString:@"/Documents/"].location != NSNotFound) {
+        return @"Documents";
+    }
+    
+    if ([fileURL rangeOfString:@"/Library/"].location != NSNotFound) {
+        return @"Library";
+    }
+    
+    if ([fileURL rangeOfString:@"/tmp/"].location != NSNotFound) {
+        return @"tmp";
+    }
+    
+    return @"";
+}
+
++(NSString *)replaceSystemtFolder:(NSString *)fileURL{
+    NSString *folderName = [self systemtFolderName:fileURL];
+    NSString *newFileURL = @"";
+    if (ZXLISNSStringValid(folderName)) {
+        NSString *tempFolderName = [NSString stringWithFormat:@"/%@/",folderName];
+        newFileURL = [fileURL substringFromIndex:[fileURL rangeOfString:tempFolderName].location];
+        newFileURL = [newFileURL stringByReplacingOccurrencesOfString:tempFolderName withString:@""];
+        newFileURL = [NSString stringWithFormat:@"%@/%@",FILE_DIRECTORY,newFileURL];
+    }
+    return ZXLISNSStringValid(newFileURL)?newFileURL:fileURL;
+}
 @end
 
 @implementation UIImage (ZXLBundle)
