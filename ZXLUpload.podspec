@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "ZXLUpload"
-    s.version      = "1.0.5"
+    s.version      = "1.0.6"
     s.summary      = "A Library for iOS to use for upload"
     s.homepage     = "https://github.com/ZXLBoaConstrictor"
     s.license      = "MIT"
