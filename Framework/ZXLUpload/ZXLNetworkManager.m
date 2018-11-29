@@ -25,10 +25,10 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kZXLReachabilityChangedNotification object:nil];
-        ZXLReachability *mangerNet = [ZXLReachability reachabilityWithHostName:@"www.baidu.com"];
-        [mangerNet startNotifier];
-        self.haveNetwork = [mangerNet isReachable];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:ZXLReachabilityChangedNotification object:nil];
+        ZXLReachability *reach = [ZXLReachability reachabilityWithHostName:@"www.apple.com"];
+        self.haveNetwork = [reach isReachable];
+        [reach startNotifier];
     }
     return self;
 }
@@ -43,6 +43,11 @@
 }
 
 +(BOOL)appHaveNetwork{
-    return [ZXLNetworkManager manager].haveNetwork;
+    BOOL bNetwork = NO;
+    ZXLReachability *reach = [ZXLReachability reachabilityWithHostName:@"www.apple.com"];
+    if(reach){
+        bNetwork = [reach isReachable];
+    }
+    return bNetwork;
 }
 @end

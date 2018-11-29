@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "UploadViewController.h"
 #import "CompressViewController.h"
-
+#import <AliyunOSSiOS/AliyunOSSiOS.h>
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView * tableView;
 @property(nonatomic,strong)NSArray *domes;
@@ -46,6 +46,8 @@
     
     self.domes = @[@"上传测试",@"压缩测试"];
     [self.tableView reloadData];
+    
+    [OSSLog enableLog];
 }
 
 - (void)didReceiveMemoryWarning {

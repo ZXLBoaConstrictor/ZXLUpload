@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "ZXLUpload"
-    s.version      = "1.0.6"
+    s.version      = "1.0.7"
     s.summary      = "A Library for iOS to use for upload"
     s.homepage     = "https://github.com/ZXLBoaConstrictor"
     s.license      = "MIT"
@@ -13,8 +13,4 @@ Pod::Spec.new do |s|
     s.framework  = "SystemConfiguration","CoreTelephony","Photos"
     s.requires_arc = true
     s.dependency "FMDB"
-    s.subspec 'Utils' do |ss|
-    ss.source_files = 'Framework/ZXLUpload/Utils/*.{h,m}'
-    end
-
 end

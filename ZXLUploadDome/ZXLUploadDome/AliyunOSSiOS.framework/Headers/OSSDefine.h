@@ -16,16 +16,22 @@
 #elif TARGET_OS_OSX
 #define OSSUAPrefix                             @"aliyun-sdk-mac"
 #endif
-#define OSSSDKVersion                           @"2.8.0"
+#define OSSSDKVersion                           @"2.10.7"
 
 #define OSSListBucketResultXMLTOKEN             @"ListBucketResult"
 #define OSSNameXMLTOKEN                         @"Name"
 #define OSSDelimiterXMLTOKEN                    @"Delimiter"
 #define OSSMarkerXMLTOKEN                       @"Marker"
+#define OSSKeyMarkerXMLTOKEN                    @"KeyMarker"
 #define OSSNextMarkerXMLTOKEN                   @"NextMarker"
+#define OSSNextKeyMarkerXMLTOKEN                @"NextKeyMarker"
+#define OSSUploadIdMarkerXMLTOKEN               @"UploadIdMarker"
+#define OSSNextUploadIdMarkerXMLTOKEN           @"NextUploadIdMarker"
 #define OSSMaxKeysXMLTOKEN                      @"MaxKeys"
+#define OSSMaxUploadsXMLTOKEN                   @"MaxUploads"
 #define OSSIsTruncatedXMLTOKEN                  @"IsTruncated"
 #define OSSContentsXMLTOKEN                     @"Contents"
+#define OSSUploadXMLTOKEN                       @"Upload"
 #define OSSKeyXMLTOKEN                          @"Key"
 #define OSSLastModifiedXMLTOKEN                 @"LastModified"
 #define OSSETagXMLTOKEN                         @"ETag"
@@ -62,6 +68,13 @@
 #define OSSHttpHeaderContentMD5                 @"Content-MD5"
 #define OSSHttpHeaderCacheControl               @"Cache-Control"
 #define OSSHttpHeaderExpires                    @"Expires"
+#define OSSHttpHeaderHashSHA1                   @"x-oss-hash-sha1"
+#define OSSHttpHeaderBucketACL                  @"x-oss-acl"
+#define OSSHttpHeaderObjectACL                  @"x-oss-object-acl"
+#define OSSHttpHeaderCopySource                 @"x-oss-copy-source"
+#define OSSHttpHeaderSymlinkTarget              @"x-oss-symlink-target"
+
+#define OSSHttpQueryProcess                     @"x-oss-process"
 
 #define OSSDefaultRetryCount                    3
 #define OSSDefaultMaxConcurrentNum              5

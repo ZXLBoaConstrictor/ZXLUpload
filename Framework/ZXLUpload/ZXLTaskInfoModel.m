@@ -252,6 +252,8 @@
                     ZXLFileInfoModel *fileInfo = [weakSelf.uploadFiles objectAtIndex:i];
                     if (fileInfo && [fileInfo isKindOfClass:[ZXLFileInfoModel class]]) {
                         if ([needUploadFiles indexOfObject:fileInfo.identifier] != NSNotFound) {
+                            //修复相同文件未删除需要上传文件任务
+                            [needUploadFiles removeObject:fileInfo.identifier];
                             [[ZXLUploadFileManager manager] taskUploadFile:fileInfo progress:^(float percent) {
                                 fileInfo.progress = percent;
                             } complete:^(ZXLFileUploadType nResult, NSString *resultURL) {

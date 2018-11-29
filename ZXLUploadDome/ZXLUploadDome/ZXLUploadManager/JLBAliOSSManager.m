@@ -62,7 +62,7 @@
     NSString *strSTSServer = @"https://test-web-api.bestjlb.com/upload/token/get?tokenType=Ali";//公司获取阿里云token接口
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:strSTSServer]];
     request.HTTPMethod = @"post";
-    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTUyOTYzMjIwNSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJhYTU1Njc0MC00Y2E0LTQ0MzAtODFkYy1hZmI4Yzc5MTZjZjAifQ.RHMCRi-frxYg_2dvcKfkS9PpxIZX8qfB8e-GniL1Gl-lMLeskfO2YQpk-HBqHfxEiIWiJjJI3SEW9ceE7Iz5izd-scD1KFUpIWH1sNzsP-oKg8pHp3fKm8mZs1a_Js_ksJ6GmY1A7tYK7UVtjQURjzQjmBMLZ7A5ioyL_sYER1msXlD-bbT7E1dHA8o3lN8RlFE8_GnKEJUYQ5hMFTJ0keYYQ4D-LeerSOB51AKTQJ85aguKJP8cSnXPDn22vDg-KgPWSCyavDyAGT16efQGfkeriXsvSeSy-5zbtNPO9zAWpljXbGK2uGkbpbpVKsYdCkwW5oIXMBLrM7bcT7kZvw";//公司登录后的token 公司内部获取阿里云上传token使用
+    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTU0MzM5ODk2OSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJmZTFkOTYzYi1kNTg4LTRjYTUtYTUyYy02MWE2ZTI3ZmYzZDUifQ.SlLeHimfODod1rXOW9TWXg1Sa26hA8wltFUdqk9Ks_p8VcD2AkrGgfHSrskSNzKR9xsvjw_ErWpBZNraZVQWhQ";//公司登录后的token 公司内部获取阿里云上传token使用
     if (ZXLISNSStringValid(strToken)) {
         [request setValue:[NSString stringWithFormat:@"Bearer %@",strToken] forHTTPHeaderField:@"Authorization"];
     }
@@ -105,40 +105,59 @@
             localFilePath:(NSString *)filePath
                  progress:(void (^)(float percent))progress
                    result:(void (^)(OSSTask *task))result{
+    
     OSSResumableUploadRequest* resumableRequest = [[OSSResumableUploadRequest alloc] init];
     resumableRequest.bucketName = [self getBucketName];
     resumableRequest.objectKey = objectKey;
     resumableRequest.uploadingFileURL = [NSURL fileURLWithPath:filePath];
     resumableRequest.partSize = 256 * 1024;//256K 分片上传
+    resumableRequest.deleteUploadIdOnCancelling = NO;
+    resumableRequest.recordDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     //totalBytesSent 上传量 totalBytesExpectedToSend 上传文件大小
     resumableRequest.uploadProgress = ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
-        progress((CGFloat)totalBytesSent/(CGFloat)totalBytesExpectedToSend);
+        if (progress) {
+            progress((CGFloat)totalBytesSent/(CGFloat)totalBytesExpectedToSend);
+        }
     };
     
-    OSSInitMultipartUploadRequest * init = [[OSSInitMultipartUploadRequest alloc] init];
-    init.bucketName = [self getBucketName];
-    init.objectKey = objectKey;
-    
-    OSSTask * task = [_client multipartUploadInit:init];
-    
-    [task continueWithBlock:^id(OSSTask *task) {
-        if (!task.error) {
-            OSSInitMultipartUploadResult * taskresult = task.result;
-            resumableRequest.uploadId = taskresult.uploadId;
-            OSSTask * resumeTask = [self->_client resumableUpload:resumableRequest];
-            [resumeTask continueWithBlock:^id(OSSTask *partTask) {
-                result(partTask);
-                return nil;
-            }];
-            
-            [task waitUntilFinished];
-            
+    OSSTask * resumeTask = [self.client resumableUpload:resumableRequest];
+    typeof(self) __weak weakSelf = self;
+    [resumeTask continueWithBlock:^id(OSSTask *task) {
+        if (task.error) {
+            if ([task.error.domain isEqualToString:OSSClientErrorDomain] && task.error.code == OSSClientErrorCodeCannotResumeUpload) {
+                // 该任务无法续传，需要获取新的uploadId重新上传
+                OSSResumableUploadRequest* resumableUpload = [[OSSResumableUploadRequest alloc] init];
+                resumableUpload.bucketName = [weakSelf getBucketName];
+                resumableUpload.objectKey = objectKey;
+                resumableUpload.uploadingFileURL = [NSURL fileURLWithPath:filePath];
+                resumableUpload.partSize = 256 * 1024;//256K 分片上传
+                resumableUpload.deleteUploadIdOnCancelling = NO;
+                resumableUpload.recordDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+                //totalBytesSent 上传量 totalBytesExpectedToSend 上传文件大小
+                resumableUpload.uploadProgress = ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+                    if (progress) {
+                        progress((CGFloat)totalBytesSent/(CGFloat)totalBytesExpectedToSend);
+                    }
+                };
+                OSSTask * newResumeTask = [weakSelf.client resumableUpload:resumableUpload];
+                [newResumeTask continueWithBlock:^id(OSSTask * task) {
+                    if (result) {
+                        result(task);
+                    }
+                    return nil;
+                }];
+            }else{
+                if (result) {
+                    result(task);
+                }
+            }
         } else {
-            result(task);
+            if (result) {
+                result(task);
+            }
         }
         return nil;
     }];
-    
     return resumableRequest;
 }
 
