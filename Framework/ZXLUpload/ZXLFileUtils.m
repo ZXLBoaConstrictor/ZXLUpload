@@ -7,6 +7,7 @@
 //
 
 #import "ZXLFileUtils.h"
+#import "ZXLDocumentUtils.h"
 #import "ZXLUploadDefine.h"
 #import "ZXLUploadManager.h"
 #import <AVFoundation/AVFoundation.h>
