@@ -11,6 +11,7 @@
 #import "ZXLUploadDefine.h"
 @interface ZXLNetworkManager()
 @property(nonatomic,assign)BOOL haveNetwork;
+@property (nonatomic) ZXLReachability *reachability;
 @end
 
 @implementation ZXLNetworkManager
@@ -26,9 +27,9 @@
 - (instancetype)init{
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:ZXLReachabilityChangedNotification object:nil];
-        ZXLReachability *reach = [ZXLReachability reachabilityWithHostName:@"www.apple.com"];
-        self.haveNetwork = [reach isReachable];
-        [reach startNotifier];
+        self.reachability = [ZXLReachability reachabilityWithHostName:@"www.apple.com"];
+        self.haveNetwork = [self.reachability isReachable];
+        [self.reachability startNotifier];
     }
     return self;
 }
