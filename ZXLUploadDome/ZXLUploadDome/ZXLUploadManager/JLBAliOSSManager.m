@@ -62,7 +62,7 @@
     NSString *strSTSServer = @"https://test-web-api.bestjlb.com/upload/token/get?tokenType=Ali";//公司获取阿里云token接口
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:strSTSServer]];
     request.HTTPMethod = @"post";
-    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTU0MzM5ODk2OSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiJmZTFkOTYzYi1kNTg4LTRjYTUtYTUyYy02MWE2ZTI3ZmYzZDUifQ.SlLeHimfODod1rXOW9TWXg1Sa26hA8wltFUdqk9Ks_p8VcD2AkrGgfHSrskSNzKR9xsvjw_ErWpBZNraZVQWhQ";//公司登录后的token 公司内部获取阿里云上传token使用
+    NSString *strToken = @"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMDA2OTgyIiwiaXNvbGF0aW9uIjoiYmVzdGpsYiIsImV4cCI6MTU0MzU2MTQ3NSwidHlwZSI6IklPUyIsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJqdGkiOiI4MWExOThmMS1jNTY3LTQxNzctOGIzYy02MjlhMDdhNGJmZTIifQ.re-Pv762mm5VBeO1uLG2O6YcB-NwECcRMEJIaFDOwvC0POb8DPcg60nIUzLaQNvO7kDQ6Jn88NWzZbebtFhxzQ";//公司登录后的token 公司内部获取阿里云上传token使用
     if (ZXLISNSStringValid(strToken)) {
         [request setValue:[NSString stringWithFormat:@"Bearer %@",strToken] forHTTPHeaderField:@"Authorization"];
     }
@@ -104,7 +104,7 @@
 -(OSSRequest *)uploadFile:(NSString *)objectKey
             localFilePath:(NSString *)filePath
                  progress:(void (^)(float percent))progress
-                   result:(void (^)(OSSTask *task))result{
+                   result:(void (^)(OSSRequest *request,OSSTask *task))result{
     
     OSSResumableUploadRequest* resumableRequest = [[OSSResumableUploadRequest alloc] init];
     resumableRequest.bucketName = [self getBucketName];
@@ -139,21 +139,25 @@
                         progress((CGFloat)totalBytesSent/(CGFloat)totalBytesExpectedToSend);
                     }
                 };
+                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+                [dictionary setValue:resumableUpload forKey:ZXLUploadRequestKey];
+                [dictionary setValue:objectKey forKey:ZXLUploadFileKey];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ZXLUploadFileRequestNotification object:dictionary];
                 OSSTask * newResumeTask = [weakSelf.client resumableUpload:resumableUpload];
                 [newResumeTask continueWithBlock:^id(OSSTask * task) {
                     if (result) {
-                        result(task);
+                        result(resumableUpload,task);
                     }
                     return nil;
                 }];
             }else{
                 if (result) {
-                    result(task);
+                    result(resumableRequest,task);
                 }
             }
         } else {
             if (result) {
-                result(task);
+                result(resumableRequest,task);
             }
         }
         return nil;

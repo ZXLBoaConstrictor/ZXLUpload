@@ -24,5 +24,5 @@
 -(OSSRequest *)uploadFile:(NSString *)objectKey
             localFilePath:(NSString *)filePath
                  progress:(void (^)(float percent))progress
-                   result:(void (^)(OSSTask *task))result;
+                   result:(void (^)(OSSRequest *request,OSSTask *task))result;
 @end

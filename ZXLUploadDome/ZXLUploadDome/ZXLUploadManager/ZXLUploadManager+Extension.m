@@ -18,10 +18,15 @@
            localFilePath:(NSString *)filePath
                 progress:(void (^)(float percent))progress
                 complete:(void (^)(BOOL result))complete{
-    return [[JLBAliOSSManager manager] uploadFile:objectKey localFilePath:filePath progress:progress result:^(OSSTask *task) {
+    return [[JLBAliOSSManager manager] uploadFile:objectKey localFilePath:filePath progress:progress result:^(OSSRequest *request,OSSTask *task) {
         OSSInitMultipartUploadResult * uploadResult = task.result;
-        if (complete) {
-            complete(task && uploadResult && uploadResult.httpResponseCode == 200);
+        NSString *fileKey = [objectKey stringByDeletingPathExtension];
+        fileKey = [fileKey substringFromIndex:ZXLFilePrefixion.length];
+        OSSResumableUploadRequest * uploadRequest = [[ZXLUploadFileResultCenter shareUploadResultCenter] uploadRequestFor:fileKey];
+        if (uploadRequest && request == uploadRequest) {
+            if (complete) {
+                complete(task && uploadResult && uploadResult.httpResponseCode == 200);
+            }
         }
     }];
 }

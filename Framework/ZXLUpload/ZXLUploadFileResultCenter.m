@@ -66,6 +66,8 @@
          _uploadInfo = [[ZXLSyncMutableDictionary alloc] init];
          _sessionRequestDict = [[ZXLSyncMutableDictionary alloc] init];
          
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNotificationUploadRequest:) name:ZXLUploadFileRequestNotification object:nil];
+    
          //读取本地上传结果文件信息
          NSMutableArray<ZXLFileInfoModel *> *fileModels =[[ZXLUploadFmdb manager] selectAllUploadSuccessFileResultInfo];
          if (ZXLISArrayValid(fileModels)) {
@@ -257,6 +259,20 @@
     if (request && ZXLISNSStringValid(identifier)) {
         [_sessionRequestDict setObject:request forKey:identifier];
     }
+}
+
+-(void)addNotificationUploadRequest:(NSNotification *)notification{
+    NSDictionary *dictionary = [notification object];
+    if (dictionary) {
+        [self addUploadRequest:[dictionary objectForKey:ZXLUploadRequestKey] with:[dictionary objectForKey:ZXLUploadFileKey]];
+    }
+}
+
+-(id)uploadRequestFor:(NSString *)identifier{
+    if (ZXLISNSStringValid(identifier)) {
+        return [_sessionRequestDict objectForKey:identifier];
+    }
+    return nil;
 }
 
 /**

@@ -10,6 +10,15 @@
 #import <AVFoundation/AVFoundation.h>
 @class ZXLFileInfoModel;
 
+/**
+ ZXLUploadFileRequestNotification 通知的形式添加文件请求session 传参以字典模式
+ ZXLUploadRequestKey  -session
+ ZXLUploadFileKey   -文件唯一值
+ */
+#define ZXLUploadFileRequestNotification    @"ZXLUploadFileRequestNotification"
+#define ZXLUploadRequestKey                 @"ZXLUploadRequestKey"
+#define ZXLUploadFileKey                    @"ZXLUploadFileKey"
+
 @interface ZXLUploadFileResultCenter : NSObject
 +(ZXLUploadFileResultCenter*)shareUploadResultCenter;
 
@@ -85,6 +94,14 @@
  @param request Request
  */
 -(void)addUploadRequest:(id)request with:(NSString *)identifier;
+
+/**
+ 获取文件上传请求
+
+ @param identifier 文件唯一值
+ @return 上传请求
+ */
+-(id)uploadRequestFor:(NSString *)identifier;
 
 /**
  删除文件上传OSSRequest
