@@ -7,7 +7,7 @@
 //
 
 #import "JLBAliOSSManager.h"
-
+#import "ZXLUploadDefine.h"
 
 @interface JLBAliOSSManager()
 @property (nonatomic,strong)OSSClient *client;
@@ -68,8 +68,45 @@
     }
     [request setValue:@"3.4.7" forHTTPHeaderField:@"JLBIOSVersion"];
     
+    NSInteger restCount = 3;//token 出错重试次数
+    OSSTask *task;
+    NSDictionary *tokenDict;
+    while (restCount != 0 && !(task && !task.error && tokenDict && [[tokenDict objectForKey:@"code"] integerValue] == 200)) {
+        task = [self getOSSToken:request];
+        if (task && !task.error) {
+            tokenDict = [NSJSONSerialization JSONObjectWithData:task.result options:kNilOptions error:nil];
+        }
+        restCount --;
+    }
+    //3次请求报错或者请求结果报错认为此次获取OSStoken失败
+    if (!(task && !task.error && tokenDict && [[tokenDict objectForKey:@"code"] integerValue] == 200)) {
+        return nil;
+    } else {
+        NSDictionary * tokenResult = [tokenDict objectForKey:@"result"];
+        if (!ZXLISDictionaryValid(tokenResult)
+            || !ZXLISNSStringValid([tokenResult objectForKey:@"accessKeyId"])
+            || !ZXLISNSStringValid([tokenResult objectForKey:@"accessKeySecret"])
+            || !ZXLISNSStringValid([tokenResult objectForKey:@"accessToken"])) {
+            return nil;
+        }
+        
+        OSSFederationToken * token = [OSSFederationToken new];
+        token.tAccessKey = [[tokenDict objectForKey:@"result"] objectForKey:@"accessKeyId"];
+        token.tSecretKey = [[tokenDict objectForKey:@"result"] objectForKey:@"accessKeySecret"];
+        token.tToken = [[tokenDict objectForKey:@"result"] objectForKey:@"accessToken"];
+        token.expirationTimeInMilliSecond = [[NSDate oss_clockSkewFixedDate] timeIntervalSince1970]*1000 + [[[tokenDict objectForKey:@"result"] objectForKey:@"durationSeconds"] integerValue] * 1000;
+        return token;
+    }
+}
+
+/**
+ 获取osstoken 使用为了对服务器偶现 STS token 获取失败的问题
+ 
+ @param request 接口请求
+ @return task结果
+ */
+-(OSSTask *)getOSSToken:(NSMutableURLRequest *)request{
     OSSTaskCompletionSource * tcs = [OSSTaskCompletionSource taskCompletionSource];
-    
     NSURLSession * session = [NSURLSession sharedSession];
     NSURLSessionTask * sessionTask = [session dataTaskWithRequest:request
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -81,24 +118,8 @@
                                                     [tcs setResult:data];
                                                 }];
     [sessionTask resume];
-    
-    // 实现这个回调需要同步返回Token，所以要waitUntilFinished
-    [tcs.task waitUntilFinished];
-    if (tcs.task.error) {
-        return nil;
-    } else {
-        
-        NSDictionary * object = [NSJSONSerialization JSONObjectWithData:tcs.task.result
-                                                                options:kNilOptions
-                                                                  error:nil];
-        //根据公司接口返回数据组织后返回token
-        OSSFederationToken * token = [OSSFederationToken new];
-        token.tAccessKey = [[object objectForKey:@"result"] objectForKey:@"accessKeyId"];
-        token.tSecretKey = [[object objectForKey:@"result"] objectForKey:@"accessKeySecret"];
-        token.tToken = [[object objectForKey:@"result"] objectForKey:@"accessToken"];
-        token.expirationTimeInMilliSecond = [[NSDate oss_clockSkewFixedDate] timeIntervalSince1970]*1000 + [[[object objectForKey:@"result"] objectForKey:@"durationSeconds"] integerValue] * 1000;
-        return token;
-    }
+    [tcs.task waitUntilFinished]; // 实现这个回调需要同步返回Token，所以要waitUntilFinished
+    return tcs.task;
 }
 
 -(OSSRequest *)uploadFile:(NSString *)objectKey
