@@ -50,12 +50,14 @@
  *    @brief    初始化获取OSSClient
  */
 - (void)ossInit {
-   
     id<OSSCredentialProvider> credential = [[OSSFederationCredentialProvider alloc] initWithFederationTokenGetter:^OSSFederationToken * {
         return [self getFederationToken];
     }];
-    
-    _client = [[OSSClient alloc] initWithEndpoint:[self getEndPoint] credentialProvider:credential];
+    OSSClientConfiguration * config = [OSSClientConfiguration new];
+    config.timeoutIntervalForRequest = 60;
+    config.maxRetryCount = 5;
+    config.maxConcurrentRequestCount = 1;
+    _client = [[OSSClient alloc] initWithEndpoint:[self getEndPoint] credentialProvider:credential clientConfiguration:config];
 }
 
 - (OSSFederationToken *) getFederationToken{
@@ -151,9 +153,6 @@
                 resumableUpload.bucketName = [weakSelf getBucketName];
                 resumableUpload.objectKey = objectKey;
                 resumableUpload.uploadingFileURL = [NSURL fileURLWithPath:filePath];
-                resumableUpload.partSize = 256 * 1024;//256K 分片上传
-                resumableUpload.deleteUploadIdOnCancelling = NO;
-                resumableUpload.recordDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
                 //totalBytesSent 上传量 totalBytesExpectedToSend 上传文件大小
                 resumableUpload.uploadProgress = ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
                     if (progress) {

@@ -70,6 +70,10 @@
 -(void)mp4VideoPHAsset:(PHAsset *)asset
         fileIdentifier:(NSString *)fileId
               callback:(ZXLComprssCallback)callback{
+    if (asset == nil || !ZXLISNSStringValid(fileId)) {
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     dispatch_async(self.addOperationSerialQueue, ^{
         ZXLCompressOperation * operation = [weakSelf isCompressingFile:fileId];
