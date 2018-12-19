@@ -149,7 +149,7 @@
         if (task.error) {
             if ([task.error.domain isEqualToString:OSSClientErrorDomain] && task.error.code == OSSClientErrorCodeCannotResumeUpload) {
                 // 该任务无法续传，需要获取新的uploadId重新上传
-                OSSResumableUploadRequest* resumableUpload = [[OSSResumableUploadRequest alloc] init];
+                OSSMultipartUploadRequest* resumableUpload = [[OSSMultipartUploadRequest alloc] init];
                 resumableUpload.bucketName = [weakSelf getBucketName];
                 resumableUpload.objectKey = objectKey;
                 resumableUpload.uploadingFileURL = [NSURL fileURLWithPath:filePath];
@@ -163,7 +163,7 @@
                 [dictionary setValue:resumableUpload forKey:ZXLUploadRequestKey];
                 [dictionary setValue:objectKey forKey:ZXLUploadFileKey];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ZXLUploadFileRequestNotification object:dictionary];
-                OSSTask * newResumeTask = [weakSelf.client resumableUpload:resumableUpload];
+                OSSTask * newResumeTask = [weakSelf.client multipartUpload:resumableUpload];
                 [newResumeTask continueWithBlock:^id(OSSTask * task) {
                     if (result) {
                         result(resumableUpload,task);
