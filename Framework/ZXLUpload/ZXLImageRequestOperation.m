@@ -7,6 +7,7 @@
 //
 
 #import "ZXLImageRequestOperation.h"
+#import "ZXLImageRequestManager.h"
 #import "ZXLUploadDefine.h"
 #import "ZXLSyncHashTable.h"
 #import "ZXLPhotosUtils.h"
@@ -49,30 +50,6 @@ static NSString * const ZXLImageRequestOperationLockName = @"ZXLImageRequestOper
     return self;
 }
 
-+ (void)imageRequestThreadEntryPoint:(id)__unused object {
-    @autoreleasepool {
-        [[NSThread currentThread] setName:@"ZXLImageRequestAsyncOperation"];
-        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
-        [runLoop run];
-    }
-}
-
-static NSThread *_compressThread = nil;
-static dispatch_once_t oncePredicate;
-+ (NSThread *)operationThread {
-    dispatch_once(&oncePredicate, ^{
-        _compressThread = [[NSThread alloc] initWithTarget:self selector:@selector(imageRequestThreadEntryPoint:) object:nil];
-        [_compressThread start];
-    });
-    return _compressThread;
-}
-
-+(void)operationThreadAttemptDealloc{
-    oncePredicate = 0;
-    [_compressThread cancel];
-    _compressThread = nil;
-}
 
 - (void)addImageRequestCallback:(ZXLImageRequestCallback)callback{
     if (callback) {
@@ -170,7 +147,7 @@ static dispatch_once_t oncePredicate;
 }
 
 - (void)runSelector:(SEL)selecotr {
-    [self performSelector:selecotr onThread:[[self class] operationThread] withObject:nil waitUntilDone:NO modes:self.runLoopModes];
+    [self performSelector:selecotr onThread:[ZXLImageRequestManager operationThread] withObject:nil waitUntilDone:NO modes:self.runLoopModes];
 }
 
 @end

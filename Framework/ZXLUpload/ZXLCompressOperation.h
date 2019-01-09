@@ -27,5 +27,4 @@ typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
 
 -(float)compressProgress;
 
-+(void)operationThreadAttemptDealloc;
 @end

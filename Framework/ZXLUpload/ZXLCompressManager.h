@@ -13,6 +13,7 @@ typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
 
 @interface ZXLCompressManager : NSObject
 +(instancetype)manager;
++ (NSThread *)operationThread;
 
 -(void)videoAsset:(AVURLAsset *)asset
    fileIdentifier:(NSString *)fileId

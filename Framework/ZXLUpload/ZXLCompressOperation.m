@@ -7,6 +7,7 @@
 //
 
 #import "ZXLCompressOperation.h"
+#import "ZXLCompressManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 #import "ZXLDocumentUtils.h"
@@ -55,6 +56,7 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
         self.runLoopModes = @[NSRunLoopCommonModes];
         [self.comprssCallback addObject:callback];
         self.identifier = fileId;
+        [self assetExportSessionConfig];
     }
     return self;
 }
@@ -72,33 +74,9 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
         self.runLoopModes = @[NSRunLoopCommonModes];
         [self.comprssCallback addObject:callback];
         self.identifier = fileId;
+        [self assetExportSessionConfig];
     }
     return self;
-}
-
-+ (void)compressThreadEntryPoint:(id)__unused object {
-    @autoreleasepool {
-        [[NSThread currentThread] setName:@"ZXLCompressAsyncOperation"];
-        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
-        [runLoop run];
-    }
-}
-static NSThread *_compressThread = nil;
-static dispatch_once_t oncePredicate;
-
-+ (NSThread *)operationThread {
-    dispatch_once(&oncePredicate, ^{
-        _compressThread = [[NSThread alloc] initWithTarget:self selector:@selector(compressThreadEntryPoint:) object:nil];
-        [_compressThread start];
-    });
-    return _compressThread;
-}
-
-+(void)operationThreadAttemptDealloc{
-    oncePredicate = 0;
-    [_compressThread cancel];
-    _compressThread = nil;
 }
 
 - (void)addComprssCallback:(ZXLComprssCallback)callback{
@@ -164,7 +142,6 @@ static dispatch_once_t oncePredicate;
 }
 
 - (void)compressFile {
-    [self assetExportSessionConfig];
     
     if (self.checkFailed) {
         [self comprssComplete:@"" error:@"视频类型暂不支持导出"];
@@ -192,11 +169,10 @@ static dispatch_once_t oncePredicate;
         PHAssetResourceRequestOptions *requestOptions = [[PHAssetResourceRequestOptions alloc] init];
         requestOptions.networkAccessAllowed = YES;
         requestOptions.progressHandler = ^(double progress) {
-            typeof(self) strongSelf = weakSelf;
-            strongSelf.mp4Progress = progress;
+            weakSelf.mp4Progress = progress;
         };
         [[PHAssetResourceManager defaultManager] writeDataForAssetResource:resource toFile:[NSURL fileURLWithPath:resultPath] options:requestOptions completionHandler:^(NSError *_Nullable error) {
-            typeof(self) strongSelf = weakSelf;
+            __strong typeof(self) strongSelf = weakSelf;
             strongSelf.mp4Progress = 1.0;
             if (error) {
                 [strongSelf comprssComplete:@"" error:[error localizedDescription]];
@@ -206,7 +182,7 @@ static dispatch_once_t oncePredicate;
         }];
     }else{
         [self.compressSession exportAsynchronouslyWithCompletionHandler:^{
-            typeof(self) strongSelf = weakSelf;
+            __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
                 NSString *errorStr = @"";
                 switch (strongSelf.compressSession.status) {
@@ -317,7 +293,7 @@ static dispatch_once_t oncePredicate;
 }
 
 - (void)runSelector:(SEL)selecotr {
-    [self performSelector:selecotr onThread:[[self class] operationThread] withObject:nil waitUntilDone:NO modes:self.runLoopModes];
+    [self performSelector:selecotr onThread:[ZXLCompressManager operationThread] withObject:nil waitUntilDone:NO modes:self.runLoopModes];
 }
 
 -(float)compressProgress{

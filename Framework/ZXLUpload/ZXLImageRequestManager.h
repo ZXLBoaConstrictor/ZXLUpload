@@ -13,6 +13,7 @@ typedef void (^ZXLImageRequestCallback)(UIImage *image,NSString *error);
 
 @interface ZXLImageRequestManager : NSObject
 +(instancetype)manager;
++ (NSThread *)operationThread;
 
 -(void)imageRequest:(NSString *)assetLocalIdentifier
      fileIdentifier:(NSString *)fileId

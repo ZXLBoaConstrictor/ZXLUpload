@@ -201,6 +201,10 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
 }
 
 +(NSInteger)fileCMTime:(NSString *)path{
+    if (!ZXLISNSStringValid(path)) {
+        return 0;
+    }
+    
     AVURLAsset *avUrl = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:path]];
     CMTime time = [avUrl duration];
     return ceil(time.value/time.timescale);

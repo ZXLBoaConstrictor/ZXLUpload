@@ -126,28 +126,23 @@ static NSString *cellIdentifier = @"ZXLUploadFilesCellIdentifier";//文件
     dispatch_group_t group = dispatch_group_create();
     for (NSInteger i = 0; i < fileCount; i++) {
         ZXLFileInfoModel * fileModel = [taskModel uploadFileAtIndex:i];
-        [fileModel videoCompress:^(BOOL bResult) {
-   
-        }];
-//        dispatch_group_enter(group);
-//        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            [fileModel videoCompress:^(BOOL bResult) {
-//                if (bResult) {
-//                     successCount ++;
-//                }
-//                dispatch_group_leave(group);
-//            }];
-//        });
+        dispatch_group_enter(group);
+        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [fileModel videoCompress:^(BOOL bResult) {
+                if (bResult) {
+                     successCount ++;
+                }
+                dispatch_group_leave(group);
+            }];
+        });
     }
-    
-    [[ZXLCompressManager manager] cancelCompressOperations];
-//    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-//        if (successCount == fileCount) {
-//            [SVProgressHUD showSuccessWithStatus:@"压缩成功"];
-//        }else{
-//            [SVProgressHUD showErrorWithStatus:@"压缩失败"];
-//        }
-//    });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if (successCount == fileCount) {
+            [SVProgressHUD showSuccessWithStatus:@"压缩成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"压缩失败"];
+        }
+    });
 }
 
 -(void)deleteCompress{

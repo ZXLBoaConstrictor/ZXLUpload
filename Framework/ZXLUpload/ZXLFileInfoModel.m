@@ -188,39 +188,40 @@
     
     typeof(self) __weak weakSelf = self;
     [self getVideoOutputAVURLAsset:^(AVURLAsset *asset) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         if (asset) {
             NSString * fileExtension = [asset.URL.absoluteString pathExtension];
             fileExtension = [fileExtension lowercaseString];
             if ([fileExtension hasSuffix:@"mp4"]) {
-                if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册文件
-                    PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
-                    [[ZXLCompressManager manager] mp4VideoPHAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
+                if (ZXLISNSStringValid(strongSelf.assetLocalIdentifier)) {//相册文件
+                    PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:strongSelf.assetLocalIdentifier] options:nil].firstObject;
+                    [[ZXLCompressManager manager] mp4VideoPHAsset:asset fileIdentifier:strongSelf.identifier callback:^(NSString *outputPath, NSString *error) {
                         if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
-                            weakSelf.comprssSuccess = YES;
-                            [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                            strongSelf.comprssSuccess = YES;
+                            [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:strongSelf];
                             if (completed) {
                                 completed(YES);
                             }
                         }else{
                             //文件信息错误
-                            [weakSelf setUploadResultError:ZXLFileUploadFileError];
+                            [strongSelf setUploadResultError:ZXLFileUploadFileError];
                             if (completed) {
                                 completed(NO);
                             }
                         }
                     }];
                 }else{//沙盒文件--不用压缩
-                    weakSelf.comprssSuccess = YES;
-                    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                    strongSelf.comprssSuccess = YES;
+                    [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:strongSelf];
                     if (completed) {
                         completed(YES);
                     }
                 }
             }else{
-                [[ZXLCompressManager manager] videoAsset:asset fileIdentifier:weakSelf.identifier callback:^(NSString *outputPath, NSString *error) {
+                [[ZXLCompressManager manager] videoAsset:asset fileIdentifier:strongSelf.identifier callback:^(NSString *outputPath, NSString *error) {
                     if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(outputPath)) {
-                        weakSelf.comprssSuccess = YES;
-                        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:weakSelf];
+                        strongSelf.comprssSuccess = YES;
+                        [[ZXLUploadFileResultCenter shareUploadResultCenter] saveComprssSuccess:strongSelf];
                         if (completed) {
                             completed(YES);
                         }
@@ -234,7 +235,7 @@
                 }];
             }
         }else{
-            [weakSelf setUploadResultError:ZXLFileUploadFileError];
+            [strongSelf setUploadResultError:ZXLFileUploadFileError];
             if (completed) {
                 completed(NO);
             }

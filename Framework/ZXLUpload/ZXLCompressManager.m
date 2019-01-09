@@ -18,6 +18,16 @@
 @end
 
 @implementation ZXLCompressManager
+-(instancetype)init{
+    if (self = [super init]) {
+        self.addOperationSerialQueue = dispatch_queue_create("com.ZXLUpload.ZXLCompressManagerAddOperationSerializeQueue", DISPATCH_QUEUE_SERIAL);
+        self.operationQueue = [[NSOperationQueue alloc] init];
+        self.operationQueue.maxConcurrentOperationCount = ZXLMaxConcurrentOperationCount;
+        [self.operationQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return self;
+}
+
 +(instancetype)manager{
     static dispatch_once_t pred = 0;
     __strong static ZXLCompressManager * _sharedObject = nil;
@@ -27,25 +37,34 @@
     return _sharedObject;
 }
 
--(dispatch_queue_t)addOperationSerialQueue{
-    if (!_addOperationSerialQueue) {
-        _addOperationSerialQueue = dispatch_queue_create("com.ZXLUpload.ZXLCompressManagerAddOperationSerializeQueue", DISPATCH_QUEUE_SERIAL);
++ (void)compressThreadEntryPoint:(id)__unused object {
+    @autoreleasepool {
+        [[NSThread currentThread] setName:@"ZXLCompressAsyncOperation"];
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        [runLoop run];
     }
-    return _addOperationSerialQueue;
+}
+static NSThread *_compressThread = nil;
+static dispatch_once_t oncePredicate;
+
++ (NSThread *)operationThread {
+    dispatch_once(&oncePredicate, ^{
+        _compressThread = [[NSThread alloc] initWithTarget:self selector:@selector(compressThreadEntryPoint:) object:nil];
+        [_compressThread start];
+    });
+    return _compressThread;
 }
 
--(NSOperationQueue *)operationQueue{
-    if (!_operationQueue) {
-        _operationQueue = [[NSOperationQueue alloc] init];
-        _operationQueue.maxConcurrentOperationCount = ZXLMaxConcurrentOperationCount;
-        [_operationQueue addObserver:self forKeyPath:@"operationCount" options:NSKeyValueObservingOptionNew context:nil];
-    }
-    return _operationQueue;
++(void)operationThreadAttemptDealloc{
+    oncePredicate = 0;
+    [_compressThread cancel];
+    _compressThread = nil;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if (object ==self.operationQueue && self.operationQueue.operationCount == 0) {
-        [ZXLCompressOperation operationThreadAttemptDealloc];
+        [ZXLCompressManager operationThreadAttemptDealloc];
     }
 }
 
@@ -125,4 +144,6 @@
     }
     return 0;
 }
+
+
 @end

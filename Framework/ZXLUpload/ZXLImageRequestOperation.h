@@ -19,6 +19,4 @@ typedef void (^ZXLImageRequestCallback)(UIImage *image,NSString *error);
                          callback:(ZXLImageRequestCallback)callback;
 
 - (void)addImageRequestCallback:(ZXLImageRequestCallback)callback;
-
-+(void)operationThreadAttemptDealloc;
 @end
