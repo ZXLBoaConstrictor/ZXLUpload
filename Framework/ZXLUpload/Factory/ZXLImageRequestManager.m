@@ -10,7 +10,7 @@
 #import "ZXLImageRequestOperation.h"
 #import "ZXLUploadDefine.h"
 
-#define ZXLMaxConcurrentOperationCount 5 //控制执行数量
+#define ZXLMaxConcurrentOperationCount 1 //控制执行数量
 
 @interface ZXLImageRequestManager ()
 @property (nonatomic, strong) dispatch_queue_t addOperationSerialQueue;

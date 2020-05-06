@@ -12,6 +12,7 @@
 #import "ZXLUploadManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CommonCrypto/CommonCrypto.h>
+#import "ZXLUploadFileResultCenter.h"
 #define FileHashDefaultChunkSizeForReadingData 1024*8
 
 
@@ -78,8 +79,7 @@
     return fileSize;
 }
 
-+(NSString *)serverAddressFileURL:(NSString *)fileKey
-{
++(NSString *)serverAddressFileURL:(NSString *)fileKey{
     return [NSString stringWithFormat:@"%@%@",[ZXLUploadManager manager].fileServerAddress,fileKey];
 }
 
@@ -200,6 +200,20 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
    return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
++(NSString *)md5EncodedString:(NSString *)string{
+    const char *cStr = [string UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(cStr, (unsigned int)strlen(cStr), result);
+    
+    return [[NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+             result[0], result[1], result[2], result[3],
+             result[4], result[5], result[6], result[7],
+             result[8], result[9], result[10], result[11],
+             result[12], result[13], result[14], result[15]
+             ] lowercaseString];
+}
+
+
 +(NSInteger)fileCMTime:(NSString *)path{
     if (!ZXLISNSStringValid(path)) {
         return 0;
@@ -230,13 +244,14 @@ CFStringRef ZXLFileMD5HashCreateWithPath(CFStringRef filePath,size_t chunkSizeFo
 }
 
 +(NSString *)replaceSystemtFolder:(NSString *)fileURL{
-    NSString *folderName = [self systemtFolderName:fileURL];
+    NSString *folderName = [ZXLFileUtils systemtFolderName:fileURL];
     NSString *newFileURL = @"";
     if (ZXLISNSStringValid(folderName)) {
         NSString *tempFolderName = [NSString stringWithFormat:@"/%@/",folderName];
         newFileURL = [fileURL substringFromIndex:[fileURL rangeOfString:tempFolderName].location];
-        newFileURL = [newFileURL stringByReplacingOccurrencesOfString:tempFolderName withString:@""];
-        newFileURL = [NSString stringWithFormat:@"%@/%@",FILE_DIRECTORY,newFileURL];
+        NSString *systemURL = FILE_DIRECTORY;
+        systemURL = [systemURL stringByReplacingOccurrencesOfString:@"/Documents" withString:@""];
+        newFileURL = [NSString stringWithFormat:@"%@%@",systemURL,newFileURL];
     }
     return ZXLISNSStringValid(newFileURL)?newFileURL:fileURL;
 }

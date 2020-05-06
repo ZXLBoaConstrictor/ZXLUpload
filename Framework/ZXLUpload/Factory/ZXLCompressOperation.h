@@ -15,16 +15,13 @@ typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
 @interface ZXLCompressOperation : NSOperation
 @property (nonatomic, copy) NSString *identifier;
 
--(instancetype)initWithVideoAsset:(AVURLAsset *)asset
-                   fileIdentifier:(NSString *)fileId
-                         callback:(ZXLComprssCallback)callback;
+-(instancetype)initWithVideoAsset:(AVURLAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback;
 
--(instancetype)initWithMp4VideoPHAsset:(PHAsset *)asset
-                        fileIdentifier:(NSString *)fileId
-                              callback:(ZXLComprssCallback)callback;
+-(instancetype)initWithMp4VideoPHAsset:(PHAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback;
 
 - (void)addComprssCallback:(ZXLComprssCallback)callback;
 
 -(float)compressProgress;
 
+-(void)failCancelCompress;
 @end

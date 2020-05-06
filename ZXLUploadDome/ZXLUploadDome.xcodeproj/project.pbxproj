@@ -37,6 +37,8 @@
 		827D80DA20DA303000273C19 /* ZXLImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 827D80D920DA303000273C19 /* ZXLImageRequestOperation.m */; };
 		82BE1DF520C126F200C45367 /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BE1DF420C126F200C45367 /* UploadViewController.m */; };
 		82BE1DF820C130D500C45367 /* CompressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BE1DF720C130D500C45367 /* CompressViewController.m */; };
+		82C6484D24629EFC001C19C8 /* ZXLThumbnailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6484924629EFC001C19C8 /* ZXLThumbnailManager.m */; };
+		82C6484E24629EFC001C19C8 /* ZXLThumbnailOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C6484A24629EFC001C19C8 /* ZXLThumbnailOperation.m */; };
 		82C8EA0F209C4F7A00797BA9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA0E209C4F7A00797BA9 /* AppDelegate.m */; };
 		82C8EA12209C4F7A00797BA9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C8EA11209C4F7A00797BA9 /* ViewController.m */; };
 		82C8EA17209C4F7B00797BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C8EA16209C4F7B00797BA9 /* Assets.xcassets */; };
@@ -116,6 +118,10 @@
 		82BE1DF420C126F200C45367 /* UploadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadViewController.m; sourceTree = "<group>"; };
 		82BE1DF620C130D500C45367 /* CompressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompressViewController.h; sourceTree = "<group>"; };
 		82BE1DF720C130D500C45367 /* CompressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompressViewController.m; sourceTree = "<group>"; };
+		82C6484924629EFC001C19C8 /* ZXLThumbnailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLThumbnailManager.m; sourceTree = "<group>"; };
+		82C6484A24629EFC001C19C8 /* ZXLThumbnailOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXLThumbnailOperation.m; sourceTree = "<group>"; };
+		82C6484B24629EFC001C19C8 /* ZXLThumbnailOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLThumbnailOperation.h; sourceTree = "<group>"; };
+		82C6484C24629EFC001C19C8 /* ZXLThumbnailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXLThumbnailManager.h; sourceTree = "<group>"; };
 		82C8EA0A209C4F7A00797BA9 /* ZXLUploadDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXLUploadDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82C8EA0D209C4F7A00797BA9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		82C8EA0E209C4F7A00797BA9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -170,21 +176,35 @@
 			path = UICollectionViewLeftAlignedLayout;
 			sourceTree = "<group>";
 		};
+		822ECECA24628DEE00140D6E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				820B5E2B216C7FEF00DA4AAB /* ZXLCGDTimer.h */,
+				820B5E1C216C7FEE00DA4AAB /* ZXLCGDTimer.m */,
+				820B5E28216C7FEF00DA4AAB /* ZXLDocumentUtils.h */,
+				820B5E25216C7FEF00DA4AAB /* ZXLDocumentUtils.m */,
+				820B5E2F216C7FF000DA4AAB /* ZXLFileUtils.h */,
+				820B5E2E216C7FF000DA4AAB /* ZXLFileUtils.m */,
+				820B5E2D216C7FF000DA4AAB /* ZXLPhotosUtils.h */,
+				820B5E1B216C7FEE00DA4AAB /* ZXLPhotosUtils.m */,
+				820B5E23216C7FEE00DA4AAB /* ZXLVideoUtils.h */,
+				820B5E1F216C7FEE00DA4AAB /* ZXLVideoUtils.m */,
+				820B5E29216C7FEF00DA4AAB /* ZXLReachability.h */,
+				820B5E18216C7FED00DA4AAB /* ZXLReachability.m */,
+				82595D3520CE486700DBFEAB /* ZXLNetworkManager.h */,
+				82595D1820CE486500DBFEAB /* ZXLNetworkManager.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		82595CCB20CE484800DBFEAB /* ZXLUpload */ = {
 			isa = PBXGroup;
 			children = (
+				82C6484824629E2C001C19C8 /* Factory */,
+				82C6484724629DEA001C19C8 /* SyncSafe */,
+				822ECECA24628DEE00140D6E /* Utils */,
 				82595D2E20CE486700DBFEAB /* ZXLUpload.h */,
 				82595D2320CE486600DBFEAB /* ZXLUploadDefine.h */,
-				82595D2420CE486600DBFEAB /* ZXLCompressManager.h */,
-				82595D1C20CE486600DBFEAB /* ZXLCompressManager.m */,
-				82595D3420CE486700DBFEAB /* ZXLCompressOperation.h */,
-				82595D2F20CE486700DBFEAB /* ZXLCompressOperation.m */,
-				827D80D520DA2F2100273C19 /* ZXLImageRequestManager.h */,
-				827D80D620DA2F2100273C19 /* ZXLImageRequestManager.m */,
-				827D80D820DA303000273C19 /* ZXLImageRequestOperation.h */,
-				827D80D920DA303000273C19 /* ZXLImageRequestOperation.m */,
-				82595D3520CE486700DBFEAB /* ZXLNetworkManager.h */,
-				82595D1820CE486500DBFEAB /* ZXLNetworkManager.m */,
 				82595D3920CE486800DBFEAB /* ZXLUploadFileManager.h */,
 				82595D2620CE486600DBFEAB /* ZXLUploadFileManager.m */,
 				82595D3620CE486800DBFEAB /* ZXLUploadFileResultCenter.h */,
@@ -197,18 +217,18 @@
 				82595D3020CE486700DBFEAB /* ZXLUploadTaskManager.m */,
 				82595D1620CE486500DBFEAB /* ZXLUploadUnifiedResponese.h */,
 				82595D2920CE486700DBFEAB /* ZXLUploadUnifiedResponese.m */,
-				820B5E2B216C7FEF00DA4AAB /* ZXLCGDTimer.h */,
-				820B5E1C216C7FEE00DA4AAB /* ZXLCGDTimer.m */,
-				820B5E28216C7FEF00DA4AAB /* ZXLDocumentUtils.h */,
-				820B5E25216C7FEF00DA4AAB /* ZXLDocumentUtils.m */,
 				820B5E26216C7FEF00DA4AAB /* ZXLFileInfoModel.h */,
 				820B5E22216C7FEE00DA4AAB /* ZXLFileInfoModel.m */,
-				820B5E2F216C7FF000DA4AAB /* ZXLFileUtils.h */,
-				820B5E2E216C7FF000DA4AAB /* ZXLFileUtils.m */,
-				820B5E2D216C7FF000DA4AAB /* ZXLPhotosUtils.h */,
-				820B5E1B216C7FEE00DA4AAB /* ZXLPhotosUtils.m */,
-				820B5E29216C7FEF00DA4AAB /* ZXLReachability.h */,
-				820B5E18216C7FED00DA4AAB /* ZXLReachability.m */,
+				820B5E19216C7FED00DA4AAB /* ZXLTaskInfoModel.h */,
+				820B5E1A216C7FEE00DA4AAB /* ZXLTaskInfoModel.m */,
+			);
+			name = ZXLUpload;
+			path = ../../../Framework/ZXLUpload;
+			sourceTree = "<group>";
+		};
+		82C6484724629DEA001C19C8 /* SyncSafe */ = {
+			isa = PBXGroup;
+			children = (
 				820B5E2A216C7FEF00DA4AAB /* ZXLSyncHashTable.h */,
 				820B5E24216C7FEF00DA4AAB /* ZXLSyncHashTable.m */,
 				820B5E27216C7FEF00DA4AAB /* ZXLSyncMapTable.h */,
@@ -217,13 +237,27 @@
 				820B5E1D216C7FEE00DA4AAB /* ZXLSyncMutableArray.m */,
 				820B5E20216C7FEE00DA4AAB /* ZXLSyncMutableDictionary.h */,
 				820B5E1E216C7FEE00DA4AAB /* ZXLSyncMutableDictionary.m */,
-				820B5E19216C7FED00DA4AAB /* ZXLTaskInfoModel.h */,
-				820B5E1A216C7FEE00DA4AAB /* ZXLTaskInfoModel.m */,
-				820B5E23216C7FEE00DA4AAB /* ZXLVideoUtils.h */,
-				820B5E1F216C7FEE00DA4AAB /* ZXLVideoUtils.m */,
 			);
-			name = ZXLUpload;
-			path = ../../../Framework/ZXLUpload;
+			path = SyncSafe;
+			sourceTree = "<group>";
+		};
+		82C6484824629E2C001C19C8 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				82595D2420CE486600DBFEAB /* ZXLCompressManager.h */,
+				82595D1C20CE486600DBFEAB /* ZXLCompressManager.m */,
+				82595D3420CE486700DBFEAB /* ZXLCompressOperation.h */,
+				82595D2F20CE486700DBFEAB /* ZXLCompressOperation.m */,
+				827D80D520DA2F2100273C19 /* ZXLImageRequestManager.h */,
+				827D80D620DA2F2100273C19 /* ZXLImageRequestManager.m */,
+				827D80D820DA303000273C19 /* ZXLImageRequestOperation.h */,
+				827D80D920DA303000273C19 /* ZXLImageRequestOperation.m */,
+				82C6484C24629EFC001C19C8 /* ZXLThumbnailManager.h */,
+				82C6484924629EFC001C19C8 /* ZXLThumbnailManager.m */,
+				82C6484B24629EFC001C19C8 /* ZXLThumbnailOperation.h */,
+				82C6484A24629EFC001C19C8 /* ZXLThumbnailOperation.m */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		82C8EA01209C4F7A00797BA9 = {
@@ -429,10 +463,12 @@
 				82C8EA50209C6B0400797BA9 /* ZXLUploadUnifiedResponese+Exension.m in Sources */,
 				82C8EA4F209C6B0400797BA9 /* JLBUploadTaskModel.m in Sources */,
 				820B5E36216C7FF000DA4AAB /* ZXLVideoUtils.m in Sources */,
+				82C6484E24629EFC001C19C8 /* ZXLThumbnailOperation.m in Sources */,
 				821B072620A17D620011D116 /* FilesCollectionViewCell.m in Sources */,
 				820B5E39216C7FF000DA4AAB /* ZXLSyncHashTable.m in Sources */,
 				820B5E32216C7FF000DA4AAB /* ZXLPhotosUtils.m in Sources */,
 				820B5E3B216C7FF000DA4AAB /* ZXLFileUtils.m in Sources */,
+				82C6484D24629EFC001C19C8 /* ZXLThumbnailManager.m in Sources */,
 				82C8EA12209C4F7A00797BA9 /* ViewController.m in Sources */,
 				820B5E31216C7FF000DA4AAB /* ZXLTaskInfoModel.m in Sources */,
 				820B5E38216C7FF000DA4AAB /* ZXLFileInfoModel.m in Sources */,
@@ -582,7 +618,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T87C2R7MW;
+				DEVELOPMENT_TEAM = XZJA6Q67R9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZXLUploadDome",
@@ -649,7 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7T87C2R7MW;
+				DEVELOPMENT_TEAM = XZJA6Q67R9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZXLUploadDome",

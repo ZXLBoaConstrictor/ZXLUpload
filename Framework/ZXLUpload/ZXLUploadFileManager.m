@@ -91,13 +91,13 @@
             progress(1.0);
         }
         if (complete) {
-            complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+            complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo addFolderUploadKey]]);
         }
         return;
     }
     
     fileInfo.progressType = ZXLFileUploadProgressUpload;
-    NSString * uploadKey = [fileInfo uploadKey];//上传后的文件key (即文件名称)
+    NSString * uploadKey = [fileInfo addFolderUploadKey];//上传后的文件key (即文件名称)
     NSString *localUploadURL = [fileInfo localUploadURL]; //文件在本地地址
     [[ZXLUploadFileResultCenter shareUploadResultCenter] saveUploadProgress:fileInfo];
     
@@ -117,7 +117,7 @@
                 progress(1.0);
             }
             if (complete) {
-                complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:uploadKey]);
+                complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo addFolderUploadKey]]);
             }
             
         }else{
@@ -159,7 +159,7 @@
             progress(1.0);
         }
         if (complete) {
-            complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+            complete(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo addFolderUploadKey]]);
         }
         return;
     }
@@ -251,7 +251,7 @@
                 if (resultFileInfo.uploadResult == ZXLFileUploadSuccess) {
                     [fileInfo setUploadResultSuccess];
                     if (responseCallback) {
-                        responseCallback(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo uploadKey]]);
+                        responseCallback(ZXLFileUploadSuccess,[ZXLFileUtils serverAddressFileURL:[fileInfo addFolderUploadKey]]);
                         [self.uploadFileResponseBlocks removeObjectForKey:fileInfo.identifier];
                         [self.uploadFileProgressBlocks removeObjectForKey:fileInfo.identifier];
                         [self.waitResultFiles removeObjectForKey:fileInfo.identifier];

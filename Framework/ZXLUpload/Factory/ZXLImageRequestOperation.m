@@ -12,6 +12,8 @@
 #import "ZXLSyncHashTable.h"
 #import "ZXLPhotosUtils.h"
 #import <Photos/Photos.h>
+#import "ZXLDocumentUtils.h"
+#import "ZXLFileUtils.h"
 
 static NSString * const ZXLImageRequestOperationLockName = @"ZXLImageRequestOperationLockName";
 
@@ -106,19 +108,23 @@ static NSString * const ZXLImageRequestOperationLockName = @"ZXLImageRequestOper
     __weak typeof(self) weakSelf = self;
     self.requestID = [ZXLPhotosUtils getPhoto:self.assetLocalIdentifier complete:^(UIImage *image) {
         typeof(self) strongSelf = weakSelf;
-        if (image) {
-            [strongSelf imageRequestComplete:image error:@""];
+        NSString* localURL = [ZXLDocumentUtils saveImage:image name:[strongSelf fileKey]];
+        if (ZXLISNSStringValid(localURL)) {
+            [strongSelf imageRequestComplete:localURL error:@""];
         }else{
             [strongSelf imageRequestComplete:nil error:@"获取文件出错"];
         }
     }];
 }
 
+-(NSString *)fileKey{
+   return [ZXLFileUtils fileNameWithidentifier:[NSString stringWithFormat:@"%@",self.identifier] fileExtension:[ZXLFileUtils fileExtension:ZXLFileTypeImage]];
+}
 
--(void)imageRequestComplete:(UIImage *)image error:(NSString *)error{
+-(void)imageRequestComplete:(NSString *)localURL error:(NSString *)error{
     for (ZXLImageRequestCallback callback in self.requestCallback.allObjects) {
         if (callback) {
-            callback(image,error);
+            callback(localURL,error);
         }
     }
     [self finish];

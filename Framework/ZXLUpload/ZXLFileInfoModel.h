@@ -132,6 +132,8 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
  */
 -(NSString *)uploadKey;
 
+-(NSString *)addFolderUploadKey;
+
 /**
  设置文件上传成功
 

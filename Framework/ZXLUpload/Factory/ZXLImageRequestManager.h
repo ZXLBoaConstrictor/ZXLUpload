@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef void (^ZXLImageRequestCallback)(UIImage *image,NSString *error);
+typedef void (^ZXLImageRequestCallback)(NSString *localURL,NSString *error);
 
 @interface ZXLImageRequestManager : NSObject
 +(instancetype)manager;

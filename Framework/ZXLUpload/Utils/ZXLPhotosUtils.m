@@ -52,12 +52,7 @@
         return 0;
     }
     
-    CGFloat fullScreenWidth = [UIScreen mainScreen].bounds.size.width;
-    if (fullScreenWidth > 1200) {
-        fullScreenWidth = 1200;
-    }
-    
-   return [ZXLPhotosUtils getPhotoWithAsset:asset photoWidth:fullScreenWidth completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+   return [ZXLPhotosUtils getPhotoWithAsset:asset photoWidth:1200 completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
         if (!isDegraded && complete) {
             complete(photo);
         }

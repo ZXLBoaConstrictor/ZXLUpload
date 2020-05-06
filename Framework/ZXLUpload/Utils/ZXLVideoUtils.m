@@ -79,6 +79,7 @@
 }
 
 + (PHImageRequestID)getPhotoWithAsset:(id)asset completion:(void (^)(UIImage *photo,NSDictionary *info,BOOL isDegraded))completion progressHandler:(void (^)(double progress, NSError *error, BOOL *stop, NSDictionary *info))progressHandler networkAccessAllowed:(BOOL)networkAccessAllowed {
+    
     CGFloat fullScreenWidth = [UIScreen mainScreen].bounds.size.width;
     if (fullScreenWidth > 600) {
         fullScreenWidth = 600;
@@ -87,8 +88,7 @@
 }
 
 + (PHImageRequestID)getPhotoWithAsset:(id)asset photoWidth:(CGFloat)photoWidth completion:(void (^)(UIImage *photo,NSDictionary *info,BOOL isDegraded))completion progressHandler:(void (^)(double progress, NSError *error, BOOL *stop, NSDictionary *info))progressHandler networkAccessAllowed:(BOOL)networkAccessAllowed {
-    if ([asset isKindOfClass:[PHAsset class]]) {
-        
+    if (asset && [asset isKindOfClass:[PHAsset class]]) {
         PHAsset *phAsset = (PHAsset *)asset;
         CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
         CGFloat pixelWidth = photoWidth * 1.0;
@@ -131,7 +131,12 @@
             }
         }];
         return imageRequestID;
-    } 
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+          if (completion)
+              completion(nil,nil,NO);
+        });
+    }
     return 0;
 }
 

@@ -18,6 +18,7 @@
 #import "ZXLUploadTaskManager.h"
 #import "ZXLCompressManager.h"
 #import "ZXLImageRequestManager.h"
+#import "ZXLThumbnailManager.h"
 
 
 @implementation ZXLFileInfoModel
@@ -74,7 +75,8 @@
         
         self.localURL =                 @"";
         self.superTaskIdentifier =      @"";
-        self.identifier =               [ZXLFileUtils base64EncodedString:asset.localIdentifier];
+        self.identifier =               [ZXLFileUtils md5EncodedString:asset.localIdentifier];
+//        self.identifier = [NSString stringWithFormat:@"%@(%zdx%zd)",self.identifier,(NSInteger)asset.pixelWidth,(NSInteger)asset.pixelHeight];
         self.comprssSuccess =           NO;
         self.uploadSize =               0;
         self.progress =                 0;
@@ -96,9 +98,11 @@
     if (self = [super init]) {
         self.localURL =                 [ZXLDocumentUtils saveImageByName:image];
         self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
+        self.fileType =                 ZXLFileTypeImage;
+//        self.identifier = [NSString stringWithFormat:@"%@(%zdx%zd)",self.identifier,(NSInteger)image.size.width,(NSInteger)image.size.height];
         self.comprssSuccess =           NO;
         self.uploadSize =               0;
-        self.fileType =                 ZXLFileTypeImage;
+        
         self.progress =                 0;
         self.progressType =             ZXLFileUploadProgressStartUpload;
         self.uploadResult =             ZXLFileUploadloading;
@@ -123,12 +127,17 @@
             //目前拍摄的支持视频 -- 图片采用存储 initWithImage 格式
             self.localURL =             [ZXLDocumentUtils takePhotoVideoURL:fileURL];
             self.fileType =             ZXLFileTypeVideo;
+//            UIImage *image = [ZXLFileUtils localVideoThumbnail:self.localURL];
+            self.identifier = [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
+//            if (image) {
+//                self.identifier = [NSString stringWithFormat:@"%@(%zdx%zd)",self.identifier,(NSInteger)image.size.width,(NSInteger)image.size.height];
+//            }
         }else{
             self.fileType =             [ZXLFileUtils fileTypeByURL:fileURL];
             self.localURL =             [ZXLFileUtils replaceSystemtFolder:fileURL];
+            self.identifier =           [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         }
         
-        self.identifier =               [ZXLFileUtils fileMd5HashCreateWithPath:self.localURL];
         self.comprssSuccess =           NO;
         self.uploadSize =               0;
         self.progress =                 0;
@@ -251,6 +260,13 @@
 -(void)getVideoOutputAVURLAsset:(void (^)(AVURLAsset * asset))completion{
     if (ZXLISNSStringValid(self.assetLocalIdentifier)) {
         __block PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
+        if (!asset) {
+            if (completion) {
+                completion(nil);
+            }
+            return;
+        }
+        
         PHVideoRequestOptions* options = [[PHVideoRequestOptions alloc] init];
         options.version = PHVideoRequestOptionsVersionOriginal;
         options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
@@ -281,10 +297,9 @@
         && ZXLISNSStringValid(self.assetLocalIdentifier)
         && !ZXLISNSStringValid(self.localURL)) {
         typeof(self) __weak weakSelf = self;
-        [[ZXLImageRequestManager manager] imageRequest:self.assetLocalIdentifier fileIdentifier:self.identifier callback:^(UIImage *image, NSString *error) {
+        [[ZXLImageRequestManager manager] imageRequest:self.assetLocalIdentifier fileIdentifier:self.identifier callback:^(NSString *localURL, NSString *error) {
             typeof(self) strongSelf = weakSelf;
-            if (!ZXLISNSStringValid(error) && image) {
-                strongSelf.localURL = [ZXLDocumentUtils saveImage:image name:[strongSelf uploadKey]];
+            if (!ZXLISNSStringValid(error) && ZXLISNSStringValid(localURL)) {
                 if (completed) {
                     completed(YES);
                 }
@@ -320,6 +335,7 @@
     if (ZXLISNSStringValid(localUploadURL) && [[NSFileManager defaultManager] fileExistsAtPath:localUploadURL]) {
         self.localURL = localUploadURL;
     }else{
+        self.localURL = [ZXLFileUtils replaceSystemtFolder:self.localURL];
         localUploadURL = self.localURL;
     }
     
@@ -332,7 +348,7 @@
     
     NSString * fileKey = @"";
     if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册文件类型固定
-        fileKey =  [ZXLFileUtils fileNameWithidentifier:self.identifier fileExtension:[ZXLFileUtils fileExtension:self.fileType]];
+        fileKey =  [ZXLFileUtils fileNameWithidentifier:[NSString stringWithFormat:@"%@",self.identifier] fileExtension:[ZXLFileUtils fileExtension:self.fileType]];
     }
     
     if (!ZXLISNSStringValid(fileKey) && ZXLISNSStringValid(self.localURL)) {
@@ -345,6 +361,28 @@
     
     return fileKey;
 }
+
+-(NSString *)addFolderUploadKey{
+    
+    NSString *folder = @"app/other";
+    switch (self.fileType) {
+        case ZXLFileTypeVideo:
+            folder = @"app/video";
+            break;
+        case ZXLFileTypeImage:
+            folder = @"app/image";
+            break;
+        case ZXLFileTypeVoice:
+            folder = @"app/audio";
+            break;
+        default:
+            folder = @"app/other";
+            break;
+    }
+    
+    return [NSString stringWithFormat:@"%@/%@",folder,[self uploadKey]];
+}
+
 
 -(void)setUploadResultSuccess{
     self.uploadResult = ZXLFileUploadSuccess;
@@ -388,58 +426,13 @@
 }
 
 -(void)getThumbnail:(void (^)(UIImage * image))completed{
-    if (self.fileType == ZXLFileTypeImage) {
-        if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册图片
-            [ZXLPhotosUtils getPhotoAlbumThumbnail:self.assetLocalIdentifier complete:^(UIImage *image) {
-                if (completed) {
-                    completed(image);
-                }
-            }];
-            
-            if (!ZXLISNSStringValid(self.localURL)) {
-                [self albumImageRequest:^(BOOL bResult) {
-                    
-                }];
-            }
-        }else{
+    [[ZXLThumbnailManager manager] thumbnailRequest:self callback:^(UIImage *image, NSString *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (completed) {
-                completed([UIImage imageWithContentsOfFile:[self localUploadURL]]);
+                completed(image);
             }
-        }
-    }
-    
-    if (self.fileType == ZXLFileTypeVideo) {
-        if (ZXLISNSStringValid(self.assetLocalIdentifier)) {//相册数据
-            PHAsset * asset = [PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:self.assetLocalIdentifier] options:nil].firstObject;
-            [ZXLVideoUtils getPhotoWithAsset:asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
-                if (!isDegraded && completed) {
-                    completed(photo);
-                }
-            } progressHandler:nil networkAccessAllowed:YES];
-        }else{
-            ZXLFileFromType fileFrom = ZXLFileFromLoacl;
-            NSRange tempRang = [self.localURL rangeOfString:@"/tmp/"];
-            if (tempRang.location != NSNotFound){
-                fileFrom = ZXLFileFromTakePhoto;
-            }
-            NSString * localURL = @"";
-            if (fileFrom == ZXLFileFromTakePhoto) {//拍照视频
-                localURL = [ZXLDocumentUtils takePhotoVideoURL:self.localURL];
-            }else{//本地视频
-                localURL = [ZXLDocumentUtils localFilePath:[self.localURL lastPathComponent] fileType:self.fileType];
-            }
-            
-            if (completed) {
-                completed([ZXLFileUtils localVideoThumbnail:localURL]);
-            }
-        }
-    }
-    
-    if (self.fileType == ZXLFileTypeVoice) {
-        if (completed) {
-           completed([UIImage imageNamedFromZXLBundle:@"ZXLDefaultVoice.png"]);
-        }
-    }
+        });
+    }];
 }
 
 - (void)networkError{

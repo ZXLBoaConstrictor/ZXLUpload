@@ -68,9 +68,7 @@ static dispatch_once_t oncePredicate;
     }
 }
 
--(void)videoAsset:(AVURLAsset *)asset
-   fileIdentifier:(NSString *)fileId
-         callback:(ZXLComprssCallback)callback{
+-(void)videoAsset:(AVURLAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback{
     if (asset == nil || !ZXLISNSStringValid(fileId)) {
         return;
     }
@@ -86,10 +84,11 @@ static dispatch_once_t oncePredicate;
     });
 }
 
--(void)mp4VideoPHAsset:(PHAsset *)asset
-        fileIdentifier:(NSString *)fileId
-              callback:(ZXLComprssCallback)callback{
+-(void)mp4VideoPHAsset:(PHAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback{
     if (asset == nil || !ZXLISNSStringValid(fileId)) {
+        if (callback) {
+            callback(@"",@"文件获取错误");
+        }
         return;
     }
     
@@ -120,6 +119,11 @@ static dispatch_once_t oncePredicate;
 - (void)cancelCompressOperations {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        for (ZXLCompressOperation * operation in weakSelf.operationQueue.operations) {
+            if (operation) {
+                [operation failCancelCompress];
+            }
+        }
         [weakSelf.operationQueue cancelAllOperations];
     });
 }

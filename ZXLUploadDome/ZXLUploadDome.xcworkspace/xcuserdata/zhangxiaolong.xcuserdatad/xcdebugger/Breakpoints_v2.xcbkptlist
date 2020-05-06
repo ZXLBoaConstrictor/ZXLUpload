@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "335EEBB3-C294-48BD-9602-F4BA89D814C5"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "5A66396D-7A3B-412C-9B32-1F568C853873"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZXLUploadDome/ZXLUploadManager/ZXLUploadUnifiedResponese+Exension.m"
-            timestampString = "550463787.709438"
+            filePath = "../Framework/ZXLUpload/ZXLUploadFileResultCenter.m"
+            timestampString = "579518635.59833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "-extensionUnifiedResponese:"
+            startingLineNumber = "340"
+            endingLineNumber = "340">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21C4D6F7-94BE-4FBB-A373-28DF2EF54ACB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Framework/ZXLUpload/ZXLFileUtils.m"
+            timestampString = "579518833.367716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "+serverAddressFileURL:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "087C4E54-FDD8-499F-A561-4954B5D7F7BE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZXLUploadDome/CompressViewController.m"
-            timestampString = "565616394.835727"
+            filePath = "../Framework/ZXLUpload/ZXLFileUtils.m"
+            timestampString = "579518833.368489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "-compress"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "+fileKeyAddBySize:fileKey:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

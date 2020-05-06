@@ -44,9 +44,7 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     return _comprssCallback;
 }
 
--(instancetype)initWithVideoAsset:(AVURLAsset *)asset
-                   fileIdentifier:(NSString *)fileId
-                         callback:(ZXLComprssCallback)callback{
+-(instancetype)initWithVideoAsset:(AVURLAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback{
     if (self = [super init]) {
         self.checkFailed = NO;
         self.mp4Video = NO;
@@ -61,9 +59,10 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
     return self;
 }
 
--(instancetype)initWithMp4VideoPHAsset:(PHAsset *)asset
-                        fileIdentifier:(NSString *)fileId
-                              callback:(ZXLComprssCallback)callback{
+-(void)dealloc{
+    
+}
+-(instancetype)initWithMp4VideoPHAsset:(PHAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback{
     if (self = [super init]) {
         self.checkFailed = NO;
         self.mp4Video = YES;
@@ -305,5 +304,13 @@ static NSString * const ZXLCompressOperationLockName = @"ZXLCompressOperationLoc
         }
     }
     return 0;
+}
+
+-(void)failCancelCompress{
+    for (ZXLComprssCallback callback in self.comprssCallback.allObjects) {
+        if (callback) {
+            callback(@"",@"压缩中断");
+        }
+    }
 }
 @end

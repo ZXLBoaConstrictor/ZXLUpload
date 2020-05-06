@@ -10,6 +10,7 @@
 @interface ZXLCGDTimer()
 @property (nonatomic, copy) NSString  * timerKey;
 @property (nonatomic, strong) NSMutableDictionary * timerContainer;
+@property (nonatomic, assign) BOOL   bStart;
 @end
 
 @implementation ZXLCGDTimer
@@ -89,6 +90,11 @@
 - (void)pause{
     dispatch_source_t timer = (dispatch_source_t)[self.timerContainer objectForKey:self.timerKey];
     if (timer) {
+        if (!self.bStart) {
+             return;
+         }
+         self.bStart = NO;
+        
         dispatch_suspend(timer);
     }
 }
@@ -97,6 +103,11 @@
 - (void)resume{
     dispatch_source_t timer = (dispatch_source_t)[self.timerContainer objectForKey:self.timerKey];
     if (timer) {
+        if (self.bStart) {
+            return;
+        }
+        
+        self.bStart = YES;
         dispatch_resume(timer);
     }
 }

@@ -7,7 +7,7 @@
 //
 
 //文件前缀
-#define ZXLFilePrefixion @"jlboss"
+#define ZXLFilePrefixion @"ios"
 
 //NEW 对象
 #define ZXLNewObject(object) [[object alloc]init];

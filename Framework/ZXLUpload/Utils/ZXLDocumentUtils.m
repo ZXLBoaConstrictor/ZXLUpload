@@ -57,7 +57,7 @@
     NSString *filePath = FILE_Image_PATH(fileName);
     BOOL bWrite = YES;
     if ([ZXLFileUtils fileSizeByPath:filePath] <= 0) {
-        NSData *imageData = UIImagePNGRepresentation(image);
+        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
         bWrite = [imageData writeToFile:filePath atomically:YES];
     }
     return bWrite?filePath:@"";

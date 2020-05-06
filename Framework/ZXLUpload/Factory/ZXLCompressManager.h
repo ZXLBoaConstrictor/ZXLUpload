@@ -15,13 +15,9 @@ typedef void (^ZXLComprssCallback)(NSString *outputPath,NSString *error);
 +(instancetype)manager;
 + (NSThread *)operationThread;
 
--(void)videoAsset:(AVURLAsset *)asset
-   fileIdentifier:(NSString *)fileId
-         callback:(ZXLComprssCallback)callback;
+-(void)videoAsset:(AVURLAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback;
 
--(void)mp4VideoPHAsset:(PHAsset *)asset
-        fileIdentifier:(NSString *)fileId
-              callback:(ZXLComprssCallback)callback;
+-(void)mp4VideoPHAsset:(PHAsset *)asset fileIdentifier:(NSString *)fileId callback:(ZXLComprssCallback)callback;
 
 -(void)cancelCompressOperationForIdentifier:(NSString *)fileIdentifier;
 

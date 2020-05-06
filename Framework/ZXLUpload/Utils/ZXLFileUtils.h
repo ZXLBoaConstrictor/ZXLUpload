@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, ZXLFileType);
 
 +(NSString *)base64EncodedString:(NSString *)string;
 
++(NSString *)md5EncodedString:(NSString *)string;
 /**
  音频文件和视频文件的时长
 
